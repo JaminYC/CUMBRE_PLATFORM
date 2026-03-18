@@ -1,0 +1,111 @@
+name: cumbre-ci
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+concurrency:
+  group: cumbre-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Start PostgreSQL
+        run: docker compose -f infrastructure/docker/docker-compose.yml up -d postgres
+
+      - name: Prepare environment files
+        run: corepack pnpm env:prepare
+
+      - name: Generate Prisma clients
+        run: corepack pnpm db:generate
+
+      - name: Apply migrations
+        run: corepack pnpm db:migrate
+
+      - name: Seed local baseline
+        run: corepack pnpm db:seed
+
+      - name: Install Playwright browser
+        run: corepack pnpm test:e2e:install
+
+      - name: Validate monorepo
+        run: corepack pnpm validate
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Start PostgreSQL
+        run: docker compose -f infrastructure/docker/docker-compose.yml up -d postgres
+
+      - name: Prepare environment files
+        run: corepack pnpm env:prepare
+
+      - name: Generate Prisma clients
+        run: corepack pnpm db:generate
+
+      - name: Apply migrations
+        run: corepack pnpm db:migrate
+
+      - name: Seed local baseline
+        run: corepack pnpm db:seed
+
+      - name: Install Playwright browser
+        run: corepack pnpm test:e2e:install
+
+      - name: Run browser E2E
+        run: corepack pnpm test:e2e
+
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore

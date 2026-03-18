@@ -1,0 +1,28 @@
+{
+  "name": "@cumbre/api-runtime",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "description": "Shared runtime validation, routing, envelopes, and API error handling for CUMBRE services",
+  "dependencies": {
+    "@cumbre/schemas": "workspace:*",
+    "@cumbre/types": "workspace:*",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo api-runtime lint pending",
+    "test": "echo api-runtime test pending",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

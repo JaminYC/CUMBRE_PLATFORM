@@ -1,0 +1,16 @@
+node_modules
+.next
+.turbo
+.git
+.github
+test-results
+playwright-report
+coverage
+dist
+tmp
+*.log
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+!.env.local.example

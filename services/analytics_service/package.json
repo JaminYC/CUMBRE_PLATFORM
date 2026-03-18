@@ -1,0 +1,13 @@
+{
+  "name": "@cumbre/analytics-service",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo analytics_service build scaffold pending",
+    "dev": "echo analytics_service dev scaffold pending",
+    "lint": "echo analytics_service lint scaffold pending",
+    "test": "echo analytics_service test scaffold pending"
+  }
+}

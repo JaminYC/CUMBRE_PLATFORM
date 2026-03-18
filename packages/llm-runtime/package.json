@@ -1,0 +1,26 @@
+{
+  "name": "@cumbre/llm-runtime",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "description": "Shared OpenAI-compatible LLM provider runtime for CUMBRE AI modules",
+  "dependencies": {
+    "@cumbre/types": "workspace:*",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo llm-runtime lint pending",
+    "test": "echo llm-runtime test pending",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

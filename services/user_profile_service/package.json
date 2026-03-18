@@ -1,0 +1,13 @@
+{
+  "name": "@cumbre/user-profile-service",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo user_profile_service build scaffold pending",
+    "dev": "echo user_profile_service dev scaffold pending",
+    "lint": "echo user_profile_service lint scaffold pending",
+    "test": "echo user_profile_service test scaffold pending"
+  }
+}

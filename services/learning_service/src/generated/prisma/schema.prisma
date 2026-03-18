@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model LearningPathRecord {
+  id                       String                  @id
+  createdAt                DateTime                @default(now())
+  updatedAt                DateTime                @updatedAt
+  metadata                 Json?
+  title                    String
+  summary                  String?
+  status                   String
+  audienceRoles            String[]                @default([])
+  topicIds                 String[]                @default([])
+  skillIds                 String[]                @default([])
+  lessonIds                String[]                @default([])
+  projectIds               String[]                @default([])
+  estimatedDurationMinutes Int?
+  difficultyLevel          String?
+  sequencingStrategy       String?
+  sessions                 LearningSessionRecord[]
+  classrooms               ClassroomRecord[]
+
+  @@map("learning_paths")
+}
+
+model LearningSessionRecord {
+  id                String              @id
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  metadata          Json?
+  learnerUserId     String
+  status            String
+  learningPathId    String?
+  lessonId          String?
+  topicId           String?
+  tutorSessionId    String?
+  startedAt         DateTime
+  endedAt           DateTime?
+  progressPercent   Float
+  difficultyLevel   String?
+  masteryStateIds   String[]            @default([])
+  recommendationIds String[]            @default([])
+  learningPath      LearningPathRecord? @relation(fields: [learningPathId], references: [id], onDelete: SetNull)
+
+  @@map("learning_sessions")
+}
+
+model MasteryStateRecord {
+  id                    String   @id
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  metadata              Json?
+  learnerUserId         String
+  learningPathId        String?
+  subjectType           String
+  subjectId             String
+  level                 String
+  score                 Float
+  confidence            Float
+  evidenceCount         Int?
+  trend                 String?
+  lastObservedAt        DateTime
+  recommendedDifficulty String?
+
+  @@map("mastery_states")
+}
+
+model ClassroomRecord {
+  id                      String                    @id
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  metadata                Json?
+  name                    String
+  gradeLevel              String
+  subject                 String
+  teacherId               String
+  classCode               String                    @unique
+  assignedModuleIds       String[]                  @default([])
+  assignedLearningPathIds String[]                  @default([])
+  learningPathId          String?
+  learningPath            LearningPathRecord?       @relation(fields: [learningPathId], references: [id], onDelete: SetNull)
+  enrollments             StudentEnrollmentRecord[]
+  meetings                ClassroomMeetingRecord[]
+
+  @@map("classrooms")
+}
+
+model ClassroomStudentProfileRecord {
+  id                  String                    @id
+  createdAt           DateTime                  @default(now())
+  updatedAt           DateTime                  @updatedAt
+  metadata            Json?
+  name                String
+  email               String?
+  gradeLevel          String
+  createdByTeacher    Boolean
+  linkedUserId        String?                   @unique
+  generatedCredential String?
+  enrollments         StudentEnrollmentRecord[]
+
+  @@map("classroom_student_profiles")
+}
+
+model StudentEnrollmentRecord {
+  id          String                        @id
+  createdAt   DateTime                      @default(now())
+  updatedAt   DateTime                      @updatedAt
+  metadata    Json?
+  classroomId String
+  studentId   String
+  status      String
+  joinedAt    DateTime?
+  classroom   ClassroomRecord               @relation(fields: [classroomId], references: [id], onDelete: Cascade)
+  student     ClassroomStudentProfileRecord @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([classroomId, studentId])
+  @@map("student_enrollments")
+}
+
+model ClassroomMeetingRecord {
+  id                 String          @id
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  metadata           Json?
+  classroomId        String
+  provider           String
+  title              String
+  description        String?
+  scheduledAt        DateTime
+  meetingUrl         String
+  createdByTeacherId String
+  classroom          ClassroomRecord @relation(fields: [classroomId], references: [id], onDelete: Cascade)
+
+  @@map("classroom_meetings")
+}

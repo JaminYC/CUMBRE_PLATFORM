@@ -1,0 +1,13 @@
+{
+  "name": "@cumbre/notification-service",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo notification_service build scaffold pending",
+    "dev": "echo notification_service dev scaffold pending",
+    "lint": "echo notification_service lint scaffold pending",
+    "test": "echo notification_service test scaffold pending"
+  }
+}

@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TutorSessionRecord {
+  id                String            @id
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  metadata          Json?
+  learnerUserId     String
+  status            String
+  tutorMode         String
+  startedAt         DateTime
+  lastInteractionAt DateTime
+  learningPathId    String?
+  lessonId          String?
+  topicIds          String[]          @default([])
+  goalSummary       String?
+  turnCount         Int               @default(0)
+  turns             TutorTurnRecord[]
+
+  @@index([learnerUserId, lessonId, status, lastInteractionAt(sort: Desc)])
+  @@map("tutor_sessions")
+}
+
+model TutorTurnRecord {
+  id               String             @id
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  metadata         Json?
+  retrievalContext Json?
+  tutorSessionId   String
+  actor            String
+  action           String?
+  responseType     String?
+  title            String?
+  summary          String?
+  content          String
+  lessonId         String?
+  topicId          String?
+  suggestedPrompts String[]           @default([])
+  nextSteps        String[]           @default([])
+  references       Json?
+  contextSnippets  Json?
+  tutorSession     TutorSessionRecord @relation(fields: [tutorSessionId], references: [id], onDelete: Cascade)
+
+  @@index([tutorSessionId, createdAt])
+  @@map("tutor_turns")
+}

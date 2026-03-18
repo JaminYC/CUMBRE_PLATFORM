@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TopicRecord {
+  id                   String         @id
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  metadata             Json?
+  title                String
+  summary              String?
+  slug                 String?
+  parentTopicId        String?
+  skillIds             String[]       @default([])
+  prerequisiteTopicIds String[]       @default([])
+  lessons              LessonRecord[]
+
+  @@map("content_topics")
+}
+
+model LessonRecord {
+  id                       String      @id
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
+  metadata                 Json?
+  title                    String
+  summary                  String?
+  lessonType               String
+  topicId                  String
+  skillIds                 String[]    @default([])
+  learningObjectiveIds     String[]    @default([])
+  prerequisiteLessonIds    String[]    @default([])
+  estimatedDurationMinutes Int?
+  difficultyLevel          String?
+  resourceUrls             String[]    @default([])
+  topic                    TopicRecord @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@map("content_lessons")
+}
+
+model ContentItemRecord {
+  id           String   @id
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  metadata     Json?
+  title        String
+  summary      String?
+  contentType  String
+  status       String
+  topicIds     String[] @default([])
+  skillIds     String[] @default([])
+  lessonId     String?
+  assessmentId String?
+  projectId    String?
+  authorUserId String?
+  sourceUrl    String?
+  language     String?
+  versionLabel String?
+
+  @@map("content_items")
+}
+
+model TeachingMaterialRecord {
+  id              String   @id
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  metadata        Json?
+  teacherId       String
+  fileName        String
+  mimeType        String
+  materialKind    String
+  status          String
+  parsedText      String
+  parsedStructure Json
+  sourceUrl       String?
+
+  @@map("teaching_materials")
+}
+
+model TeachingModuleRecord {
+  id                   String   @id
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  metadata             Json?
+  teacherId            String
+  materialId           String?
+  title                String
+  summary              String?
+  status               String
+  conceptNodeIds       String[] @default([])
+  lessonIds            String[] @default([])
+  sections             Json
+  suggestedTopicTitles String[] @default([])
+
+  @@map("teaching_modules")
+}
+
+model TeachingQuizRecord {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  metadata  Json?
+  teacherId String
+  moduleId  String?
+  lessonId  String?
+  title     String
+  summary   String?
+  questions Json
+
+  @@map("teaching_quizzes")
+}
+
+model StudentAttemptRecord {
+  id              String   @id
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  metadata        Json?
+  studentId       String
+  classroomId     String?
+  quizId          String?
+  source          String
+  score           Float?
+  answers         Json
+  teacherVerified Boolean  @default(false)
+
+  @@map("student_attempts")
+}
+
+model KnowledgeNodeRecord {
+  id               String   @id
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  metadata         Json?
+  nodeType         String
+  title            String
+  summary          String?
+  sourceEntityType String?
+  sourceEntityId   String?
+
+  @@index([nodeType, sourceEntityType, sourceEntityId])
+  @@map("knowledge_nodes")
+}
+
+model KnowledgeEdgeRecord {
+  id           String   @id
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  metadata     Json?
+  sourceNodeId String
+  targetNodeId String
+  edgeType     String
+  label        String?
+  weight       Float?
+  directed     Boolean  @default(true)
+
+  @@index([sourceNodeId, edgeType])
+  @@index([targetNodeId, edgeType])
+  @@map("knowledge_edges")
+}

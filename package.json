@@ -1,0 +1,52 @@
+{
+  "name": "cumbre-platform",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "build": "corepack pnpm --filter @cumbre/types --filter @cumbre/schemas --filter @cumbre/sdk --filter @cumbre/api-runtime --filter @cumbre/app-auth --filter @cumbre/app-runtime --filter @cumbre/llm-runtime --filter @cumbre/test-utils --filter @cumbre/retrieval-engine --filter @cumbre/adaptive-engine --filter @cumbre/recommendation-engine --filter @cumbre/tutor-engine --filter @cumbre/material-parser --filter @cumbre/module-generator --filter @cumbre/module-builder --filter @cumbre/assessment-engine --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service --filter @cumbre/web-portal --filter @cumbre/web-student --filter @cumbre/web-teacher --filter @cumbre/web-admin -r build",
+    "db:up": "docker compose -f infrastructure/docker/docker-compose.yml up -d postgres",
+    "db:down": "docker compose -f infrastructure/docker/docker-compose.yml down",
+    "db:generate": "corepack pnpm env:prepare && corepack pnpm --workspace-concurrency=1 --filter @cumbre/tutor-engine --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service -r db:generate",
+    "db:migrate": "corepack pnpm env:prepare && corepack pnpm --workspace-concurrency=1 --filter @cumbre/tutor-engine --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service -r db:migrate",
+    "db:seed": "corepack pnpm env:prepare && corepack pnpm --workspace-concurrency=1 --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service -r db:seed",
+    "dev": "corepack pnpm --parallel --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service dev",
+    "dev:auth": "corepack pnpm --filter @cumbre/auth-service dev",
+    "dev:learning": "corepack pnpm --filter @cumbre/learning-service dev",
+    "dev:content": "corepack pnpm --filter @cumbre/content-service dev",
+    "dev:student": "corepack pnpm --filter @cumbre/web-student dev",
+    "dev:portal": "corepack pnpm --filter @cumbre/web-portal dev",
+    "dev:teacher": "corepack pnpm --filter @cumbre/web-teacher dev",
+    "dev:admin": "corepack pnpm --filter @cumbre/web-admin dev",
+    "env:prepare": "node scripts/prepare-env.mjs",
+    "validate": "corepack pnpm typecheck && corepack pnpm build && corepack pnpm test",
+    "test:e2e": "corepack pnpm test:e2e:prepare && playwright test",
+    "test:e2e:install": "playwright install chromium",
+    "test:e2e:prepare": "corepack pnpm env:prepare && corepack pnpm db:migrate && corepack pnpm db:seed",
+    "lint": "corepack pnpm --filter @cumbre/types --filter @cumbre/schemas --filter @cumbre/sdk --filter @cumbre/api-runtime --filter @cumbre/app-auth --filter @cumbre/llm-runtime --filter @cumbre/test-utils --filter @cumbre/retrieval-engine --filter @cumbre/adaptive-engine --filter @cumbre/recommendation-engine --filter @cumbre/tutor-engine --filter @cumbre/material-parser --filter @cumbre/module-generator --filter @cumbre/module-builder --filter @cumbre/assessment-engine --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service --filter @cumbre/web-portal --filter @cumbre/web-student --filter @cumbre/web-teacher --filter @cumbre/web-admin -r lint",
+    "start:auth": "corepack pnpm --filter @cumbre/auth-service start",
+    "start:learning": "corepack pnpm --filter @cumbre/learning-service start",
+    "start:content": "corepack pnpm --filter @cumbre/content-service start",
+    "start:student": "corepack pnpm --filter @cumbre/web-student start",
+    "start:portal": "corepack pnpm --filter @cumbre/web-portal start",
+    "start:teacher": "corepack pnpm --filter @cumbre/web-teacher start",
+    "start:admin": "corepack pnpm --filter @cumbre/web-admin start",
+    "test": "corepack pnpm test:integration",
+    "test:integration": "corepack pnpm --workspace-concurrency=1 --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service -r test",
+    "test:auth": "corepack pnpm --filter @cumbre/auth-service test",
+    "test:learning": "corepack pnpm --filter @cumbre/learning-service test",
+    "test:content": "corepack pnpm --filter @cumbre/content-service test",
+    "ci:validate": "corepack pnpm test:e2e:prepare && corepack pnpm typecheck && corepack pnpm build && corepack pnpm test && corepack pnpm test:e2e",
+    "typecheck": "corepack pnpm --workspace-concurrency=1 --filter @cumbre/types --filter @cumbre/schemas --filter @cumbre/sdk --filter @cumbre/api-runtime --filter @cumbre/app-auth --filter @cumbre/app-runtime --filter @cumbre/llm-runtime --filter @cumbre/test-utils --filter @cumbre/retrieval-engine --filter @cumbre/adaptive-engine --filter @cumbre/recommendation-engine --filter @cumbre/tutor-engine --filter @cumbre/material-parser --filter @cumbre/module-generator --filter @cumbre/module-builder --filter @cumbre/assessment-engine --filter @cumbre/auth-service --filter @cumbre/learning-service --filter @cumbre/content-service --filter @cumbre/web-portal --filter @cumbre/web-student --filter @cumbre/web-teacher --filter @cumbre/web-admin -r typecheck"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.4"
+  }
+}

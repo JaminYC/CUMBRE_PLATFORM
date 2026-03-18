@@ -1,0 +1,85 @@
+name: cumbre-production-migrations
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  migrate-production:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Write production env files
+        shell: bash
+        run: |
+          cat <<'EOF' > services/auth_service/.env
+          DATABASE_URL=${{ secrets.PRODUCTION_DATABASE_URL }}
+          DIRECT_URL=${{ secrets.PRODUCTION_DIRECT_URL }}
+          AUTH_SERVICE_PORT=3001
+          LOG_LEVEL=info
+          NODE_ENV=production
+          REQUEST_TIMEOUT_MS=10000
+          AUTH_ACCESS_TOKEN_TTL_MINUTES=30
+          AUTH_REFRESH_TOKEN_TTL_DAYS=14
+          EOF
+
+          cat <<'EOF' > services/learning_service/.env
+          DATABASE_URL=${{ secrets.PRODUCTION_DATABASE_URL }}
+          DIRECT_URL=${{ secrets.PRODUCTION_DIRECT_URL }}
+          LEARNING_SERVICE_PORT=3002
+          AUTH_SERVICE_URL=${{ secrets.PRODUCTION_AUTH_SERVICE_URL }}
+          CONTENT_SERVICE_URL=${{ secrets.PRODUCTION_CONTENT_SERVICE_URL }}
+          LOG_LEVEL=info
+          NODE_ENV=production
+          REQUEST_TIMEOUT_MS=10000
+          EOF
+
+          cat <<'EOF' > services/content_service/.env
+          DATABASE_URL=${{ secrets.PRODUCTION_DATABASE_URL }}
+          DIRECT_URL=${{ secrets.PRODUCTION_DIRECT_URL }}
+          CONTENT_SERVICE_PORT=3003
+          AUTH_SERVICE_URL=${{ secrets.PRODUCTION_AUTH_SERVICE_URL }}
+          LOG_LEVEL=info
+          NODE_ENV=production
+          REQUEST_TIMEOUT_MS=10000
+          EOF
+
+          cat <<'EOF' > ai/tutor_engine/.env
+          DATABASE_URL=${{ secrets.PRODUCTION_DATABASE_URL }}
+          DIRECT_URL=${{ secrets.PRODUCTION_DIRECT_URL }}
+          EOF
+
+      - name: Generate Prisma clients
+        run: corepack pnpm db:generate
+
+      - name: Apply auth migrations
+        run: corepack pnpm --filter @cumbre/auth-service db:migrate
+
+      - name: Apply learning migrations
+        run: corepack pnpm --filter @cumbre/learning-service db:migrate
+
+      - name: Apply content migrations
+        run: corepack pnpm --filter @cumbre/content-service db:migrate
+
+      - name: Apply tutor migrations
+        run: corepack pnpm --filter @cumbre/tutor-engine db:migrate

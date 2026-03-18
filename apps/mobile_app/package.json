@@ -1,0 +1,12 @@
+{
+  "name": "@cumbre/mobile-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "echo mobile_app scaffold pending",
+    "build": "echo mobile_app build scaffold pending",
+    "lint": "echo mobile_app lint scaffold pending",
+    "test": "echo mobile_app test scaffold pending"
+  }
+}

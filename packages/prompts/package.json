@@ -1,0 +1,12 @@
+{
+  "name": "@cumbre/prompts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo prompts build scaffold pending",
+    "lint": "echo prompts lint scaffold pending",
+    "test": "echo prompts test scaffold pending"
+  }
+}

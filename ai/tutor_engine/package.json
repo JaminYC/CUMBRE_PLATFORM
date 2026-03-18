@@ -1,0 +1,29 @@
+{
+  "name": "@cumbre/tutor-engine",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "@cumbre/llm-runtime": "workspace:*",
+    "@cumbre/retrieval-engine": "workspace:*",
+    "@cumbre/schemas": "workspace:*",
+    "@cumbre/types": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "db:generate": "dotenv -e .env -- prisma generate --schema prisma/schema.prisma",
+    "db:migrate": "dotenv -e .env -- prisma migrate deploy --schema prisma/schema.prisma",
+    "dev": "echo tutor_engine baseline is consumed through web_student BFF routes",
+    "lint": "echo tutor_engine lint scaffold pending",
+    "test": "echo tutor_engine test scaffold pending",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "dotenv-cli": "^7.4.4",
+    "prisma": "^6.5.0",
+    "typescript": "^5.7.2"
+  }
+}

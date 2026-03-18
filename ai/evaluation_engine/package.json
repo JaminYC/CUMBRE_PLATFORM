@@ -1,0 +1,13 @@
+{
+  "name": "@cumbre/evaluation-engine",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo evaluation_engine build scaffold pending",
+    "dev": "echo evaluation_engine dev scaffold pending",
+    "lint": "echo evaluation_engine lint scaffold pending",
+    "test": "echo evaluation_engine test scaffold pending"
+  }
+}

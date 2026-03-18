@@ -1,0 +1,25 @@
+{
+  "name": "@cumbre/retrieval-engine",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@cumbre/types": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "dev": "echo retrieval_engine is consumed by tutor_engine and learning_service",
+    "lint": "echo retrieval_engine lint scaffold pending",
+    "test": "echo retrieval_engine test scaffold pending",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

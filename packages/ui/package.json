@@ -1,0 +1,12 @@
+{
+  "name": "@cumbre/ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo ui build scaffold pending",
+    "lint": "echo ui lint scaffold pending",
+    "test": "echo ui test scaffold pending"
+  }
+}

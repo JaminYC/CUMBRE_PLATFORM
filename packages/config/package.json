@@ -1,0 +1,12 @@
+{
+  "name": "@cumbre/config",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo config build scaffold pending",
+    "lint": "echo config lint scaffold pending",
+    "test": "echo config test scaffold pending"
+  }
+}

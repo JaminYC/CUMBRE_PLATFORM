@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AuthUser {
+  id                String        @id
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  metadata          Json?
+  primaryRole       String
+  roles             String[]
+  status            String
+  displayName       String
+  givenName         String?
+  familyName        String?
+  email             String?       @unique
+  avatarUrl         String?
+  locale            String?
+  preferredLanguage String?
+  timezone          String?
+  externalRef       String?
+  credentialHash    String?
+  sessions          AuthSession[]
+
+  @@map("auth_users")
+}
+
+model AuthSession {
+  id                    String    @id
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  userId                String
+  primaryRole           String
+  roles                 String[]
+  accessTokenHash       String    @unique
+  refreshTokenHash      String    @unique
+  accessTokenExpiresAt  DateTime
+  refreshTokenExpiresAt DateTime
+  revokedAt             DateTime?
+  lastUsedAt            DateTime?
+  deviceId              String?
+  userAgent             String?
+  ipAddress             String?
+  user                  AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([accessTokenExpiresAt])
+  @@index([refreshTokenExpiresAt])
+  @@map("auth_sessions")
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@cumbre/test-utils",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "description": "Shared integration testing helpers for CUMBRE backend services",
+  "dependencies": {
+    "@cumbre/api-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo test-utils lint pending",
+    "test": "echo test-utils has no direct tests",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}
