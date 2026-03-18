@@ -8,7 +8,8 @@ import type {
 export class HealthController {
   constructor(
     private readonly serviceName: string,
-    private readonly readinessCheck: () => Promise<void>
+    private readonly readinessCheck: () => Promise<void>,
+    private readonly onReadinessError?: (error: unknown) => void
   ) {}
 
   getHealth = (_context: RequestContext): ServiceHealthResponse => {
@@ -31,7 +32,8 @@ export class HealthController {
           database: "ready"
         }
       };
-    } catch {
+    } catch (error) {
+      this.onReadinessError?.(error);
       throw new InternalServerError("The service is not ready to receive traffic.");
     }
   };

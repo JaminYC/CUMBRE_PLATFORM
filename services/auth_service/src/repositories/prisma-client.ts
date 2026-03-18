@@ -1,5 +1,6 @@
 import { PrismaClient } from "../generated/prisma/index.js";
 import type { AuthServiceConfig } from "../config/env.js";
+import { normalizePostgresUrl } from "@cumbre/sdk";
 
 declare global {
   var __authPrismaClient: PrismaClient | undefined;
@@ -13,7 +14,7 @@ export function createPrismaClient(config: AuthServiceConfig): PrismaClient {
   const client = new PrismaClient({
     datasources: {
       db: {
-        url: config.databaseUrl
+        url: normalizePostgresUrl(config.databaseUrl)
       }
     }
   });

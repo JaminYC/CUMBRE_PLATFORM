@@ -27,9 +27,17 @@ export function createAuthApp({ config, logger }: AuthAppDependencies) {
     config
   );
   const authController = new AuthController(authService);
-  const healthController = new HealthController(config.serviceName, async () => {
-    await prisma.$queryRaw`SELECT 1`;
-  });
+  const healthController = new HealthController(
+    config.serviceName,
+    async () => {
+      await prisma.$queryRaw`SELECT 1`;
+    },
+    (error) => {
+      logger.error("Auth service readiness check failed", {
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  );
   const authResolver: AuthResolver = {
     async resolveAccess(req) {
       const authorizationHeader = req.headers.authorization;

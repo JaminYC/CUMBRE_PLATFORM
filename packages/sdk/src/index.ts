@@ -411,3 +411,5 @@ export const defaultServiceEndpoints: ServiceEndpoints = {
   analyticsServiceUrl: "http://localhost:3004",
   notificationServiceUrl: "http://localhost:3005"
 };
+
+export * from "./database-url.js";
