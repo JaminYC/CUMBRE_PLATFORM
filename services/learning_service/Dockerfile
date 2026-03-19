@@ -9,7 +9,9 @@ COPY packages ./packages
 COPY ai ./ai
 COPY services/learning_service ./services/learning_service
 
-RUN pnpm install --frozen-lockfile --filter @cumbre/learning-service...
+RUN pnpm install --frozen-lockfile --filter @cumbre/learning-service... \
+  && pnpm --filter @cumbre/learning-service db:generate \
+  && pnpm --filter @cumbre/tutor-engine db:generate
 
 ENV NODE_ENV=production
 
