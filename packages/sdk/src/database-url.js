@@ -1,4 +1,4 @@
-export function normalizePostgresUrl(input: string) {
+export function normalizePostgresUrl(input) {
   const trimmed = input.trim();
 
   try {
