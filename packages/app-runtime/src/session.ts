@@ -84,6 +84,16 @@ export function createServerSessionHelpers(config: AppRuntimeConfig) {
       path: "/",
       expires: new Date(0)
     });
+
+    // Also clear without domain in case the cookie was originally set before
+    // APP_SESSION_COOKIE_DOMAIN was configured (browser treats them as different cookies).
+    if (config.appSessionCookieDomain) {
+      const secureFlag = process.env.NODE_ENV === "production" ? "; Secure" : "";
+      response.headers.append(
+        "Set-Cookie",
+        `${config.appSessionCookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax${secureFlag}`
+      );
+    }
   }
 
   return {
