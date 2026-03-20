@@ -53,9 +53,17 @@ export function createLearningApp({
     logger
   );
   const learningController = new LearningController(learningService);
-  const healthController = new HealthController(config.serviceName, async () => {
-    await prisma.$queryRaw`SELECT 1`;
-  });
+  const healthController = new HealthController(
+    config.serviceName,
+    async () => {
+      await prisma.$queryRaw`SELECT 1`;
+    },
+    (error) => {
+      logger.error("Learning service readiness check failed", {
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  );
   const resolvedAuthResolver =
     authResolver ??
     ({

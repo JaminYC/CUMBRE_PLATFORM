@@ -1,6 +1,7 @@
 "use client";
 
 import type {
+  AuthSignupRequest,
   CreateLessonRequest,
   CreateLessonResponse,
   CreateKnowledgeEdgeRequest,
@@ -17,6 +18,7 @@ import type {
   UpdateLessonRequest,
   UpdateLessonResponse
 } from "@cumbre/schemas";
+import type { User } from "@cumbre/types";
 import { requestAppApi } from "@/lib/app-http";
 
 export function fetchAdminOverview() {
@@ -87,6 +89,13 @@ export function runAdminIntegrityFix(issueType: string, entityId: string) {
       issueType,
       entityId
     })
+  });
+}
+
+export function createAdminUser(request: AuthSignupRequest) {
+  return requestAppApi<{ user: User }>("/api/admin/users", {
+    method: "POST",
+    body: JSON.stringify(request)
   });
 }
 

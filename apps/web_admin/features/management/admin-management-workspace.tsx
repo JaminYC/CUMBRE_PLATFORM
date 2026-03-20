@@ -15,6 +15,7 @@ import {
   createAdminEdge,
   createAdminLesson,
   createAdminTopic,
+  createAdminUser,
   fetchAdminKnowledgeExplore,
   fetchAdminManagementOverview,
   runAdminIntegrityFix,
@@ -71,6 +72,12 @@ export function AdminManagementWorkspace() {
     targetNodeId: "",
     edgeType: "prerequisite_of",
     label: ""
+  });
+  const [userDraft, setUserDraft] = useState({
+    displayName: "",
+    email: "",
+    credential: "",
+    requestedRole: "student"
   });
 
   const resource = useAsyncResource(() => fetchAdminManagementOverview(), []);
@@ -272,6 +279,20 @@ export function AdminManagementWorkspace() {
     await runAction(async () => {
       const response = await runAdminIntegrityFix(issueType, entityId);
       setActionMessage(response.summary);
+    });
+  }
+
+  async function handleCreateUser() {
+    await runAction(async () => {
+      const response = await createAdminUser({
+        displayName: userDraft.displayName,
+        email: userDraft.email,
+        credential: userDraft.credential,
+        requestedRole: userDraft.requestedRole as "student" | "teacher" | "administrator"
+      });
+
+      setActionMessage(`Usuario creado: ${response.user.displayName} (${response.user.email})`);
+      setUserDraft({ displayName: "", email: "", credential: "", requestedRole: "student" });
     });
   }
 
@@ -671,6 +692,71 @@ export function AdminManagementWorkspace() {
       </div>
 
       <div className="workspace-grid workspace-grid--secondary">
+        <ContentCard
+          title="Crear usuario"
+          subtitle="Registra un nuevo estudiante, docente o administrador directamente desde el panel. El usuario podra iniciar sesion con las credenciales ingresadas."
+          accent="mint"
+        >
+          <div className="form-grid">
+            <label className="field">
+              <span>Nombre completo</span>
+              <input
+                value={userDraft.displayName}
+                onChange={(event) =>
+                  setUserDraft((current) => ({ ...current, displayName: event.target.value }))
+                }
+              />
+            </label>
+            <label className="field">
+              <span>Correo electronico</span>
+              <input
+                type="email"
+                value={userDraft.email}
+                onChange={(event) =>
+                  setUserDraft((current) => ({ ...current, email: event.target.value }))
+                }
+              />
+            </label>
+            <label className="field">
+              <span>Contrasena inicial</span>
+              <input
+                type="password"
+                value={userDraft.credential}
+                onChange={(event) =>
+                  setUserDraft((current) => ({ ...current, credential: event.target.value }))
+                }
+              />
+            </label>
+            <label className="field">
+              <span>Rol</span>
+              <select
+                value={userDraft.requestedRole}
+                onChange={(event) =>
+                  setUserDraft((current) => ({ ...current, requestedRole: event.target.value }))
+                }
+              >
+                <option value="student">Estudiante</option>
+                <option value="teacher">Docente</option>
+                <option value="administrator">Administrador</option>
+              </select>
+            </label>
+          </div>
+          <button
+            className="button"
+            data-testid="admin-create-user"
+            type="button"
+            disabled={
+              isSubmitting ||
+              !userDraft.displayName ||
+              !userDraft.email ||
+              !userDraft.credential
+            }
+            onClick={handleCreateUser}
+          >
+            Crear usuario
+          </button>
+        </ContentCard>
+
         <ContentCard
           title="Acciones de integridad"
           subtitle="Aplica reparaciones automaticas base cuando sea posible y deja claro cuando se requiere trabajo manual."

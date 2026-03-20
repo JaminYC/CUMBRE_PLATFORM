@@ -5,3 +5,4 @@ const authServerClient = createAuthServerClient(serverServiceEndpoints.authServi
 
 export const loginAdmin = authServerClient.login;
 export const logoutAdmin = authServerClient.logout;
+export const createUser = authServerClient.signup;
