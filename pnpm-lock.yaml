@@ -146,6 +146,9 @@ importers:
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
+      '@cumbre/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
       '@cumbre/types':
         specifier: workspace:*
         version: link:../../packages/types

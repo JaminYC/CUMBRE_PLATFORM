@@ -9,6 +9,7 @@
     "@cumbre/llm-runtime": "workspace:*",
     "@cumbre/retrieval-engine": "workspace:*",
     "@cumbre/schemas": "workspace:*",
+    "@cumbre/sdk": "workspace:*",
     "@cumbre/types": "workspace:*"
   },
   "scripts": {

@@ -1,4 +1,5 @@
 import { PrismaClient } from "../generated/prisma/index.js";
+import { normalizePostgresUrl } from "@cumbre/sdk";
 
 declare global {
   // eslint-disable-next-line no-var
@@ -11,6 +12,11 @@ export function createPrismaClient(nodeEnv = process.env.NODE_ENV): PrismaClient
   }
 
   const client = new PrismaClient({
+    datasources: {
+      db: {
+        url: normalizePostgresUrl(process.env.DATABASE_URL ?? "")
+      }
+    },
     log: nodeEnv === "development" ? ["warn", "error"] : ["error"]
   });
 
