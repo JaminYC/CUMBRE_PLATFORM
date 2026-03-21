@@ -3,16 +3,84 @@ import { PrismaClient } from "../src/generated/prisma/index.js";
 
 const prisma = new PrismaClient();
 
+// Stable demo UUIDs — consistent across all services
+const DEMO_TOPIC_PREREQ_ID    = "30000000-0000-0000-0000-000000000001";
+const DEMO_TOPIC_MAIN_ID      = "30000000-0000-0000-0000-000000000002";
+const DEMO_LESSON_PREREQ_ID   = "40000000-0000-0000-0000-000000000001";
+const DEMO_LESSON_MAIN_ID     = "40000000-0000-0000-0000-000000000002";
+const DEMO_CONTENT_ITEM_ID    = "50000000-0000-0000-0000-000000000001";
+
+// Knowledge nodes
+const KN_TOPIC_PATTERNS       = "70000000-0000-0000-0000-000000000001";
+const KN_TOPIC_SYSTEMS        = "70000000-0000-0000-0000-000000000002";
+const KN_LESSON_PATTERNS      = "70000000-0000-0000-0000-000000000003";
+const KN_LESSON_SYSTEMS       = "70000000-0000-0000-0000-000000000004";
+const KN_CONCEPT_PATTERN_REC  = "70000000-0000-0000-0000-000000000005";
+const KN_CONCEPT_CAUSAL       = "70000000-0000-0000-0000-000000000006";
+const KN_CONCEPT_SYSTEMS      = "70000000-0000-0000-0000-000000000007";
+const KN_CONCEPT_FEEDBACK     = "70000000-0000-0000-0000-000000000008";
+
+// Knowledge edges
+const KE_PATTERNS_PART_OF     = "80000000-0000-0000-0000-000000000001";
+const KE_CAUSAL_PART_OF       = "80000000-0000-0000-0000-000000000002";
+const KE_SYSTEMS_PART_OF      = "80000000-0000-0000-0000-000000000003";
+const KE_FEEDBACK_PART_OF     = "80000000-0000-0000-0000-000000000004";
+const KE_L_PATTERNS_REINFORCES_PATTERNS = "80000000-0000-0000-0000-000000000005";
+const KE_L_PATTERNS_REINFORCES_CAUSAL   = "80000000-0000-0000-0000-000000000006";
+const KE_L_SYSTEMS_REINFORCES_SYSTEMS   = "80000000-0000-0000-0000-000000000007";
+const KE_L_SYSTEMS_REINFORCES_FEEDBACK  = "80000000-0000-0000-0000-000000000008";
+const KE_PATTERNS_PREREQ_SYSTEMS        = "80000000-0000-0000-0000-000000000009";
+const KE_CAUSAL_PREREQ_FEEDBACK         = "80000000-0000-0000-0000-000000000010";
+const KE_SYSTEMS_RELATES_FEEDBACK       = "80000000-0000-0000-0000-000000000011";
+
 async function main() {
+  // Clean up old string-ID placeholder records
+  await prisma.knowledgeEdgeRecord.deleteMany({
+    where: {
+      id: {
+        in: [
+          "edge-patterns-part-of-topic", "edge-causal-part-of-topic",
+          "edge-systems-part-of-topic", "edge-feedback-part-of-topic",
+          "edge-lesson-patterns-reinforces-patterns", "edge-lesson-patterns-reinforces-causal",
+          "edge-lesson-systems-reinforces-systems", "edge-lesson-systems-reinforces-feedback",
+          "edge-patterns-prerequisite-of-systems", "edge-causal-prerequisite-of-feedback",
+          "edge-systems-relates-feedback"
+        ]
+      }
+    }
+  });
+  await prisma.knowledgeNodeRecord.deleteMany({
+    where: {
+      id: {
+        in: [
+          "knowledge-topic-patterns", "knowledge-topic-systems",
+          "knowledge-lesson-patterns", "knowledge-lesson-systems",
+          "concept-pattern-recognition", "concept-causal-links",
+          "concept-systems-thinking", "concept-feedback-loops"
+        ]
+      }
+    }
+  });
+  await prisma.contentItemRecord.deleteMany({
+    where: { id: { in: ["content-item-placeholder"] } }
+  });
+  await prisma.lessonRecord.deleteMany({
+    where: { id: { in: ["lesson-placeholder", "lesson-prerequisite-patterns"] } }
+  });
+  await prisma.topicRecord.deleteMany({
+    where: { id: { in: ["topic-placeholder", "topic-prerequisite-thinking"] } }
+  });
+
+  // Topics
   await prisma.topicRecord.upsert({
-    where: { id: "topic-prerequisite-thinking" },
+    where: { id: DEMO_TOPIC_PREREQ_ID },
     update: {
       title: "Pattern Recognition Basics",
       summary: "Prerequisite topic that supports systems-thinking concepts.",
       skillIds: ["skill-structured-observation"]
     },
     create: {
-      id: "topic-prerequisite-thinking",
+      id: DEMO_TOPIC_PREREQ_ID,
       title: "Pattern Recognition Basics",
       summary: "Prerequisite topic that supports systems-thinking concepts.",
       skillIds: ["skill-structured-observation"]
@@ -20,169 +88,172 @@ async function main() {
   });
 
   await prisma.topicRecord.upsert({
-    where: { id: "topic-placeholder" },
+    where: { id: DEMO_TOPIC_MAIN_ID },
     update: {
       title: "Learning Foundations",
-      summary: "Seed topic for local development.",
+      summary: "Ruta de aprendizaje demo para la plataforma CUMBRE.",
       skillIds: ["skill-critical-thinking"],
-      prerequisiteTopicIds: ["topic-prerequisite-thinking"]
+      prerequisiteTopicIds: [DEMO_TOPIC_PREREQ_ID]
     },
     create: {
-      id: "topic-placeholder",
+      id: DEMO_TOPIC_MAIN_ID,
       title: "Learning Foundations",
-      summary: "Seed topic for local development.",
+      summary: "Ruta de aprendizaje demo para la plataforma CUMBRE.",
       skillIds: ["skill-critical-thinking"],
-      prerequisiteTopicIds: ["topic-prerequisite-thinking"]
+      prerequisiteTopicIds: [DEMO_TOPIC_PREREQ_ID]
     }
   });
 
+  // Lessons
   await prisma.lessonRecord.upsert({
-    where: { id: "lesson-prerequisite-patterns" },
+    where: { id: DEMO_LESSON_PREREQ_ID },
     update: {
       title: "Recognizing Stable Patterns",
       summary: "Prerequisite lesson for systems-thinking work.",
       lessonType: "lesson",
-      topicId: "topic-prerequisite-thinking",
+      topicId: DEMO_TOPIC_PREREQ_ID,
       skillIds: ["skill-structured-observation"],
-      learningObjectiveIds: ["objective-patterns-placeholder"],
+      learningObjectiveIds: ["objective-patterns-prereq"],
       estimatedDurationMinutes: 25,
       difficultyLevel: "beginner",
-      resourceUrls: ["https://example.com/content/lesson-prerequisite-patterns"]
+      resourceUrls: ["https://example.com/content/recognizing-stable-patterns"]
     },
     create: {
-      id: "lesson-prerequisite-patterns",
+      id: DEMO_LESSON_PREREQ_ID,
       title: "Recognizing Stable Patterns",
       summary: "Prerequisite lesson for systems-thinking work.",
       lessonType: "lesson",
-      topicId: "topic-prerequisite-thinking",
+      topicId: DEMO_TOPIC_PREREQ_ID,
       skillIds: ["skill-structured-observation"],
-      learningObjectiveIds: ["objective-patterns-placeholder"],
+      learningObjectiveIds: ["objective-patterns-prereq"],
       estimatedDurationMinutes: 25,
       difficultyLevel: "beginner",
-      resourceUrls: ["https://example.com/content/lesson-prerequisite-patterns"]
+      resourceUrls: ["https://example.com/content/recognizing-stable-patterns"]
     }
   });
 
   await prisma.lessonRecord.upsert({
-    where: { id: "lesson-placeholder" },
+    where: { id: DEMO_LESSON_MAIN_ID },
     update: {
       title: "Thinking in Systems",
-      summary: "Seed lesson for local development.",
+      summary: "Lección principal del demo CUMBRE.",
       lessonType: "lesson",
-      topicId: "topic-placeholder",
+      topicId: DEMO_TOPIC_MAIN_ID,
       skillIds: ["skill-critical-thinking"],
-      learningObjectiveIds: ["objective-placeholder"],
-      prerequisiteLessonIds: ["lesson-prerequisite-patterns"],
+      learningObjectiveIds: ["objective-systems-main"],
+      prerequisiteLessonIds: [DEMO_LESSON_PREREQ_ID],
       estimatedDurationMinutes: 35,
       difficultyLevel: "intermediate",
-      resourceUrls: ["https://example.com/content/lesson-placeholder"]
+      resourceUrls: ["https://example.com/content/thinking-in-systems"]
     },
     create: {
-      id: "lesson-placeholder",
+      id: DEMO_LESSON_MAIN_ID,
       title: "Thinking in Systems",
-      summary: "Seed lesson for local development.",
+      summary: "Lección principal del demo CUMBRE.",
       lessonType: "lesson",
-      topicId: "topic-placeholder",
+      topicId: DEMO_TOPIC_MAIN_ID,
       skillIds: ["skill-critical-thinking"],
-      learningObjectiveIds: ["objective-placeholder"],
-      prerequisiteLessonIds: ["lesson-prerequisite-patterns"],
+      learningObjectiveIds: ["objective-systems-main"],
+      prerequisiteLessonIds: [DEMO_LESSON_PREREQ_ID],
       estimatedDurationMinutes: 35,
       difficultyLevel: "intermediate",
-      resourceUrls: ["https://example.com/content/lesson-placeholder"]
+      resourceUrls: ["https://example.com/content/thinking-in-systems"]
     }
   });
 
+  // Content item
   await prisma.contentItemRecord.upsert({
-    where: { id: "content-item-placeholder" },
+    where: { id: DEMO_CONTENT_ITEM_ID },
     update: {
       title: "Systems Thinking Resource",
-      summary: "Seed content item for local development.",
+      summary: "Recurso principal del demo CUMBRE.",
       contentType: "resource",
       status: "published",
-      topicIds: ["topic-placeholder"],
+      topicIds: [DEMO_TOPIC_MAIN_ID],
       skillIds: ["skill-critical-thinking"],
-      lessonId: "lesson-placeholder",
-      sourceUrl: "https://example.com/content/resource-placeholder",
-      language: "en"
+      lessonId: DEMO_LESSON_MAIN_ID,
+      sourceUrl: "https://example.com/content/systems-thinking-resource",
+      language: "es"
     },
     create: {
-      id: "content-item-placeholder",
+      id: DEMO_CONTENT_ITEM_ID,
       title: "Systems Thinking Resource",
-      summary: "Seed content item for local development.",
+      summary: "Recurso principal del demo CUMBRE.",
       contentType: "resource",
       status: "published",
-      topicIds: ["topic-placeholder"],
+      topicIds: [DEMO_TOPIC_MAIN_ID],
       skillIds: ["skill-critical-thinking"],
-      lessonId: "lesson-placeholder",
-      sourceUrl: "https://example.com/content/resource-placeholder",
-      language: "en"
+      lessonId: DEMO_LESSON_MAIN_ID,
+      sourceUrl: "https://example.com/content/systems-thinking-resource",
+      language: "es"
     }
   });
 
+  // Knowledge nodes
   const knowledgeNodes = [
     {
-      id: "knowledge-topic-patterns",
+      id: KN_TOPIC_PATTERNS,
       nodeType: "topic",
       title: "Pattern Recognition Basics",
       summary: "Topic node for prerequisite pattern-recognition work.",
       sourceEntityType: "topic",
-      sourceEntityId: "topic-prerequisite-thinking"
+      sourceEntityId: DEMO_TOPIC_PREREQ_ID
     },
     {
-      id: "knowledge-topic-systems",
+      id: KN_TOPIC_SYSTEMS,
       nodeType: "topic",
       title: "Learning Foundations",
       summary: "Topic node for systems-thinking work.",
       sourceEntityType: "topic",
-      sourceEntityId: "topic-placeholder"
+      sourceEntityId: DEMO_TOPIC_MAIN_ID
     },
     {
-      id: "knowledge-lesson-patterns",
+      id: KN_LESSON_PATTERNS,
       nodeType: "lesson",
       title: "Recognizing Stable Patterns",
       summary: "Lesson node for prerequisite pattern-recognition work.",
       sourceEntityType: "lesson",
-      sourceEntityId: "lesson-prerequisite-patterns"
+      sourceEntityId: DEMO_LESSON_PREREQ_ID
     },
     {
-      id: "knowledge-lesson-systems",
+      id: KN_LESSON_SYSTEMS,
       nodeType: "lesson",
       title: "Thinking in Systems",
       summary: "Lesson node for systems-thinking work.",
       sourceEntityType: "lesson",
-      sourceEntityId: "lesson-placeholder"
+      sourceEntityId: DEMO_LESSON_MAIN_ID
     },
     {
-      id: "concept-pattern-recognition",
+      id: KN_CONCEPT_PATTERN_REC,
       nodeType: "concept",
       title: "Pattern recognition",
       summary: "Notice stable structures before reasoning about larger systems.",
       sourceEntityType: "topic",
-      sourceEntityId: "topic-prerequisite-thinking"
+      sourceEntityId: DEMO_TOPIC_PREREQ_ID
     },
     {
-      id: "concept-causal-links",
+      id: KN_CONCEPT_CAUSAL,
       nodeType: "concept",
       title: "Causal links",
       summary: "Understand how one change influences another inside a system.",
       sourceEntityType: "topic",
-      sourceEntityId: "topic-prerequisite-thinking"
+      sourceEntityId: DEMO_TOPIC_PREREQ_ID
     },
     {
-      id: "concept-systems-thinking",
+      id: KN_CONCEPT_SYSTEMS,
       nodeType: "concept",
       title: "Systems thinking",
       summary: "Reason about interacting parts instead of isolated facts.",
       sourceEntityType: "topic",
-      sourceEntityId: "topic-placeholder"
+      sourceEntityId: DEMO_TOPIC_MAIN_ID
     },
     {
-      id: "concept-feedback-loops",
+      id: KN_CONCEPT_FEEDBACK,
       nodeType: "concept",
       title: "Feedback loops",
       summary: "Track how outputs of a system feed back into future behavior.",
       sourceEntityType: "topic",
-      sourceEntityId: "topic-placeholder"
+      sourceEntityId: DEMO_TOPIC_MAIN_ID
     }
   ];
 
@@ -194,84 +265,19 @@ async function main() {
     });
   }
 
+  // Knowledge edges
   const knowledgeEdges = [
-    {
-      id: "edge-patterns-part-of-topic",
-      sourceNodeId: "concept-pattern-recognition",
-      targetNodeId: "knowledge-topic-patterns",
-      edgeType: "part_of",
-      label: "belongs to prerequisite topic"
-    },
-    {
-      id: "edge-causal-part-of-topic",
-      sourceNodeId: "concept-causal-links",
-      targetNodeId: "knowledge-topic-patterns",
-      edgeType: "part_of",
-      label: "belongs to prerequisite topic"
-    },
-    {
-      id: "edge-systems-part-of-topic",
-      sourceNodeId: "concept-systems-thinking",
-      targetNodeId: "knowledge-topic-systems",
-      edgeType: "part_of",
-      label: "belongs to systems topic"
-    },
-    {
-      id: "edge-feedback-part-of-topic",
-      sourceNodeId: "concept-feedback-loops",
-      targetNodeId: "knowledge-topic-systems",
-      edgeType: "part_of",
-      label: "belongs to systems topic"
-    },
-    {
-      id: "edge-lesson-patterns-reinforces-patterns",
-      sourceNodeId: "knowledge-lesson-patterns",
-      targetNodeId: "concept-pattern-recognition",
-      edgeType: "reinforces",
-      label: "covers pattern recognition"
-    },
-    {
-      id: "edge-lesson-patterns-reinforces-causal",
-      sourceNodeId: "knowledge-lesson-patterns",
-      targetNodeId: "concept-causal-links",
-      edgeType: "reinforces",
-      label: "covers causal links"
-    },
-    {
-      id: "edge-lesson-systems-reinforces-systems",
-      sourceNodeId: "knowledge-lesson-systems",
-      targetNodeId: "concept-systems-thinking",
-      edgeType: "reinforces",
-      label: "covers systems thinking"
-    },
-    {
-      id: "edge-lesson-systems-reinforces-feedback",
-      sourceNodeId: "knowledge-lesson-systems",
-      targetNodeId: "concept-feedback-loops",
-      edgeType: "reinforces",
-      label: "covers feedback loops"
-    },
-    {
-      id: "edge-patterns-prerequisite-of-systems",
-      sourceNodeId: "concept-pattern-recognition",
-      targetNodeId: "concept-systems-thinking",
-      edgeType: "prerequisite_of",
-      label: "supports systems thinking"
-    },
-    {
-      id: "edge-causal-prerequisite-of-feedback",
-      sourceNodeId: "concept-causal-links",
-      targetNodeId: "concept-feedback-loops",
-      edgeType: "prerequisite_of",
-      label: "supports feedback reasoning"
-    },
-    {
-      id: "edge-systems-relates-feedback",
-      sourceNodeId: "concept-systems-thinking",
-      targetNodeId: "concept-feedback-loops",
-      edgeType: "relates_to",
-      label: "closely connected concept"
-    }
+    { id: KE_PATTERNS_PART_OF,   sourceNodeId: KN_CONCEPT_PATTERN_REC, targetNodeId: KN_TOPIC_PATTERNS,  edgeType: "part_of",        label: "belongs to prerequisite topic" },
+    { id: KE_CAUSAL_PART_OF,     sourceNodeId: KN_CONCEPT_CAUSAL,      targetNodeId: KN_TOPIC_PATTERNS,  edgeType: "part_of",        label: "belongs to prerequisite topic" },
+    { id: KE_SYSTEMS_PART_OF,    sourceNodeId: KN_CONCEPT_SYSTEMS,     targetNodeId: KN_TOPIC_SYSTEMS,   edgeType: "part_of",        label: "belongs to systems topic" },
+    { id: KE_FEEDBACK_PART_OF,   sourceNodeId: KN_CONCEPT_FEEDBACK,    targetNodeId: KN_TOPIC_SYSTEMS,   edgeType: "part_of",        label: "belongs to systems topic" },
+    { id: KE_L_PATTERNS_REINFORCES_PATTERNS, sourceNodeId: KN_LESSON_PATTERNS, targetNodeId: KN_CONCEPT_PATTERN_REC, edgeType: "reinforces", label: "covers pattern recognition" },
+    { id: KE_L_PATTERNS_REINFORCES_CAUSAL,   sourceNodeId: KN_LESSON_PATTERNS, targetNodeId: KN_CONCEPT_CAUSAL,      edgeType: "reinforces", label: "covers causal links" },
+    { id: KE_L_SYSTEMS_REINFORCES_SYSTEMS,   sourceNodeId: KN_LESSON_SYSTEMS,  targetNodeId: KN_CONCEPT_SYSTEMS,     edgeType: "reinforces", label: "covers systems thinking" },
+    { id: KE_L_SYSTEMS_REINFORCES_FEEDBACK,  sourceNodeId: KN_LESSON_SYSTEMS,  targetNodeId: KN_CONCEPT_FEEDBACK,    edgeType: "reinforces", label: "covers feedback loops" },
+    { id: KE_PATTERNS_PREREQ_SYSTEMS,        sourceNodeId: KN_CONCEPT_PATTERN_REC, targetNodeId: KN_CONCEPT_SYSTEMS,  edgeType: "prerequisite_of", label: "supports systems thinking" },
+    { id: KE_CAUSAL_PREREQ_FEEDBACK,         sourceNodeId: KN_CONCEPT_CAUSAL,      targetNodeId: KN_CONCEPT_FEEDBACK, edgeType: "prerequisite_of", label: "supports feedback reasoning" },
+    { id: KE_SYSTEMS_RELATES_FEEDBACK,       sourceNodeId: KN_CONCEPT_SYSTEMS,     targetNodeId: KN_CONCEPT_FEEDBACK, edgeType: "relates_to",      label: "closely connected concept" }
   ];
 
   for (const edge of knowledgeEdges) {
@@ -281,6 +287,8 @@ async function main() {
       create: edge
     });
   }
+
+  console.log("Content seed complete — topics, lessons, content items, and knowledge graph created with stable UUIDs");
 }
 
 main()
