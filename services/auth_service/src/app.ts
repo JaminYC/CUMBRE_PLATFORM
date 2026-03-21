@@ -1,12 +1,14 @@
 import { createRouter, type AuthResolver } from "@cumbre/api-runtime";
 import { resolvePermissionScopes } from "@cumbre/types";
 import { AuthController } from "./controllers/auth-controller.js";
+import { GoogleOAuthController } from "./controllers/google-oauth-controller.js";
 import { HealthController } from "./controllers/health-controller.js";
 import type { AuthServiceConfig } from "./config/env.js";
 import { createPrismaClient } from "./repositories/prisma-client.js";
 import { SessionRepository } from "./repositories/session-repository.js";
 import { UserRepository } from "./repositories/user-repository.js";
 import { registerAuthRoutes } from "./routes/auth-routes.js";
+import { registerGoogleOAuthRoutes } from "./routes/google-oauth-routes.js";
 import { registerHealthRoutes } from "./routes/health-routes.js";
 import { AuthApplicationService } from "./services/auth-service.js";
 import type { Logger } from "./utils/logger.js";
@@ -27,6 +29,12 @@ export function createAuthApp({ config, logger }: AuthAppDependencies) {
     config
   );
   const authController = new AuthController(authService);
+  const googleOAuthController = new GoogleOAuthController(
+    userRepository,
+    sessionRepository,
+    logger,
+    config
+  );
   const healthController = new HealthController(
     config.serviceName,
     async () => {
@@ -72,7 +80,8 @@ export function createAuthApp({ config, logger }: AuthAppDependencies) {
   return createRouter(
     [
       ...registerHealthRoutes(healthController),
-      ...registerAuthRoutes(authController)
+      ...registerAuthRoutes(authController),
+      ...registerGoogleOAuthRoutes(googleOAuthController)
     ],
     logger,
     {

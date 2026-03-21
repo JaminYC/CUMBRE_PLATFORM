@@ -4,3 +4,4 @@ import { portalAppConfig } from "@/lib/env";
 const authServerClient = createAuthServerClient(portalAppConfig.authServiceUrl);
 
 export const loginFromPortal = authServerClient.login;
+export const validateSessionFromPortal = authServerClient.validateSession;

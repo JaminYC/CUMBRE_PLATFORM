@@ -70,4 +70,55 @@ export class UserRepository {
 
     return verifyCredential(credential, record.credentialHash) ? record : null;
   }
+
+  async findOrCreateByGoogle(input: {
+    googleId: string;
+    email: string;
+    displayName: string;
+    givenName?: string;
+    familyName?: string;
+    avatarUrl?: string;
+  }) {
+    const externalRef = `google:${input.googleId}`;
+
+    let record = await this.prisma.authUser.findFirst({
+      where: { externalRef }
+    });
+
+    if (!record) {
+      record = await this.prisma.authUser.findUnique({
+        where: { email: input.email }
+      });
+    }
+
+    if (!record) {
+      record = await this.prisma.authUser.create({
+        data: {
+          id: randomUUID(),
+          displayName: input.displayName,
+          email: input.email,
+          givenName: input.givenName,
+          familyName: input.familyName,
+          avatarUrl: input.avatarUrl,
+          externalRef,
+          primaryRole: "student",
+          roles: ["student"],
+          status: "active",
+          locale: "es-PE",
+          preferredLanguage: "es",
+          timezone: "America/Lima"
+        }
+      });
+    } else if (!record.externalRef) {
+      record = await this.prisma.authUser.update({
+        where: { id: record.id },
+        data: {
+          externalRef,
+          avatarUrl: input.avatarUrl ?? record.avatarUrl
+        }
+      });
+    }
+
+    return record;
+  }
 }

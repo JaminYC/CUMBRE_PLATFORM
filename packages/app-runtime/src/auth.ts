@@ -3,7 +3,8 @@ import type {
   AuthLoginResponse,
   AuthSignupRequest,
   AuthSignupResponse,
-  GetCurrentUserResponse
+  GetCurrentUserResponse,
+  ValidateAccessTokenResponse
 } from "@cumbre/schemas";
 import { parseBackendEnvelope } from "./backend";
 
@@ -55,6 +56,17 @@ export function createAuthServerClient(authServiceUrl: string) {
       );
 
       return parseBackendEnvelope<GetCurrentUserResponse>(response, "Respuesta de autenticacion inesperada.");
+    },
+    async validateSession(accessToken: string) {
+      const response = await fetch(`${authServiceUrl}/auth/session`, {
+        method: "GET",
+        cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      return parseBackendEnvelope<ValidateAccessTokenResponse>(response, "Respuesta de sesion inesperada.");
     }
   };
 }

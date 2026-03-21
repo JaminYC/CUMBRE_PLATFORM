@@ -9,6 +9,10 @@ export interface AuthServiceConfig {
   requestTimeoutMs: number;
   authAccessTokenTtlMinutes: number;
   authRefreshTokenTtlDays: number;
+  googleClientId: string;
+  googleClientSecret: string;
+  googleCallbackUrl: string;
+  portalUrl: string;
 }
 
 function resolvePort(raw: string | undefined, fallback: number): number {
@@ -60,6 +64,11 @@ export function loadAuthServiceConfig(
     authRefreshTokenTtlDays: resolvePositiveInteger(
       env.AUTH_REFRESH_TOKEN_TTL_DAYS,
       14
-    )
+    ),
+    googleClientId: env.GOOGLE_CLIENT_ID ?? "",
+    googleClientSecret: env.GOOGLE_CLIENT_SECRET ?? "",
+    googleCallbackUrl:
+      env.GOOGLE_CALLBACK_URL ?? "http://localhost:3001/auth/google/callback",
+    portalUrl: env.PORTAL_URL ?? "http://localhost:3000"
   };
 }
