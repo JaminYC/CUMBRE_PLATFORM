@@ -45,16 +45,25 @@ export function LoginForm() {
   return (
     <main className="login-page">
       <section className="login-page__hero">
-        <p className="eyebrow">Entrada unificada</p>
-        <h2>Inicia sesion una vez y CUMBRE te envia al espacio correcto.</h2>
-        <p className="hero-copy">
-          El portal detecta tu rol despues de autenticarte y redirige automaticamente
-          al entorno de estudiante, docente o administracion, reutilizando la sesion
-          real del sistema.
-        </p>
-        <Link className="button button--ghost" href="/">
-          Volver al inicio
-        </Link>
+        <div className="login-page__hero-text">
+          <p className="eyebrow">Entrada unificada</p>
+          <h2>Inicia sesion una vez y CUMBRE te envia al espacio correcto.</h2>
+          <p className="hero-copy">
+            El portal detecta tu rol despues de autenticarte y redirige automaticamente
+            al entorno de estudiante, docente o administracion, reutilizando la sesion
+            real del sistema.
+          </p>
+          <Link className="button button--ghost" href="/">
+            Volver al inicio
+          </Link>
+        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/illustrations/illo-login.png"
+          alt=""
+          className="login-page__illo"
+          draggable={false}
+        />
       </section>
 
       <form className="auth-card" onSubmit={onSubmit}>
