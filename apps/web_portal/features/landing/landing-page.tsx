@@ -1,6 +1,57 @@
 import Link from "next/link";
-import { BrandMark } from "@/components/brand-mark";
 import type { PortalRoleTarget } from "@/lib/role-targets";
+
+function CheckIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function GraduationCapIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+    </svg>
+  );
+}
+
+function BookOpenIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+
+function BrainIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+      <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
+      <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
+    </svg>
+  );
+}
+
+function SparklesIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    </svg>
+  );
+}
 
 export function LandingPage({
   activeTarget
@@ -8,130 +59,234 @@ export function LandingPage({
   activeTarget: PortalRoleTarget | null;
 }) {
   const primaryHref = activeTarget ? activeTarget.dashboardUrl : "/login";
-  const primaryLabel = activeTarget ? "Ir a mi espacio" : "Iniciar sesion";
+  const primaryLabel = activeTarget ? "Ir a mi espacio" : "Comenzar ahora";
 
   return (
-    <main className="portal-page">
-      <header className="portal-nav">
-        <BrandMark />
-        <nav className="portal-nav__links">
+    <div className="lp">
+
+      {/* ── NAVBAR ── */}
+      <header className="lp-nav">
+        <span className="lp-logo">CUMBRE</span>
+        <nav className="lp-nav__links">
           <a href="#experiencias">Experiencias</a>
-          <a href="#como-funciona">Como funciona</a>
+          <a href="#como-funciona">Cómo funciona</a>
           <a href="#instituciones">Instituciones</a>
-          <Link className="button button--ghost" href="/login">
-            Iniciar sesion
-          </Link>
         </nav>
+        <Link className="button lp-nav__cta" href="/login">
+          Iniciar sesión
+        </Link>
       </header>
 
-      <section className="hero-card">
-        <div className="hero-card__content">
-          <p className="eyebrow">Plataforma educativa adaptativa</p>
-          <h2>Una sola entrada para estudiar, ensenar y operar el ecosistema CUMBRE.</h2>
-          <p className="hero-copy">
-            CUMBRE conecta rutas de aprendizaje, tutor con IA, trabajo de aula,
-            authoring docente y supervision administrativa sin separar la experiencia
-            del producto en silos desconectados.
+      {/* ── HERO ── */}
+      <section className="lp-hero">
+        <div className="lp-hero__left">
+          <p className="lp-eyebrow">Plataforma educativa adaptativa</p>
+          <h1 className="lp-hero__headline">
+            Aprende, enseña y gestiona en una sola plataforma.
+          </h1>
+          <p className="lp-hero__desc">
+            CUMBRE conecta rutas de aprendizaje adaptativas, tutor con IA y gestión de aula en un ecosistema unificado para estudiantes, docentes e instituciones.
           </p>
-          <div className="hero-actions">
-            <Link className="button" href={primaryHref}>
+          <div className="lp-hero__actions">
+            <Link className="button lp-btn-primary" href={primaryHref}>
               {primaryLabel}
             </Link>
-            <a className="button button--ghost" href="#demo">
+            <a className="button lp-btn-ghost-dark" href="#demo">
               Solicitar demo
             </a>
-            <Link className="button button--ghost" href="/login">
-              Comenzar
-            </Link>
+          </div>
+          <ul className="lp-checklist">
+            {[
+              "Rutas de aprendizaje adaptativas por perfil",
+              "Tutor con IA y grounding contextual",
+              "Aulas, materiales y seguimiento en tiempo real"
+            ].map(item => (
+              <li key={item} className="lp-checklist__item">
+                <span className="lp-check" aria-hidden="true"><CheckIcon /></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="lp-hero__right" aria-hidden="true">
+          <div className="lp-visual">
+            <div className="lp-visual__blob" />
+
+            <article className="lp-card lp-card--tl">
+              <p className="lp-card__num">94%</p>
+              <p className="lp-card__label">Tasa de avance semanal</p>
+            </article>
+
+            <article className="lp-card lp-card--ml">
+              <span className="lp-card__icon lp-card__icon--mint">
+                <GraduationCapIcon />
+              </span>
+              <div>
+                <p className="lp-card__num">3 roles</p>
+                <p className="lp-card__label">Estudiante · Docente · Admin</p>
+              </div>
+            </article>
+
+            <article className="lp-card lp-card--br">
+              <span className="lp-card__icon lp-card__icon--sun">
+                <BrainIcon />
+              </span>
+              <div>
+                <p className="lp-card__num">IA nativa</p>
+                <p className="lp-card__label">Tutor con grafo de conocimiento</p>
+              </div>
+            </article>
+
+            <article className="lp-card lp-card--tr">
+              <span className="lp-card__icon lp-card__icon--spark">
+                <SparklesIcon />
+              </span>
+              <div>
+                <p className="lp-card__num">Adaptativo</p>
+                <p className="lp-card__label">Señales de dominio en tiempo real</p>
+              </div>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div className="hero-card__panel">
-          <article className="insight-card insight-card--mint">
-            <p className="eyebrow">Para estudiantes</p>
-            <h3>Aprenden con una ruta clara, tutor contextual y progreso sin rankings toxicos.</h3>
+      {/* ── STATS STRIP ── */}
+      <div className="lp-stats">
+        <div className="lp-stat">
+          <p className="lp-stat__num">100%</p>
+          <p className="lp-stat__label">Adaptativo por perfil</p>
+        </div>
+        <div className="lp-stats__div" />
+        <div className="lp-stat">
+          <p className="lp-stat__num">3</p>
+          <p className="lp-stat__label">Superficies especializadas</p>
+        </div>
+        <div className="lp-stats__div" />
+        <div className="lp-stat">
+          <p className="lp-stat__num">1 login</p>
+          <p className="lp-stat__label">Portal unificado de acceso</p>
+        </div>
+        <div className="lp-stats__div" />
+        <div className="lp-stat">
+          <p className="lp-stat__num">IA nativa</p>
+          <p className="lp-stat__label">Tutor, retrieval y grafo</p>
+        </div>
+      </div>
+
+      {/* ── FEATURES ── */}
+      <section className="lp-features" id="experiencias">
+        <div className="lp-section-hd">
+          <p className="lp-eyebrow lp-eyebrow--ink">Experiencias</p>
+          <h2>Tres roles, una sola plataforma.</h2>
+          <p className="lp-section-hd__sub">
+            Cada espacio está diseñado para el flujo real de trabajo de quien lo usa.
+          </p>
+        </div>
+        <div className="lp-features-grid">
+          <article className="lp-feat">
+            <span className="lp-feat__icon lp-feat__icon--mint">
+              <GraduationCapIcon />
+            </span>
+            <h3>Estudiante</h3>
+            <p>
+              Ruta adaptativa con continuidad, tutor contextual con IA, progreso explicable
+              y lecciones asignadas por tu docente.
+            </p>
           </article>
-          <article className="insight-card insight-card--sun">
-            <p className="eyebrow">Para docentes</p>
-            <h3>Gestionan aulas, importan estudiantes, publican modulos y observan dificultades reales.</h3>
+          <article className="lp-feat">
+            <span className="lp-feat__icon lp-feat__icon--sun">
+              <BookOpenIcon />
+            </span>
+            <h3>Docente</h3>
+            <p>
+              Creación de aulas, importación de estudiantes, authoring de módulos,
+              seguimiento del grupo y publicación de materiales.
+            </p>
           </article>
-          <article className="insight-card insight-card--sand">
-            <p className="eyebrow">Para instituciones</p>
-            <h3>Supervisan contenido, grafo de conocimiento, integridad operativa y adopcion de la plataforma.</h3>
+          <article className="lp-feat">
+            <span className="lp-feat__icon lp-feat__icon--sand">
+              <ShieldIcon />
+            </span>
+            <h3>Institución</h3>
+            <p>
+              Gestión del grafo de conocimiento, supervisión de contenido,
+              integridad operativa y visibilidad de adopción.
+            </p>
           </article>
         </div>
       </section>
 
-      <section className="section-grid" id="experiencias">
-        <article className="feature-card">
-          <p className="eyebrow">Estudiantes</p>
-          <h3>Ruta adaptativa con continuidad.</h3>
-          <p>
-            Dashboard, lecciones, tutor con grounding, progreso explicable, clases asignadas y reuniones futuras.
-          </p>
-        </article>
-        <article className="feature-card">
-          <p className="eyebrow">Docentes</p>
-          <h3>Flujo real de aula.</h3>
-          <p>
-            Creacion de aulas, importacion CSV, ingestion de materiales, generacion de modulos y seguimiento del grupo.
-          </p>
-        </article>
-        <article className="feature-card">
-          <p className="eyebrow">Administracion</p>
-          <h3>Visibilidad estructural.</h3>
-          <p>
-            Gestion de temas, lecciones, conceptos, enlaces del grafo, integridad y cobertura de contenido.
-          </p>
-        </article>
-      </section>
-
-      <section className="story-section" id="como-funciona">
-        <div>
-          <p className="eyebrow">Como funciona</p>
-          <h3>Aprendizaje adaptativo con tutor, aula y contenido estructurado.</h3>
+      {/* ── HOW IT WORKS ── */}
+      <section className="lp-how" id="como-funciona">
+        <div className="lp-section-hd">
+          <p className="lp-eyebrow lp-eyebrow--ink">Cómo funciona</p>
+          <h2>Del aula al aprendizaje adaptativo en 4 pasos.</h2>
         </div>
-        <div className="story-grid">
-          <article className="story-step">
-            <strong>1. El docente prepara el aula</strong>
-            <p>Crea el aula, importa estudiantes y publica modulos desde materiales o authoring directo.</p>
-          </article>
-          <article className="story-step">
-            <strong>2. El estudiante entra con un solo login</strong>
-            <p>Recibe acceso a clases, sesiones, tutor y recomendaciones segun avance y mastery.</p>
-          </article>
-          <article className="story-step">
-            <strong>3. La IA mantiene grounding y explicabilidad</strong>
-            <p>Retrieval, grafo de conocimiento y senales adaptativas enriquecen respuestas y siguientes pasos.</p>
-          </article>
-          <article className="story-step">
-            <strong>4. La institucion observa y corrige</strong>
-            <p>Administra grafo, contenido e integridad operativa sin romper la experiencia del aula.</p>
-          </article>
+        <div className="lp-how-grid">
+          {[
+            {
+              n: "01",
+              t: "El docente prepara el aula",
+              d: "Crea el aula, importa estudiantes y publica módulos desde materiales o authoring directo."
+            },
+            {
+              n: "02",
+              t: "El estudiante entra con un solo login",
+              d: "Accede a clases, lecciones, tutor y recomendaciones según su avance y nivel de dominio."
+            },
+            {
+              n: "03",
+              t: "La IA mantiene contexto y explicabilidad",
+              d: "Retrieval, grafo de conocimiento y señales adaptativas enriquecen respuestas y siguientes pasos."
+            },
+            {
+              n: "04",
+              t: "La institución observa y corrige",
+              d: "Administra grafo, contenido e integridad operativa sin romper la experiencia del aula."
+            }
+          ].map(step => (
+            <div className="lp-step" key={step.n}>
+              <p className="lp-step__num">{step.n}</p>
+              <h4>{step.t}</h4>
+              <p>{step.d}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="section-grid" id="instituciones">
-        <article className="feature-card feature-card--wide">
-          <p className="eyebrow">Valor del producto</p>
-          <h3>Un producto unico, varias superficies especializadas.</h3>
+      {/* ── CTA / DEMO ── */}
+      <section className="lp-cta" id="instituciones">
+        <div className="lp-cta__copy">
+          <p className="lp-eyebrow lp-eyebrow--light">Para instituciones</p>
+          <h2>Un producto único, varias superficies especializadas.</h2>
           <p>
-            El portal unifica la entrada y el branding, mientras que `web_student`,
-            `web_teacher` y `web_admin` conservan sus flujos especializados y su
-            arquitectura independiente.
+            El portal unifica la entrada y el branding mientras cada sub-app conserva
+            su flujo especializado y su arquitectura independiente.
           </p>
-        </article>
-        <article className="feature-card" id="demo">
-          <p className="eyebrow">Demo</p>
-          <h3>Solicita una demostracion guiada.</h3>
+        </div>
+        <article className="lp-cta__card" id="demo">
+          <p className="lp-eyebrow">Demo</p>
+          <h3>Solicita una demostración guiada</h3>
           <p>
-            Podemos recorrer flujos de estudiante, aula, authoring, analytics y tutor en un mismo setup.
+            Recorremos flujos de estudiante, aula, authoring, analytics y tutor en un mismo setup.
           </p>
-          <a className="button" href="mailto:demo@cumbre.local?subject=Solicitud%20de%20demo%20CUMBRE">
+          <a
+            className="button lp-btn-primary"
+            href="mailto:demo@cumbre.teamvastoria.com?subject=Solicitud%20de%20demo%20CUMBRE"
+          >
             Solicitar demo
           </a>
         </article>
       </section>
-    </main>
+
+      {/* ── FOOTER ── */}
+      <footer className="lp-footer">
+        <span className="lp-logo lp-logo--sm">CUMBRE</span>
+        <p>© 2025 CUMBRE · Plataforma educativa adaptativa</p>
+        <Link href="/login">Iniciar sesión</Link>
+      </footer>
+
+    </div>
   );
 }
