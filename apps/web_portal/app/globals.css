@@ -204,51 +204,75 @@ h4 {
 
 .login-page {
   min-height: 100vh;
-  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 26rem);
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-nav {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.login-nav__logo {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.login-nav__back {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+  transition: color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.login-nav__back::before {
+  content: "←";
+}
+
+.login-nav__back:hover {
+  color: var(--accent);
+}
+
+.login-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 22rem);
   gap: 3rem;
+  align-items: center;
+  flex: 1;
+  padding-block: 2.5rem;
 }
 
 .login-page__hero {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   gap: 1rem;
-  min-height: 100vh;
-  padding-block: 3rem;
 }
 
-.login-page__hero-top {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.login-page__hero-top h2 {
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
-  line-height: 1.08;
-  max-width: 10ch;
+.login-page__hero h2 {
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  line-height: 1.1;
 }
 
 .login-page__illo {
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   height: auto;
   animation: illo-float 6s ease-in-out infinite;
   filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.1));
   user-select: none;
   pointer-events: none;
-}
-
-.login-page__back {
-  font-size: 0.88rem;
-  color: var(--ink-muted);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
-.login-page__back:hover {
-  color: var(--ink);
 }
 
 .demo-stack {

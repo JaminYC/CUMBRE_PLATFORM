@@ -44,22 +44,24 @@ export function LoginForm() {
 
   return (
     <main className="login-page">
-      <section className="login-page__hero">
-        <div className="login-page__hero-top">
+
+      <header className="login-nav">
+        <Link href="/" className="login-nav__logo">CUMBRE</Link>
+        <Link href="/" className="login-nav__back">Volver al inicio</Link>
+      </header>
+
+      <div className="login-layout">
+        <section className="login-page__hero">
           <p className="eyebrow">Entrada unificada</p>
           <h2>Un login.<br />Tu espacio.</h2>
-        </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/illustrations/illo-login.png"
-          alt=""
-          className="login-page__illo"
-          draggable={false}
-        />
-        <Link className="login-page__back" href="/">
-          ← Volver al inicio
-        </Link>
-      </section>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/illustrations/illo-login.png"
+            alt=""
+            className="login-page__illo"
+            draggable={false}
+          />
+        </section>
 
       <form className="auth-card" onSubmit={onSubmit}>
         <div>
@@ -121,6 +123,7 @@ export function LoginForm() {
           Continuar con Google
         </a>
       </form>
+      </div>
     </main>
   );
 }
