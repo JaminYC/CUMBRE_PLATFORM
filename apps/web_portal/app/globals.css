@@ -473,13 +473,20 @@ h4 {
 }
 
 .lp-logo {
-  height: 32px;
-  width: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 7px;
+  box-sizing: border-box;
   display: block;
 }
 
 .lp-logo--sm {
-  height: 24px;
+  width: 34px;
+  height: 34px;
+  padding: 5px;
 }
 
 .lp-nav__links {
