@@ -466,6 +466,158 @@ h4 {
   line-height: 1.5;
 }
 
+/* ── Stat cards ─────────────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 1.3rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 250, 241, 0.84);
+  box-shadow: var(--shadow);
+}
+
+.stat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}
+
+.stat-card__icon--primary {
+  background: rgba(13, 122, 113, 0.12);
+  color: var(--mint-strong);
+}
+
+.stat-card__icon--secondary {
+  background: rgba(242, 200, 142, 0.4);
+  color: #a37020;
+}
+
+.stat-card__icon--success {
+  background: rgba(13, 152, 105, 0.1);
+  color: #1a8c6a;
+}
+
+.stat-card__info {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.stat-card__label {
+  font-size: 0.83rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+}
+
+.stat-card__value {
+  font-size: 1.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+/* ── Continue banner ─────────────────────────────────────── */
+.continue-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.3rem;
+  background: linear-gradient(135deg, rgba(13, 122, 113, 0.14), rgba(201, 235, 229, 0.48));
+  border: 1px solid rgba(13, 122, 113, 0.2);
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+}
+
+.continue-banner__text {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.continue-banner__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--mint-strong);
+  font-weight: 600;
+}
+
+.continue-banner__title {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* ── Loading spinner ─────────────────────────────────────── */
+@keyframes cumbre-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state-panel__spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--mint-strong);
+  border-radius: 50%;
+  animation: cumbre-spin 0.75s linear infinite;
+  margin: 0 auto;
+}
+
+/* ── Topics horizontal row ───────────────────────────────── */
+.topics-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.topic-card {
+  flex: 0 0 auto;
+  width: 13rem;
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 250, 241, 0.88);
+  transition: transform 180ms ease, border-color 180ms ease;
+  color: var(--ink);
+}
+
+.topic-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(13, 122, 113, 0.28);
+}
+
+.topic-card h4 {
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.topic-card p {
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
 .tutor-panel__header,
 .tutor-panel__composer,
 .tutor-message,
@@ -599,8 +751,14 @@ h4 {
   }
 
   .dashboard-grid,
-  .page-grid {
+  .page-grid,
+  .stat-grid {
     grid-template-columns: 1fr;
+  }
+
+  .continue-banner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .page-header {

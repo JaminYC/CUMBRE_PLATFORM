@@ -51,6 +51,28 @@ export function MetricCard({
   );
 }
 
+export function StatCard({
+  label,
+  value,
+  icon,
+  accent = "primary"
+}: {
+  label: string;
+  value: string;
+  icon: ReactNode;
+  accent?: "primary" | "secondary" | "success";
+}) {
+  return (
+    <article className="stat-card">
+      <div className={`stat-card__icon stat-card__icon--${accent}`}>{icon}</div>
+      <div className="stat-card__info">
+        <p className="stat-card__label">{label}</p>
+        <p className="stat-card__value">{value}</p>
+      </div>
+    </article>
+  );
+}
+
 export function ProgressBar({ value }: { value: number }) {
   const clampedValue = Math.max(0, Math.min(100, value));
   const { t } = useAppLocale();
@@ -74,6 +96,7 @@ export function LoadingPanel({
 }) {
   return (
     <div className="state-panel">
+      <div className="state-panel__spinner" role="status" aria-label="Cargando" />
       <div className="state-panel__content">
         <p className="state-panel__title">{message}</p>
         {detail ? <p className="state-panel__detail">{detail}</p> : null}
