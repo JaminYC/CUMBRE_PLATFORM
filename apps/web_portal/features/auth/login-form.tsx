@@ -45,17 +45,9 @@ export function LoginForm() {
   return (
     <main className="login-page">
       <section className="login-page__hero">
-        <div className="login-page__hero-text">
+        <div className="login-page__hero-top">
           <p className="eyebrow">Entrada unificada</p>
-          <h2>Inicia sesion una vez y CUMBRE te envia al espacio correcto.</h2>
-          <p className="hero-copy">
-            El portal detecta tu rol despues de autenticarte y redirige automaticamente
-            al entorno de estudiante, docente o administracion, reutilizando la sesion
-            real del sistema.
-          </p>
-          <Link className="button button--ghost" href="/">
-            Volver al inicio
-          </Link>
+          <h2>Un login.<br />Tu espacio.</h2>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -64,6 +56,9 @@ export function LoginForm() {
           className="login-page__illo"
           draggable={false}
         />
+        <Link className="login-page__back" href="/">
+          ← Volver al inicio
+        </Link>
       </section>
 
       <form className="auth-card" onSubmit={onSubmit}>
