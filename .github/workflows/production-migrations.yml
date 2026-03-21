@@ -83,10 +83,16 @@ jobs:
         run: corepack pnpm --filter @cumbre/tutor-engine db:migrate
 
       - name: Seed auth service
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}
         run: corepack pnpm --filter @cumbre/auth-service db:seed
 
       - name: Seed learning service
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}
         run: corepack pnpm --filter @cumbre/learning-service db:seed
 
       - name: Seed content service
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}
         run: corepack pnpm --filter @cumbre/content-service db:seed
