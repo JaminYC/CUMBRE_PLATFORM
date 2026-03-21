@@ -1,24 +1,25 @@
 /* ─────────────────────────────────────────────────────────────
    CUMBRE – Landing illustrations
-   SVGs served as static assets from /public/illustrations/
+   Assets from /public/illustrations/ — SVG or PNG, auto-detected
    ───────────────────────────────────────────────────────────── */
+import Image from "next/image";
 
-export function IllustrationNino() {
-  return <img src="/illustrations/illo-nino.svg" className="lp-illo" alt="" draggable={false} />;
+function Illo({ name }: { name: string }) {
+  return (
+    <Image
+      src={`/illustrations/${name}`}
+      alt=""
+      width={440}
+      height={374}
+      className="lp-illo"
+      draggable={false}
+      priority
+    />
+  );
 }
 
-export function IllustrationJoven() {
-  return <img src="/illustrations/illo-joven.svg" className="lp-illo" alt="" draggable={false} />;
-}
-
-export function IllustrationAdulto() {
-  return <img src="/illustrations/illo-adulto.svg" className="lp-illo" alt="" draggable={false} />;
-}
-
-export function IllustrationDocente() {
-  return <img src="/illustrations/illo-docente.svg" className="lp-illo" alt="" draggable={false} />;
-}
-
-export function IllustrationInstitucion() {
-  return <img src="/illustrations/illo-institucion.svg" className="lp-illo" alt="" draggable={false} />;
-}
+export function IllustrationNino()       { return <Illo name="illo-nino.png" />; }
+export function IllustrationJoven()      { return <Illo name="illo-joven.png" />; }
+export function IllustrationAdulto()     { return <Illo name="illo-adulto.png" />; }
+export function IllustrationDocente()    { return <Illo name="illo-docente.png" />; }
+export function IllustrationInstitucion(){ return <Illo name="illo-institucion.png" />; }
