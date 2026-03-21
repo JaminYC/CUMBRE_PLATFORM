@@ -44,6 +44,10 @@ export function useAsyncResource<T>(
           return;
         }
 
+        if (error instanceof Error && error.name === "AbortError") {
+          return;
+        }
+
         setState((currentState) => ({
           data: null,
           error: error instanceof Error ? error.message : "No fue posible cargar este panel.",
