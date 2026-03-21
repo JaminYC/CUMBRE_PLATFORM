@@ -38,7 +38,8 @@ export function LandingPage({
 
       {/* ── NAVBAR ── */}
       <header className="lp-nav">
-        <span className="lp-logo">CUMBRE</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="lp-logo" draggable={false} />
         <nav className="lp-nav__links">
           <a href="#experiencias">Experiencias</a>
           <a href="#como-funciona">Cómo funciona</a>
@@ -183,7 +184,8 @@ export function LandingPage({
 
       {/* ── FOOTER ── */}
       <footer className="lp-footer">
-        <span className="lp-logo lp-logo--sm">CUMBRE</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="lp-logo lp-logo--sm" draggable={false} />
         <p>© 2025 CUMBRE · Plataforma educativa adaptativa</p>
         <Link href="/login">Iniciar sesión</Link>
       </footer>

@@ -46,7 +46,10 @@ export function LoginForm() {
     <main className="login-page">
 
       <header className="login-nav">
-        <Link href="/" className="login-nav__logo">CUMBRE</Link>
+        <Link href="/" className="login-nav__logo">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/illustrations/LOGONEGRO.png" alt="CUMBRE" className="login-logo" draggable={false} />
+        </Link>
         <Link href="/" className="login-nav__back">Volver al inicio</Link>
       </header>
 

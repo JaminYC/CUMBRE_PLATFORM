@@ -221,11 +221,13 @@ h4 {
 }
 
 .login-nav__logo {
-  font-family: Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--ink);
+  display: flex;
+  align-items: center;
+}
+.login-logo {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .login-nav__back {
@@ -396,15 +398,13 @@ h4 {
 }
 
 .lp-logo {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.02em;
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .lp-logo--sm {
-  font-size: 1.15rem;
+  height: 24px;
 }
 
 .lp-nav__links {
