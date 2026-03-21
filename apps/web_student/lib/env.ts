@@ -5,7 +5,7 @@ export const studentAppConfig = {
   appRole: "student" as const,
   defaultLearningPathId:
     process.env.NEXT_PUBLIC_DEFAULT_LEARNING_PATH_ID ??
-    "learning-path-placeholder",
+    "20000000-0000-0000-0000-000000000001",
   appSessionCookieName:
     process.env.APP_SESSION_COOKIE_NAME ?? "cumbre_student_session",
   appSessionCookieDomain: process.env.APP_SESSION_COOKIE_DOMAIN,

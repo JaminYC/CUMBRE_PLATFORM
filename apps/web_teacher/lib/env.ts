@@ -3,7 +3,7 @@ import { defaultServiceEndpoints } from "@cumbre/sdk";
 export const teacherAppConfig = {
   appRole: "teacher" as const,
   defaultLearningPathId:
-    process.env.NEXT_PUBLIC_DEFAULT_LEARNING_PATH_ID ?? "learning-path-placeholder",
+    process.env.NEXT_PUBLIC_DEFAULT_LEARNING_PATH_ID ?? "20000000-0000-0000-0000-000000000001",
   appSessionCookieName:
     process.env.APP_SESSION_COOKIE_NAME ?? "cumbre_teacher_session",
   appSessionCookieDomain: process.env.APP_SESSION_COOKIE_DOMAIN,
