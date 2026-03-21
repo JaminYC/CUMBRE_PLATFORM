@@ -81,3 +81,12 @@ jobs:
 
       - name: Apply tutor migrations
         run: corepack pnpm --filter @cumbre/tutor-engine db:migrate
+
+      - name: Seed auth service
+        run: corepack pnpm --filter @cumbre/auth-service db:seed
+
+      - name: Seed learning service
+        run: corepack pnpm --filter @cumbre/learning-service db:seed
+
+      - name: Seed content service
+        run: corepack pnpm --filter @cumbre/content-service db:seed
