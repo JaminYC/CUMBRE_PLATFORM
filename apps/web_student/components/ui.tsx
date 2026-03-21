@@ -104,7 +104,7 @@ export function LoadingPanel({
       <div className="splash-loader__orb" aria-hidden="true" />
       <div className="splash-loader__body">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/LOGOBLANCO.png" alt="CUMBRE" className="splash-loader__brand" aria-hidden="true" draggable={false} />
+        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="splash-loader__brand" aria-hidden="true" draggable={false} />
         <p className="splash-loader__message">{message}</p>
         {detail ? <p className="splash-loader__detail">{detail}</p> : null}
         <div className="splash-loader__dots" aria-hidden="true">
