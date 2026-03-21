@@ -57,6 +57,14 @@ export function registerAuthRoutes(
       authorization: {
         required: true
       }
+    },
+    {
+      method: "PATCH",
+      path: "/auth/me/role",
+      handler: controller.setRole,
+      authorization: {
+        required: true
+      }
     }
   ];
 }

@@ -42,6 +42,13 @@ export class AuthController {
       accessToken
     } satisfies ValidateAccessTokenRequest);
   };
+
+  setRole = async ({ req, body }: RequestContext): Promise<unknown> => {
+    const accessToken = extractBearerToken(req.headers.authorization);
+    const { role } = body as { role: string };
+    await this.authService.setUserRole(accessToken, role);
+    return { updated: true };
+  };
 }
 
 function extractBearerToken(authorizationHeader: string | undefined) {

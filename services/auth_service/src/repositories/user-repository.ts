@@ -91,6 +91,8 @@ export class UserRepository {
       });
     }
 
+    let isNew = false;
+
     if (!record) {
       record = await this.prisma.authUser.create({
         data: {
@@ -109,6 +111,7 @@ export class UserRepository {
           timezone: "America/Lima"
         }
       });
+      isNew = true;
     } else if (!record.externalRef) {
       record = await this.prisma.authUser.update({
         where: { id: record.id },
@@ -119,6 +122,13 @@ export class UserRepository {
       });
     }
 
-    return record;
+    return { record, isNew };
+  }
+
+  async updatePrimaryRole(id: string, role: UserRole) {
+    await this.prisma.authUser.update({
+      where: { id },
+      data: { primaryRole: role, roles: [role] }
+    });
   }
 }

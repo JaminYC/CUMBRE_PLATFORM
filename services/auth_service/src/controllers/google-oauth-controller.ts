@@ -53,7 +53,7 @@ export class GoogleOAuthController {
 
       const profile = await getGoogleUserInfo(googleAccessToken);
 
-      const userRecord = await this.userRepository.findOrCreateByGoogle({
+      const { record: userRecord, isNew } = await this.userRepository.findOrCreateByGoogle({
         googleId: profile.id,
         email: profile.email,
         displayName: profile.name,
@@ -86,6 +86,9 @@ export class GoogleOAuthController {
         "refresh_expires_at",
         session.record.refreshTokenExpiresAt.toISOString()
       );
+      if (isNew) {
+        finishUrl.searchParams.set("is_new", "1");
+      }
 
       this.logger.info("Google OAuth login success", {
         userId: userRecord.id,

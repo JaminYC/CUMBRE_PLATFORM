@@ -177,6 +177,24 @@ export class AuthApplicationService implements AuthServiceContract {
     };
   }
 
+  async setUserRole(accessToken: string, role: string): Promise<void> {
+    if (role !== "student" && role !== "teacher") {
+      throw new DomainError("Invalid role for self-assignment.", "INVALID_ROLE", 400);
+    }
+
+    const record = await this.sessionRepository.findByAccessToken(accessToken);
+
+    if (!record || record.revokedAt) {
+      throw new UnauthorizedError("The access token is invalid or revoked.");
+    }
+
+    if (record.accessTokenExpiresAt.getTime() <= Date.now()) {
+      throw new UnauthorizedError("The access token has expired.");
+    }
+
+    await this.userRepository.updatePrimaryRole(record.userId, role as "student" | "teacher");
+  }
+
   async validateAccessToken(
     request: ValidateAccessTokenRequest
   ): Promise<ValidateAccessTokenResponse> {
