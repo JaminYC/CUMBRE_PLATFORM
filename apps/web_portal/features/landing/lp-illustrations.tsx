@@ -340,7 +340,7 @@ export function IllustrationDocente() {
       <circle cx="331" cy="146" r="36" fill="#d4a470"/>
       {/* Hair – bun style */}
       <ellipse cx="331" cy="116" rx="28" ry="12" fill="#1a0f06"/>
-      <circle cx="331" cy="107" rx="18" ry="18" fill="#1a0f06" cy="104"/>
+      <circle cx="331" cy="107" r="18" fill="#1a0f06"/>
       <circle cx="348" cy="108" r="10" fill="#1a0f06"/>
       <circle cx="314" cy="108" r="10" fill="#1a0f06"/>
       {/* Bun */}
