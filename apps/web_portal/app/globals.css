@@ -613,6 +613,19 @@ h4 {
   50%       { transform: translate(-50%, -50%) scale(1.08); }
 }
 
+/* ── Illustration (SVG cartoon per role) ── */
+.lp-illo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  z-index: 1;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.32));
+}
+
 /* Animaciones de flotación escalonadas */
 @keyframes lp-float {
   0%, 100% { transform: translateY(0px); }
