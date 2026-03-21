@@ -573,7 +573,7 @@ h4 {
 
 .lp-visual {
   position: relative;
-  width: 440px;
+  width: 520px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -619,9 +619,23 @@ h4 {
 .lp-illo {
   display: block;
   width: 100%;
-  max-width: 440px;
+  max-width: 500px;
   height: auto;
   user-select: none;
+  animation: illo-float 5s ease-in-out infinite;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.18));
+}
+
+.lp-illo:hover {
+  transform: scale(1.04) translateY(-6px);
+  filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.28));
+  animation-play-state: paused;
+}
+
+@keyframes illo-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
 }
 
 /* Animaciones de flotación escalonadas */
