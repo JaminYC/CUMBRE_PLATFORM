@@ -515,12 +515,11 @@ h4 {
 }
 
 .splash-loader__brand {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  color: rgba(201, 235, 229, 0.85);
-  margin: 0 0 0.25rem;
+  height: 30px;
+  width: auto;
+  display: block;
+  margin: 0 auto 0.5rem;
+  opacity: 0.85;
 }
 
 .splash-loader__message {
