@@ -112,13 +112,30 @@ export function LandingPage({
         <div className="lp-hero__right" aria-hidden="true">
           <div className="lp-visual">
             <div className="lp-visual__blob" />
+            <div className="lp-visual__blob lp-visual__blob--2" />
 
-            <article className="lp-card lp-card--tl">
-              <p className="lp-card__num">94%</p>
-              <p className="lp-card__label">Tasa de avance semanal</p>
+            {/* Sesión activa — card grande superior */}
+            <article className="lp-card lp-card--session lp-float-1">
+              <div className="lp-card__session-header">
+                <span className="lp-live-dot" />
+                <span className="lp-card__badge">Sesión activa</span>
+                <span className="lp-card__time">14:32</span>
+              </div>
+              <p className="lp-card__topic">Pensamiento en sistemas</p>
+              <div className="lp-progress-wrap">
+                <div className="lp-progress-bar">
+                  <div className="lp-progress-fill" style={{ width: "68%" }} />
+                </div>
+                <span className="lp-progress-pct">68%</span>
+              </div>
+              <p className="lp-card__next">
+                <span className="lp-card__next-label">Próximo ›</span>
+                Loops de retroalimentación
+              </p>
             </article>
 
-            <article className="lp-card lp-card--ml">
+            {/* Roles badge — izquierda */}
+            <article className="lp-card lp-card--roles lp-float-2">
               <span className="lp-card__icon lp-card__icon--mint">
                 <GraduationCapIcon />
               </span>
@@ -128,25 +145,36 @@ export function LandingPage({
               </div>
             </article>
 
-            <article className="lp-card lp-card--br">
-              <span className="lp-card__icon lp-card__icon--sun">
-                <BrainIcon />
-              </span>
-              <div>
-                <p className="lp-card__num">IA nativa</p>
-                <p className="lp-card__label">Tutor con grafo de conocimiento</p>
+            {/* Tutor IA — inferior derecha */}
+            <article className="lp-card lp-card--tutor lp-float-3">
+              <div className="lp-tutor-header">
+                <span className="lp-card__icon lp-card__icon--sun" style={{ width: "1.8rem", height: "1.8rem", borderRadius: "0.5rem" }}>
+                  <BrainIcon />
+                </span>
+                <span className="lp-tutor-name">Tutor IA</span>
+                <span className="lp-live-dot lp-live-dot--sun" />
+              </div>
+              <div className="lp-tutor-bubble">
+                Tu siguiente tema refuerza dominio en <strong>pensamiento crítico</strong>.
+              </div>
+              <div className="lp-tutor-typing">
+                <span /><span /><span />
               </div>
             </article>
 
-            <article className="lp-card lp-card--tr">
-              <span className="lp-card__icon lp-card__icon--spark">
-                <SparklesIcon />
-              </span>
-              <div>
-                <p className="lp-card__num">Adaptativo</p>
-                <p className="lp-card__label">Señales de dominio en tiempo real</p>
+            {/* Social proof — rating — superior derecha */}
+            <article className="lp-card lp-card--rating lp-float-4">
+              <div className="lp-stars">
+                {[1,2,3,4,5].map(i => (
+                  <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#efc88d" stroke="none">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                ))}
               </div>
+              <p className="lp-card__num" style={{ fontSize: "1rem" }}>4.9 <span className="lp-card__label">/ 200 reseñas</span></p>
+              <p className="lp-card__label">Confiado por 200+ usuarios</p>
             </article>
+
           </div>
         </div>
       </section>
