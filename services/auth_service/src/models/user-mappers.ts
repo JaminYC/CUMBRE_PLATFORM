@@ -43,7 +43,7 @@ export function toDerivedProfiles(record: AuthUser): UserProfile[] {
       updatedAt: record.updatedAt.toISOString(),
       profileType,
       status: "active",
-      activeLearningPathIds: ["learning-path-placeholder"],
+      activeLearningPathIds: ["20000000-0000-0000-0000-000000000001"],
       focusSkillIds: ["skill-critical-thinking"]
     };
 

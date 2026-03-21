@@ -95,11 +95,20 @@ export function LoadingPanel({
   detail?: string;
 }) {
   return (
-    <div className="state-panel">
-      <div className="state-panel__spinner" role="status" aria-label="Cargando" />
-      <div className="state-panel__content">
-        <p className="state-panel__title">{message}</p>
-        {detail ? <p className="state-panel__detail">{detail}</p> : null}
+    <div className="splash-loader" role="status">
+      <div className="splash-loader__rings" aria-hidden="true">
+        <span className="splash-loader__ring splash-loader__ring--1" />
+        <span className="splash-loader__ring splash-loader__ring--2" />
+        <span className="splash-loader__ring splash-loader__ring--3" />
+      </div>
+      <div className="splash-loader__orb" aria-hidden="true" />
+      <div className="splash-loader__body">
+        <p className="splash-loader__brand" aria-hidden="true">CUMBRE</p>
+        <p className="splash-loader__message">{message}</p>
+        {detail ? <p className="splash-loader__detail">{detail}</p> : null}
+        <div className="splash-loader__dots" aria-hidden="true">
+          <span /><span /><span />
+        </div>
       </div>
     </div>
   );
