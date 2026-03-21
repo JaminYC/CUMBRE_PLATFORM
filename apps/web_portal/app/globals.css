@@ -574,8 +574,10 @@ h4 {
 .lp-visual {
   position: relative;
   width: 440px;
-  height: 500px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Blobs animados */
@@ -613,17 +615,13 @@ h4 {
   50%       { transform: translate(-50%, -50%) scale(1.08); }
 }
 
-/* ── Illustration (SVG cartoon per role) ── */
+/* ── Illustration (static SVG asset per role) ── */
 .lp-illo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   height: auto;
-  z-index: 1;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.32));
+  user-select: none;
 }
 
 /* Animaciones de flotación escalonadas */
