@@ -329,9 +329,9 @@ export function LandingPage({
             </span>
             <h3>Docente</h3>
             <p>
-              Creá aulas, importá estudiantes, publicá materiales y seguí el avance
-              individual y grupal desde un mismo lugar. Menos administración,
-              más enseñanza.
+              Publicá módulos con contenido propio, asigná lecciones por aula y
+              seguí el avance de cada estudiante en tiempo real. La IA tutoriza
+              entre clases — vos te enfocás en enseñar.
             </p>
           </article>
           <article className="lp-feat">
@@ -601,9 +601,9 @@ export function LandingPage({
           <article className="lp-cta-card lp-cta-card--featured">
             <span className="lp-cta-card__icon" aria-hidden="true"><BookOpenIcon /></span>
             <h3>Soy docente</h3>
-            <p>Creá tu aula, gestioná estudiantes y publicá materiales desde un solo espacio.</p>
+            <p>Publicá módulos propios, asigná lecciones y seguí a cada estudiante. CUMBRE se encarga del acompañamiento continuo.</p>
             <Link className="button lp-btn-primary" href="/signup">
-              Crear mi clase
+              Crear mi primera aula
             </Link>
           </article>
           <article className="lp-cta-card">
