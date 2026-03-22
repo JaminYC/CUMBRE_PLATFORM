@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { LoginForm } from "@/features/auth/login-form";
 import { getServerSession } from "@/lib/server-session";
+import { adminAppConfig } from "@/lib/env";
 
 export default async function LoginPage() {
   const session = await getServerSession();
@@ -9,5 +9,5 @@ export default async function LoginPage() {
     redirect("/dashboard");
   }
 
-  return <LoginForm />;
+  redirect(`${adminAppConfig.portalUrl}/login`);
 }
