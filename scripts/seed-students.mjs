@@ -4,6 +4,13 @@
  * Crea cuentas de estudiante en CUMBRE llamando directamente al auth_service.
  * La contraseña inicial de cada estudiante es su DNI.
  *
+ * Convención de correos:
+ *   - Si el estudiante tiene correo real (o del padre/tutor) → usarlo directamente.
+ *   - Si no tiene correo único (niños que comparten email familiar, hermanos, etc.)
+ *     → usar   {dni}@cumbre.local   (ej: "90536610@cumbre.local").
+ *     El correo @cumbre.local es un identificador interno; el estudiante inicia
+ *     sesión con su DNI como contraseña — no se necesita acceso a ningún inbox.
+ *
  * Uso:
  *   node scripts/seed-students.mjs
  *   AUTH_API_URL=http://localhost:3001 node scripts/seed-students.mjs
@@ -58,11 +65,12 @@ const STUDENTS = [
     grado: "3°"
   },
   {
-    // ⚠ Mismo correo que Juan Alejandro (estudiante 2).
-    // Este registro FALLARÁ — hay que coordinar un correo único con la familia.
+    // Hermano de Juan Alejandro — mismo correo familiar.
+    // Usa correo interno @cumbre.local para evitar conflicto.
+    // Inicia sesión con DNI como contraseña; no necesita acceso al inbox.
     dni: "90536610",
     displayName: "Favio López Vilcahuaman",
-    email: "joseluisvilcahuamanponce@gmail.com",
+    email: "90536610@cumbre.local",
     grado: "3°"
   },
   {
