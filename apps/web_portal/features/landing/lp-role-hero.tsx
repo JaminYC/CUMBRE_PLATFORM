@@ -20,11 +20,67 @@ function CheckIcon() {
   );
 }
 
+function StarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+function RocketIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  );
+}
+
+function BriefcaseIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+      <line x1="12" y1="12" x2="12" y2="12" />
+      <path d="M2 12h20" />
+    </svg>
+  );
+}
+
+function BookStackIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  );
+}
+
+function BuildingIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="7" width="20" height="15" rx="1" />
+      <path d="M16 7V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3" />
+      <line x1="12" y1="12" x2="12" y2="12.01" />
+      <path d="M2 7h20" />
+      <path d="M6 7v14" />
+      <path d="M18 7v14" />
+      <path d="M6 12h4" />
+      <path d="M14 12h4" />
+      <path d="M6 16h4" />
+      <path d="M14 16h4" />
+    </svg>
+  );
+}
+
 /* ── Role data ── */
 interface RoleConfig {
   id: string;
   tab: string;
-  emoji: string;
+  Icon: React.ComponentType;
   eyebrow: string;
   headline: string;
   desc: string;
@@ -38,7 +94,7 @@ const ROLES: RoleConfig[] = [
   {
     id: "nino",
     tab: "Niño",
-    emoji: "🌟",
+    Icon: StarIcon,
     eyebrow: "Para estudiantes pequeños",
     headline: "Aprende jugando, avanza de verdad.",
     desc: "Una ruta de aprendizaje que se adapta a cómo aprendes tú — con logros, rachas y un tutor que nunca te juzga.",
@@ -50,7 +106,7 @@ const ROLES: RoleConfig[] = [
   {
     id: "joven",
     tab: "Joven",
-    emoji: "🚀",
+    Icon: RocketIcon,
     eyebrow: "Para estudiantes jóvenes",
     headline: "Domina lo que importa. A tu ritmo.",
     desc: "Rutas inteligentes, tutor con IA y progreso visible. Para quien quiere ir más lejos sin esperar al resto de la clase.",
@@ -62,7 +118,7 @@ const ROLES: RoleConfig[] = [
   {
     id: "adulto",
     tab: "Adulto",
-    emoji: "💼",
+    Icon: BriefcaseIcon,
     eyebrow: "Para profesionales en formación",
     headline: "Formación que se adapta a tu vida.",
     desc: "Contenido estructurado, ritmo adaptativo y seguimiento real. Sin perder el tiempo en lo que ya sabes.",
@@ -74,7 +130,7 @@ const ROLES: RoleConfig[] = [
   {
     id: "docente",
     tab: "Docente",
-    emoji: "📚",
+    Icon: BookStackIcon,
     eyebrow: "Para docentes",
     headline: "El aula que siempre quisiste gestionar.",
     desc: "Crea aulas, importa estudiantes, publica materiales y sigue el avance de cada uno desde un solo espacio.",
@@ -86,7 +142,7 @@ const ROLES: RoleConfig[] = [
   {
     id: "institucion",
     tab: "Institución",
-    emoji: "🏛️",
+    Icon: BuildingIcon,
     eyebrow: "Para instituciones educativas",
     headline: "Escala tu programa. Observa cada detalle.",
     desc: "Grafo de conocimiento, supervisión de contenido e integridad operativa. Un ecosistema unificado para toda la organización.",
@@ -157,7 +213,7 @@ export function LpRoleHero({ activeTarget }: { activeTarget: PortalRoleTarget | 
             onClick={() => switchRole(i)}
             type="button"
           >
-            <span className="lp-role-tab__emoji" aria-hidden="true">{r.emoji}</span>
+            <span className="lp-role-tab__icon" aria-hidden="true"><r.Icon /></span>
             {r.tab}
           </button>
         ))}
