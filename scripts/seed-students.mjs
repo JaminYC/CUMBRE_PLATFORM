@@ -5,11 +5,9 @@
  * La contraseña inicial de cada estudiante es su DNI.
  *
  * Convención de correos:
- *   - Si el estudiante tiene correo real (o del padre/tutor) → usarlo directamente.
- *   - Si no tiene correo único (niños que comparten email familiar, hermanos, etc.)
- *     → usar   {dni}@cumbre.local   (ej: "90536610@cumbre.local").
- *     El correo @cumbre.local es un identificador interno; el estudiante inicia
- *     sesión con su DNI como contraseña — no se necesita acceso a ningún inbox.
+ *   Todos los estudiantes usan {dni}@cumbre.local como identificador interno.
+ *   No se requiere acceso a ningún inbox — el estudiante inicia sesión con su
+ *   DNI como contraseña y el correo @cumbre.local solo sirve como identificador.
  *
  * Uso:
  *   node scripts/seed-students.mjs
@@ -20,72 +18,20 @@ const AUTH_API_URL =
   process.env.AUTH_API_URL ?? "https://auth-api.cumbre.teamvastoria.com";
 
 // ── Lista de estudiantes ──────────────────────────────────────────────────────
-// DNI se usa como contraseña inicial; el docente la comparte con los padres.
+// Todos los estudiantes usan {dni}@cumbre.local como identificador de correo.
+// El DNI es la contraseña inicial — el docente la comparte con los padres.
 const STUDENTS = [
-  {
-    dni: "91683094",
-    displayName: "Gia Hanna Delgadillo Cristobal",
-    email: "giovannaTorresmatos@gmail.com",
-    grado: "1°"
-  },
-  {
-    dni: "91359035",
-    displayName: "Juan Alejandro López Vilcahuaman",
-    email: "joseluisvilcahuamanponce@gmail.com",
-    grado: "1°"
-  },
-  {
-    dni: "90957275",
-    displayName: "Aymar Eithan Avendaño Ponce",
-    email: "Veritopg2022@gmail.com",
-    grado: "2°"
-  },
-  {
-    dni: "91236562",
-    displayName: "Sebastián Wilson Blancas Maximiliano",
-    email: "Karencita080795@gmail.com",
-    grado: "2°"
-  },
-  {
-    dni: "90412673",
-    displayName: "Valentina Maravi Zarate",
-    email: "kelys.zaratelizarraga@gmail.com",
-    grado: "3°"
-  },
-  {
-    dni: "90680803",
-    displayName: "Schneider Sebastián Alvaro Castro",
-    email: "castrogalarzaisabel72@gmail.com",
-    grado: "3°"
-  },
-  {
-    dni: "90455263",
-    displayName: "André Fabrizio Chipana Calderon",
-    email: "Abikcm92@gmail.com",
-    grado: "3°"
-  },
-  {
-    // Hermano de Juan Alejandro — mismo correo familiar.
-    // Usa correo interno @cumbre.local para evitar conflicto.
-    // Inicia sesión con DNI como contraseña; no necesita acceso al inbox.
-    dni: "90536610",
-    displayName: "Favio López Vilcahuaman",
-    email: "90536610@cumbre.local",
-    grado: "3°"
-  },
-  {
-    dni: "79312735",
-    displayName: "Ainhona Mariangel Cruz Llerena",
-    email: "rossariollerenallerena@gmail.com",
-    grado: "5°"
-  },
-  {
-    dni: "72371837",
-    displayName: "Alexis Vicent Vilca Baltazar",
-    email: "72371837@continental.edu.pe",
-    grado: "5°"
-  }
-];
+  { dni: "91683094", displayName: "Gia Hanna Delgadillo Cristobal",        grado: "1°" },
+  { dni: "91359035", displayName: "Juan Alejandro López Vilcahuaman",       grado: "1°" },
+  { dni: "90957275", displayName: "Aymar Eithan Avendaño Ponce",            grado: "2°" },
+  { dni: "91236562", displayName: "Sebastián Wilson Blancas Maximiliano",   grado: "2°" },
+  { dni: "90412673", displayName: "Valentina Maravi Zarate",                grado: "3°" },
+  { dni: "90680803", displayName: "Schneider Sebastián Alvaro Castro",      grado: "3°" },
+  { dni: "90455263", displayName: "André Fabrizio Chipana Calderon",        grado: "3°" },
+  { dni: "90536610", displayName: "Favio López Vilcahuaman",                grado: "3°" },
+  { dni: "79312735", displayName: "Ainhona Mariangel Cruz Llerena",         grado: "5°" },
+  { dni: "72371837", displayName: "Alexis Vicent Vilca Baltazar",           grado: "5°" }
+].map(s => ({ ...s, email: `${s.dni}@cumbre.local` }));
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const GREEN  = "\x1b[32m";

@@ -266,8 +266,7 @@ export class LearningApplicationService implements LearningServiceContract {
     const classCode = buildClassCode(request.name, request.subject);
     const classroom = await this.classroomRepository.createClassroom({
       ...request,
-      classCode,
-      learningPathId: "learning-path-placeholder"
+      classCode
     });
 
     return { classroom };
