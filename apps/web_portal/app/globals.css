@@ -394,6 +394,61 @@ h4 {
   color: var(--error);
 }
 
+.auth-switch {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.auth-switch a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.signup-role-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.signup-role-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s;
+}
+
+.signup-role-btn strong {
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.signup-role-btn span {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+.signup-role-btn:hover {
+  border-color: var(--accent);
+}
+
+.signup-role-btn--active {
+  border-color: var(--accent);
+  background: rgba(20, 122, 113, 0.06);
+}
+
+.signup-role-btn--active strong {
+  color: var(--accent);
+}
+
 .auth-divider {
   display: flex;
   align-items: center;

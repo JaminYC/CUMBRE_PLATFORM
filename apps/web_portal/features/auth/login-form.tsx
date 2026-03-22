@@ -125,6 +125,10 @@ export function LoginForm() {
           </svg>
           Continuar con Google
         </a>
+
+        <p className="auth-switch">
+          ¿No tienes cuenta? <Link href="/signup">Regístrate</Link>
+        </p>
       </form>
       </div>
     </main>
