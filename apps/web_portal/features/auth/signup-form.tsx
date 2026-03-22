@@ -5,9 +5,28 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { requestAppApi } from "@/lib/app-http";
 
+function StudentIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+    </svg>
+  );
+}
+
+function TeacherIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="3" width="20" height="14" rx="2" />
+      <path d="M8 21h8M12 17v4" />
+      <path d="M7 8h10M7 11h6" />
+    </svg>
+  );
+}
+
 const ROLES = [
-  { id: "student", label: "Estudiante", desc: "Aprendo con CUMBRE" },
-  { id: "teacher", label: "Docente",    desc: "Enseño con CUMBRE" }
+  { id: "student", icon: <StudentIcon />, label: "Estudiante", desc: "Aprendo con CUMBRE" },
+  { id: "teacher", icon: <TeacherIcon />, label: "Docente",    desc: "Enseño con CUMBRE" }
 ];
 
 interface PortalSignupResponse {
@@ -90,6 +109,7 @@ export function SignupForm() {
                 className={`signup-role-btn ${role === r.id ? "signup-role-btn--active" : ""}`}
                 onClick={() => setRole(r.id)}
               >
+                <span className="signup-role-btn__icon" aria-hidden="true">{r.icon}</span>
                 <strong>{r.label}</strong>
                 <span>{r.desc}</span>
               </button>

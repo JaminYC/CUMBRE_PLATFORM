@@ -259,9 +259,20 @@ h4 {
   box-shadow: 0 0 0 3px rgba(20, 122, 113, 0.18);
 }
 
-.onboarding-card__emoji {
-  font-size: 2rem;
-  line-height: 1;
+.onboarding-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  background: rgba(20, 122, 113, 0.08);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.onboarding-card--selected .onboarding-card__icon {
+  background: rgba(20, 122, 113, 0.15);
 }
 
 .onboarding-card__label {
@@ -437,6 +448,12 @@ h4 {
   cursor: pointer;
   text-align: left;
   transition: border-color 0.15s;
+}
+
+.signup-role-btn__icon {
+  display: flex;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
 }
 
 .signup-role-btn strong {

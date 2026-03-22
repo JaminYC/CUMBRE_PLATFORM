@@ -3,16 +3,35 @@
 import { useState } from "react";
 import Link from "next/link";
 
+function StudentIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+    </svg>
+  );
+}
+
+function TeacherIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="3" width="20" height="14" rx="2" />
+      <path d="M8 21h8M12 17v4" />
+      <path d="M7 8h10M7 11h6" />
+    </svg>
+  );
+}
+
 const ROLES = [
   {
     id: "student",
-    emoji: "🎓",
+    icon: <StudentIcon />,
     label: "Estudiante",
     desc: "Accede a rutas de aprendizaje adaptativas, tutor IA y seguimiento de tu progreso."
   },
   {
     id: "teacher",
-    emoji: "📚",
+    icon: <TeacherIcon />,
     label: "Docente",
     desc: "Crea aulas, publica materiales, gestiona estudiantes y sigue su avance en tiempo real."
   }
@@ -68,7 +87,7 @@ export function OnboardingForm() {
               className={`onboarding-card ${selected === role.id ? "onboarding-card--selected" : ""}`}
               onClick={() => setSelected(role.id)}
             >
-              <span className="onboarding-card__emoji" aria-hidden="true">{role.emoji}</span>
+              <span className="onboarding-card__icon" aria-hidden="true">{role.icon}</span>
               <strong className="onboarding-card__label">{role.label}</strong>
               <p className="onboarding-card__desc">{role.desc}</p>
             </button>
