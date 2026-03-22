@@ -122,6 +122,63 @@ function RefreshIcon() {
   );
 }
 
+/* ── Flow step icons ── */
+function ClipboardIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <line x1="8" y1="11" x2="16" y2="11" />
+      <line x1="8" y1="15" x2="14" y2="15" />
+    </svg>
+  );
+}
+
+function LogInIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+      <polyline points="10 17 15 12 10 7" />
+      <line x1="15" y1="12" x2="3" y2="12" />
+    </svg>
+  );
+}
+
+function BrainIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
+      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
+    </svg>
+  );
+}
+
+function ZapIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  );
+}
+
+function EyeSmIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  );
+}
+
 /* ── AI section icon ── */
 function CpuIcon() {
   return (
@@ -296,39 +353,81 @@ export function LandingPage({
         <div className="lp-section-hd">
           <p className="lp-eyebrow lp-eyebrow--ink">Cómo funciona</p>
           <h2>Del aula al aprendizaje adaptativo en 5 pasos.</h2>
+          <p className="lp-section-hd__sub">
+            Cada paso tiene un actor claro, una acción concreta y un resultado medible.
+          </p>
         </div>
-        <div className="lp-how-grid lp-how-grid--5">
-          {[
+        <div className="lp-flow">
+          {([
             {
               n: "01",
-              t: "El docente prepara el aula",
-              d: "Crea el aula, sube materiales y asigna lecciones a sus estudiantes desde un panel simple."
+              actor: "Docente",
+              actorKey: "docente",
+              Icon: ClipboardIcon,
+              t: "Prepara el aula",
+              d: "Crea el aula, importa estudiantes, sube materiales y asigna lecciones desde un panel simple.",
+              result: "Aula lista con contenido estructurado y estudiantes vinculados"
             },
             {
               n: "02",
-              t: "El estudiante accede con un solo login",
-              d: "Entra a sus rutas, tutor y progreso desde el portal unificado, sin importar el dispositivo."
+              actor: "Estudiante",
+              actorKey: "estudiante",
+              Icon: LogInIcon,
+              t: "Accede con un solo login",
+              d: "Entra a sus rutas, tutor y progreso desde el portal unificado, desde cualquier dispositivo.",
+              result: "Ruta personalizada activa desde el primer acceso"
             },
             {
               n: "03",
-              t: "La IA mantiene contexto",
-              d: "Retrieval, grafo de conocimiento y señales adaptativas activos en cada interacción."
+              actor: "IA",
+              actorKey: "ia",
+              Icon: BrainIcon,
+              t: "Activa el contexto",
+              d: "Retrieval semántico, grafo de conocimiento y señales adaptativas se activan en cada interacción.",
+              result: "Respuestas contextuales y recomendaciones basadas en historial real"
             },
             {
               n: "04",
-              t: "El aprendizaje se adapta en tiempo real",
-              d: "El sistema ajusta el siguiente paso según el dominio alcanzado, sin esperar al fin del módulo."
+              actor: "Sistema",
+              actorKey: "sistema",
+              Icon: ZapIcon,
+              t: "Adapta en tiempo real",
+              d: "El sistema ajusta el siguiente paso según el dominio alcanzado, sin esperar al fin del módulo.",
+              result: "Próxima lección calibrada al nivel real de cada estudiante"
             },
             {
               n: "05",
-              t: "La institución observa y mejora",
-              d: "Visibilidad total de adopción, contenido e integridad operativa en un solo panel."
+              actor: "Institución",
+              actorKey: "institucion",
+              Icon: EyeSmIcon,
+              t: "Observa y mejora",
+              d: "Visibilidad total de adopción, integridad de contenido y operación desde un panel unificado.",
+              result: "Decisiones informadas con datos de todo el ecosistema"
             }
-          ].map(step => (
-            <div className="lp-step" key={step.n}>
-              <p className="lp-step__num">{step.n}</p>
-              <h4>{step.t}</h4>
-              <p>{step.d}</p>
+          ] as const).map((step, i, arr) => (
+            <div className="lp-flow__item" key={step.n}>
+              <div className="lp-flow-step">
+                <div className="lp-flow-step__top">
+                  <span className={`lp-flow-step__actor lp-flow-step__actor--${step.actorKey}`}>
+                    {step.actor}
+                  </span>
+                  <span className="lp-flow-step__num">{step.n}</span>
+                </div>
+                <span className="lp-flow-step__icon" aria-hidden="true">
+                  <step.Icon />
+                </span>
+                <h4 className="lp-flow-step__title">{step.t}</h4>
+                <p className="lp-flow-step__desc">{step.d}</p>
+                <div className="lp-flow-step__result">
+                  <span className="lp-flow-step__result-dot" aria-hidden="true" />
+                  <span>{step.result}</span>
+                </div>
+              </div>
+              {i < arr.length - 1 && (
+                <div className="lp-flow-arrow" aria-hidden="true">
+                  <ArrowRightIcon />
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -338,47 +437,83 @@ export function LandingPage({
       <section className="lp-model">
         <div className="lp-section-hd">
           <p className="lp-eyebrow lp-eyebrow--ink">Modelo de aprendizaje</p>
-          <h2>Cinco tipos de aprendizaje, un solo flujo.</h2>
+          <h2>Cinco etapas, un ciclo continuo.</h2>
           <p className="lp-section-hd__sub">
-            CUMBRE no elige uno solo. Combina los cinco en cada ruta, ajustándolos
-            según tu nivel y momento.
+            CUMBRE no elige una sola forma de enseñar. Combina las cinco en cada ruta
+            y las repite — cada vuelta construye sobre la anterior.
           </p>
         </div>
-        <div className="lp-model-grid">
-          {[
+        <div className="lp-cycle">
+          {([
             {
+              n: "01",
               Icon: CompassIcon,
-              label: "Exploración libre",
-              desc: "Seguís tu curiosidad y descubrís conexiones entre conceptos."
+              label: "Exploración",
+              purpose: "Activar curiosidad",
+              desc: "El estudiante navega conceptos libremente, sin un objetivo fijo. La IA observa qué le interesa y qué le cuesta.",
+              colorKey: "explore"
             },
             {
+              n: "02",
               Icon: BarChartIcon,
-              label: "Progresión estructurada",
-              desc: "Pasos claros que construyen dominio de forma acumulativa."
+              label: "Progresión",
+              purpose: "Construir dominio",
+              desc: "Módulos organizados en secuencia creciente de complejidad. Cada paso valida el anterior antes de avanzar.",
+              colorKey: "progress"
             },
             {
+              n: "03",
               Icon: TargetIcon,
-              label: "Práctica deliberada",
-              desc: "Ejercicios calibrados exactamente a tu nivel actual."
+              label: "Práctica",
+              purpose: "Fijar comprensión",
+              desc: "Ejercicios calibrados exactamente al nivel actual del estudiante. Ni muy fácil, ni frustrante.",
+              colorKey: "practice"
             },
             {
+              n: "04",
               Icon: PuzzleIcon,
-              label: "Resolución de problemas",
-              desc: "Aplicás lo aprendido en situaciones reales y nuevas."
+              label: "Resolución",
+              purpose: "Aplicar conocimiento",
+              desc: "Problemas que combinan conceptos de distintos módulos. Aquí el aprendizaje se vuelve real y transferible.",
+              colorKey: "solve"
             },
             {
+              n: "05",
               Icon: RefreshIcon,
               label: "Reflexión",
-              desc: "Entendés cómo y por qué aprendiste lo que aprendiste."
+              purpose: "Consolidar y reiniciar",
+              desc: "El estudiante entiende qué aprendió, cómo lo aprendió y qué viene después. La IA registra el cierre y prepara el próximo ciclo.",
+              colorKey: "reflect"
             }
-          ].map(({ Icon, label, desc }) => (
-            <div className="lp-model-item" key={label}>
-              <span className="lp-model-item__icon" aria-hidden="true"><Icon /></span>
-              <strong className="lp-model-item__label">{label}</strong>
-              <p className="lp-model-item__desc">{desc}</p>
+          ] as const).map((stage, i, arr) => (
+            <div className="lp-cycle__item" key={stage.n}>
+              <div className={`lp-cycle-card lp-cycle-card--${stage.colorKey}`}>
+                <div className="lp-cycle-card__top">
+                  <span className="lp-cycle-card__num">{stage.n}</span>
+                  <span className="lp-cycle-card__icon" aria-hidden="true"><stage.Icon /></span>
+                </div>
+                <strong className="lp-cycle-card__label">{stage.label}</strong>
+                <span className="lp-cycle-card__purpose">{stage.purpose}</span>
+                <p className="lp-cycle-card__desc">{stage.desc}</p>
+              </div>
+              {i < arr.length - 1 ? (
+                <div className="lp-cycle-arrow" aria-hidden="true">
+                  <ArrowRightIcon />
+                </div>
+              ) : (
+                <div className="lp-cycle-loop" aria-label="El ciclo se repite y profundiza">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="1 4 1 10 7 10" />
+                    <path d="M3.51 15a9 9 0 1 0 .49-3.1" />
+                  </svg>
+                </div>
+              )}
             </div>
           ))}
         </div>
+        <p className="lp-cycle__note">
+          El ciclo no termina — cada repetición profundiza el dominio y amplía las conexiones.
+        </p>
       </section>
 
       {/* ── LA DIFERENCIA ── */}
