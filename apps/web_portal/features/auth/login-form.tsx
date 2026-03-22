@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { requestAppApi } from "@/lib/app-http";
 
@@ -11,9 +12,11 @@ interface PortalLoginResponse {
 }
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
+  const params = useSearchParams();
+  const [email, setEmail] = useState(params.get("email") ?? "");
   const [credential, setCredential] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isNew, setIsNew] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -32,11 +35,17 @@ export function LoginForm() {
 
       window.location.assign(response.redirectTo);
     } catch (caughtError) {
+      const msg = caughtError instanceof Error ? caughtError.message : "";
+      const isInvalidCredentials =
+        msg.toLowerCase().includes("invalid") ||
+        msg.toLowerCase().includes("credentials") ||
+        msg.toLowerCase().includes("not found");
       setError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : "No fue posible iniciar sesion desde el portal."
+        isInvalidCredentials
+          ? "Correo o contraseña incorrectos. ¿Eres nuevo?"
+          : msg || "No fue posible iniciar sesión."
       );
+      setIsNew(isInvalidCredentials);
     } finally {
       setIsSubmitting(false);
     }
@@ -94,10 +103,19 @@ export function LoginForm() {
           />
         </label>
 
-        {error ? <p className="field-error">{error}</p> : null}
+        {error ? (
+          <div className="field-error-block">
+            <p className="field-error">{error}</p>
+            {isNew ? (
+              <Link href={`/signup?email=${encodeURIComponent(email)}`} className="field-error-action">
+                Crear cuenta nueva →
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
 
         <button className="button" disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Redirigiendo..." : "Iniciar sesion"}
+          {isSubmitting ? "Redirigiendo..." : "Iniciar sesión"}
         </button>
 
         <div className="auth-divider">

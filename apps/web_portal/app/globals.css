@@ -392,6 +392,19 @@ h4 {
 
 .field-error {
   color: var(--error);
+  margin: 0;
+}
+
+.field-error-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field-error-action {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .auth-switch {

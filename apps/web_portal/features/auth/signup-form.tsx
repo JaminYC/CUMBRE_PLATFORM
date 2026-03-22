@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { requestAppApi } from "@/lib/app-http";
 
@@ -14,11 +15,13 @@ interface PortalSignupResponse {
 }
 
 export function SignupForm() {
+  const params = useSearchParams();
   const [name, setName]           = useState("");
-  const [email, setEmail]         = useState("");
+  const [email, setEmail]         = useState(params.get("email") ?? "");
   const [password, setPassword]   = useState("");
   const [role, setRole]           = useState<string | null>(null);
-  const [error, setError]         = useState<string | null>(null);
+  const [error, setError]           = useState<string | null>(null);
+  const [accountExists, setAccountExists] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -40,11 +43,16 @@ export function SignupForm() {
 
       window.location.assign(response.redirectTo);
     } catch (caughtError) {
+      const msg = caughtError instanceof Error ? caughtError.message : "";
+      const alreadyExists =
+        msg.toLowerCase().includes("already exists") ||
+        msg.toLowerCase().includes("conflict");
       setError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : "No fue posible crear la cuenta."
+        alreadyExists
+          ? "Ya existe una cuenta con ese correo."
+          : msg || "No fue posible crear la cuenta."
       );
+      setAccountExists(alreadyExists);
       setIsSubmitting(false);
     }
   }
@@ -122,7 +130,16 @@ export function SignupForm() {
             />
           </label>
 
-          {error ? <p className="field-error">{error}</p> : null}
+          {error ? (
+            <div className="field-error-block">
+              <p className="field-error">{error}</p>
+              {accountExists ? (
+                <Link href={`/login?email=${encodeURIComponent(email)}`} className="field-error-action">
+                  Iniciar sesión con esta cuenta →
+                </Link>
+              ) : null}
+            </div>
+          ) : null}
 
           <button className="button" disabled={isSubmitting} type="submit">
             {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
