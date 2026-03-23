@@ -7,6 +7,82 @@ import { useAppLocale } from "@cumbre/app-runtime/client";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui";
 import { SignOutButton } from "@/components/sign-out-button";
 
+// ── Inline SVG icons ──────────────────────────────────────────────────────────
+function GridIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <rect x="1" y="1" width="5.5" height="5.5" rx="1.2" fill="currentColor"/>
+      <rect x="8.5" y="1" width="5.5" height="5.5" rx="1.2" fill="currentColor"/>
+      <rect x="1" y="8.5" width="5.5" height="5.5" rx="1.2" fill="currentColor"/>
+      <rect x="8.5" y="8.5" width="5.5" height="5.5" rx="1.2" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function UsersIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <circle cx="5.5" cy="4.5" r="2.3" fill="currentColor"/>
+      <path d="M1 12.5c0-2.485 2.015-3.5 4.5-3.5s4.5 1.015 4.5 3.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+      <circle cx="11.5" cy="4.5" r="1.8" fill="currentColor" opacity=".5"/>
+      <path d="M13.5 12.5c0-1.5-.9-2.6-2-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity=".5"/>
+    </svg>
+  );
+}
+
+function FilesIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <rect x="3" y="2" width="7.5" height="10" rx="1.3" fill="currentColor" opacity=".25"/>
+      <rect x="4.5" y="1" width="7.5" height="10" rx="1.3" stroke="currentColor" strokeWidth="1.3"/>
+      <line x1="6.5" y1="4.5" x2="10" y2="4.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
+      <line x1="6.5" y1="7" x2="10" y2="7" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function BlocksIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <rect x="1" y="1" width="5.5" height="5.5" rx="1.2" stroke="currentColor" strokeWidth="1.3"/>
+      <rect x="8.5" y="1" width="5.5" height="5.5" rx="1.2" fill="currentColor"/>
+      <rect x="1" y="8.5" width="5.5" height="5.5" rx="1.2" fill="currentColor" opacity=".4"/>
+      <rect x="8.5" y="8.5" width="5.5" height="5.5" rx="1.2" stroke="currentColor" strokeWidth="1.3"/>
+    </svg>
+  );
+}
+
+function ClipboardIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <rect x="2.5" y="2.5" width="10" height="12" rx="1.3" stroke="currentColor" strokeWidth="1.3"/>
+      <path d="M5.5 2.5V2A2 2 0 0 1 7.5 0v0A2 2 0 0 1 9.5 2v.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+      <line x1="5" y1="6.5" x2="10" y2="6.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
+      <line x1="5" y1="9.5" x2="10" y2="9.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function PenIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <path d="M10 2.5l2.5 2.5L5.5 12H3v-2.5L10 2.5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/>
+      <path d="M8 4.5l2.5 2.5" stroke="currentColor" strokeWidth="1.1"/>
+    </svg>
+  );
+}
+
+// ── Nav config ────────────────────────────────────────────────────────────────
+const NAV_ITEMS = [
+  { href: "/dashboard",      es: "Panel docente",         en: "Dashboard",       Icon: GridIcon,      badge: null },
+  { href: "/classrooms",     es: "Aulas",                 en: "Classrooms",      Icon: UsersIcon,     badge: null },
+  { href: "/materials",      es: "Materiales",            en: "Materials",       Icon: FilesIcon,     badge: null },
+  { href: "/module-builder", es: "Constructor de módulos", en: "Module builder",  Icon: BlocksIcon,    badge: null },
+  { href: "/exams",          es: "Examenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },
+  { href: "/authoring",      es: "Estudio de autoría",    en: "Authoring",       Icon: PenIcon,       badge: null },
+] as const;
+
+// ── AppShell ──────────────────────────────────────────────────────────────────
 export function AppShell({
   title,
   description,
@@ -22,51 +98,42 @@ export function AppShell({
 }) {
   const pathname = usePathname();
   const { t } = useAppLocale();
-  const navItems = [
-    { href: "/dashboard", label: t({ es: "Panel docente", en: "Teacher dashboard" }) },
-    { href: "/classrooms", label: t({ es: "Aulas", en: "Classrooms" }) },
-    { href: "/materials", label: t({ es: "Materiales", en: "Materials" }) },
-    {
-      href: "/module-builder",
-      label: t({ es: "Constructor de modulos", en: "Module builder" })
-    },
-    { href: "/exams", label: t({ es: "Examenes", en: "Exams" }) },
-    { href: "/authoring", label: t({ es: "Estudio de autoria", en: "Authoring studio" }) }
-  ];
 
   return (
     <div className="shell">
       <aside className="shell__nav">
-        <div>
+        {/* Brand */}
+        <div className="shell__brand-block">
           <p className="shell__eyebrow">{t({ es: "Espacio docente", en: "Teacher space" })}</p>
           <h1 className="shell__brand">Cumbre</h1>
-          <p className="shell__caption">
-            {t({
-              es: "Visibilidad del aula y autoria ligera para lecciones, mapeo conceptual y curacion instruccional.",
-              en: "Classroom visibility plus lightweight authoring for lessons, concept mapping, and instructional curation."
-            })}
-          </p>
         </div>
 
+        {/* Nav */}
         <nav className="shell__menu">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={pathname === item.href ? "shell__link active" : "shell__link"}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map(({ href, es, en, Icon }) => {
+            const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={active ? "shell__link active" : "shell__link"}
+              >
+                <span className="shell__link-icon"><Icon /></span>
+                <span>{t({ es, en })}</span>
+              </Link>
+            );
+          })}
         </nav>
 
+        {/* Profile */}
         <div className="shell__profile">
-          <p className="shell__profile-name">
-            {t({ es: "Base docente", en: "Teacher baseline" })}
-          </p>
-          <p className="shell__profile-meta">
-            {t({ es: "Espacio de observacion y autoria", en: "Observation and authoring workspace" })}
-          </p>
+          <div className="shell__avatar">D</div>
+          <div className="shell__profile-info">
+            <p className="shell__profile-name">{t({ es: "Docente", en: "Teacher" })}</p>
+            <p className="shell__profile-meta">
+              {t({ es: "Autoria y seguimiento", en: "Authoring & tracking" })}
+            </p>
+          </div>
           <SignOutButton />
         </div>
       </aside>
