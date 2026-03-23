@@ -273,11 +273,38 @@ export function TeacherClassroomsWorkspace() {
             </label>
             <label className="field">
               <span>Grado</span>
-              <input value={createDraft.gradeLevel} onChange={(e) => setCreateDraft(c => ({ ...c, gradeLevel: e.target.value }))} placeholder="1er grado" />
+              <select value={createDraft.gradeLevel} onChange={(e) => setCreateDraft(c => ({ ...c, gradeLevel: e.target.value }))}>
+                <option value="">Seleccionar grado</option>
+                <optgroup label="Primaria">
+                  <option value="1er grado">1er grado</option>
+                  <option value="2do grado">2do grado</option>
+                  <option value="3er grado">3er grado</option>
+                  <option value="4to grado">4to grado</option>
+                  <option value="5to grado">5to grado</option>
+                  <option value="6to grado">6to grado</option>
+                </optgroup>
+                <optgroup label="Secundaria">
+                  <option value="1° sec">1° sec</option>
+                  <option value="2° sec">2° sec</option>
+                  <option value="3° sec">3° sec</option>
+                  <option value="4° sec">4° sec</option>
+                  <option value="5° sec">5° sec</option>
+                </optgroup>
+              </select>
             </label>
             <label className="field field--full">
               <span>Asignatura</span>
-              <input value={createDraft.subject} onChange={(e) => setCreateDraft(c => ({ ...c, subject: e.target.value }))} placeholder="Matemática, Ciencias..." />
+              <select value={createDraft.subject} onChange={(e) => setCreateDraft(c => ({ ...c, subject: e.target.value }))}>
+                <option value="">Seleccionar asignatura</option>
+                <option value="Matemática">Matemática</option>
+                <option value="Comunicación">Comunicación</option>
+                <option value="Ciencias">Ciencias</option>
+                <option value="Historia">Historia</option>
+                <option value="Inglés">Inglés</option>
+                <option value="Educación Física">Educación Física</option>
+                <option value="Arte">Arte</option>
+                <option value="Computación">Computación</option>
+              </select>
             </label>
           </div>
           <button className="button" type="button" disabled={isSubmitting || !createDraft.name || !createDraft.gradeLevel || !createDraft.subject} onClick={handleCreateClassroom}>

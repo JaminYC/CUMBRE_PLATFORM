@@ -37,7 +37,8 @@ export function TeacherClassroomDetailWorkspace({
     provider: "google_meet",
     title: "Weekly classroom session",
     description: "",
-    scheduledAt: ""
+    scheduledAt: "",
+    meetingUrl: ""
   });
   const [learningPathIds, setLearningPathIds] = useState("");
   const [actionMessage, setActionMessage] = useState<string | null>(null);
@@ -227,6 +228,19 @@ export function TeacherClassroomDetailWorkspace({
                     scheduledAt: event.target.value
                   }))
                 }
+              />
+            </label>
+            <label className="field field--full">
+              <span>URL de la reunión</span>
+              <input
+                value={meetingDraft.meetingUrl}
+                onChange={(event) =>
+                  setMeetingDraft((current) => ({
+                    ...current,
+                    meetingUrl: event.target.value
+                  }))
+                }
+                placeholder="https://meet.google.com/xxx-xxxx-xxx"
               />
             </label>
           </div>
