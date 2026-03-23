@@ -67,19 +67,17 @@ export function TeacherMaterialsWorkspace() {
 
   if (resource.isLoading) {
     return (
-      <LoadingPanel
-        message="Cargando materiales..."
-        detail="Recuperando materiales subidos y sus estructuras analizadas."
-      />
+      <AppShell title="Materiales" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Materiales" }]}>
+        <LoadingPanel message="Cargando materiales..." detail="Recuperando materiales subidos y sus estructuras analizadas." />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar los materiales docentes."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Materiales" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Materiales" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar los materiales docentes."} onRetry={resource.reload} />
+      </AppShell>
     );
   }
 

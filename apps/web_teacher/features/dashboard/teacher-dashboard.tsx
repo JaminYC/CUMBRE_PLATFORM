@@ -175,19 +175,17 @@ export function TeacherDashboard() {
 
   if (resource.isLoading) {
     return (
-      <LoadingPanel
-        message="Cargando resumen docente..."
-        detail="Recuperando resumenes de estudiantes, guia adaptativa y senales del grafo."
-      />
+      <AppShell title="Panel docente" breadcrumbs={[{ label: "Panel docente" }]}>
+        <LoadingPanel message="Cargando resumen docente..." detail="Recuperando resumenes de estudiantes, guia adaptativa y senales del grafo." />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar el resumen docente."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Panel docente" breadcrumbs={[{ label: "Panel docente" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar el resumen docente."} onRetry={resource.reload} />
+      </AppShell>
     );
   }
 

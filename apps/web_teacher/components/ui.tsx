@@ -53,7 +53,8 @@ export function MetricCard({
 
 export function LoadingPanel({ message, detail }: { message: string; detail?: string }) {
   return (
-    <div className="state-panel">
+    <div className="state-panel state-panel--loading">
+      <div className="loading-spinner" aria-hidden />
       <div className="state-panel__content">
         <p className="state-panel__title">{message}</p>
         {detail ? <p className="state-panel__detail">{detail}</p> : null}

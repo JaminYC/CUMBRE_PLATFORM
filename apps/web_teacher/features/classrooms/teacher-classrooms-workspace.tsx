@@ -97,19 +97,17 @@ export function TeacherClassroomsWorkspace() {
 
   if (resource.isLoading) {
     return (
-      <LoadingPanel
-        message="Cargando aulas..."
-        detail="Recuperando lista de aulas, codigos de clase, cantidad de estudiantes y proximas reuniones."
-      />
+      <AppShell title="Aulas" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Aulas" }]}>
+        <LoadingPanel message="Cargando aulas..." detail="Recuperando lista de aulas, codigos de clase, cantidad de estudiantes y proximas reuniones." />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar las aulas."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Aulas" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Aulas" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar las aulas."} onRetry={resource.reload} />
+      </AppShell>
     );
   }
 

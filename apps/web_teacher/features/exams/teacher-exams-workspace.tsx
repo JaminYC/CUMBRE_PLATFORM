@@ -87,19 +87,17 @@ export function TeacherExamsWorkspace() {
 
   if (resource.isLoading) {
     return (
-      <LoadingPanel
-        message="Cargando herramientas de examenes..."
-        detail="Recuperando listas de aula y cuestionarios disponibles para verificar escaneos."
-      />
+      <AppShell title="Examenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Examenes" }]}>
+        <LoadingPanel message="Cargando herramientas de examenes..." detail="Recuperando listas de aula y cuestionarios disponibles para verificar escaneos." />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar las herramientas de procesamiento de examenes."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Examenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Examenes" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar las herramientas de procesamiento de examenes."} onRetry={resource.reload} />
+      </AppShell>
     );
   }
 

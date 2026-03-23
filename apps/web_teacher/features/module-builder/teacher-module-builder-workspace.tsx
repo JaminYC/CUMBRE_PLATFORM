@@ -74,19 +74,17 @@ export function TeacherModuleBuilderWorkspace() {
 
   if (resource.isLoading) {
     return (
-      <LoadingPanel
-        message="Cargando constructor de modulos..."
-        detail="Recuperando materiales analizados, modulos propuestos y cuestionarios generados."
-      />
+      <AppShell title="Constructor de módulos" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Constructor de módulos" }]}>
+        <LoadingPanel message="Cargando constructor de modulos..." detail="Recuperando materiales analizados, modulos propuestos y cuestionarios generados." />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar los datos del constructor de modulos."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Constructor de módulos" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Constructor de módulos" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar los datos del constructor de modulos."} onRetry={resource.reload} />
+      </AppShell>
     );
   }
 

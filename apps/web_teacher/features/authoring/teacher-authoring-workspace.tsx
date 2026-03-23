@@ -260,19 +260,17 @@ export function TeacherAuthoringWorkspace() {
 
   if (resource.isLoading) {
     return (
-      <LoadingPanel
-        message="Cargando estudio de autoria..."
-        detail="Recuperando temas, lecciones, conceptos, relaciones e inventario de contenido de apoyo."
-      />
+      <AppShell title="Estudio de autoría" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Estudio de autoría" }]}>
+        <LoadingPanel message="Cargando estudio de autoria..." detail="Recuperando temas, lecciones, conceptos, relaciones e inventario de contenido de apoyo." />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar los datos de autoria docente."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Estudio de autoría" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Estudio de autoría" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar los datos de autoria docente."} onRetry={resource.reload} />
+      </AppShell>
     );
   }
 
