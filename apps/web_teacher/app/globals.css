@@ -167,6 +167,65 @@ h1, h2, h3, h4 { font-family: Georgia, "Times New Roman", serif; }
 .concept-card__summary { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.45; }
 .concept-stats { display: flex; gap: 0.85rem; font-size: 0.78rem; color: var(--ink-muted); }
 
+/* ── Classrooms: aula cards ──────────────────────────────────────────────── */
+.aula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 1.1rem; margin-bottom: 2rem; }
+
+/* Card base */
+.aula-card { display: flex; flex-direction: column; border-radius: 1.4rem; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(34,50,59,0.08); background: rgba(255,250,242,0.95); transition: box-shadow 0.15s; }
+.aula-card:hover { box-shadow: 0 8px 32px rgba(34,50,59,0.13); }
+
+/* Chalkboard header */
+.aula-card__header { display: flex; justify-content: space-between; align-items: flex-start; padding: 1.2rem 1.4rem 1.1rem; background: linear-gradient(135deg, #1a4a45 0%, #0f7a71 100%); color: white; }
+.aula-card__subject { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.7; margin-bottom: 0.2rem; }
+.aula-card__name { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+.aula-card__grade { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+.aula-code-badge { display: inline-block; padding: 0.3rem 0.65rem; border-radius: 0.6rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; color: white; }
+
+/* Import card header variant */
+.aula-card__header--import { background: linear-gradient(135deg, #3d4060 0%, #5a5f8a 100%); gap: 0.75rem; align-items: center; }
+
+/* Body */
+.aula-card__body { display: flex; flex-direction: column; gap: 1rem; padding: 1.1rem 1.3rem 1.2rem; flex: 1; }
+.aula-card__stats { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.aula-stat { display: flex; align-items: center; gap: 0.4rem; }
+.aula-stat__icon { display: flex; color: var(--ink-muted); }
+.aula-stat__value { font-weight: 700; font-size: 0.88rem; }
+.aula-stat__value--meet { font-size: 0.82rem; color: var(--ink-muted); font-weight: 500; }
+.aula-stat__label { font-size: 0.78rem; color: var(--ink-muted); }
+
+/* Action buttons row */
+.aula-card__actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.aula-card__open { display: inline-flex; align-items: center; gap: 0.4rem; }
+.aula-card__meet-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; }
+
+/* Create aula panel */
+.create-aula-panel { display: grid; gap: 1rem; padding: 1.4rem; border-radius: 1.3rem; border: 1px solid rgba(15,122,113,0.25); background: rgba(200,235,226,0.2); margin-bottom: 1.2rem; }
+.create-aula-panel__header { display: flex; align-items: center; justify-content: space-between; }
+.create-aula-panel__header h3 { font-size: 1.05rem; }
+
+/* ── Meeting form ─────────────────────────────────────────────────────────── */
+.meeting-form { display: grid; gap: 0.9rem; padding: 1rem; border-radius: 1rem; background: rgba(255,250,242,0.98); border: 1px solid var(--border); margin-top: 0.5rem; }
+.meeting-form__title { font-weight: 700; font-size: 0.92rem; }
+.meeting-form__actions { display: flex; gap: 0.6rem; justify-content: flex-end; }
+
+/* Provider tabs */
+.provider-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.provider-btn { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.8rem; border-radius: 0.7rem; border: 1px solid var(--border); background: rgba(255,250,242,0.88); color: var(--ink-muted); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.12s; }
+.provider-btn:hover { background: rgba(200,235,226,0.35); color: var(--ink); }
+.provider-btn--active { background: var(--mint); color: var(--ink); border-color: rgba(15,122,113,0.3); font-weight: 700; }
+
+/* Quick launch links */
+.meet-launch-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; border-radius: 0.75rem; background: rgba(52,168,83,0.1); border: 1px solid rgba(52,168,83,0.25); color: #1e6b30; font-size: 0.82rem; font-weight: 600; text-decoration: none; width: fit-content; transition: background 0.12s; }
+.meet-launch-btn:hover { background: rgba(52,168,83,0.18); }
+.meet-launch-btn--zoom { background: rgba(45,140,255,0.1); border-color: rgba(45,140,255,0.25); color: #1a5ab0; }
+.meet-launch-btn--zoom:hover { background: rgba(45,140,255,0.18); }
+
+/* CSV preview */
+.csv-preview { padding: 0.75rem 0.9rem; border-radius: 0.75rem; background: rgba(34,50,59,0.04); border: 1px solid var(--border); font-size: 0.8rem; }
+.csv-preview__label { color: var(--ink-muted); margin-bottom: 0.35rem; }
+.csv-preview__label code { font-family: monospace; background: rgba(15,122,113,0.1); padding: 0.1rem 0.35rem; border-radius: 0.3rem; }
+.csv-preview__row { color: var(--ink); padding: 0.15rem 0; border-top: 1px solid var(--border); }
+
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 980px) {
   .shell { grid-template-columns: 1fr; }

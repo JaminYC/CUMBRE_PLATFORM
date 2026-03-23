@@ -147,6 +147,7 @@ export function scheduleTeacherMeeting(request: {
   title: string;
   description?: string;
   scheduledAt: string;
+  meetingUrl: string;
 }) {
   return requestAppApi<CreateClassroomMeetingResponse>(
     `/api/teacher/classrooms/${encodeURIComponent(request.classroomId)}/meeting`,
