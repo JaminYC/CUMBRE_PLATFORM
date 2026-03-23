@@ -661,6 +661,26 @@ export class LearningApplicationService implements LearningServiceContract {
     };
   }
 
+  async deleteClassroom(classroomId: string): Promise<{ deleted: true; classroomId: string }> {
+    await this.ensureClassroom(classroomId);
+    await this.classroomRepository.deleteClassroom(classroomId);
+    return { deleted: true, classroomId };
+  }
+
+  async searchStudentUsers(
+    query: string
+  ): Promise<{ users: { id: string; displayName: string; email: string; primaryRole: string }[] }> {
+    const profiles = await this.classroomRepository.searchStudentProfiles(query);
+    return {
+      users: profiles.map((p) => ({
+        id: p.linkedUserId ?? p.id,
+        displayName: p.name,
+        email: p.email ?? "",
+        primaryRole: "student"
+      }))
+    };
+  }
+
   private async ensureClassroom(classroomId: string) {
     const classroom = await this.classroomRepository.findClassroomById(classroomId);
 

@@ -136,4 +136,17 @@ export class LearningController {
       validatedParams as GetClassroomAnalyticsRequest
     );
   };
+
+  deleteClassroom = async ({ params }: RequestContext): Promise<unknown> => {
+    return (this.learningService as unknown as {
+      deleteClassroom(id: string): Promise<unknown>;
+    }).deleteClassroom(params["classroomId"] ?? "");
+  };
+
+  searchStudentUsers = async ({ query }: RequestContext): Promise<unknown> => {
+    const q = query.get("q") ?? "";
+    return (this.learningService as unknown as {
+      searchStudentUsers(q: string): Promise<unknown>;
+    }).searchStudentUsers(q);
+  };
 }

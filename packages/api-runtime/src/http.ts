@@ -17,7 +17,7 @@ import {
   type RequestValidation
 } from "./validation.js";
 
-export type HttpMethod = "GET" | "POST";
+export type HttpMethod = "GET" | "POST" | "DELETE";
 
 export interface LoggerLike {
   debug(message: string, context?: Record<string, unknown>): void;

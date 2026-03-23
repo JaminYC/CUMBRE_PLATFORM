@@ -49,6 +49,36 @@ export function createClassroom(request: CreateClassroomRequest) {
   });
 }
 
+export function deleteClassroom(classroomId: string) {
+  return fetchBackendData<{ deleted: true; classroomId: string }>(
+    "learning",
+    `/classrooms/${classroomId}`,
+    { method: "DELETE" }
+  );
+}
+
+export function searchStudentUsers(query: string) {
+  const params = new URLSearchParams({ q: query, role: "student", limit: "10" });
+  return fetchBackendData<{ users: { id: string; displayName: string; email: string; primaryRole: string }[] }>(
+    "learning",
+    `/classrooms/search-users?${params.toString()}`
+  );
+}
+
+export function addStudentToClassroom(request: { classroomId: string; userId: string; displayName: string; email: string }) {
+  return fetchBackendData<ImportStudentsResponse>(
+    "learning",
+    "/classrooms/import-students",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        classroomId: request.classroomId,
+        csvContent: `name,email,gradeLevel\n${request.displayName},${request.email},`
+      })
+    }
+  );
+}
+
 export function getClassroom(classroomId: string) {
   return fetchBackendData<GetClassroomResponse>("learning", `/classrooms/${classroomId}`);
 }

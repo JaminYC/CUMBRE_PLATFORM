@@ -238,4 +238,25 @@ export class ClassroomRepository {
 
     return record ? toDomainClassroomMeeting(record) : null;
   }
+
+  async deleteClassroom(classroomId: string) {
+    await this.prisma.classroomRecord.delete({
+      where: { id: classroomId }
+    });
+  }
+
+  async searchStudentProfiles(query: string) {
+    const records = await this.prisma.classroomStudentProfileRecord.findMany({
+      where: {
+        OR: [
+          { name: { contains: query } },
+          { email: { contains: query } }
+        ]
+      },
+      take: 10,
+      orderBy: { name: "asc" }
+    });
+
+    return records.map(toDomainClassroomStudentProfile);
+  }
 }

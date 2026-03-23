@@ -141,6 +141,33 @@ export function importTeacherStudents(request: {
   });
 }
 
+export function deleteTeacherClassroom(classroomId: string) {
+  return requestAppApi<{ deleted: true; classroomId: string }>(
+    `/api/teacher/classrooms/${encodeURIComponent(classroomId)}`,
+    { method: "DELETE" }
+  );
+}
+
+export function searchTeacherUsers(query: string) {
+  const params = new URLSearchParams({ q: query });
+  return requestAppApi<{ users: { id: string; displayName: string; email: string; primaryRole: string }[] }>(
+    `/api/teacher/classrooms/search-users?${params.toString()}`
+  );
+}
+
+export function addTeacherStudentToClassroom(request: {
+  classroomId: string;
+  userId: string;
+  displayName: string;
+  email: string;
+}) {
+  const csvContent = `name,email,gradeLevel\n${request.displayName},${request.email},`;
+  return requestAppApi<ImportStudentsResponse>("/api/teacher/classrooms/import", {
+    method: "POST",
+    body: JSON.stringify({ classroomId: request.classroomId, csvContent })
+  });
+}
+
 export function scheduleTeacherMeeting(request: {
   classroomId: string;
   provider: string;

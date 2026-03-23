@@ -228,6 +228,26 @@ export function registerLearningRoutes(
         roles: ["teacher", "administrator"],
         scopes: ["analytics:read"]
       }
+    },
+    {
+      method: "DELETE",
+      path: "/classrooms/:classroomId",
+      handler: controller.deleteClassroom,
+      authorization: {
+        required: true,
+        roles: ["teacher", "administrator"],
+        scopes: ["classroom:manage"]
+      }
+    },
+    {
+      method: "GET",
+      path: "/classrooms/search-users",
+      handler: controller.searchStudentUsers,
+      authorization: {
+        required: true,
+        roles: ["teacher", "administrator"],
+        scopes: ["classroom:manage"]
+      }
     }
   ];
 }
