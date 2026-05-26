@@ -1,0 +1,36 @@
+{
+  "name": "@cumbre/content-generator-service",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "db:generate": "prisma generate --schema prisma/schema.prisma",
+    "db:migrate": "prisma migrate deploy --schema prisma/schema.prisma",
+    "db:seed": "tsx prisma/seed.ts",
+    "predev": "prisma generate --schema prisma/schema.prisma",
+    "dev": "tsx watch src/server.ts",
+    "prestart": "prisma generate --schema prisma/schema.prisma",
+    "start": "tsx src/server.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.37.0",
+    "@cumbre/api-runtime": "workspace:*",
+    "@cumbre/sdk": "workspace:*",
+    "@cumbre/types": "workspace:*",
+    "@prisma/client": "^6.5.0",
+    "@supabase/supabase-js": "^2.49.1",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@cumbre/test-utils": "workspace:*",
+    "@types/node": "^22.10.2",
+    "prisma": "^6.5.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  }
+}

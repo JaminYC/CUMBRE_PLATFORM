@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model GenerationJobRecord {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  role      String
+  topic     String
+  depth     String   // "summary" | "deep"
+  sources   Json     // { type: "text"|"pdf"|"cumbre_content", data: string }[]
+  outputs   String[] // ["pdf", "podcast", "infographic"]
+  status    String   // "pending" | "processing" | "done" | "error"
+  results   Json?    // { pdfUrl?: string, podcastUrl?: string, infographicUrl?: string }
+  errorMsg  String?
+
+  @@index([userId])
+  @@index([status])
+  @@map("generation_jobs")
+}
+
+model GenerationLimitRecord {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  role       String   @unique
+  dailyLimit Int      // -1 = sin límite
+  isActive   Boolean  @default(true)
+
+  @@map("generation_limits")
+}
