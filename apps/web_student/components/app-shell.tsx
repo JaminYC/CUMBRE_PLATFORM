@@ -27,7 +27,8 @@ export function AppShell({
     { href: "/dashboard", label: t({ es: "Inicio", en: "Dashboard" }) },
     { href: "/progress", label: t({ es: "Progreso", en: "Progress" }) },
     { href: "/classroom", label: t({ es: "Aula", en: "Classroom" }) },
-    { href: "/join-class", label: t({ es: "Unirme a clase", en: "Join class" }) }
+    { href: "/join-class", label: t({ es: "Unirme a clase", en: "Join class" }) },
+    { href: "/generator", label: t({ es: "✨ Generador", en: "✨ Generator" }) }
   ];
   const resumeHref =
     session?.lastTopicId && session?.lastLessonId

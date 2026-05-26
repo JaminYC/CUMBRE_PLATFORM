@@ -21,5 +21,7 @@ export const serverServiceEndpoints = {
     process.env.LEARNING_SERVICE_URL ??
     defaultServiceEndpoints.learningServiceUrl,
   contentServiceUrl:
-    process.env.CONTENT_SERVICE_URL ?? defaultServiceEndpoints.contentServiceUrl
+    process.env.CONTENT_SERVICE_URL ?? defaultServiceEndpoints.contentServiceUrl,
+  contentGeneratorServiceUrl:
+    process.env.CONTENT_GENERATOR_SERVICE_URL ?? "http://localhost:3004",
 };
