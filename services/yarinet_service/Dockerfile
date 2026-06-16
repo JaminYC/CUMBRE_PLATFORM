@@ -10,8 +10,7 @@ COPY ai ./ai
 COPY services/yarinet_service ./services/yarinet_service
 
 RUN pnpm install --frozen-lockfile --filter @cumbre/yarinet-service... \
-  && pnpm --filter @cumbre/yarinet-service db:generate \
-  && pnpm --filter @cumbre/tutor-engine db:generate
+  && pnpm --filter @cumbre/yarinet-service db:generate
 
 ENV NODE_ENV=production
 
