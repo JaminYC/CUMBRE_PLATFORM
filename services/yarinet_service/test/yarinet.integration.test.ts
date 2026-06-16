@@ -2,7 +2,7 @@ import { createServer, type Server } from "node:http";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createYariNetApp } from "../src/app.js";
 import { loadYariNetServiceConfig } from "../src/config/env.js";
-import { createLogger } from "../src/utils/logger.js";
+import type { Logger } from "../src/utils/logger.js";
 
 let server: Server;
 let baseUrl: string;
@@ -19,7 +19,7 @@ beforeAll(async () => {
     DATABASE_URL: "postgres://localhost:5432/test",
     NODE_ENV: "test"
   } as NodeJS.ProcessEnv);
-  const logger = createLogger("yarinet_service", "error");
+  const logger: Logger = { debug() {}, info() {}, warn() {}, error() {} };
   const app = createYariNetApp({
     config,
     logger,
