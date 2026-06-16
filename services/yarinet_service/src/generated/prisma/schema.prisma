@@ -1,0 +1,181 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model CivicChallenge {
+  id               String            @id
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  metadata         Json?
+  teacherId        String
+  classroomId      String?
+  title            String
+  problemStatement String
+  context          String?
+  category         String
+  gradeLevel       String?
+  status           ChallengeStatus   @default(DRAFT)
+  guidingQuestions String[]          @default([])
+  rubric           Json?
+  opensAt          DateTime?
+  closesAt         DateTime?
+  forum            DebateForum?
+  proposals        CitizenProposal[]
+
+  @@index([teacherId])
+  @@index([classroomId])
+  @@map("civic_challenges")
+}
+
+enum ChallengeStatus {
+  DRAFT
+  OPEN
+  DELIBERATING
+  SYNTHESIZING
+  CLOSED
+  ARCHIVED
+}
+
+model DebateForum {
+  id              String             @id
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  metadata        Json?
+  challengeId     String             @unique
+  challenge       CivicChallenge     @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  status          ForumStatus        @default(ACTIVE)
+  moderationLevel String             @default("standard")
+  messageCount    Int                @default(0)
+  lastActivityAt  DateTime?
+  messages        ForumMessage[]
+  participants    ForumParticipant[]
+
+  @@map("debate_forums")
+}
+
+enum ForumStatus {
+  ACTIVE
+  PAUSED
+  LOCKED
+  CLOSED
+}
+
+model ForumParticipant {
+  id           String      @id
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  forumId      String
+  forum        DebateForum @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  studentId    String
+  stance       String?
+  messagesSent Int         @default(0)
+
+  @@unique([forumId, studentId])
+  @@map("forum_participants")
+}
+
+model ForumMessage {
+  id               String              @id
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  metadata         Json?
+  forumId          String
+  forum            DebateForum         @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  authorType       MessageAuthorType
+  authorId         String?
+  agentRole        AgentRole?
+  body             String
+  replyToId        String?
+  replyTo          ForumMessage?       @relation("MessageThread", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies          ForumMessage[]      @relation("MessageThread")
+  moderationStatus ModerationStatus    @default(VISIBLE)
+  flaggedReason    String?
+  citations        FactCheckCitation[]
+
+  @@index([forumId, createdAt])
+  @@map("forum_messages")
+}
+
+enum MessageAuthorType {
+  STUDENT
+  TEACHER
+  AI
+  SYSTEM
+}
+
+enum AgentRole {
+  MODERATOR
+  FACT_CHECKER
+  SYNTHESIZER
+}
+
+enum ModerationStatus {
+  VISIBLE
+  FLAGGED
+  HIDDEN
+  PENDING
+}
+
+model FactCheckCitation {
+  id                String       @id
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  metadata          Json?
+  messageId         String
+  message           ForumMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  sourceUrl         String?
+  sourceTitle       String?
+  claim             String
+  verdict           FactVerdict  @default(UNVERIFIED)
+  confidence        Float        @default(0)
+  rationale         String?
+  supportingSources Json?
+
+  @@index([messageId])
+  @@map("fact_check_citations")
+}
+
+enum FactVerdict {
+  SUPPORTED
+  PARTIALLY_SUPPORTED
+  DISPUTED
+  UNSUPPORTED
+  UNVERIFIED
+}
+
+model CitizenProposal {
+  id                  String         @id
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  metadata            Json?
+  challengeId         String
+  challenge           CivicChallenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  generatedByAgent    Boolean        @default(true)
+  title               String
+  summary             String
+  problemRestatement  String
+  proposedActions     Json
+  agreements          String[]       @default([])
+  tensions            String[]       @default([])
+  citedMessageIds     String[]       @default([])
+  status              ProposalStatus @default(DRAFT)
+  approvedByTeacherId String?
+
+  @@index([challengeId])
+  @@map("citizen_proposals")
+}
+
+enum ProposalStatus {
+  DRAFT
+  UNDER_REVIEW
+  APPROVED
+  PUBLISHED
+  REJECTED
+}
