@@ -1416,6 +1416,22 @@ git commit -m "feat(yarinet): wire app with auth resolver and integration tests"
 
 ---
 
+## Required deploy follow-up (out of scope here, but DO NOT assume automatic)
+
+The final whole-branch review surfaced this and it must be tracked, not assumed:
+`.github/workflows/production-migrations.yml` uses a **hardcoded** per-service list
+(auth, learning, content, tutor-engine) — it does NOT auto-discover services. The
+YariNET tables will never be created in Supabase until a `yarinet_service` stanza
+(env write + `corepack pnpm --filter @cumbre/yarinet-service db:migrate`, mirroring
+the learning_service block) is added to that workflow. Add this in the deploy slice.
+Do NOT add a seed step yet — `package.json` declares `db:seed` but no `prisma/seed.ts`
+exists on this branch.
+
+Minor (cosmetic, deferred): the generated `migration.sql` begins with
+`CREATE SCHEMA IF NOT EXISTS "public"` (an artifact of the DB-less `migrate diff`
+route); sibling services' first migrations omit it. Harmless on Supabase; trim for
+house-style consistency if desired.
+
 ## Roadmap (separate plans, not in scope here)
 
 - **Plan 2 — AI agents & prompts:** `packages/prompts/src/yarinet/{socratic-moderator,fact-checker,consensus-synthesizer}.ts`, agent wrappers in `services/yarinet_service/src/agents/`, and `moderation-service` / `factcheck-service` / `synthesis-service` over `@cumbre/llm-runtime`'s `generateJsonObject`.
