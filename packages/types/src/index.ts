@@ -50,6 +50,10 @@ export type PermissionScope = ExtensibleString<
   | "classroom:join"
   | "material:write"
   | "assessment:write"
+  | "deliberation:read"
+  | "deliberation:write"
+  | "challenge:manage"
+  | "forum:moderate"
 >;
 
 export type UserStatus = ExtensibleString<
@@ -774,7 +778,9 @@ export const defaultRoleScopeMap: Record<string, PermissionScope[]> = {
     "learning:write",
     "progress:read",
     "tutor:use",
-    "classroom:join"
+    "classroom:join",
+    "deliberation:read",
+    "deliberation:write"
   ],
   teacher: [
     "content:read",
@@ -786,7 +792,11 @@ export const defaultRoleScopeMap: Record<string, PermissionScope[]> = {
     "tutor:moderate",
     "classroom:manage",
     "material:write",
-    "assessment:write"
+    "assessment:write",
+    "deliberation:read",
+    "deliberation:write",
+    "challenge:manage",
+    "forum:moderate"
   ],
   mentor: ["content:read", "learning:read", "progress:read", "analytics:read", "tutor:moderate"],
   researcher: ["content:read", "analytics:read"],
@@ -803,7 +813,11 @@ export const defaultRoleScopeMap: Record<string, PermissionScope[]> = {
     "tutor:moderate",
     "classroom:manage",
     "material:write",
-    "assessment:write"
+    "assessment:write",
+    "deliberation:read",
+    "deliberation:write",
+    "challenge:manage",
+    "forum:moderate"
   ]
 };
 
