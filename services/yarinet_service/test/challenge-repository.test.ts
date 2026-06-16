@@ -78,4 +78,11 @@ describe("ChallengeRepository", () => {
     const updated = await repo.updateChallengeStatus(created.id, "OPEN");
     expect(updated?.status).toBe("OPEN");
   });
+
+  it("returns null when updating the status of a missing challenge", async () => {
+    const prisma = createFakePrisma();
+    const repo = new ChallengeRepository(prisma as any);
+    const result = await repo.updateChallengeStatus("does-not-exist", "OPEN");
+    expect(result).toBeNull();
+  });
 });

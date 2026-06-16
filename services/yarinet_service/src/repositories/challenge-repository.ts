@@ -64,10 +64,16 @@ export class ChallengeRepository {
     challengeId: string,
     status: string
   ): Promise<ChallengeDTO | null> {
+    const existing = await this.prisma.civicChallenge.findUnique({
+      where: { id: challengeId }
+    });
+    if (!existing) {
+      return null;
+    }
     const record = await this.prisma.civicChallenge.update({
       where: { id: challengeId },
       data: { status: status as never }
     });
-    return record ? toChallengeDTO(record) : null;
+    return toChallengeDTO(record);
   }
 }
