@@ -2227,6 +2227,8 @@ export * from "./classroom.js";
 export * from "./teaching.js";
 export {
   yarinetSchemas,
+  challengeStatusValues,
+  type ChallengeStatusValue,
   type CreateChallengeRequest,
   type UpdateChallengeStatusRequest,
   type GetChallengeRequest,
