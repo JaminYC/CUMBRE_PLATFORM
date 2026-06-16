@@ -2225,3 +2225,10 @@ export type ContentReferenceResponse =
 
 export * from "./classroom.js";
 export * from "./teaching.js";
+export {
+  yarinetSchemas,
+  type CreateChallengeRequest,
+  type UpdateChallengeStatusRequest,
+  type GetChallengeRequest,
+  type ListChallengesRequest
+} from "./yarinet.js";
