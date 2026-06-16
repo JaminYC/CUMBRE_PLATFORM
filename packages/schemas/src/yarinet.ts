@@ -1,51 +1,103 @@
-import { z } from "zod";
+import type { SchemaDefinition } from "./index.js";
 
-export const challengeStatusValues = [
+export type ChallengeStatusValue =
+  | "DRAFT"
+  | "OPEN"
+  | "DELIBERATING"
+  | "SYNTHESIZING"
+  | "CLOSED"
+  | "ARCHIVED";
+
+export const challengeStatusValues: readonly ChallengeStatusValue[] = [
   "DRAFT",
   "OPEN",
   "DELIBERATING",
   "SYNTHESIZING",
   "CLOSED",
   "ARCHIVED"
-] as const;
+];
 
-const createChallengeRequest = z.object({
-  teacherId: z.string().min(1),
-  classroomId: z.string().min(1).optional(),
-  title: z.string().min(3).max(200),
-  problemStatement: z.string().min(10),
-  context: z.string().optional(),
-  category: z.string().min(1),
-  gradeLevel: z.string().optional(),
-  guidingQuestions: z.array(z.string()).max(10).default([]),
-  rubric: z.record(z.unknown()).optional(),
-  opensAt: z.string().datetime().optional(),
-  closesAt: z.string().datetime().optional()
-});
+export interface CreateChallengeRequest {
+  teacherId: string;
+  classroomId?: string;
+  title: string;
+  problemStatement: string;
+  context?: string;
+  category: string;
+  gradeLevel?: string;
+  guidingQuestions: string[];
+  rubric?: Record<string, unknown>;
+  opensAt?: string;
+  closesAt?: string;
+}
 
-const updateChallengeStatusRequest = z.object({
-  challengeId: z.string().min(1),
-  status: z.enum(challengeStatusValues)
-});
+export interface UpdateChallengeStatusRequest {
+  challengeId: string;
+  status: ChallengeStatusValue;
+}
 
-const getChallengeRequest = z.object({
-  challengeId: z.string().min(1)
-});
+export interface GetChallengeRequest {
+  challengeId: string;
+}
 
-const listChallengesRequest = z.object({
-  teacherId: z.string().min(1).optional(),
-  classroomId: z.string().min(1).optional(),
-  status: z.enum(challengeStatusValues).optional()
-});
+export interface ListChallengesRequest {
+  teacherId?: string;
+  classroomId?: string;
+  status?: ChallengeStatusValue;
+}
 
 export const yarinetSchemas = {
-  createChallengeRequest,
-  updateChallengeStatusRequest,
-  getChallengeRequest,
-  listChallengesRequest
+  createChallengeRequest: {
+    $id: "schema://yarinet/CreateChallengeRequest",
+    type: "object",
+    required: [
+      "teacherId",
+      "title",
+      "problemStatement",
+      "category",
+      "guidingQuestions"
+    ],
+    properties: {
+      teacherId: { type: "string" },
+      classroomId: { type: "string" },
+      title: { type: "string" },
+      problemStatement: { type: "string" },
+      context: { type: "string" },
+      category: { type: "string" },
+      gradeLevel: { type: "string" },
+      guidingQuestions: {
+        type: "array",
+        items: { type: "string" }
+      },
+      rubric: { type: "object", additionalProperties: true },
+      opensAt: { type: "string", format: "date-time" },
+      closesAt: { type: "string", format: "date-time" }
+    }
+  } satisfies SchemaDefinition,
+  updateChallengeStatusRequest: {
+    $id: "schema://yarinet/UpdateChallengeStatusRequest",
+    type: "object",
+    required: ["challengeId", "status"],
+    properties: {
+      challengeId: { type: "string" },
+      status: { type: "string", enum: challengeStatusValues }
+    }
+  } satisfies SchemaDefinition,
+  getChallengeRequest: {
+    $id: "schema://yarinet/GetChallengeRequest",
+    type: "object",
+    required: ["challengeId"],
+    properties: {
+      challengeId: { type: "string" }
+    }
+  } satisfies SchemaDefinition,
+  listChallengesRequest: {
+    $id: "schema://yarinet/ListChallengesRequest",
+    type: "object",
+    properties: {
+      teacherId: { type: "string" },
+      classroomId: { type: "string" },
+      status: { type: "string", enum: challengeStatusValues }
+    }
+  } satisfies SchemaDefinition
 };
-
-export type CreateChallengeRequest = z.infer<typeof createChallengeRequest>;
-export type UpdateChallengeStatusRequest = z.infer<typeof updateChallengeStatusRequest>;
-export type GetChallengeRequest = z.infer<typeof getChallengeRequest>;
-export type ListChallengesRequest = z.infer<typeof listChallengesRequest>;

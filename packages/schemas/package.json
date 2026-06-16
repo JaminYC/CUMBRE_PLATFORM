@@ -10,8 +10,7 @@
   },
   "description": "Shared API payload schemas for the CUMBRE platform",
   "dependencies": {
-    "@cumbre/types": "workspace:*",
-    "zod": "^3.22.0"
+    "@cumbre/types": "workspace:*"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",
