@@ -1,0 +1,188 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\setlist{itemsep=2pt, topsep=3pt}
+
+\title{\textbf{YariNET --- Marco Te\'orico y Posicionamiento}\\[2pt]
+\large M\'odulo de deliberaci\'on c\'ivica asistida por IA para colegios\\
+Educat\'on Challenge 2026}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1.2cm}
+\begin{center}\rule{\textwidth}{0.4pt}\end{center}
+
+\section{Definici\'on de YariNET}
+
+\noindent\textbf{Frase que lo define:}
+\begin{quote}
+\textit{YariNET es un foro de debate c\'ivico para colegios donde una IA act\'ua como moderadora imparcial: ordena la discusi\'on, verifica las fuentes en tiempo real y convierte el desacuerdo en una propuesta ciudadana concreta.}
+\end{quote}
+
+\noindent\textbf{Posicionamiento:} No solo formamos \textit{agentes de cambio} --- formamos \textbf{constructores de acuerdos}: estudiantes capaces de convertir el desacuerdo en consenso, y el consenso en propuesta.
+
+\medskip
+\noindent La IA no decide qui\'en tiene la raz\'on. Es un \textbf{cart\'ografo, no el viajero}: dibuja el terreno ---perspectivas, evidencia y consecuencias--- para que el estudiante decida con criterio. La decisi\'on final siempre es humana.
+
+\section{Problema central}
+
+La educaci\'on c\'ivica escolar en el Per\'u es \textbf{te\'orica y pasiva}, y los estudiantes ---aun estando motivados y con espacios de debate--- \textbf{no logran deliberar de forma efectiva}: sus discusiones colapsan en el momento del desacuerdo.
+
+\begin{quote}
+El debate estudiantil no fracasa por falta de espacio ni de ganas --- fracasa en el momento del desacuerdo. Cuando las opiniones chocan, no hay qui\'en modere, entra desinformaci\'on sin filtro, y la discusi\'on termina en conflicto, sin acuerdo y sin resultado.
+\end{quote}
+
+\noindent\textbf{Tres causas ra\'iz:}
+\begin{enumerate}[leftmargin=*]
+  \item No hay \textbf{moderaci\'on imparcial} que ordene la discusi\'on y exija argumentar.
+  \item Entra \textbf{desinformaci\'on} (redes/influencers) al debate sin validarse.
+  \item No existe un \textbf{m\'etodo para convertir el desacuerdo en consenso} y en propuesta.
+\end{enumerate}
+
+\noindent\textit{Evidencia de la entrevista (Mariana, 16 a\~nos, 5.\textordmasculine{} de secundaria):} ``S\'i tenemos el espacio adecuado\dots pero lo m\'as dif\'icil suele ser ponerse de acuerdo, porque cada uno tiene su opini\'on y a veces chocan, lo que genera un conflicto.''
+
+\section{Marco te\'orico}
+
+\subsection{Diagn\'ostico del problema (evidencia verificada)}
+
+\noindent\textbf{A. La formaci\'on c\'ivica es te\'orica y da bajos resultados.}
+\begin{itemize}[leftmargin=*]
+  \item En el estudio internacional \textbf{ICCS 2016 (IEA)}, solo el \textbf{34,8\%} de estudiantes peruanos de 2.\textordmasculine{} de secundaria alcanz\'o los dos niveles m\'as altos de conocimiento c\'ivico ---es decir, cerca del \textbf{65\% no reconoce la democracia representativa como sistema pol\'itico}. Solo el 8,8\% lleg\'o al nivel m\'as alto. La media del Per\'u fue \textbf{438 puntos, la segunda m\'as baja} de todos los pa\'ises participantes. \textit{(MINEDU-UMC / ICCS 2016. El Per\'u no particip\'o en ICCS 2022, por lo que 2016 es la evidencia internacional m\'as reciente.)}
+\end{itemize}
+
+\noindent\textbf{B. La participaci\'on estudiantil es simb\'olica, no decisoria.}
+\begin{itemize}[leftmargin=*]
+  \item El \textbf{ICCS 2016} muestra que el \textbf{51,5\%} de estudiantes vot\'o por un delegado o municipio escolar, pero \textbf{solo el 21,3\%} particip\'o en decisiones sobre c\'omo se maneja el colegio. \textit{(MINEDU-UMC / ICCS 2016.)}
+  \item Un estudio revisado por pares sobre municipios escolares en Lima ubica la participaci\'on en los peldan\~os de ``manipulaci\'on, decorativa y simb\'olica'' de la escalera de Hart: los estudiantes son ``escuchados, mas no a decidir''. \textit{(Mora Alvino, SciELO Per\'u / UNMSM, 2024.)}
+  \item El propio Estado reconoce el ``\textbf{d\'ebil involucramiento de las y los estudiantes}''. \textit{(MINEDU, Open Government Partnership PE0110.)}
+\end{itemize}
+
+\noindent\textbf{C. Los adolescentes se informan por redes y est\'an expuestos a desinformaci\'on.}
+\begin{itemize}[leftmargin=*]
+  \item El \textbf{33\% de peruanos usa TikTok para informarse} ---el mayor porcentaje de todos los mercados hispanohablantes--- y el 64\% usa redes sociales para noticias. \textit{(Reuters Institute Digital News Report 2025.)}
+  \item El \textbf{63\% de usuarios de redes} las usa para informarse sobre acontecimientos nacionales e internacionales. \textit{(Ipsos Per\'u 2022 ---poblaci\'on adulta 18-70; citar como dato general.)}
+\end{itemize}
+
+\subsection{Fundamento pedag\'ogico}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Curr\'iculo Nacional (CNEB):} YariNET operativiza una competencia ya obligatoria, ``Convive y participa democr\'aticamente en la b\'usqueda del bien com\'un'' (\'area de DPCC), y en espec\'ifico la capacidad ``\textbf{Delibera sobre asuntos p\'ublicos}''. No inventa una materia nueva: le da pr\'actica a una que hoy se ense\~na en teor\'ia.
+  \item \textbf{Aprendizaje experiencial (Dewey):} la ciudadan\'ia se aprende ejerci\'endola, no escuch\'andola.
+  \item \textbf{Andamiaje / zona de desarrollo pr\'oximo (Vygotsky):} el estudiante realiza una tarea un poco m\'as dif\'icil de lo que podr\'ia solo, con apoyo (la IA y el docente son el andamio); la carga se distribuye.
+  \item \textbf{Agencia (empower self / with / to):} pasar de receptor pasivo a actor con capacidad de decidir e influir.
+\end{itemize}
+
+\subsection{Sobre el rol de la IA}
+Los problemas sociales son \textbf{problemas ``perversos'' (Rittel \& Webber)}: no tienen una \'unica respuesta correcta; decidir implica riesgo, costo de oportunidad y valores en tensi\'on. Por la \textbf{racionalidad limitada (Simon)} decidimos con informaci\'on incompleta. Por eso YariNET apuesta por \textbf{inteligencia aumentada (Engelbart)}, no aut\'onoma: la IA amplia lo que el estudiante alcanza a ver, no decide por \'el.
+\begin{itemize}[leftmargin=*]
+  \item La IA \textbf{s\'i} eval\'ua la confiabilidad de una fuente (con nivel de confianza) y se\~nala afirmaciones factuales dudosas.
+  \item La IA \textbf{nunca} juzga opiniones, valores ni posturas pol\'iticas, ni elige un ``ganador''.
+  \item El \textbf{humano mantiene la autoridad}: la propuesta final la aprueban el docente y los estudiantes.
+\end{itemize}
+
+\subsection{Estado del arte (evidencia de que el mecanismo funciona)}
+\textit{Cada componente de YariNET ya produjo resultados positivos por separado; la innovaci\'on es integrarlos.}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Deliberaci\'on asistida por IA:} en un estudio con 5.734 participantes, las personas \textbf{prefirieron las declaraciones de consenso generadas por IA} sobre las de mediadores humanos, y los grupos convergieron. \textit{(Tessler et al., ``Habermas Machine'', Science, 2024, Google DeepMind.)}
+  \item \textbf{Inoculaci\'on contra la desinformaci\'on:} el juego ``Bad News'' (N$\approx$15.000) mejor\'o de forma medible la detecci\'on de desinformaci\'on; un ensayo de aula de 2024 con \textbf{estudiantes de 15-17 a\~nos} mejor\'o el reconocimiento de t\'ecnicas de manipulaci\'on. \textit{(Roozenbeek \& van der Linden, Univ. de Cambridge, 2019.)}
+  \item \textbf{Deliberaci\'on c\'ivica a escala:} Pol.is / vTaiwan (Taiw\'an) agrup\'o consensos que derivaron en pol\'iticas p\'ublicas reales.
+\end{itemize}
+
+\noindent\textbf{Postura epist\'emica:} esta evidencia es internacional y \textbf{prueba que el mecanismo puede funcionar, no que funcione en un aula peruana}. Se toma como \textbf{hip\'otesis a validar}, no como f\'ormula a copiar: YariNET debe moldearse y validarse con la realidad del aula p\'ublica peruana (conectividad, dispositivos, tiempo docente, encaje cultural y curricular).
+
+\section{P\'ublico objetivo}
+
+\noindent\textbf{Usuarios directos:} estudiantes de \textbf{secundaria, 4.\textordmasculine{} y 5.\textordmasculine{} (15-17 a\~nos)}, que cursan \textbf{DPCC} y participan en proyectos escolares de identificaci\'on de problemas. Nativos digitales que se informan por redes, motivados a participar, con espacios de debate pero que se traban al construir acuerdos.
+
+\medskip
+\noindent\textbf{Usuarios indirectos:} docentes de DPCC (median y eval\'uan la deliberaci\'on) y directivos del colegio.
+
+\medskip
+\noindent\textbf{Por qu\'e esta etapa (la m\'as crucial):} la secundaria es el \textbf{umbral de la ciudadan\'ia} ---se forman identidad y valores, madura el razonamiento cr\'itico y faltan 1-2 a\~nos para votar. Si aqu\'i aprenden que ``participar no sirve'', cargan esa resignaci\'on toda la vida. \textit{(Varios proyectos similares apuntan a primaria; YariNET toma la etapa donde el debate pol\'emico es real y la ciudadan\'ia es inminente.)}
+
+\medskip
+\noindent\textbf{Decisi\'on pendiente (coherencia):} el reto apunta a colegios ``Barrio PUCP'' (p\'ublicos), pero la entrevista es a una estudiante de colegio privado (Innova). Se recomienda realizar al menos una entrevista adicional a un estudiante de colegio p\'ublico y usar el caso ya recogido como contraste.
+
+\section{Diagrama de flujo (c\'omo funcionar\'ia)}
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.85cm,
+  every node/.style={font=\footnotesize},
+  box/.style={rectangle, rounded corners, draw=blue!55!black, thick, text width=8cm, minimum height=0.85cm, align=center, fill=blue!5},
+  ai/.style={rectangle, rounded corners, draw=orange!75!black, thick, text width=8cm, minimum height=0.85cm, align=center, fill=orange!14},
+  result/.style={rectangle, rounded corners, draw=green!50!black, very thick, text width=8cm, minimum height=0.85cm, align=center, fill=green!12},
+  arrow/.style={-{Stealth[length=2.4mm]}, thick},
+  fb/.style={-{Stealth[length=2mm]}, thick, dashed, gray}
+]
+\node[box] (n1) {\textbf{1.} El docente lanza un \textbf{Reto C\'ivico} (problema real del colegio o barrio)};
+\node[box, below=of n1] (n2) {\textbf{2.} Los estudiantes debaten en el \textbf{foro}};
+\node[ai, below=of n2] (n3) {\textbf{IA {\textperiodcentered} Moderador Socr\'atico}: ordena, repregunta, frena faltas de respeto};
+\node[box, below=of n3] (n4) {\textbf{3.} Un estudiante adjunta una \textbf{fuente} o afirmaci\'on};
+\node[ai, below=of n4] (n5) {\textbf{IA {\textperiodcentered} Fact-Checker}: veredicto + nivel de confianza + explicaci\'on};
+\node[ai, below=of n5] (n6) {\textbf{IA {\textperiodcentered} Sintetizador de Consenso}: separa acuerdos de tensiones};
+\node[result, below=of n6] (n7) {\textbf{4. Propuesta Ciudadana} estructurada};
+\node[box, below=of n7] (n8) {\textbf{5.} El docente \textbf{valida / aprueba}};
+\node[result, below=of n8] (n9) {\textbf{6.} Se presenta a la \textbf{autoridad} (direcci\'on / municipio)};
+
+\draw[arrow] (n1)--(n2);
+\draw[arrow] (n2)--(n3);
+\draw[arrow] (n3)--(n4);
+\draw[arrow] (n4)--(n5);
+\draw[arrow] (n5)--(n6);
+\draw[arrow] (n6)--(n7);
+\draw[arrow] (n7)--(n8);
+\draw[arrow] (n8)--(n9);
+\draw[fb] (n3.west) to[out=180,in=180,looseness=1.6] node[left,font=\scriptsize]{modera} (n2.west);
+\draw[fb] (n5.east) to[out=0,in=0,looseness=1.6] node[right,font=\scriptsize]{verifica} (n4.east);
+\end{tikzpicture}
+\end{center}
+
+\noindent\textbf{Los tres agentes (ninguno juzga; cada uno ilumina el terreno):} el \textbf{Moderador} ilumina las \textit{perspectivas}; el \textbf{Fact-Checker}, la \textit{calidad de la evidencia}; el \textbf{Sintetizador}, \textit{d\'onde hay acuerdo y d\'onde queda tensi\'on}.
+
+\section{Trabajos a realizar para construir esto}
+
+\noindent\textbf{Fase 0 --- Fundaci\'on t\'ecnica (base construida):} microservicio \texttt{yarinet\_service} (API de retos), base de datos y modelo de datos; prototipo web del docente para crear y listar Retos C\'ivicos, integrado a la Plataforma Cumbre y su autenticaci\'on por roles.
+
+\medskip
+\noindent\textbf{Fase 1 --- Agentes de IA + prompts:} redactar e integrar los \textit{system prompts} de los tres agentes (Moderador Socr\'atico, Fact-Checker, Sintetizador) sobre la infraestructura de LLM de Cumbre; servicios de moderaci\'on, verificaci\'on y s\'intesis.
+
+\medskip
+\noindent\textbf{Fase 2 --- Foro de deliberaci\'on + tiempo real:} repositorios y API del foro, mensajes, fuentes y propuestas; entrega en tiempo real y moderaci\'on post-publicaci\'on.
+
+\medskip
+\noindent\textbf{Fase 3 --- Frontend:} app del estudiante (foro con mensajes en vivo, intervenciones de IA destacadas, alertas de fact-checking); app del docente (creaci\'on/monitoreo de retos y aprobaci\'on de la propuesta).
+
+\medskip
+\noindent\textbf{Fase 4 --- Validaci\'on en aula (encaje local):} piloto con docentes y estudiantes de DPCC (idealmente colegio p\'ublico Barrio PUCP); medir calidad de la deliberaci\'on, uso y desarrollo de la competencia; ajustar el producto a la realidad local.
+
+\medskip
+\noindent\textbf{Transversal:} alineaci\'on con los desempe\~nos del CNEB; seguridad de menores, moderaci\'on y consentimiento informado; m\'etricas de impacto.
+
+\section*{Referencias (fuentes verificadas)}
+\small
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+  \item MINEDU --- UMC. \textit{El Per\'u en ICCS 2016: Informe nacional de resultados} (2017-2018). umc.minedu.gob.pe
+  \item IEA. \textit{International Civic and Citizenship Education Study (ICCS) 2016 / 2022}. iea.nl
+  \item Mora Alvino, G. J. (2024). \textit{Municipios escolares y la participaci\'on estudiantil.} Discursos del Sur, n.14, UNMSM. scielo.org.pe
+  \item Open Government Partnership. \textit{Compromiso PE0110.} opengovpartnership.org
+  \item Reuters Institute. \textit{Digital News Report 2025 --- Per\'u.} reutersinstitute.politics.ox.ac.uk
+  \item Ipsos Per\'u (2022). \textit{Si no est\'as en RRSS, est\'as en na.} ipsos.com/es-pe
+  \item Tessler, M. H., et al. (2024). \textit{AI can help humans find common ground in democratic deliberation.} Science, 386, eadq2852.
+  \item Roozenbeek, J. \& van der Linden, S. (2019). \textit{Fake news game confers psychological resistance against online misinformation.} Palgrave Communications, Univ. of Cambridge.
+\end{itemize}
+\normalsize
+
+\vfill
+\noindent\footnotesize\textit{Cuidados de citaci\'on: fechar siempre ICCS como ``2016''; el 63\% de Ipsos es poblaci\'on adulta (no adolescentes); la evidencia internacional (Habermas Machine, Bad News) es prueba de concepto, no evidencia en contexto peruano.}
+
+\end{document}

@@ -18,5 +18,7 @@ export const serverServiceEndpoints = {
   contentServiceUrl:
     process.env.CONTENT_SERVICE_URL ?? defaultServiceEndpoints.contentServiceUrl,
   learningServiceUrl:
-    process.env.LEARNING_SERVICE_URL ?? defaultServiceEndpoints.learningServiceUrl
+    process.env.LEARNING_SERVICE_URL ?? defaultServiceEndpoints.learningServiceUrl,
+  yarinetServiceUrl:
+    process.env.YARINET_SERVICE_URL ?? "http://localhost:3004"
 };

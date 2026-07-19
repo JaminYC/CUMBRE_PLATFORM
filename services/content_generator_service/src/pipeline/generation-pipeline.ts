@@ -34,10 +34,15 @@ export class GenerationPipeline {
 
     const job = await this.deps.jobRepo.createJob(input);
     const jobId = job.id;
-    // Iniciar procesamiento (awaited para poder observar resultados en tests;
-    // en producción el cliente recibe jobId antes de que el processing termine
-    // gracias a HTTP streaming — o se usa un worker separado)
-    await this.processJob(jobId, input);
+
+    // Lanzar en background — el cliente recibe jobId inmediatamente
+    // y hace polling con GET /generate/:jobId hasta que status === "done"
+    setImmediate(() => {
+      this.processJob(jobId, input).catch((err) => {
+        console.error("[GenerationPipeline] Unhandled error in background job", jobId, err);
+      });
+    });
+
     return { jobId };
   }
 

@@ -1,0 +1,55 @@
+[00:00] que tendríamos un poquito para parte técnica parte de tener una diapositiva de
+[00:05] respaldo que plantee eso estaría bacán
+[00:10] el problema que sería cuatro minutos en cuatro minutos casi no nos deja hablar
+[00:13] para nada
+[00:29] y el otro es el pinche no? si se va a tener que hablar de que es sostenible
+[00:42] porque el optimizador del modelo del lenguaje de inteligencia artificial que estamos
+[00:48] usándose usa de manera optimista optimizada y se está usando recursos ya existentes en el aula
+[00:57] eso es lo que podemos decir dependiendo de bueno si se desglosa un poco más nos demoraríamos
+[01:09] mucho. No, la mayoría no, todo tu tiempo tienes que consumirlo en presentar la idea.
+[01:36] Al inicio de frente, si puedes saludar también, un buenas tardes a todos y empiezas con la
+[01:45] pregunta. A veces dicen que sabían ustedes, el ISS plantea que el 33% de los estudiantes,
+[01:57] bueno, de las personas en general se informan por TikTok. Uno de cada tres personas tiene
+[02:04] información netamente de TikTok. Luego, aterrizar el panorama de los actores que van a usar,
+[02:12] por ejemplo, ya de personas a estudiantes, estudiantes a nivel secundaria, y darnos la razón de por qué.
+[02:20] Es casi como que al espectador lo estás encaminando a que entiendan cómo es que
+[02:32] nosotros hemos desarrollado todo nuestro trabajo. Los problemas, los problemas sociales,
+[02:38] hay un montón de problemas sociales. No estamos solucionando la corrupción, no como tal,
+[02:53] indirectamente lo podríamos estar haciendo, no lo estamos haciendo. Entonces hay un proceso
+[03:02] de explicar prácticamente el problema de a poquitos, de lo más general o lo más particular
+[03:09] y recaen la responsabilidad de los estudiantes del grado, de segundo grado o secundaria en adelante
+[03:15] que podrían levantar o bueno, podrían tener más juicio de valores, de tomar una iniciativa
+[03:25] ciudadana en entornos de debate de la ola. Bien, ya se aterrizó la propuesta, entonces
+[03:35] ya tenemos los actores principales dados, la problemática esclarecida y se plantea
+[03:42] la solución. Se menciona que existen entornos de debate, podría mencionar el curso de
+[03:51] la nómina estudiantil de Perú, luego de eso que es lo que ya se hace y no pensamos
+[04:00] construir desde cero, sino adaptarlo y ayudar a la metodología actual, refinarla al nuevo
+[04:08] cambio de las personas, bueno en este caso de los estudiantes, a las nuevas metodologías
+[04:16] y así plantear un poquito más allá de la parte técnica, se podría plantear un entorno
+[04:23] de debate con un dispositivo que pueda capturar y en tiempo raro moderar, de acuerdo a estas
+[04:29] funcionalidades, y vas atacando las funcionalidades a los problemas generales. Entonces una metodología
+[04:36] asocrática va a ser netamente imparcializada para que todos los estudiantes mantengan
+[04:44] su voto y tengan del mismo peso. Luego la segunda que es la parte de revisión de fuentes
+[04:50] fake news, que tengan la posibilidad de la internet artificial de seleccionar que noticias
+[04:58] son verdaderas y noticias son falsas y seguir moderando. Luego así podemos mencionar un
+[05:05] montón de funcionalidades de la aplicación que estamos haciendo y a la par están mencionando
+[05:12] ¿Qué es lo que hace y cómo lo está haciendo?
+[05:19] Dime, dime
+[05:39] Sí
+[05:41] Vamos a ver con el hilo que te estaba comentando la parte técnica
+[05:46] Ya has mencionado cómo se desarrolla, qué es lo que el Jarinet, cómo lo solucionaría
+[05:51] Entonces pasaría al siguiente de
+[05:53] Actualmente ese proyecto es similar a otros
+[05:59] ¿Qué es lo que se está haciendo actualmente?
+[06:01] Entonces, ahí se plantea un proyecto similar al nuestro, pero en un entorno distinto, que
+[06:09] sea resultado satisfactorio, realzando que sí se puede, o sea, sí es viable.
+[06:15] Alguien más lo hizo, nosotros podemos hacerlo, pero con el contexto actual.
+[06:19] Luego, último para despedirte, ya que finalmente se menciona todo, esto se puede desarrollar
+[06:25] gracias al equipo técnico y el equipo diverso y técnico que se tiene, ahí ya tendría el peso por
+[06:34] ejemplo en nuestros compañeros de educación, tendría un montón de peso, parte de gestión y
+[06:40] parte de arquitectura complementaría casi como que estructurarían todo y una capa que sería
+[06:47] la parte técnico para el desarrollo entonces es un equipo completo y ya se despide gracias por
+[06:54] la presentación y esperamos las preguntas de así pero en cuatro minutos
+[07:03] no está preparado para eso creo que quén yo entro dímedeme diapositivas
+[07:23] sí creo que sí le voy a pedir la gracia a mi querido claudecito que
+[07:34] termine de cenar. Bueno, claro, geniérame con todo lo que dije.

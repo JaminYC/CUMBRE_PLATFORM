@@ -1,0 +1,195 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds, shapes.geometric}
+\setlist{itemsep=2pt, topsep=3pt}
+\newcommand{\usd}{US\$}
+
+\title{\textbf{YariNET --- Documento T\'ecnico, Costos y Sostenibilidad}\\[2pt]
+\large Arquitectura, plan de desarrollo, unit economics y ROI\\
+Educat\'on Challenge 2026}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1.2cm}
+\begin{center}\rule{\textwidth}{0.4pt}\end{center}
+
+\section{Resumen ejecutivo}
+YariNET es un m\'odulo de deliberaci\'on c\'ivica asistida por IA, construido como parte de la \textbf{Plataforma Cumbre} (monorepo de microservicios). Su tesis econ\'omica es simple: \textbf{automatiza el recurso m\'as escaso y caro de una buena deliberaci\'on ---un moderador imparcial, un verificador de fuentes y un sintetizador de consensos--- a un costo marginal de centavos por aula.} Un facilitador humano entrenado por cada debate es inescalable; YariNET modera debates ilimitados en paralelo por una fracci\'on del costo. Esto lo hace, a la vez, \textbf{escalable y sostenible}.
+
+\section{Arquitectura t\'ecnica}
+
+El sistema sigue una arquitectura de \textbf{microservicios} sobre un monorepo (pnpm). El nuevo \texttt{yarinet\_service} expone una API REST, persiste en PostgreSQL v\'ia Prisma, orquesta tres agentes de IA sobre un proveedor de LLM, y entrega mensajes en tiempo real. El frontend son apps Next.js por rol.
+
+\begin{center}
+\begin{tikzpicture}[
+  font=\footnotesize,
+  layer/.style={rectangle, rounded corners, draw, thick, align=center, minimum height=0.8cm, text width=3.3cm, fill=blue!5},
+  svc/.style={rectangle, rounded corners, draw=blue!55!black, thick, align=center, minimum height=0.8cm, text width=3.3cm, fill=blue!8},
+  ai/.style={rectangle, rounded corners, draw=orange!75!black, thick, align=center, minimum height=0.8cm, text width=3.3cm, fill=orange!14},
+  data/.style={cylinder, shape border rotate=90, aspect=0.25, draw=green!50!black, thick, align=center, minimum height=1cm, text width=2.7cm, fill=green!10},
+  ext/.style={rectangle, rounded corners, draw=purple!60!black, thick, align=center, minimum height=0.8cm, text width=2.9cm, fill=purple!8},
+  a/.style={-{Stealth[length=2mm]}, thick},
+  d/.style={{Stealth[length=2mm]}-{Stealth[length=2mm]}, thick, dashed, gray}
+]
+% Frontend
+\node[layer] (t) at (-2,3.2) {\textbf{web\_teacher}\\Next.js (Vercel)};
+\node[layer] (s) at (2,3.2) {\textbf{web\_student}\\Next.js (Vercel)};
+% Servicios
+\node[svc] (auth) at (-2,1.4) {\textbf{auth\_service}\\sesiones, roles};
+\node[svc] (yari) at (2,1.4) {\textbf{yarinet\_service}\\Node/TS (Railway)};
+% Interior de yarinet
+\node[ai] (agents) at (2,-0.4) {\textbf{Agentes IA}\\Moderador {\textperiodcentered} Fact-Checker {\textperiodcentered} Sintetizador};
+% Datos e IA externa
+\node[data] (db) at (-2,-1.9) {\textbf{PostgreSQL}\\+ Realtime\\(Supabase)};
+\node[ext] (llm) at (2.3,-2.2) {\textbf{Proveedor LLM}\\(OpenAI-compatible)};
+
+\draw[a] (t)--(auth);
+\draw[a] (s)--(yari);
+\draw[a] (yari)--(auth) node[midway,above,font=\scriptsize]{};
+\draw[a] (yari)--(agents);
+\draw[a] (agents)--(llm);
+\draw[a] (yari)--(db);
+\draw[a] (auth)--(db);
+\draw[d] (db) to[out=150,in=210] node[left,font=\scriptsize]{tiempo real} (t.west);
+\end{tikzpicture}
+\end{center}
+
+\noindent\textbf{Flujo de datos:} el docente crea un reto (\texttt{web\_teacher} $\rightarrow$ \texttt{yarinet\_service}); los estudiantes debaten (\texttt{web\_student}); cada mensaje se persiste y se difunde en tiempo real; los agentes de IA consumen el LLM para moderar, verificar y sintetizar; la propuesta final se guarda y la aprueba el docente.
+
+\section{Stack tecnol\'ogico}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Lenguaje/runtime:} TypeScript sobre Node.js (ESM).
+  \item \textbf{Backend:} microservicios con enrutador propio (\texttt{api-runtime}) y validaci\'on por JSON Schema (AJV).
+  \item \textbf{Datos:} PostgreSQL con Prisma 6 (un esquema por servicio).
+  \item \textbf{IA:} capa \texttt{llm-runtime} sobre un proveedor OpenAI-compatible; los prompts de los 3 agentes viven en \texttt{prompts}.
+  \item \textbf{Tiempo real:} Supabase Realtime (escucha de cambios sobre los mensajes del foro).
+  \item \textbf{Frontend:} Next.js (apps por rol: docente y estudiante).
+  \item \textbf{Infraestructura:} Railway (servicios), Vercel (frontend), Supabase (BD + realtime).
+\end{itemize}
+
+\section{Plan de desarrollo}
+\begin{tabularx}{\textwidth}{@{}l l X@{}}
+\toprule
+\textbf{Fase} & \textbf{Estado} & \textbf{Alcance} \\
+\midrule
+0. Fundaci\'on & \textbf{Hecho} & Servicio, BD y modelo de datos; CRUD de Retos; prototipo web docente; auth por roles. \\
+1. Agentes IA & Pendiente & Prompts e integraci\'on de Moderador, Fact-Checker y Sintetizador sobre el LLM. \\
+2. Foro + realtime & Pendiente & API de foro/mensajes/fuentes/propuestas; entrega en vivo; moderaci\'on post-publicaci\'on. \\
+3. Frontend & Pendiente & Foro del estudiante y panel de monitoreo del docente. \\
+4. Validaci\'on & Pendiente & Piloto en aula (DPCC), medici\'on de impacto y ajuste al contexto local. \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent Estimaci\'on de esfuerzo para el MVP funcional (Fases 1--3): del orden de \textbf{8--12 semanas} de un equipo peque\~no (2--3 desarrolladores), aprovechando la infraestructura ya existente de Cumbre. La Fase 0 ya est\'a construida.
+
+\section{Costos (unit economics)}
+
+El costo se divide en \textbf{fijo} (infraestructura) y \textbf{variable} (tokens de LLM por debate). \textit{Todas las cifras son estimaciones con supuestos expl\'icitos y ajustables.}
+
+\subsection{Costo variable de IA por reto}
+\textbf{Supuestos:} un reto = 1 aula (30 estudiantes), $\sim$60 mensajes; el moderador interviene en $\sim$1 de cada 4 mensajes ($\sim$15 llamadas); $\sim$10 verificaciones de fuentes; 1 s\'intesis final que lee el historial.
+
+\begin{tabularx}{\textwidth}{@{}X r r r@{}}
+\toprule
+\textbf{Agente} & \textbf{Llamadas} & \textbf{Tokens aprox.} & \textbf{Subtotal} \\
+\midrule
+Moderador Socr\'atico & 15 & $\sim$42{,}000 & --- \\
+Fact-Checker & 10 & $\sim$18{,}000 & --- \\
+Sintetizador de Consenso & 1 & $\sim$9{,}000 & --- \\
+\midrule
+\textbf{Total por reto} & & $\sim$\textbf{70{,}000 tokens} & \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent A un precio combinado de referencia (modelo econ\'omico), el costo por reto es de \textbf{centavos}:
+\begin{tabularx}{\textwidth}{@{}X r r@{}}
+\toprule
+\textbf{Escenario de precio LLM} & \textbf{\usd/1M tokens} & \textbf{Costo por reto (30 alumnos)} \\
+\midrule
+Modelo econ\'omico & \usd 0{,}30 & $\approx$ \usd 0{,}02 \\
+Modelo intermedio & \usd 2{,}00 & $\approx$ \usd 0{,}14 \\
+Modelo premium & \usd 8{,}00 & $\approx$ \usd 0{,}56 \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent\textbf{Conclusi\'on clave:} incluso con un modelo intermedio, el costo de IA es de \textbf{$\sim$\usd 0{,}14 por debate de 30 alumnos}, es decir, \textbf{menos de \usd 0{,}005 por estudiante por debate}. El costo marginal de sumar un aula es despreciable.
+
+\subsection{Costo fijo de infraestructura}
+\begin{tabularx}{\textwidth}{@{}X r r@{}}
+\toprule
+\textbf{Componente} & \textbf{Piloto (mensual)} & \textbf{Escala (mensual)} \\
+\midrule
+Backend (Railway) & \usd 15 -- 40 & \usd 50 -- 150 \\
+Frontend (Vercel) & \usd 0 -- 20 & \usd 20 -- 50 \\
+Base de datos + realtime (Supabase) & \usd 0 -- 25 & \usd 25 -- 100 \\
+LLM (variable, seg\'un uso) & \usd 1 -- 10 & \usd 20 -- 80 \\
+\midrule
+\textbf{Total aproximado} & \textbf{\usd 30 -- 95} & \textbf{\usd 115 -- 380} \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent Con estos supuestos, atender a \textbf{$\sim$1{,}000 estudiantes activos} cuesta del orden de \textbf{unos pocos cientos de d\'olares al mes}, o \textbf{menos de \usd 2 por estudiante al a\~no} en tecnolog\'ia (infraestructura + IA).
+
+\section{Retorno de inversi\'on (ROI)}
+
+\subsection{ROI financiero / comparativo}
+El valor de YariNET es \textbf{automatizar el recurso escaso}: un moderador-facilitador humano imparcial y entrenado. Ese perfil cuesta \textbf{decenas de d\'olares por hora} y no escala (una persona, un debate a la vez). YariNET modera \textbf{debates ilimitados en paralelo por centavos}. La relaci\'on costo-cobertura es de varios \'ordenes de magnitud a favor del software.
+
+\subsection{ROI social (SROI)}
+Por \textbf{menos de \usd 2 por estudiante al a\~no} en tecnolog\'ia, YariNET desarrolla una competencia obligatoria del Curr\'iculo Nacional (``Delibera sobre asuntos p\'ublicos'') que hoy se ense\~na en teor\'ia. El retorno social ---estudiantes que aprenden a informarse, deliberar y construir acuerdos--- es alto frente a un costo unitario muy bajo. La m\'etrica de impacto propuesta: \textbf{mejora en la competencia deliberativa por soles invertidos por estudiante}.
+
+\section{Modelo de sostenibilidad}
+
+\subsection{Fuentes de ingreso (c\'omo se financia)}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{SaaS B2B dentro de Cumbre:} redes privadas (p. ej. Innova) pagan una licencia por estudiante/mes como parte de la plataforma.
+  \item \textbf{Sector p\'ublico / MINEDU:} licenciamiento o convenio para escalar en escuelas p\'ublicas, alineado al CNEB.
+  \item \textbf{Subsidios cruzados / CSR / grants:} los ingresos de redes privadas y fondos de responsabilidad social \textbf{subsidian el acceso gratuito de colegios p\'ublicos}.
+  \item \textbf{Freemium:} versi\'on b\'asica gratuita para colegios p\'ublicos; funciones avanzadas (anal\'itica, m\'as retos, modelos premium) en el plan pagado.
+\end{enumerate}
+
+\subsection{Palancas de sostenibilidad t\'ecnica (bajar el costo variable)}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Escalonamiento de modelos (model tiering):} modelo barato para moderar (alto volumen) y uno mejor solo para la s\'intesis final.
+  \item \textbf{Cach\'e de verificaciones:} las mismas fuentes/afirmaciones se reutilizan entre aulas, evitando repetir llamadas.
+  \item \textbf{Procesamiento por lotes y as\'incrono:} agrupar llamadas y moderar en segundo plano.
+  \item \textbf{Opci\'on de modelos open-source autoalojados} a gran escala, para eliminar el costo por token.
+  \item \textbf{Arquitectura modular:} en etapa temprana, consolidar servicios (monolito modular) reduce el costo fijo de infraestructura sin perder modularidad del c\'odigo.
+\end{itemize}
+
+\subsection{Sostenibilidad operativa}
+El producto es \textbf{liderado por el docente} y de \textbf{bajo costo marginal}: cada aula nueva a\~nade centavos, no d\'olares. Al integrarse a una plataforma ya en uso (Cumbre) y a un curso ya obligatorio (DPCC), la adopci\'on no exige crear una materia ni un presupuesto nuevos.
+
+\section{Riesgos t\'ecnicos y mitigaciones}
+\begin{tabularx}{\textwidth}{@{}X X@{}}
+\toprule
+\textbf{Riesgo} & \textbf{Mitigaci\'on} \\
+\midrule
+Costo de LLM crece con el uso & Model tiering, cach\'e, lotes, modelos open-source a escala. \\
+Conectividad/dispositivos en colegios p\'ublicos & Modo ligero, uso por turnos, validaci\'on en el piloto (Fase 4). \\
+Errores o sesgo de la IA & La IA no decide; verifica con niveles de confianza y el docente aprueba. \\
+Seguridad de menores & Moderaci\'on, acceso institucional y consentimiento informado. \\
+Dependencia de un proveedor de IA & Capa \texttt{llm-runtime} desacoplada (OpenAI-compatible), intercambiable. \\
+\bottomrule
+\end{tabularx}
+
+\vfill
+\noindent\footnotesize\textit{Nota: las cifras de costos son estimaciones basadas en supuestos expl\'icitos (tama\~no de aula, volumen de mensajes, tokens por interacci\'on y precio del LLM) y deben calibrarse con datos reales del piloto. El precio del LLM var\'ia por proveedor y modelo.}
+
+\end{document}

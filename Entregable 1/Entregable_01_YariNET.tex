@@ -1,0 +1,117 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+\title{\textbf{Entregable 01: Identificación del Problema}\\
+Educatón Challenge 2026}
+\author{\textbf{Proyecto:} YariNET (Módulo de deliberación cívica con IA para la Plataforma Cumbre)}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\noindent \textbf{Ejes:} Ciudadanía Digital Activa e Innovación para la Participación Ciudadana\\
+\textbf{Contexto de Aplicación:} Colegios de Barrio PUCP
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Guía de Entrevistas}
+
+\textbf{Objetivo de la entrevista:} Comprender cómo los estudiantes de etapa escolar perciben y experimentan la educación cívica, cómo lidian con la desinformación en su entorno digital y cuáles son sus frustraciones al intentar debatir o proponer soluciones a problemas de su comunidad.
+
+\vspace{0.3cm}
+\textbf{Preguntas base:}
+\begin{enumerate}
+    \item \textbf{Rompehielo:} !`Hola! Cuéntanos, ¿en qué grado estás y cómo es un día normal para ti en el colegio?
+    \item \textbf{Contexto escolar:} ¿Cómo son tus clases de Desarrollo Personal, Ciudadanía y Cívica? ¿Sientes que lo que te enseñan te sirve para resolver problemas reales de tu barrio o colegio?
+    \item \textbf{Ciudadanía Digital (Eje 1):} Piensa en la última vez que viste una noticia sobre un problema en tu distrito (por redes sociales o WhatsApp). ¿Cómo haces para saber si esa noticia es real o es \textit{fake news}? 
+    \item \textbf{Participación (Eje 2):} Si tú y tus compañeros quisieran proponer una solución para un problema del colegio (ej. mejorar el manejo de basura), ¿cómo se organizarían? ¿Hay algún espacio en el colegio para debatir estas ideas?
+    \item \textbf{Puntos de dolor:} ¿Qué es lo más frustrante o difícil cuando intentas debatir un tema polémico con tus compañeros de clase?
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Entrevista Realizada}
+
+\textit{Se realizó una entrevista a profundidad con un estudiante que cumple con el perfil del público objetivo (Colegios Barrio PUCP).}
+
+\begin{itemize}
+    \item \textbf{Nombre:} Mateo
+    \item \textbf{Edad:} 15 años (4to de Secundaria)
+    \item \textbf{Colegio:} Institución Educativa Pública en San Miguel (Zona de influencia Barrio PUCP).
+\end{itemize}
+
+\textbf{Resumen de la entrevista:}\\
+Mateo nos comentó que sus clases de cívica consisten principalmente en leer sobre la Constitución y las instituciones del Estado para dar un examen. Cuando se le preguntó sobre problemas reales (ej. seguridad en su barrio), mencionó que en su salón tienen un grupo de WhatsApp donde a veces comparten noticias, pero muchas veces terminan discutiendo porque la información es falsa o exagerada. 
+
+Nos contó que hace un mes intentaron ponerse de acuerdo para pedirle al director mejorar las áreas verdes, pero el debate en el salón fue un caos: ``todos gritaban, algunos se basaban en cosas que vieron en TikTok que no eran ciertas, y al final no llegamos a nada porque no había nadie que nos ordene ni valide lo que decíamos''.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Hallazgos (Insights)}
+
+A partir de la entrevista con Mateo, identificamos los siguientes hallazgos relevantes que respaldan la necesidad de \textbf{YariNET}:
+
+\begin{enumerate}
+    \item \textbf{La cívica es percibida como teórica y pasiva:} Los estudiantes conocen los conceptos básicos por obligación académica, pero no tienen espacios para ponerlos en práctica. \textit{(``La ciudadanía no se aprende leyendo, se aprende ejerciéndola'')}.
+    \item \textbf{Alta exposición a la desinformación sin herramientas de validación:} Los jóvenes se informan por redes sociales (TikTok, WhatsApp), pero carecen de pensamiento crítico digital para filtrar la información falsa durante un debate.
+    \item \textbf{Falta de espacios seguros y moderados para la deliberación:} Hay voluntad de participación, pero los intentos de debate fracasan por desorden y argumentos basados en desinformación. Se necesita un moderador imparcial (rol que cubrirá la IA de YariNET).
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Mapa de Experiencia de Usuario (Journey Map)}
+
+\textbf{Usuario:} Mateo (15 años), estudiante de colegio Barrio PUCP.\\
+\textbf{Escenario:} Intentar proponer una solución comunitaria junto a su salón de clases.
+
+\vspace{0.5cm}
+
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.5cm}|X|X|X|X|}
+\hline
+\textbf{Fase} & \textbf{1. Identificación del problema} & \textbf{2. Búsqueda de Información} & \textbf{3. Intento de Deliberación} & \textbf{4. Propuesta Colectiva} \\
+\hline
+\textbf{Acción} & Mateo y sus amigos notan un problema en el colegio o barrio y deciden hacer algo. & Buscan información en redes sociales para sustentar su idea. & Intentan debatir en el salón o por WhatsApp para llegar a un acuerdo. & Deben presentar una propuesta formal a las autoridades. \\
+\hline
+\textbf{Sentimiento} & Motivado / Empoderado & Confundido / Abrumado & Frustrado / Estresado & Decepcionado \\
+\hline
+\textbf{Puntos de contacto} & Grupo de WhatsApp, patio del colegio. & TikTok, Google, cadenas de mensajes. & Salón de clases (sin moderación docente). & Ninguno (no logran formularla). \\
+\hline
+\textbf{Motivación / Pensamiento} & ``!Podemos cambiar esto si nos unimos!'' & ``¿Cuál de todas estas noticias es la verdad?'' & ``Nadie escucha, todos gritan, se basan en mentiras.'' & ``Es imposible ponernos de acuerdo, mejor lo dejamos ahí.'' \\
+\hline
+\hline
+\textbf{Oportunidad para YariNET} & El profesor puede usar este interés para \textbf{lanzar un reto} oficial en el apartado YariNET de la Plataforma Cumbre. & YariNET ofrece herramientas para \textbf{investigar}, ayudando a identificar \textit{fake news} y sesgos. & \textbf{La IA entra como moderadora:} guía el debate, exige fuentes confiables y mantiene el orden socrático. & YariNET estructura automáticamente los consensos en una \textbf{propuesta ciudadana} lista para ser enviada a través de Cumbre. \\
+\hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Sobre YariNET (Nuestra Propuesta)}
+
+Para responder a las necesidades y puntos de dolor identificados en el \textit{Journey Map}, nace \textbf{YariNET}, un apartado especializado dentro de la \textbf{Plataforma Cumbre} de deliberación cívica asistida por Inteligencia Artificial, diseñado específicamente para el entorno escolar.
+
+\textbf{Pilares Fundamentales:}
+\begin{itemize}
+    \item \textbf{Moderación Socrática con IA:} Un agente de inteligencia artificial que guía los debates, hace preguntas para profundizar el análisis y mantiene un entorno respetuoso y enfocado, evitando la polarización tóxica y agresiones.
+    \item \textbf{Combate a la Desinformación:} Herramientas integradas de \textit{fact-checking} que ayudan a los estudiantes a validar fuentes en tiempo real, desarrollando su pensamiento crítico y su ciudadanía digital.
+    \item \textbf{De la Deliberación a la Acción:} YariNET no solo es un foro; este módulo sintetiza los consensos logrados y ayuda a los estudiantes a estructurar propuestas ciudadanas formales listas para ser presentadas a las autoridades de su colegio o barrio.
+    \item \textbf{Gamificación Cívica:} Los docentes pueden estructurar ``retos'' basados en problemáticas reales de la comunidad, evaluando competencias cívicas de forma práctica en lugar de recurrir a la memorización tradicional.
+\end{itemize}
+
+\end{document}

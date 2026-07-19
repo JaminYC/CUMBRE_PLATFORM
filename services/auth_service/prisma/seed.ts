@@ -2,7 +2,9 @@ import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/index.js";
 import { hashCredential } from "../src/utils/credentials.js";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  datasources: { db: { url: process.env.DATABASE_URL } }
+});
 
 // Stable demo UUIDs — consistent across all services
 const DEMO_STUDENT_ID = "10000000-0000-0000-0000-000000000001";

@@ -72,10 +72,23 @@ function PenIcon() {
   );
 }
 
+function YariNetIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
+      <path d="M7.5 1.5v12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M2 4.5h11" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M3.8 4.5L2 8.5a2 2 0 0 0 3.6 0L3.8 4.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+      <path d="M11.2 4.5L9.4 8.5a2 2 0 0 0 3.6 0L11.2 4.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+      <circle cx="7.5" cy="2" r="1.3" fill="currentColor"/>
+    </svg>
+  );
+}
+
 // ── Nav config ────────────────────────────────────────────────────────────────
 const NAV_ITEMS = [
   { href: "/dashboard",      es: "Panel docente",         en: "Dashboard",       Icon: GridIcon,      badge: null },
   { href: "/classrooms",     es: "Aulas",                 en: "Classrooms",      Icon: UsersIcon,     badge: null },
+  { href: "/yarinet",        es: "YariNET",               en: "YariNET",         Icon: YariNetIcon,   badge: "Nuevo" },
   { href: "/materials",      es: "Materiales",            en: "Materials",       Icon: FilesIcon,     badge: null },
   { href: "/module-builder", es: "Constructor de módulos", en: "Module builder",  Icon: BlocksIcon,    badge: null },
   { href: "/exams",          es: "Examenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },

@@ -37,10 +37,11 @@ export function createBackendClient(config: {
     authServiceUrl: string;
     learningServiceUrl?: string;
     contentServiceUrl?: string;
+    yarinetServiceUrl?: string;
   };
 }) {
   async function fetchBackendData<T>(
-    serviceName: "auth" | "learning" | "content",
+    serviceName: "auth" | "learning" | "content" | "yarinet",
     path: string,
     init?: RequestInit,
     options: {
@@ -142,11 +143,12 @@ export async function parseBackendEnvelope<T>(
 }
 
 function resolveServiceUrl(
-  serviceName: "auth" | "learning" | "content",
+  serviceName: "auth" | "learning" | "content" | "yarinet",
   endpoints: {
     authServiceUrl: string;
     learningServiceUrl?: string;
     contentServiceUrl?: string;
+    yarinetServiceUrl?: string;
   }
 ) {
   if (serviceName === "auth") {
@@ -162,6 +164,17 @@ function resolveServiceUrl(
     }
 
     return endpoints.learningServiceUrl;
+  }
+
+  if (serviceName === "yarinet") {
+    if (!endpoints.yarinetServiceUrl) {
+      throw new BackendRequestError(
+        "La URL de yarinet_service no esta configurada.",
+        500
+      );
+    }
+
+    return endpoints.yarinetServiceUrl;
   }
 
   if (!endpoints.contentServiceUrl) {
@@ -270,7 +283,7 @@ async function executeRequest<T>(
   accessToken?: string
 ) {
   const controller = new AbortController();
-  const timeoutHandle = setTimeout(() => controller.abort(), 10_000);
+  const timeoutHandle = setTimeout(() => controller.abort(), 30_000);
 
   try {
     const response = await fetch(`${serviceUrl}${path}`, {

@@ -7,7 +7,12 @@ const nextConfig: NextConfig = {
     "@cumbre/llm-runtime",
     "@cumbre/tutor-engine",
     "@cumbre/retrieval-engine"
-  ]
+  ],
+  webpack: (config) => {
+    // Permite importar pdfjs-dist/build/pdf.worker.mjs como URL
+    config.resolve.alias["canvas"] = false;
+    return config;
+  },
 };
 
 export default nextConfig;

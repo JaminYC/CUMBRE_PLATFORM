@@ -14,11 +14,12 @@
   "dependencies": {
     "@cumbre/app-auth": "workspace:*",
     "@cumbre/app-runtime": "workspace:*",
-    "@cumbre/sdk": "workspace:*",
     "@cumbre/schemas": "workspace:*",
+    "@cumbre/sdk": "workspace:*",
     "@cumbre/tutor-engine": "workspace:*",
     "@cumbre/types": "workspace:*",
     "next": "^15.3.1",
+    "pdfjs-dist": "^5.7.284",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

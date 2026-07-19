@@ -6,6 +6,7 @@ export interface ContentGeneratorConfig {
   databaseUrl: string;
   directUrl: string;
   anthropicApiKey: string;
+  openaiApiKey: string;        // opcional — fallback cuando Anthropic no está disponible
   notebooklmServerUrl: string;
   kokoroServerUrl: string;
   supabaseUrl: string;
@@ -33,7 +34,8 @@ export function loadContentGeneratorConfig(
     nodeEnv: env.NODE_ENV ?? "development",
     databaseUrl: required("DATABASE_URL", env),
     directUrl: required("DIRECT_URL", env),
-    anthropicApiKey: required("ANTHROPIC_API_KEY", env),
+    anthropicApiKey: env.ANTHROPIC_API_KEY ?? "",
+    openaiApiKey: env.OPENAI_API_KEY ?? "",
     notebooklmServerUrl: env.NOTEBOOKLM_SERVER_URL ?? "http://localhost:8881",
     kokoroServerUrl: env.KOKORO_SERVER_URL ?? "http://localhost:8880",
     supabaseUrl: required("SUPABASE_URL", env),

@@ -1,5 +1,4 @@
 // services/content_generator_service/src/app.ts
-import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@supabase/supabase-js";
 import { createRouter, type AuthResolver } from "@cumbre/api-runtime";
 import { ResearchAgent } from "./agents/research-agent.js";
@@ -35,8 +34,10 @@ export function createContentGeneratorApp({
   const jobRepo = new GenerationJobRepository(prisma);
   const limitRepo = new GenerationLimitRepository(prisma);
 
-  const anthropic = new Anthropic({ apiKey: config.anthropicApiKey });
-  const researchAgent = new ResearchAgent(anthropic);
+  const researchAgent = new ResearchAgent({
+    anthropicApiKey: config.anthropicApiKey,
+    openaiApiKey: config.openaiApiKey,
+  });
   const notebookLMClient = new NotebookLMClient(config.notebooklmServerUrl);
   const kokoroClient = new KokoroClient(config.kokoroServerUrl);
   const supabase = createClient(config.supabaseUrl, config.supabaseServiceKey);

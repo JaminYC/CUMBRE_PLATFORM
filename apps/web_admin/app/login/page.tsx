@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "@/lib/server-session";
 import { adminAppConfig } from "@/lib/env";
+import { LoginForm } from "@/features/auth/login-form";
 
 export default async function LoginPage() {
   const session = await getServerSession();
@@ -9,5 +10,12 @@ export default async function LoginPage() {
     redirect("/dashboard");
   }
 
-  redirect(`${adminAppConfig.portalUrl}/login`);
+  // Self-contained login by default: the admin app authenticates against its own
+  // /api/auth/login. Opt into the central portal's single sign-on by setting
+  // AUTH_USE_PORTAL=true (e.g. in production behind the portal).
+  if (process.env.AUTH_USE_PORTAL === "true") {
+    redirect(`${adminAppConfig.portalUrl}/login`);
+  }
+
+  return <LoginForm />;
 }

@@ -1,0 +1,251 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[top=0.7cm, bottom=0.7cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{parskip}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+%% Paleta de colores YariNET
+\definecolor{yblue}{HTML}{1B2A6B}
+\definecolor{yteal}{HTML}{00B09B}
+\definecolor{ygold}{HTML}{F5C518}
+\definecolor{ylight}{HTML}{EEF2FF}
+\definecolor{ypurple}{HTML}{7C3AED}
+\definecolor{yorange}{HTML}{EA580C}
+\definecolor{ygray}{HTML}{475569}
+\definecolor{ylightbg}{HTML}{F8FAFC}
+
+\begin{document}
+
+%% ─── HEADER ───────────────────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=yblue,
+  colframe=yblue,
+  arc=4mm,
+  boxrule=0pt,
+  left=10pt, right=10pt, top=7pt, bottom=7pt
+]
+\begin{minipage}[c]{0.20\textwidth}
+  \includegraphics[width=\linewidth]{C:/Trabajo/CUMBRE_PLATFORM/Logotipos/YariNet.png}
+\end{minipage}%
+\hspace{14pt}%
+\begin{minipage}[c]{0.76\textwidth}
+  {\color{white}\fontsize{30}{36}\selectfont\textbf{YariNET}}\\[3pt]
+  {\color{ygold}\fontsize{12.5}{15}\selectfont\textbf{Piensa. Conecta. Act\'{u}a.}}\\[6pt]
+  {\color{white!75!yblue}\fontsize{9.5}{12}\selectfont
+    Plataforma de deliberaci\'{o}n c\'{i}vica con inteligencia artificial para escolares}\\[2pt]
+  {\color{white!50!yblue}\fontsize{8.5}{11}\selectfont
+    Educat\'{o}n Challenge 2026\ $\cdot$\ PUCP\ $\cdot$\ Barrio PUCP}
+\end{minipage}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+%% ─── DESCRIPCIÓN ──────────────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=ylight,
+  colframe=yteal,
+  arc=3mm,
+  boxrule=1.5pt,
+  left=12pt, right=12pt, top=7pt, bottom=7pt
+]
+{\color{yblue}\fontsize{10.5}{14}\selectfont
+YariNET es una plataforma de deliberaci\'{o}n c\'{i}vica con IA para escolares.
+El aula se convierte en plaza digital: los estudiantes debaten problemas reales,
+guiados por una IA que valida fuentes y modera el di\'{a}logo,
+y producen propuestas ciudadanas concretas que llegan a quienes pueden actuar.
+\textbf{\color{yteal}No ense\~{n}amos sobre ciudadan\'{i}a. La practicamos.}}
+\end{tcolorbox}
+
+\vspace{2pt}
+
+%% ─── PROBLEMA / SOLUCIÓN ──────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=ylightbg,
+  colframe=yblue!25,
+  arc=3mm,
+  boxrule=0.8pt,
+  left=8pt, right=8pt, top=5pt, bottom=5pt
+]
+\begin{minipage}[t]{0.465\textwidth}
+  {\color{yorange}\fontsize{11}{14}\selectfont\textbf{El Problema}}\\[5pt]
+  {\color{ygray}\footnotesize
+    Los escolares peruanos carecen de espacios reales de participaci\'{o}n ciudadana.
+    La educaci\'{o}n c\'{i}vica se reduce a memorizar conceptos, sin practicar el di\'{a}logo,
+    la deliberaci\'{o}n ni el pensamiento cr\'{i}tico. La desinformaci\'{o}n digital
+    los alcanza sin herramientas para evaluarla.}
+\end{minipage}%
+\hfill%
+\textcolor{yblue!20}{\vrule width 0.6pt height 3cm}%
+\hfill%
+\begin{minipage}[t]{0.465\textwidth}
+  {\color{yteal}\fontsize{11}{14}\selectfont\textbf{La Soluci\'{o}n}}\\[5pt]
+  {\color{ygray}\footnotesize
+    YariNET transforma el aula en un ecosistema participativo.
+    Los estudiantes no estudian sobre ciudadan\'{i}a --- la ejercen.
+    Debaten problemas reales de su barrio, con IA que guía el an\'{a}lisis
+    de fuentes y la construcci\'{o}n de argumentos, generando propuestas
+    que llegan a la comunidad.}
+\end{minipage}
+\end{tcolorbox}
+
+\vspace{2pt}
+
+%% ─── CÓMO FUNCIONA ────────────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=yblue,
+  colframe=yblue,
+  arc=3mm,
+  boxrule=0pt,
+  left=8pt, right=8pt, top=8pt, bottom=10pt
+]
+{\color{ygold}\fontsize{10}{12}\selectfont\textbf{C\'{O}MO FUNCIONA}}\\[8pt]
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={
+    rectangle, rounded corners=4pt,
+    fill=white!12!yblue,
+    draw=white!25!yblue,
+    line width=0.5pt,
+    text=white,
+    font=\fontsize{8}{10}\selectfont\bfseries,
+    minimum width=2.85cm,
+    minimum height=0.85cm,
+    align=center,
+    inner sep=5pt
+  },
+  arr/.style={-Stealth, color=ygold, line width=1.3pt}
+]
+\node[box] (n1) {Profesor\\lanza reto};
+\node[box, right=0.3cm of n1] (n2) {Alumnos\\investigan};
+\node[box, right=0.3cm of n2] (n3) {IA modera\\el debate};
+\node[box, right=0.3cm of n3] (n4) {Propuesta\\colectiva};
+\node[box, right=0.3cm of n4] (n5) {Impacto en\\comunidad};
+\draw[arr] (n1) -- (n2);
+\draw[arr] (n2) -- (n3);
+\draw[arr] (n3) -- (n4);
+\draw[arr] (n4) -- (n5);
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\newpage
+
+%% ─── MINI HEADER PÁGINA 2 ────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=yblue,
+  colframe=yblue,
+  arc=3mm,
+  boxrule=0pt,
+  left=10pt, right=10pt, top=5pt, bottom=5pt
+]
+\begin{minipage}[c]{0.08\textwidth}
+  \includegraphics[width=\linewidth]{C:/Trabajo/CUMBRE_PLATFORM/Logotipos/YariNet.png}
+\end{minipage}%
+\hspace{10pt}%
+\begin{minipage}[c]{0.88\textwidth}
+  {\color{white}\fontsize{14}{18}\selectfont\textbf{YariNET}} \quad
+  {\color{ygold}\fontsize{10}{12}\selectfont\textit{Piensa. Conecta. Act\'{u}a.}} \quad
+  {\color{white!50!yblue}\fontsize{8}{10}\selectfont Educat\'{o}n Challenge 2026 · PUCP}
+\end{minipage}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+%% ─── EJES EDUCATÓN 2026 ───────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=ygold!10,
+  colframe=ygold,
+  arc=3mm,
+  boxrule=1pt,
+  left=8pt, right=8pt, top=5pt, bottom=5pt
+]
+{\color{yblue}\fontsize{10}{12}\selectfont\textbf{EJES EDUCAT\'{O}N CHALLENGE 2026}}\\[6pt]
+\begin{minipage}[t]{0.465\textwidth}
+  {\color{yblue}\small\textbf{Ciudadan\'{i}a Digital Activa}}\\[3pt]
+  {\color{ygray}\footnotesize
+    La IA gu\'{i}a a los estudiantes a buscar, analizar y validar
+    informaci\'{o}n en tiempo real durante el debate --- desarrollando
+    competencias cr\'{i}ticas aplicadas a decisiones ciudadanas reales.}
+\end{minipage}%
+\hfill%
+\textcolor{ygold!50}{\vrule width 0.6pt height 2.5cm}%
+\hfill%
+\begin{minipage}[t]{0.465\textwidth}
+  {\color{yblue}\small\textbf{Innovaci\'{o}n para la Participaci\'{o}n Ciudadana}}\\[3pt]
+  {\color{ygray}\footnotesize
+    YariNET usa IA para transformar el aula en un espacio real
+    de deliberaci\'{o}n --- los estudiantes se convierten en agentes
+    de cambio, con propuestas que conectan con autoridades y comunidad.}
+\end{minipage}
+\end{tcolorbox}
+
+\vspace{2pt}
+
+%% ─── TECNOLOGÍA + ROADMAP ─────────────────────────────────────────────
+\begin{tcolorbox}[
+  enhanced,
+  colback=ylightbg,
+  colframe=ypurple!35,
+  arc=3mm,
+  boxrule=0.8pt,
+  left=8pt, right=8pt, top=5pt, bottom=5pt
+]
+\begin{minipage}[t]{0.465\textwidth}
+  {\color{ypurple}\fontsize{10}{12}\selectfont\textbf{Tecnolog\'{i}a}}\\[5pt]
+  {\color{ygray}\footnotesize
+  \begin{itemize}[leftmargin=10pt, itemsep=0pt, topsep=0pt, parsep=0pt]
+    \item IA conversacional en espa\~{n}ol
+    \item Motor de validaci\'{o}n de fuentes en tiempo real
+    \item Knowledge graph de conceptos c\'{i}vicos
+    \item Dashboard docente con analytics de aula
+    \item Accesible desde cualquier dispositivo
+  \end{itemize}}
+\end{minipage}%
+\hfill%
+\textcolor{ypurple!20}{\vrule width 0.6pt height 2.8cm}%
+\hfill%
+\begin{minipage}[t]{0.465\textwidth}
+  {\color{ypurple}\fontsize{10}{12}\selectfont\textbf{Roadmap}}\\[5pt]
+  {\color{ygray}\footnotesize
+  \begin{itemize}[leftmargin=10pt, itemsep=0pt, topsep=0pt, parsep=0pt]
+    \item \textbf{Fase 1:} Colegios Barrio PUCP (2026-2)
+    \item \textbf{Fase 2:} Alianza MINEDU --- certificaci\'{o}n oficial
+    \item \textbf{Fase 3:} Expansi\'{o}n nacional
+    \item \textbf{Visi\'{o}n:} Edge AI para zonas sin internet (Jetson Nano)
+  \end{itemize}}
+\end{minipage}
+\end{tcolorbox}
+
+\vspace{2pt}
+
+%% ─── FOOTER ───────────────────────────────────────────────────────────
+\begin{center}
+{\color{ygray}\fontsize{8.5}{10}\selectfont
+\textit{Aprendemos\ $\cdot$\ Dialogamos\ $\cdot$\ Construimos juntos}
+\quad $\bullet$ \quad
+{\color{yblue}\textbf{Educat\'{o}n Challenge 2026}}
+\quad $\bullet$ \quad
+PUCP\ $\cdot$\ Barrio PUCP}
+\end{center}
+
+\end{document}

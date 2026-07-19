@@ -121,7 +121,8 @@ export function createRouter(
         options.authResolver
       );
       const validator = createRequestValidator(matched.route.validation);
-      const body = matched.route.validation?.body ? await readJson(req) : undefined;
+      const isPost = method === "POST" || method === "PUT" || method === "PATCH";
+      const body = (matched.route.validation?.body || isPost) ? await readJson(req) : undefined;
       const validatedBody = validator.validateBody(body);
       const validatedQuery = validator.validateQuery(
         Object.fromEntries(url.searchParams.entries())
