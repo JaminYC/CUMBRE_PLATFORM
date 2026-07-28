@@ -14,8 +14,9 @@
   "dependencies": {
     "@cumbre/app-auth": "workspace:*",
     "@cumbre/app-runtime": "workspace:*",
-    "@cumbre/sdk": "workspace:*",
+    "@cumbre/brands": "workspace:*",
     "@cumbre/schemas": "workspace:*",
+    "@cumbre/sdk": "workspace:*",
     "@cumbre/types": "workspace:*",
     "next": "^15.3.1",
     "react": "^19.0.0",

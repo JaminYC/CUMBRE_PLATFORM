@@ -33,7 +33,10 @@ export const CUMBRE: Marca = {
     sand: "#ead8bf",
     error: "#b24f4f",
     border: "rgba(34, 50, 59, 0.12)",
-    shadow: "0 24px 60px rgba(34, 50, 59, 0.1)"
+    shadow: "0 24px 60px rgba(34, 50, 59, 0.1)",
+    paperTop: "#fcf8f0",
+    mintAlt: "#18a68f",
+    cargaGradiente: ["#0d1f28", "#122c38", "#0d4c48"]
   }
 };
 
@@ -60,7 +63,10 @@ export const BRYCE: Marca = {
     sand: "#e8eef9",
     error: "#c0392b",
     border: "rgba(22, 35, 61, 0.12)",
-    shadow: "0 24px 60px rgba(13, 44, 99, 0.12)"
+    shadow: "0 24px 60px rgba(13, 44, 99, 0.12)",
+    paperTop: "#ffffff",
+    mintAlt: "#2a5cc4",
+    cargaGradiente: ["#0d2c63", "#14356f", "#193f8e"]
   },
   contacto: {
     direccion: "Santa Marta 209, Cercado — Arequipa",

@@ -345,6 +345,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -385,6 +388,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -425,6 +431,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -471,6 +480,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -561,6 +573,22 @@ importers:
         version: 22.19.15
       '@types/react':
         specifier: ^19.2.2
+        version: 19.2.14
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  packages/brands:
+    dependencies:
+      react:
+        specifier: ^19.1.0
+        version: 19.2.4
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.1.0
         version: 19.2.14
       typescript:
         specifier: ^5.7.2

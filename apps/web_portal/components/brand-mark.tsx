@@ -1,11 +1,15 @@
+"use client";
+
+import { useMarca } from "@cumbre/brands/client";
+
 export function BrandMark() {
+  const marca = useMarca();
+
   return (
     <div className="brand-mark">
-      <p className="brand-mark__eyebrow">CUMBRE</p>
-      <h1 className="brand-mark__title">Cumbre</h1>
-      <p className="brand-mark__copy">
-        Aprendizaje adaptativo, tutoria con IA y operaciones de aula dentro de una misma plataforma.
-      </p>
+      <p className="brand-mark__eyebrow">{marca.nombreCorto}</p>
+      <h1 className="brand-mark__title">{marca.nombre}</h1>
+      <p className="brand-mark__copy">{marca.descripcion}</p>
     </div>
   );
 }

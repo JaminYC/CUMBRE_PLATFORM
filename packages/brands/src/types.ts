@@ -28,6 +28,23 @@ export interface TokensDeMarca {
   error: string;
   border: string;
   shadow: string;
+
+  /**
+   * Arranque del degradado claro del acceso, por encima de `paper`.
+   * Estaba escrito a mano en el CSS y era lo que dejaba el fondo crema de
+   * CUMBRE detrás del logo de otra institución.
+   */
+  paperTop: string;
+
+  /** Acompaña a `mintStrong` en los degradados de botones y barras. */
+  mintAlt: string;
+
+  /**
+   * Los tres cortes del degradado oscuro de la pantalla de carga, de arriba
+   * a abajo. Es la única superficie oscura del producto, y la que más canta
+   * si se queda con los colores de otra marca.
+   */
+  cargaGradiente: [string, string, string];
 }
 
 export interface Marca {

@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { requestAppApi } from "@/lib/app-http";
+import { useMarca } from "@cumbre/brands/client";
 
 interface PortalLoginResponse {
   redirectTo: string;
@@ -12,6 +13,7 @@ interface PortalLoginResponse {
 }
 
 export function LoginForm() {
+  const marca = useMarca();
   const params = useSearchParams();
   const [email, setEmail] = useState(params.get("email") ?? "");
   const [credential, setCredential] = useState("");
@@ -57,7 +59,7 @@ export function LoginForm() {
       <header className="login-nav">
         <Link href="/" className="login-nav__logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/illustrations/LOGONEGRO.png" alt="CUMBRE" className="login-logo" draggable={false} />
+          <img src={marca.logo.principal} alt={marca.nombre} className="login-logo" draggable={false} />
         </Link>
         <Link href="/" className="login-nav__back">Volver al inicio</Link>
       </header>

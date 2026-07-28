@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useAppLocale } from "@cumbre/app-runtime/client";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui";
 import { SignOutButton } from "@/components/sign-out-button";
+import { useMarca } from "@cumbre/brands/client";
 
 // ── Inline SVG icons ──────────────────────────────────────────────────────────
 function GridIcon() {
@@ -109,6 +110,7 @@ export function AppShell({
   breadcrumbs?: BreadcrumbItem[];
   headerActions?: ReactNode;
 }) {
+  const marca = useMarca();
   const pathname = usePathname();
   const { t } = useAppLocale();
 
@@ -118,7 +120,7 @@ export function AppShell({
         {/* Brand */}
         <div className="shell__brand-block">
           <p className="shell__eyebrow">{t({ es: "Espacio docente", en: "Teacher space" })}</p>
-          <h1 className="shell__brand">Cumbre</h1>
+          <h1 className="shell__brand">{marca.nombreCorto}</h1>
         </div>
 
         {/* Nav */}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useAppLocale } from "@cumbre/app-runtime/client";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui";
 import { SignOutButton } from "@/components/sign-out-button";
+import { useMarca } from "@cumbre/brands/client";
 
 export function AppShell({
   title,
@@ -20,6 +21,7 @@ export function AppShell({
   breadcrumbs?: BreadcrumbItem[];
   headerActions?: ReactNode;
 }) {
+  const marca = useMarca();
   const pathname = usePathname();
   const { t } = useAppLocale();
   const navItems = [
@@ -34,7 +36,7 @@ export function AppShell({
           <p className="shell__eyebrow">
             {t({ es: "Espacio administrativo", en: "Admin space" })}
           </p>
-          <h1 className="shell__brand">Cumbre</h1>
+          <h1 className="shell__brand">{marca.nombreCorto}</h1>
           <p className="shell__caption">
             {t({
               es: "Visibilidad de plataforma y gestion de grafo/contenido para temas, conceptos, relaciones y reparacion de integridad.",
