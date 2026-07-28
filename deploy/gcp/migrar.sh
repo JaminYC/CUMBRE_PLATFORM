@@ -87,7 +87,17 @@ export DATABASE_URL="postgresql://${BD_USUARIO}:${BD_CLAVE}@127.0.0.1:${PUERTO}/
 export DIRECT_URL="${DATABASE_URL}"
 
 echo ""
-for SERVICIO in auth-service content-service learning-service; do
+# tutor-engine entra en la lista aunque no sea un servicio.
+#
+# Tiene su propio esquema de Prisma —las sesiones y los turnos de conversacion
+# del tutor— y se habia quedado fuera. El sintoma no aparecia hasta usar el
+# tutor de verdad en produccion:
+#
+#   The table `public.tutor_turns` does not exist in the current database.
+#
+# El flujo de GitHub Actions si lo migraba; este guion no. Dos listas de lo
+# mismo en dos sitios, y solo una estaba completa.
+for SERVICIO in auth-service content-service learning-service tutor-engine; do
   echo "── migrando ${SERVICIO} ──"
   pnpm --filter "@cumbre/${SERVICIO}" db:migrate
 done
