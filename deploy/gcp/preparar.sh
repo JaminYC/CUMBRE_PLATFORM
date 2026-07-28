@@ -35,37 +35,65 @@ gcloud services enable \
   artifactregistry.googleapis.com \
   cloudbuild.googleapis.com
 
+# ─────────────────────────────────────────────────────────────────────────
+# Se comprueba si cada recurso existe ANTES de crearlo.
+#
+# La version anterior usaba `crear 2>/dev/null || echo "ya existia"`, que
+# oculta cualquier fallo y no solo el de recurso repetido. En la primera
+# corrida real dijo "ya existia" tres veces cuando en verdad la base habia
+# fallado, y termino anunciando que todo estaba listo.
+# ─────────────────────────────────────────────────────────────────────────
+
 echo ""
 echo "── registro de imagenes ──"
-gcloud artifacts repositories create cumbre \
-  --repository-format=docker \
-  --location="${REGION}" \
-  --description="Imagenes de los servicios de la plataforma" \
-  2>/dev/null || echo "   ya existia"
+if gcloud artifacts repositories describe cumbre --location="${REGION}" >/dev/null 2>&1; then
+  echo "   ya existia"
+else
+  gcloud artifacts repositories create cumbre \
+    --repository-format=docker \
+    --location="${REGION}" \
+    --description="Imagenes de los servicios de la plataforma"
+fi
 
 gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
 
 echo ""
 echo "── base de datos ──"
-# db-f1-micro es el nivel mas chico. Alcanza para varias academias; si algun
-# dia hace falta mas, se cambia el tamaño sin recrear nada.
-gcloud sql instances create "${INSTANCIA_SQL}" \
-  --database-version=POSTGRES_16 \
-  --tier=db-f1-micro \
-  --region="${REGION}" \
-  --storage-size=10GB \
-  --storage-auto-increase \
-  --backup-start-time=07:00 \
-  2>/dev/null || echo "   ya existia"
+if gcloud sql instances describe "${INSTANCIA_SQL}" >/dev/null 2>&1; then
+  echo "   ya existia"
+else
+  echo "   creando — tarda entre 5 y 10 minutos, no esta colgado"
+  # `--edition=enterprise` es obligatorio: Cloud SQL toma Enterprise Plus por
+  # defecto, y ahi el nivel db-f1-micro no existe. Sin esto falla con
+  # "Invalid Tier (db-f1-micro) for (ENTERPRISE_PLUS) Edition".
+  #
+  # db-f1-micro es el mas chico. Alcanza para varias academias; si un dia
+  # hace falta mas, se cambia el tamaño sin recrear nada.
+  gcloud sql instances create "${INSTANCIA_SQL}" \
+    --database-version=POSTGRES_16 \
+    --edition=enterprise \
+    --tier=db-f1-micro \
+    --region="${REGION}" \
+    --storage-size=10GB \
+    --storage-auto-increase \
+    --backup-start-time=07:00
+fi
 
-gcloud sql users create "${BD_USUARIO}" \
-  --instance="${INSTANCIA_SQL}" \
-  --password="${BD_CLAVE}" \
-  2>/dev/null || echo "   el usuario ya existia"
+echo ""
+echo "── usuario y base ──"
+if gcloud sql users list --instance="${INSTANCIA_SQL}" --format="value(name)" 2>/dev/null | grep -qx "${BD_USUARIO}"; then
+  echo "   el usuario ya existia"
+else
+  gcloud sql users create "${BD_USUARIO}" \
+    --instance="${INSTANCIA_SQL}" \
+    --password="${BD_CLAVE}"
+fi
 
-gcloud sql databases create "${BD_NOMBRE}" \
-  --instance="${INSTANCIA_SQL}" \
-  2>/dev/null || echo "   la base ya existia"
+if gcloud sql databases list --instance="${INSTANCIA_SQL}" --format="value(name)" 2>/dev/null | grep -qx "${BD_NOMBRE}"; then
+  echo "   la base ya existia"
+else
+  gcloud sql databases create "${BD_NOMBRE}" --instance="${INSTANCIA_SQL}"
+fi
 
 echo ""
 echo "════════════════════════════════════════════════════════════"
