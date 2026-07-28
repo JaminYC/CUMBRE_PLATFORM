@@ -1,21 +1,27 @@
 import { expect, test } from "@playwright/test";
-import { loginStudent } from "./helpers";
+import { loginStudent, SEMILLA, t, te } from "./helpers";
 
 test("student journey: login to tutor-backed progress flow", async ({ page }) => {
   await loginStudent(page);
 
   await expect(
-    page.getByRole("heading", { name: /Bienvenido de nuevo, Seed Student/i })
+    page.getByRole("heading", { name: t("Bienvenido, Demo Student") })
   ).toBeVisible();
 
-  await page.getByRole("link", { name: "Learning Foundations" }).click();
-  await expect(page).toHaveURL(/\/topics\/topic-placeholder$/);
+  /* El panel ya no lista los temas: se entra por la ruta de aprendizaje. */
+  await page.getByRole("link", { name: te("Ruta de aprendizaje") }).first().click();
+  await expect(page).toHaveURL(/\/learning-path\//);
 
-  await page.getByRole("link", { name: "Thinking in Systems" }).click();
-  await expect(page).toHaveURL(/\/topics\/topic-placeholder\/lessons\/lesson-placeholder$/);
+  /* El titulo del tema es un encabezado, no un enlace: se entra por el
+     boton de la tarjeta. */
+  await page.getByRole("link", { name: te("Abrir primer tema") }).first().click();
+  await expect(page).toHaveURL(new RegExp(`/topics/${SEMILLA.temaPrincipal}$`));
+
+  await page.getByRole("link", { name: t("Thinking in Systems") }).first().click();
+  await expect(page).toHaveURL(new RegExp(`/topics/${SEMILLA.temaPrincipal}/lessons/${SEMILLA.leccionPrincipal}$`));
 
   await page.getByTestId("student-start-session").click();
-  await expect(page.getByText(/se inicio correctamente/i)).toBeVisible();
+  await expect(page.getByText(/s[eé] [ií][nñ][ií]c[ií][oó] c[oó]rr[eé]ct[aá]m[eé][nñ]t[eé]/i)).toBeVisible();
 
   await page.getByTestId("student-open-tutor").click();
   await page.getByTestId("student-tutor-input").fill("Que deberia entender primero?");
@@ -24,7 +30,7 @@ test("student journey: login to tutor-backed progress flow", async ({ page }) =>
   await expect(page.getByTestId("student-tutor-thread")).toBeVisible();
   await expect(page.getByTestId("student-tutor-thread")).toContainText(/Tutor|Contexto recuperado/i);
 
-  await page.getByRole("link", { name: "Abrir progreso", exact: true }).click();
+  await page.getByRole("link", { name: te("Abrir progreso") }).click();
   await expect(page).toHaveURL(/\/progress$/);
-  await expect(page.getByRole("heading", { name: "Progreso", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: te("Progreso") })).toBeVisible();
 });

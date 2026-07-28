@@ -209,7 +209,7 @@ export function TeacherClassroomsWorkspace() {
   return (
     <AppShell
       title="Aulas"
-      description="Gestioná tus aulas, importá estudiantes y programá reuniones en Google Meet o Zoom."
+      description="Gestiona tus aulas, importa estudiantes y programa reuniones en Google Meet o Zoom."
       breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Aulas" }]}
       headerActions={
         <button className="button" type="button" onClick={() => { setIsCreating(true); setActionMessage(null); setActionError(null); }}>
@@ -499,7 +499,7 @@ export function TeacherClassroomsWorkspace() {
       ) : (
         <EmptyState
           title="Todavía no hay aulas."
-          description="Hacé clic en 'Nueva aula' para crear la primera, luego importá estudiantes y programá reuniones."
+          description="Haz clic en 'Nueva aula' para crear la primera, luego importa estudiantes y programa reuniones."
         />
       )}
     </AppShell>

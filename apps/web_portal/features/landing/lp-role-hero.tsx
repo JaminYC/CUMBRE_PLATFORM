@@ -132,9 +132,9 @@ const ROLES: RoleConfig[] = [
     tab: "Docente",
     Icon: BookStackIcon,
     eyebrow: "Para docentes",
-    headline: "Diseñá el camino. La IA lo acompaña.",
-    desc: "Creá aulas, publicá módulos propios y asigná lecciones por grupo. Mientras enseñás, CUMBRE mantiene a cada estudiante en su ruta — y te muestra exactamente quién necesita atención.",
-    checks: ["Authoring de módulos y lecciones propias", "Seguimiento por estudiante en tiempo real", "La IA tutoriza entre clases — vos enseñás"],
+    headline: "Diseña el camino. La IA lo acompaña.",
+    desc: "Crea aulas, publica módulos propios y asigna lecciones por grupo. Mientras enseñas, CUMBRE mantiene a cada estudiante en su ruta — y te muestra exactamente quién necesita atención.",
+    checks: ["Authoring de módulos y lecciones propias", "Seguimiento por estudiante en tiempo real", "La IA tutoriza entre clases — vos enseñas"],
     cta: "Crear mi primera aula",
     accentClass: "lp-role--docente",
     Illustration: IllustrationDocente
