@@ -996,6 +996,7 @@ export namespace Prisma {
     id: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    tenant: string | null
     primaryRole: string | null
     status: string | null
     displayName: string | null
@@ -1014,6 +1015,7 @@ export namespace Prisma {
     id: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    tenant: string | null
     primaryRole: string | null
     status: string | null
     displayName: string | null
@@ -1033,6 +1035,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     metadata: number
+    tenant: number
     primaryRole: number
     roles: number
     status: number
@@ -1054,6 +1057,7 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     updatedAt?: true
+    tenant?: true
     primaryRole?: true
     status?: true
     displayName?: true
@@ -1072,6 +1076,7 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     updatedAt?: true
+    tenant?: true
     primaryRole?: true
     status?: true
     displayName?: true
@@ -1091,6 +1096,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     metadata?: true
+    tenant?: true
     primaryRole?: true
     roles?: true
     status?: true
@@ -1184,6 +1190,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     metadata: JsonValue | null
+    tenant: string
     primaryRole: string
     roles: string[]
     status: string
@@ -1221,6 +1228,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     metadata?: boolean
+    tenant?: boolean
     primaryRole?: boolean
     roles?: boolean
     status?: boolean
@@ -1243,6 +1251,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     metadata?: boolean
+    tenant?: boolean
     primaryRole?: boolean
     roles?: boolean
     status?: boolean
@@ -1263,6 +1272,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     metadata?: boolean
+    tenant?: boolean
     primaryRole?: boolean
     roles?: boolean
     status?: boolean
@@ -1283,6 +1293,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     metadata?: boolean
+    tenant?: boolean
     primaryRole?: boolean
     roles?: boolean
     status?: boolean
@@ -1298,7 +1309,7 @@ export namespace Prisma {
     credentialHash?: boolean
   }
 
-  export type AuthUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "metadata" | "primaryRole" | "roles" | "status" | "displayName" | "givenName" | "familyName" | "email" | "avatarUrl" | "locale" | "preferredLanguage" | "timezone" | "externalRef" | "credentialHash", ExtArgs["result"]["authUser"]>
+  export type AuthUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "metadata" | "tenant" | "primaryRole" | "roles" | "status" | "displayName" | "givenName" | "familyName" | "email" | "avatarUrl" | "locale" | "preferredLanguage" | "timezone" | "externalRef" | "credentialHash", ExtArgs["result"]["authUser"]>
   export type AuthUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | AuthUser$sessionsArgs<ExtArgs>
     _count?: boolean | AuthUserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1316,6 +1327,12 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       metadata: Prisma.JsonValue | null
+      /**
+       * Institución dueña de la cuenta. Separa los datos de cada academia:
+       * sin esto, el administrador de una vería los usuarios de las demás.
+       * "cumbre" es el valor por defecto para no romper lo ya existente.
+       */
+      tenant: string
       primaryRole: string
       roles: string[]
       status: string
@@ -1757,6 +1774,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"AuthUser", 'DateTime'>
     readonly updatedAt: FieldRef<"AuthUser", 'DateTime'>
     readonly metadata: FieldRef<"AuthUser", 'Json'>
+    readonly tenant: FieldRef<"AuthUser", 'String'>
     readonly primaryRole: FieldRef<"AuthUser", 'String'>
     readonly roles: FieldRef<"AuthUser", 'String[]'>
     readonly status: FieldRef<"AuthUser", 'String'>
@@ -3403,6 +3421,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     metadata: 'metadata',
+    tenant: 'tenant',
     primaryRole: 'primaryRole',
     roles: 'roles',
     status: 'status',
@@ -3555,6 +3574,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AuthUser"> | Date | string
     updatedAt?: DateTimeFilter<"AuthUser"> | Date | string
     metadata?: JsonNullableFilter<"AuthUser">
+    tenant?: StringFilter<"AuthUser"> | string
     primaryRole?: StringFilter<"AuthUser"> | string
     roles?: StringNullableListFilter<"AuthUser">
     status?: StringFilter<"AuthUser"> | string
@@ -3576,6 +3596,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     metadata?: SortOrderInput | SortOrder
+    tenant?: SortOrder
     primaryRole?: SortOrder
     roles?: SortOrder
     status?: SortOrder
@@ -3601,6 +3622,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AuthUser"> | Date | string
     updatedAt?: DateTimeFilter<"AuthUser"> | Date | string
     metadata?: JsonNullableFilter<"AuthUser">
+    tenant?: StringFilter<"AuthUser"> | string
     primaryRole?: StringFilter<"AuthUser"> | string
     roles?: StringNullableListFilter<"AuthUser">
     status?: StringFilter<"AuthUser"> | string
@@ -3621,6 +3643,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     metadata?: SortOrderInput | SortOrder
+    tenant?: SortOrder
     primaryRole?: SortOrder
     roles?: SortOrder
     status?: SortOrder
@@ -3647,6 +3670,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AuthUser"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AuthUser"> | Date | string
     metadata?: JsonNullableWithAggregatesFilter<"AuthUser">
+    tenant?: StringWithAggregatesFilter<"AuthUser"> | string
     primaryRole?: StringWithAggregatesFilter<"AuthUser"> | string
     roles?: StringNullableListFilter<"AuthUser">
     status?: StringWithAggregatesFilter<"AuthUser"> | string
@@ -3772,6 +3796,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: string
     primaryRole: string
     roles?: AuthUserCreaterolesInput | string[]
     status: string
@@ -3793,6 +3818,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: string
     primaryRole: string
     roles?: AuthUserCreaterolesInput | string[]
     status: string
@@ -3814,6 +3840,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: StringFieldUpdateOperationsInput | string
     primaryRole?: StringFieldUpdateOperationsInput | string
     roles?: AuthUserUpdaterolesInput | string[]
     status?: StringFieldUpdateOperationsInput | string
@@ -3835,6 +3862,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: StringFieldUpdateOperationsInput | string
     primaryRole?: StringFieldUpdateOperationsInput | string
     roles?: AuthUserUpdaterolesInput | string[]
     status?: StringFieldUpdateOperationsInput | string
@@ -3856,6 +3884,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: string
     primaryRole: string
     roles?: AuthUserCreaterolesInput | string[]
     status: string
@@ -3876,6 +3905,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: StringFieldUpdateOperationsInput | string
     primaryRole?: StringFieldUpdateOperationsInput | string
     roles?: AuthUserUpdaterolesInput | string[]
     status?: StringFieldUpdateOperationsInput | string
@@ -3896,6 +3926,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: StringFieldUpdateOperationsInput | string
     primaryRole?: StringFieldUpdateOperationsInput | string
     roles?: AuthUserUpdaterolesInput | string[]
     status?: StringFieldUpdateOperationsInput | string
@@ -4128,6 +4159,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     metadata?: SortOrder
+    tenant?: SortOrder
     primaryRole?: SortOrder
     roles?: SortOrder
     status?: SortOrder
@@ -4147,6 +4179,7 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tenant?: SortOrder
     primaryRole?: SortOrder
     status?: SortOrder
     displayName?: SortOrder
@@ -4165,6 +4198,7 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tenant?: SortOrder
     primaryRole?: SortOrder
     status?: SortOrder
     displayName?: SortOrder
@@ -4670,6 +4704,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: string
     primaryRole: string
     roles?: AuthUserCreaterolesInput | string[]
     status: string
@@ -4690,6 +4725,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: string
     primaryRole: string
     roles?: AuthUserCreaterolesInput | string[]
     status: string
@@ -4726,6 +4762,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: StringFieldUpdateOperationsInput | string
     primaryRole?: StringFieldUpdateOperationsInput | string
     roles?: AuthUserUpdaterolesInput | string[]
     status?: StringFieldUpdateOperationsInput | string
@@ -4746,6 +4783,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    tenant?: StringFieldUpdateOperationsInput | string
     primaryRole?: StringFieldUpdateOperationsInput | string
     roles?: AuthUserUpdaterolesInput | string[]
     status?: StringFieldUpdateOperationsInput | string

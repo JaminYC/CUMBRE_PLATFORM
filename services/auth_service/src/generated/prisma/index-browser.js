@@ -126,6 +126,7 @@ exports.Prisma.AuthUserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   metadata: 'metadata',
+  tenant: 'tenant',
   primaryRole: 'primaryRole',
   roles: 'roles',
   status: 'status',

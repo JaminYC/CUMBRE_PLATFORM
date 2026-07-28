@@ -118,6 +118,25 @@ export class SessionRepository {
     });
   }
 
+  /**
+   * Revoca todas las sesiones activas de un usuario.
+   * Se usa al restablecer la contraseña: quien haya entrado con la
+   * contraseña anterior queda afuera.
+   */
+  async revokeAllForUser(userId: string) {
+    const { count } = await this.prisma.authSession.updateMany({
+      where: {
+        userId,
+        revokedAt: null
+      },
+      data: {
+        revokedAt: new Date()
+      }
+    });
+
+    return count;
+  }
+
   private generateTokens(): SessionTokens {
     return {
       accessToken: generateOpaqueToken(),
