@@ -9,6 +9,7 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   fetchTeacherClassrooms,
   fetchTeachingQuizzes,
@@ -27,6 +28,10 @@ export function TeacherExamsWorkspace() {
     },
     []
   );
+
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
   const [draft, setDraft] = useState({
     classroomId: "",
     studentId: "",
@@ -85,7 +90,7 @@ export function TeacherExamsWorkspace() {
     }
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <AppShell title="Examenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Examenes" }]}>
         <LoadingPanel message="Cargando herramientas de examenes..." detail="Recuperando listas de aula y cuestionarios disponibles para verificar escaneos." />

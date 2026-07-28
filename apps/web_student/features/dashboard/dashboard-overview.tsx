@@ -15,6 +15,7 @@ import {
 import { AdaptiveStudySection } from "@/features/adaptive/adaptive-study-section";
 import { useRequireSession } from "@/hooks/use-require-session";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   fetchCurrentStudent,
   fetchLearningPath,
@@ -87,6 +88,10 @@ export function DashboardOverview() {
     [session?.userId, session?.defaultLearningPathId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(dashboard.isLoading);
+
   useEffect(() => {
     if (!dashboard.data) return;
     auth.patchSession({
@@ -103,7 +108,7 @@ export function DashboardOverview() {
     );
   }
 
-  if (dashboard.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando el panel..."

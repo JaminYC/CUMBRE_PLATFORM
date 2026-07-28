@@ -10,6 +10,7 @@ import {
   MetricCard
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   createAdminConcept,
   createAdminEdge,
@@ -92,6 +93,10 @@ export function AdminManagementWorkspace() {
     },
     [exploreAnchorType, exploreAnchorId]
   );
+
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
 
   const overview = resource.data?.overview;
   const topics = resource.data?.topics ?? [];
@@ -304,7 +309,7 @@ export function AdminManagementWorkspace() {
     );
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando espacio de gestion..."

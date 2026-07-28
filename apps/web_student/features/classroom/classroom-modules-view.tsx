@@ -8,12 +8,17 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchStudentClassroomModules } from "@/services/client/student-api";
 
 export function ClassroomModulesView() {
   const resource = useAsyncResource(() => fetchStudentClassroomModules(), []);
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando modulos asignados..."
@@ -95,4 +100,5 @@ export function ClassroomModulesView() {
       </div>
     </AppShell>
   );
+
 }

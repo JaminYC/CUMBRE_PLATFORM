@@ -10,12 +10,17 @@ import {
   QuickAction
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchAdminOverview } from "@/services/client/admin-api";
 
 export function AdminDashboard() {
   const resource = useAsyncResource(() => fetchAdminOverview(), []);
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando resumen administrativo..."
@@ -158,4 +163,5 @@ export function AdminDashboard() {
       </ContentCard>
     </AppShell>
   );
+
 }

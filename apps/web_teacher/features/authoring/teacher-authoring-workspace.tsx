@@ -10,6 +10,7 @@ import {
   MetricCard
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { teacherAppConfig } from "@/lib/env";
 import {
   createTeacherContentItem,
@@ -70,6 +71,10 @@ export function TeacherAuthoringWorkspace() {
     () => fetchTeacherAuthoringOverview(selectedTopicId || undefined),
     [selectedTopicId]
   );
+
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
 
   const knowledgeResource = useAsyncResource(
     async () => {
@@ -258,7 +263,7 @@ export function TeacherAuthoringWorkspace() {
     );
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <AppShell title="Estudio de autoría" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Estudio de autoría" }]}>
         <LoadingPanel message="Cargando estudio de autoria..." detail="Recuperando temas, lecciones, conceptos, relaciones e inventario de contenido de apoyo." />

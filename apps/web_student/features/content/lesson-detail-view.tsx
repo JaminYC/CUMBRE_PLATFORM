@@ -11,6 +11,7 @@ import {
 } from "@/components/ui";
 import { KnowledgeInsightPanel } from "@/features/knowledge/knowledge-insight-panel";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import { studentAppConfig } from "@/lib/env";
 import {
@@ -47,6 +48,10 @@ export function LessonDetailView({
     },
     [topicId, lessonId]
   );
+
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(lessonState.isLoading);
   const [sessionResponse, setSessionResponse] =
     useState<CreateLearningSessionResponse | null>(null);
   const [sessionError, setSessionError] = useState<string | null>(null);
@@ -104,7 +109,7 @@ export function LessonDetailView({
     );
   }
 
-  if (lessonState.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando detalle de la leccion..."

@@ -9,6 +9,7 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   fetchTeacherMaterials,
   uploadTeacherMaterialFile
@@ -65,7 +66,11 @@ export function TeacherMaterialsWorkspace() {
     }
   }
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <AppShell title="Materiales" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Materiales" }]}>
         <LoadingPanel message="Cargando materiales..." detail="Recuperando materiales subidos y sus estructuras analizadas." />
@@ -203,4 +208,5 @@ export function TeacherMaterialsWorkspace() {
       </ContentCard>
     </AppShell>
   );
+
 }

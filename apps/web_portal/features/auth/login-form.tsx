@@ -80,7 +80,7 @@ export function LoginForm() {
       <form className="auth-card" onSubmit={onSubmit}>
         <div>
           <p className="eyebrow">Ingreso centralizado</p>
-          <h1>Continuar en CUMBRE</h1>
+          <h1>Continuar en {marca.nombre}</h1>
         </div>
 
         <label className="field">
@@ -95,7 +95,12 @@ export function LoginForm() {
         </label>
 
         <label className="field">
-          <span>Contrasena</span>
+          <span className="field__label-fila">
+            Contraseña
+            <Link href="/recuperar" className="field__ayuda">
+              ¿La olvidaste?
+            </Link>
+          </span>
           <input
             value={credential}
             onChange={(event) => setCredential(event.target.value)}

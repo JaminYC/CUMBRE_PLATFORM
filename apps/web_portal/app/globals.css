@@ -1929,3 +1929,29 @@ h4 {
     gap: 0.5rem;
   }
 }
+
+/* El enlace de "¿La olvidaste?" va en la misma linea que la etiqueta del
+   campo: es donde lo busca quien ya se atasco escribiendo la contrasena. */
+.field__label-fila {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.field__ayuda {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--mint-strong);
+  text-decoration: none;
+}
+
+.field__ayuda:hover,
+.field__ayuda:focus-visible {
+  text-decoration: underline;
+}
+
+.field-hint {
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+}

@@ -9,6 +9,7 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   fetchTeacherMaterials,
   fetchTeachingModules,
@@ -30,6 +31,10 @@ export function TeacherModuleBuilderWorkspace() {
     },
     []
   );
+
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
   const [materialId, setMaterialId] = useState("");
   const [approveModule, setApproveModule] = useState(true);
   const [moduleProposal, setModuleProposal] = useState<Awaited<ReturnType<typeof generateTeacherModule>> | null>(null);
@@ -72,7 +77,7 @@ export function TeacherModuleBuilderWorkspace() {
     }
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <AppShell title="Constructor de módulos" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Constructor de módulos" }]}>
         <LoadingPanel message="Cargando constructor de modulos..." detail="Recuperando materiales analizados, modulos propuestos y cuestionarios generados." />

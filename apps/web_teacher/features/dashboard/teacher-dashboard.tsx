@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { EmptyState, ErrorPanel, LoadingPanel } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { teacherAppConfig } from "@/lib/env";
 import { fetchTeacherOverview } from "@/services/client/teacher-api";
 
@@ -173,7 +174,11 @@ export function TeacherDashboard() {
     []
   );
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <AppShell title="Panel docente" breadcrumbs={[{ label: "Panel docente" }]}>
         <LoadingPanel message="Cargando resumen docente..." detail="Recuperando resumenes de estudiantes, guia adaptativa y senales del grafo." />

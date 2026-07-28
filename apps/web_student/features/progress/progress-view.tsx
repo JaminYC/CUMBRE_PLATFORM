@@ -12,6 +12,7 @@ import {
 } from "@/components/ui";
 import { AdaptiveStudySection } from "@/features/adaptive/adaptive-study-section";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import { fetchLearningProgress } from "@/services/client/student-api";
 
@@ -29,6 +30,10 @@ export function ProgressView() {
     [session?.userId, session?.defaultLearningPathId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(progressState.isLoading);
+
   if (!auth.isHydrated || !session) {
     return (
       <LoadingPanel
@@ -38,7 +43,7 @@ export function ProgressView() {
     );
   }
 
-  if (progressState.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando progreso desde learning_service..."

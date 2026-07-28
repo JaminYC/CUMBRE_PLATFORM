@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { EmptyState, ErrorPanel, LoadingPanel } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   createTeacherClassroom,
   fetchTeacherClassrooms,
@@ -181,7 +182,11 @@ export function TeacherClassroomsWorkspace() {
   }
 
   // ── Loading / Error ──────────────────────────────────────────────────────────
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <AppShell title="Aulas" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Aulas" }]}>
         <LoadingPanel message="Cargando aulas..." detail="Recuperando lista de aulas, codigos de clase y proximas reuniones." />
@@ -499,4 +504,5 @@ export function TeacherClassroomsWorkspace() {
       )}
     </AppShell>
   );
+
 }

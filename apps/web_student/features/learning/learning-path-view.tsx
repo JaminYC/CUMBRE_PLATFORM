@@ -12,6 +12,7 @@ import {
   QuickAction
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import {
   fetchLearningPath,
@@ -43,6 +44,10 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
     [learningPathId, session?.userId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
   useEffect(() => {
     if (!resource.data) {
       return;
@@ -62,7 +67,7 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
     );
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando tu ruta de aprendizaje..."

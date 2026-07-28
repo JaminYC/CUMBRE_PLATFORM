@@ -12,6 +12,7 @@ import {
 } from "@/components/ui";
 import { KnowledgeInsightPanel } from "@/features/knowledge/knowledge-insight-panel";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import {
   fetchLessons,
@@ -38,6 +39,10 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
     [topicId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
   useEffect(() => {
     auth.patchSession({
       lastTopicId: topicId
@@ -53,7 +58,7 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
     );
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando tema y lecciones..."
