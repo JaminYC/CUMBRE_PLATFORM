@@ -93,8 +93,19 @@ for SERVICIO in auth-service content-service learning-service; do
 done
 
 echo ""
-echo "── sembrando los usuarios demo ──"
-pnpm --filter @cumbre/auth-service db:seed
+# Se siembran los TRES, no solo auth.
+#
+# Antes solo corria el de auth, asi que en produccion habia cuentas pero ni
+# un tema ni una ruta de aprendizaje. El sintoma no era un error: el panel
+# del alumno respondia 200 y la lista de temas devolvia {"items":[],"total":0}.
+# Todo "funcionaba" y no habia nada dentro.
+#
+# Los tres son idempotentes: usan upsert sobre IDs fijos y solo borran los
+# registros placeholder viejos. No tocan las cuentas de ninguna institucion.
+for SERVICIO in auth-service learning-service content-service; do
+  echo "── sembrando ${SERVICIO} ──"
+  pnpm --filter "@cumbre/${SERVICIO}" db:seed
+done
 
 echo ""
 echo "════════════════════════════════════════════════════════════"
