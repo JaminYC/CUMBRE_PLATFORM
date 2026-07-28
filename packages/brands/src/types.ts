@@ -40,6 +40,21 @@ export interface TokensDeMarca {
   mintAlt: string;
 
   /**
+   * El acento de la institución: el color con el que se subraya, no con el
+   * que se pinta. En Bryce es el naranja del logo.
+   *
+   * Faltaba en la primera version del registro y se noto al migrar la
+   * portada editorial: los botones quedaban con el fondo sin definir.
+   */
+  accent: string;
+
+  /**
+   * El mismo acento, oscurecido lo justo para leerse sobre fondo claro.
+   * El naranja puro sobre blanco no llega al contraste minimo.
+   */
+  accentText: string;
+
+  /**
    * Los tres cortes del degradado oscuro de la pantalla de carga, de arriba
    * a abajo. Es la única superficie oscura del producto, y la que más canta
    * si se queda con los colores de otra marca.
@@ -84,6 +99,19 @@ export interface Marca {
    * esconder un boton no impide que alguien llame al endpoint.
    */
   permiteRegistroPublico: boolean;
+
+  /**
+   * Cual de las dos portadas usa.
+   *
+   * `producto` es la de CUMBRE: explica la plataforma a quien todavia no
+   * la conoce. `editorial` es mas sobria —titular serif, mucho aire— y
+   * encaja mejor con una institucion que ya tiene su prestigio y solo
+   * necesita una puerta de entrada.
+   *
+   * Es una propiedad de la marca y no un `if` con el nombre de una
+   * academia dentro: la siguiente elige la suya sin tocar codigo.
+   */
+  landing: "producto" | "editorial";
 
   /** Aparece en la landing y el pie de página. */
   contacto?: {

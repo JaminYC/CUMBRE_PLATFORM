@@ -1,4 +1,8 @@
 :root {
+  /* Curva de salida propia: las de CSS son flojas y el movimiento
+     se percibe mecanico. No depende de la marca. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
   --paper: #f5f0e7;
   --paper-strong: #fffaf2;
   --ink: #22323b;

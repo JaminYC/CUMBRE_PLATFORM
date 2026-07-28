@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Marca } from "@cumbre/brands";
 import type { PortalRoleTarget } from "@/lib/role-targets";
 import { LpRoleHero } from "./lp-role-hero";
 
@@ -198,9 +199,11 @@ function CpuIcon() {
 }
 
 export function LandingPage({
-  activeTarget
+  activeTarget,
+  marca
 }: {
   activeTarget: PortalRoleTarget | null;
+  marca: Marca;
 }) {
   return (
     <div className="lp">
@@ -208,7 +211,7 @@ export function LandingPage({
       {/* ── NAVBAR ── */}
       <header className="lp-nav">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="lp-logo" draggable={false} />
+        <img src={marca.logo.principal} alt={marca.nombre} className="lp-logo" draggable={false} />
         <nav className="lp-nav__links">
           <a href="#que-es">Qué es</a>
           <a href="#experiencias">Experiencias</a>
@@ -623,7 +626,7 @@ export function LandingPage({
       {/* ── FOOTER ── */}
       <footer className="lp-footer">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="lp-logo lp-logo--sm" draggable={false} />
+        <img src={marca.logo.principal} alt={marca.nombre} className="lp-logo lp-logo--sm" draggable={false} />
         <p>© 2025 CUMBRE · Plataforma educativa adaptativa</p>
         <Link href="/login">Iniciar sesión</Link>
       </footer>

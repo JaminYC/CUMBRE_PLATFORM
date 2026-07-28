@@ -49,6 +49,8 @@ export function variablesDeMarca(marca: Marca): string {
     `--mint:${t.mint}`,
     `--mint-strong:${t.mintStrong}`,
     `--mint-alt:${t.mintAlt}`,
+    `--accent:${t.accent}`,
+    `--accent-text:${t.accentText}`,
     `--sun:${t.sun}`,
     `--sand:${t.sand}`,
     `--error:${t.error}`,
@@ -67,7 +69,8 @@ export function variablesDeMarca(marca: Marca): string {
     ["mint", t.mint],
     ["mint-strong", t.mintStrong],
     ["sun", t.sun],
-    ["sand", t.sand]
+    ["sand", t.sand],
+    ["accent", t.accent]
   ];
 
   for (const [nombre, valor] of conAlfa) {

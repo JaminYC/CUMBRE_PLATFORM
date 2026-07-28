@@ -1,4 +1,8 @@
 :root {
+  /* Curva de salida propia: las de CSS son flojas y el movimiento
+     se percibe mecanico. No depende de la marca. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
   --paper: #f7f1e5;
   --paper-strong: #fffaf1;
   --ink: #1f3138;
@@ -1954,4 +1958,609 @@ h4 {
 .field-hint {
   color: var(--ink-muted);
   font-size: 0.8rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Landing editorial
+   ──────────────────────────────────────────────────────────────────────
+   La portada alternativa: titular serif, mucho aire y numeros grandes
+   como estructura de seccion. Se construyo para Academia Bryce y la elige
+   cualquier marca que declare `landing: "editorial"` en el registro.
+
+   Los colores salen de los tokens, asi que la misma maqueta sirve a
+   cualquier institucion — no es "la landing de Bryce", es una de las dos
+   portadas disponibles.
+   ══════════════════════════════════════════════════════════════════════ */
+/* ==========================================================================
+   Academia Bryce — variante editorial de la landing. Prefijo ble-
+   Referencia: titular serif, fondo claro, aire, botones capsula.
+   Paleta: la de Bryce, no la de la referencia.
+   ========================================================================== */
+
+.ble {
+  --ble-crema: var(--paper-top);
+  --ble-crema-hd: var(--paper);
+  --ble-tinta: var(--ink);
+  --ble-gris: var(--ink-muted);
+  --ble-linea: rgba(var(--ink-rgb), 0.1);
+
+  background: var(--paper-top);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.ble-inner {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 4vw, 2rem);
+}
+/* La serif es lo que le da el aire editorial. */
+.ble-hero__title,
+.ble-h2,
+.ble-cierre h2,
+.ble-perfil__titulo,
+.ble-paso h3 {
+  font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.ble-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 0 0 1rem;
+}
+/* --- Botones capsula --- */
+
+.ble-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: var(--mint-strong);
+  color: #fff;
+  transition: background-color 160ms ease, transform 160ms var(--ease-out);
+}
+.ble-btn:active {
+  transform: scale(0.97);
+}
+.ble-btn--sm {
+  min-height: 2.3rem;
+  padding: 0.5rem 1.15rem;
+  font-size: 0.85rem;
+}
+.ble-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.ble-btn--light {
+  background: #fff;
+  color: var(--mint-strong);
+}
+/* --- Navegacion --- */
+
+.ble-nav {
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.ble-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.ble-nav__brand {
+  line-height: 0;
+}
+.ble-nav__brand img {
+  height: 2.2rem;
+  width: auto;
+  display: block;
+}
+.ble-nav__links {
+  display: flex;
+  gap: 1.75rem;
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+.ble-nav__links a {
+  color: var(--ink-muted);
+  transition: color 160ms ease;
+}
+/* --- Hero: mucho aire, titular grande --- */
+
+.ble-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 5.5rem;
+  text-align: center;
+}
+/* ── Gradiente ambiente ──────────────────────────────────────────────
+   Dos manchas de color muy suaves derivando detrás del contenido.
+   Solo se anima `transform`: es la unica propiedad, junto con opacity,
+   que no obliga al navegador a recalcular la maqueta.
+   Los ciclos son largos a proposito (26 s y 34 s, desfasados): no se
+   nota que esta animado, se siente que la pagina esta viva.
+   ──────────────────────────────────────────────────────────────────── */
+
+.ble-hero::before,
+.ble-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.ble-hero::before {
+  top: -26%;
+  left: -14%;
+  width: 46rem;
+  height: 46rem;
+  background: radial-gradient(circle, rgba(var(--mint-strong-rgb), 0.16), transparent 62%);
+  animation: ble-deriva-a 26s ease-in-out infinite alternate;
+}
+.ble-hero::after {
+  top: 6%;
+  right: -18%;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle, rgba(var(--sun-rgb), 0.14), transparent 60%);
+  animation: ble-deriva-b 34s ease-in-out infinite alternate;
+}
+.ble-hero__title {
+  font-size: clamp(2.9rem, 6.4vw, 4.8rem);
+  line-height: 1.05;
+  margin: 0 auto 1.5rem;
+  max-width: 19ch;
+}
+.ble-hero__lede {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  max-width: 44ch;
+  margin: 0 auto 2.2rem;
+}
+.ble-hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+/* El logo apoyado sobre una placa de color, como en la referencia. */
+.ble-hero__stage {
+  position: relative;
+  margin-top: 4rem;
+  padding-bottom: 4.5rem;
+  display: flex;
+  justify-content: center;
+}
+.ble-hero__plate {
+  position: absolute;
+  top: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(30rem, 84vw);
+  height: 13rem;
+  border-radius: 1.5rem;
+  background: var(--mint);
+}
+.ble-hero__shot {
+  position: relative;
+  width: 14rem;
+  height: auto;
+  border-radius: 1.5rem;
+  box-shadow: 0 26px 60px rgba(var(--ink-rgb), 0.18);
+  display: block;
+}
+/* --- Secciones --- */
+
+.ble-section {
+  padding-block: 5.5rem;
+  border-top: 1px solid var(--border);
+}
+.ble-section--alt {
+  background: var(--paper);
+}
+.ble-h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin: 0;
+}
+.ble-sub {
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 50ch;
+}
+/* --- Perfiles --- */
+
+.ble-perfiles {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+.ble-perfil__rol {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mint-strong);
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+.ble-perfil__titulo {
+  font-size: 1.45rem;
+  margin: 0 0 1rem;
+}
+.ble-perfil ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+.ble-perfil li {
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+.ble-perfil li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* --- Pasos: numeros grandes como estructura --- */
+
+.ble-pasos {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+.ble-paso p.ble-paso__n {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3.6rem, 6vw, 5.4rem);
+  line-height: 0.9;
+  color: rgba(var(--ink-rgb), 0.28);
+  margin: 0 0 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.ble-paso h3 {
+  font-size: 1.3rem;
+  margin: 0 0 0.5rem;
+}
+.ble-paso p:not(.ble-paso__n) {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+/* --- Cierre --- */
+
+.ble-cierre {
+  padding-block: 5rem;
+  text-align: center;
+  color: #fff;
+  background: var(--mint-strong);
+}
+.ble-cierre h2 {
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  margin: 0 0 0.7rem;
+  color: #fff;
+}
+.ble-cierre p {
+  margin: 0 0 1.8rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+/* --- Pie --- */
+
+.ble-foot {
+  padding-block: 3.5rem 2rem;
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.88rem;
+}
+.ble-foot__grid {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(3, 1fr);
+  gap: 2rem;
+}
+.ble-foot__grid p {
+  margin: 0 0 0.35rem;
+  line-height: 1.5;
+}
+.ble-foot__logo {
+  height: 2.8rem;
+  width: auto;
+  display: block;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  margin-bottom: 0.75rem;
+}
+.ble-foot__tag {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.82rem;
+}
+.ble-foot__hd {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ble-foot__legal {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+}
+/* --- Revelado al hacer scroll --- */
+
+.ble-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out);
+  will-change: opacity, transform;
+}
+.ble-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+/* Los hijos directos de una grilla deben seguir estirandose igual
+   aunque ahora esten envueltos por el revelador. */
+.ble-perfiles > .ble-reveal,
+.ble-pasos > .ble-reveal {
+  display: flex;
+  flex-direction: column;
+}
+.ble-perfiles > .ble-reveal > .ble-perfil,
+.ble-pasos > .ble-reveal > .ble-paso {
+  height: 100%;
+}
+.ble-hero__title,
+.ble-hero__lede,
+.ble-hero__cta,
+.ble-hero__stage {
+  animation: ble-entrada 760ms var(--ease-out) both;
+}
+/* Escalonado: cada pieza entra un poco despues que la anterior. */
+.ble-hero__title {
+  animation-delay: 60ms;
+}
+.ble-hero__lede {
+  animation-delay: 150ms;
+}
+.ble-hero__cta {
+  animation-delay: 240ms;
+}
+.ble-hero__stage {
+  animation-delay: 330ms;
+}
+.ble-hero__plate {
+  animation: ble-placa 820ms var(--ease-out) 430ms both;
+}
+/* --- Micro-interacciones --- */
+
+.ble-perfil,
+.ble-paso {
+  transition: transform 240ms var(--ease-out);
+}
+.ble-hero__shot {
+  transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out);
+}
+/* Subrayado que crece desde la izquierda al pasar el cursor. */
+.ble-nav__links a {
+  position: relative;
+}
+.ble-nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-out);
+}
+/* ── El logo vectorial en la landing editorial ──────────────────────── */
+
+.ble-nav__brand svg {
+  height: 2.2rem;
+  width: auto;
+  display: block;
+}
+/* El hero pasa de una foto cuadrada a la marca en vectores:
+   la placa de color de atrás sigue dando el apoyo visual. */
+.ble-hero__shot {
+  position: relative;
+  width: clamp(11rem, 18vw, 15rem);
+  height: auto;
+  display: block;
+  box-shadow: none;
+  border-radius: 0;
+  filter: drop-shadow(0 16px 34px rgba(var(--ink-rgb), 0.16));
+}
+.ble-foot__logo {
+  height: 2.8rem;
+  width: auto;
+  display: block;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  margin-bottom: 0.75rem;
+}
+
+@keyframes ble-deriva-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(7%, 5%, 0) scale(1.14); }
+}
+@keyframes ble-deriva-b {
+  from { transform: translate3d(0, 0, 0) scale(1.08); }
+  to   { transform: translate3d(-6%, 8%, 0) scale(0.94); }
+}
+@keyframes ble-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ble-placa {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ble-btn:hover {
+    background: var(--carga-1);
+    text-decoration: none;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ble-btn--ghost:hover {
+    background: rgba(var(--ink-rgb), 0.04);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ble-btn--light:hover {
+    background: var(--mint);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ble-nav__links a:hover {
+    color: var(--ink);
+    text-decoration: none;
+  }
+}
+@media (max-width: 900px) {
+  .ble-nav__links {
+    display: none;
+  }
+
+  .ble-hero {
+    padding-top: 3.5rem;
+  }
+
+  .ble-hero__stage {
+    margin-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .ble-hero__plate {
+    top: 2.5rem;
+    height: 10rem;
+  }
+
+  .ble-hero__shot {
+    width: 10rem;
+  }
+
+  .ble-section {
+    padding-block: 3.5rem;
+  }
+
+  .ble-perfiles,
+  .ble-pasos {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .ble-foot__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ble-btn:active {
+    transform: none;
+  }
+
+  .ble-btn,
+  .ble-nav__links a {
+    transition-duration: 0.01ms;
+  }
+
+  /* El color se conserva; lo que se detiene es el movimiento. */
+  .ble-hero::before,
+  .ble-hero::after {
+    animation: none;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ble-perfil:hover,
+  .ble-paso:hover {
+    transform: translateY(-3px);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ble-hero__shot:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 34px 70px rgba(var(--ink-rgb), 0.22);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ble-nav__links a:hover::after {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ble-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .ble-hero__title,
+  .ble-hero__lede,
+  .ble-hero__cta,
+  .ble-hero__stage,
+  .ble-hero__plate {
+    animation: none;
+  }
+
+  .ble-perfil,
+  .ble-paso,
+  .ble-hero__shot,
+  .ble-nav__links a::after {
+    transition: none;
+  }
+
+  .ble-perfil:hover,
+  .ble-paso:hover,
+  .ble-hero__shot:hover {
+    transform: none;
+  }
 }
