@@ -1,0 +1,1024 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* Marca Academia Bryce — colores muestreados del logo oficial */
+  --bryce-navy: #193f8e;
+  --bryce-navy-deep: #0d2c63;
+  --bryce-orange: #ff7a33;
+  --bryce-orange-text: #c74e12;
+
+  --paper: #f4f7fc;
+  --paper-strong: #ffffff;
+  --ink: #16233d;
+  --ink-muted: #5a6782;
+  --mint: #dce6f7;
+  --sun: #ffd9bf;
+  --sand: #e8eef9;
+  --accent: #193f8e;
+  --border: rgba(22, 35, 61, 0.12);
+  --shadow: 0 24px 60px rgba(13, 44, 99, 0.12);
+  --error: #c0392b;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { color: var(--ink); background: linear-gradient(180deg, #fdfeff 0%, var(--paper) 100%); font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+h1, h2, h3, h4, p { margin: 0; }
+h1, h2, h3, h4 { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -0.02em; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.8rem; padding: 0.75rem 1.1rem; border-radius: 999px; border: 0; background: var(--accent); color: white; cursor: pointer; }
+.button--ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+.auth-page { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 28rem); gap: 2rem; align-items: center; padding: 3rem clamp(1.5rem, 5vw, 5rem); }
+.auth-page__hero { display: grid; gap: 1.25rem; }
+.auth-page__hero h1 { font-size: clamp(2.8rem, 5vw, 5rem); max-width: 12ch; }
+.auth-page__copy { max-width: 42rem; color: var(--ink-muted); font-size: 1.05rem; line-height: 1.6; }
+.auth-page__tip { display: inline-flex; flex-direction: column; gap: 0.35rem; width: fit-content; padding: 1rem 1.15rem; border-radius: 1.25rem; background: rgba(255, 255, 255, 0.86); border: 1px solid rgba(25, 63, 142, 0.16); box-shadow: var(--shadow); }
+.auth-card { display: grid; gap: 1rem; padding: 2rem; border-radius: 1.8rem; background: rgba(255, 255, 255, 0.94); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.field { display: grid; gap: 0.45rem; }
+.field span { color: var(--ink-muted); font-size: 0.95rem; }
+.field input { min-height: 3rem; padding: 0.8rem 1rem; border-radius: 1rem; border: 1px solid var(--border); background: var(--paper-strong); }
+.field-error { color: var(--error); }
+/* ── Shell ──────────────────────────────────────────────────────────────── */
+.shell { min-height: 100vh; display: grid; grid-template-columns: 17rem minmax(0, 1fr); }
+.shell__nav { display: grid; align-content: space-between; gap: 1.5rem; padding: 1.8rem 1.1rem; border-right: 1px solid var(--border); background: rgba(255, 255, 255, 0.92); }
+.shell__brand-block { display: grid; gap: 0.2rem; padding: 0 0.4rem; }
+.shell__brand { font-size: 1.8rem; }
+.shell__menu { display: grid; gap: 0.35rem; }
+.shell__caption, .muted-copy, .state-panel__detail, .card__header p, .detail-list { color: var(--ink-muted); line-height: 1.5; }
+
+/* Nav links */
+.shell__link { display: flex; align-items: center; gap: 0.65rem; min-height: 2.55rem; padding: 0.6rem 0.8rem; border-radius: 0.85rem; color: var(--ink-muted); font-size: 0.93rem; transition: background 0.12s, color 0.12s; }
+.shell__link:hover { background: rgba(220, 230, 247, 0.4); color: var(--ink); }
+.shell__link.active { background: var(--mint); color: var(--ink); font-weight: 600; }
+.shell__link-icon { display: flex; align-items: center; flex-shrink: 0; opacity: 0.65; }
+.shell__link.active .shell__link-icon { opacity: 1; }
+
+/* Profile */
+.shell__profile { display: flex; align-items: center; gap: 0.65rem; padding: 0.8rem 0.9rem; border-radius: 1rem; background: rgba(25, 63, 142, 0.07); }
+.shell__profile-info { flex: 1; min-width: 0; }
+.shell__profile-name { font-weight: 700; font-size: 0.88rem; }
+.shell__profile-meta { font-size: 0.75rem; color: var(--ink-muted); }
+.shell__avatar { display: flex; align-items: center; justify-content: center; width: 2.1rem; height: 2.1rem; border-radius: 999px; background: var(--accent); color: white; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+
+.shell__main { padding: 2rem clamp(1.2rem, 4vw, 3rem) 3rem; }
+.page-header { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.page-header__content { display: grid; gap: 0.7rem; }
+.page-header__actions { display: flex; align-items: flex-start; }
+.page-header h2 { font-size: clamp(2rem, 4vw, 3rem); }
+.page-header__description { max-width: 56rem; color: var(--ink-muted); line-height: 1.6; }
+.dashboard-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 1rem; }
+.tile-grid, .quick-actions-grid, .knowledge-grid, .inventory-grid { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.card, .metric-card, .tile, .quick-action, .state-panel { border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 1.4rem; background: rgba(255, 255, 255, 0.88); }
+.card { display: grid; gap: 1rem; padding: 1.35rem; margin-bottom: 1rem; }
+.card--mint { background: linear-gradient(180deg, rgba(220, 230, 247, 0.55), rgba(255, 255, 255, 0.96)); }
+.card--sun { background: linear-gradient(180deg, rgba(255, 217, 191, 0.38), rgba(255, 255, 255, 0.96)); }
+.card--sand { background: linear-gradient(180deg, rgba(232, 238, 249, 0.5), rgba(255, 255, 255, 0.96)); }
+.metric-card { padding: 1.2rem; }
+.metric-card__value { margin-top: 0.3rem; font-size: clamp(2rem, 4vw, 3rem); font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -0.02em; }
+.tile, .quick-action { display: grid; gap: 0.5rem; padding: 1rem; min-height: 10rem; }
+.tile--dense { min-height: 0; }
+.detail-list { display: grid; gap: 0.55rem; padding-left: 1.1rem; }
+.state-panel { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; border-radius: 1.25rem; }
+.state-panel__title { font-weight: 700; }
+.state-panel--success .state-panel__title { color: var(--accent); }
+.state-panel--error .state-panel__title { color: var(--error); }
+.state-panel--loading { align-items: center; }
+.loading-spinner { width: 1.4rem; height: 1.4rem; border-radius: 999px; border: 2.5px solid rgba(15,122,113,0.2); border-top-color: var(--accent); animation: spin 0.8s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.auth-card__eyebrow, .page-header__eyebrow, .shell__eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.74rem; color: var(--ink-muted); }
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; color: var(--ink-muted); font-size: 0.92rem; }
+.breadcrumbs__item:not(:last-child)::after { content: "/"; margin-left: 0.5rem; opacity: 0.45; }
+.workspace-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+.workspace-grid--secondary { grid-template-columns: 1.3fr 1fr; }
+.form-grid { display: grid; gap: 0.9rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.field--full { grid-column: 1 / -1; }
+.field textarea, .field select { min-height: 3rem; padding: 0.8rem 1rem; border-radius: 1rem; border: 1px solid var(--border); background: var(--paper-strong); }
+.field textarea { min-height: 7.5rem; resize: vertical; }
+.selection-banner { padding: 0.9rem 1rem; border-radius: 1rem; background: rgba(25, 63, 142, 0.08); }
+.chip-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.toggle-chip { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.65rem 0.85rem; border-radius: 999px; background: rgba(255, 255, 255, 0.88); border: 1px solid var(--border); }
+.toggle-chip input { accent-color: var(--accent); }
+.inventory-grid, .knowledge-grid { display: grid; gap: 1rem; }
+/* ── Dashboard: metric cards ─────────────────────────────────────────────── */
+.dash-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.dash-metric { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.4rem; border-radius: 1.4rem; border: 1px solid var(--border); box-shadow: var(--shadow); background: rgba(255, 255, 255, 0.9); }
+.dash-metric--mint { background: linear-gradient(135deg, rgba(200,235,226,0.6) 0%, rgba(255,250,242,0.95) 100%); }
+.dash-metric--sun  { background: linear-gradient(135deg, rgba(239,200,141,0.45) 0%, rgba(255,250,242,0.95) 100%); }
+.dash-metric--sand { background: linear-gradient(135deg, rgba(234,217,190,0.55) 0%, rgba(255,250,242,0.95) 100%); }
+.dash-metric__icon { display: flex; align-items: center; justify-content: center; width: 2.8rem; height: 2.8rem; border-radius: 0.9rem; background: rgba(255,250,242,0.7); border: 1px solid var(--border); flex-shrink: 0; color: var(--accent); }
+.dash-metric__label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); }
+.dash-metric__value { font-size: 2.2rem; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.1; margin: 0.1rem 0; }
+.dash-metric__helper { font-size: 0.8rem; color: var(--ink-muted); }
+
+/* ── Dashboard: feature cards ────────────────────────────────────────────── */
+.dash-features { margin-bottom: 2rem; }
+.dash-section-title { font-size: 1.15rem; margin-bottom: 0.3rem; }
+.dash-section-sub { font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 1rem; }
+.dash-section-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
+.feature-card { display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 1.2rem; border-radius: 1.25rem; border: 1px solid var(--border); background: rgba(255,250,242,0.88); box-shadow: 0 4px 20px rgba(34,50,59,0.06); transition: transform 0.13s, box-shadow 0.13s; text-decoration: none; color: var(--ink); cursor: pointer; }
+.feature-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,50,59,0.12); }
+.feature-card__icon { display: flex; align-items: center; justify-content: center; width: 2.6rem; height: 2.6rem; border-radius: 0.85rem; flex-shrink: 0; }
+.feature-card__body { flex: 1; min-width: 0; }
+.feature-card__label { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.25rem; }
+.feature-card__desc { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.45; }
+.feature-card__arrow { display: flex; align-items: center; color: var(--ink-muted); opacity: 0.5; flex-shrink: 0; margin-top: 0.2rem; }
+.feature-card:hover .feature-card__arrow { opacity: 1; color: var(--accent); }
+
+/* Color variants */
+.feature-card--mint .feature-card__icon { background: rgba(200,235,226,0.7); color: #0a6b64; }
+.feature-card--sun  .feature-card__icon { background: rgba(239,200,141,0.6); color: #8a5d0f; }
+.feature-card--indigo .feature-card__icon { background: rgba(180,190,240,0.45); color: #3d4caa; }
+.feature-card--sand .feature-card__icon { background: rgba(234,217,190,0.7); color: #7a6040; }
+.feature-card--accent .feature-card__icon { background: rgba(15,122,113,0.15); color: var(--accent); }
+.feature-card--neutral .feature-card__icon { background: rgba(34,50,59,0.07); color: var(--ink); }
+
+/* ── Dashboard: student cards ────────────────────────────────────────────── */
+.dash-students { margin-bottom: 2rem; }
+.student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; }
+.student-card { display: grid; gap: 0.85rem; padding: 1.2rem; border-radius: 1.25rem; border: 1px solid var(--border); background: rgba(255,250,242,0.9); box-shadow: 0 4px 18px rgba(34,50,59,0.07); }
+.student-card__head { display: flex; align-items: center; gap: 0.75rem; }
+.student-avatar { display: flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 999px; background: var(--mint); color: var(--ink); font-weight: 700; font-size: 0.95rem; flex-shrink: 0; }
+.student-card__name { font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
+
+/* Status pill */
+.status-pill { display: inline-flex; align-items: center; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; margin-top: 0.2rem; }
+.status-pill--ok    { background: rgba(200,235,226,0.7); color: #0a6b64; }
+.status-pill--warn  { background: rgba(239,200,141,0.6); color: #8a5d0f; }
+.status-pill--alert { background: rgba(177,79,79,0.12);  color: var(--error); }
+
+/* Progress bar */
+.progress-row { display: flex; justify-content: space-between; align-items: baseline; }
+.progress-label { font-size: 0.78rem; color: var(--ink-muted); }
+.progress-pct { font-size: 0.82rem; font-weight: 700; color: var(--accent); }
+.progress-track { height: 6px; border-radius: 999px; background: rgba(34,50,59,0.1); overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 999px; background: var(--accent); transition: width 0.4s ease; min-width: 2px; }
+
+/* Student stats */
+.student-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.75rem; }
+.student-stats__item { display: grid; gap: 0.1rem; }
+.student-stats__item--full { grid-column: 1 / -1; }
+.student-stats__item--alert { background: rgba(177,79,79,0.07); border-radius: 0.5rem; padding: 0.3rem 0.5rem; }
+.student-stats dt { font-size: 0.72rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.student-stats dd { font-size: 0.83rem; font-weight: 600; margin: 0; }
+.student-stats__item--alert dd { color: var(--error); }
+.student-guidance { font-size: 0.78rem; color: var(--ink-muted); line-height: 1.45; padding-top: 0.3rem; border-top: 1px solid var(--border); }
+
+/* ── Dashboard: concept cards ────────────────────────────────────────────── */
+.dash-concepts { margin-bottom: 2rem; }
+.concept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 0.85rem; margin-top: 1rem; }
+.concept-card { display: grid; gap: 0.6rem; padding: 1.1rem; border-radius: 1.15rem; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(234,217,190,0.4) 0%, rgba(255,250,242,0.95) 100%); box-shadow: 0 4px 16px rgba(34,50,59,0.06); }
+.concept-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+.concept-card__title { font-weight: 700; font-size: 0.92rem; }
+.concept-badge { display: inline-flex; padding: 0.2rem 0.55rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; background: rgba(239,200,141,0.55); color: #8a5d0f; white-space: nowrap; flex-shrink: 0; }
+.concept-card__summary { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.45; }
+.concept-stats { display: flex; gap: 0.85rem; font-size: 0.78rem; color: var(--ink-muted); }
+
+/* ── Classrooms: aula cards ──────────────────────────────────────────────── */
+.aula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 1.1rem; margin-bottom: 2rem; }
+
+/* Card base */
+.aula-card { display: flex; flex-direction: column; border-radius: 1.4rem; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(34,50,59,0.08); background: rgba(255,250,242,0.95); transition: box-shadow 0.15s; }
+.aula-card:hover { box-shadow: 0 8px 32px rgba(34,50,59,0.13); }
+
+/* Chalkboard header */
+.aula-card__header { display: flex; justify-content: space-between; align-items: flex-start; padding: 1.2rem 1.4rem 1.1rem; background: linear-gradient(135deg, #1a4a45 0%, #0f7a71 100%); color: white; }
+.aula-card__subject { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.7; margin-bottom: 0.2rem; }
+.aula-card__name { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+.aula-card__grade { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+.aula-code-badge { display: inline-block; padding: 0.3rem 0.65rem; border-radius: 0.6rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; color: white; }
+
+/* Import card header variant */
+.aula-card__header--import { background: linear-gradient(135deg, #3d4060 0%, #5a5f8a 100%); gap: 0.75rem; align-items: center; }
+
+/* Body */
+.aula-card__body { display: flex; flex-direction: column; gap: 1rem; padding: 1.1rem 1.3rem 1.2rem; flex: 1; }
+.aula-card__stats { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.aula-stat { display: flex; align-items: center; gap: 0.4rem; }
+.aula-stat__icon { display: flex; color: var(--ink-muted); }
+.aula-stat__value { font-weight: 700; font-size: 0.88rem; }
+.aula-stat__value--meet { font-size: 0.82rem; color: var(--ink-muted); font-weight: 500; }
+.aula-stat__label { font-size: 0.78rem; color: var(--ink-muted); }
+
+/* Action buttons row */
+.aula-card__actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.aula-card__open { display: inline-flex; align-items: center; gap: 0.4rem; }
+.aula-card__meet-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; }
+
+/* Create aula panel */
+.create-aula-panel { display: grid; gap: 1rem; padding: 1.4rem; border-radius: 1.3rem; border: 1px solid rgba(15,122,113,0.25); background: rgba(200,235,226,0.2); margin-bottom: 1.2rem; }
+.create-aula-panel__header { display: flex; align-items: center; justify-content: space-between; }
+.create-aula-panel__header h3 { font-size: 1.05rem; }
+
+/* ── Meeting form ─────────────────────────────────────────────────────────── */
+.meeting-form { display: grid; gap: 0.9rem; padding: 1rem; border-radius: 1rem; background: rgba(255,250,242,0.98); border: 1px solid var(--border); margin-top: 0.5rem; }
+.meeting-form__title { font-weight: 700; font-size: 0.92rem; }
+.meeting-form__actions { display: flex; gap: 0.6rem; justify-content: flex-end; }
+
+/* Provider tabs */
+.provider-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.provider-btn { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.8rem; border-radius: 0.7rem; border: 1px solid var(--border); background: rgba(255,250,242,0.88); color: var(--ink-muted); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.12s; }
+.provider-btn:hover { background: rgba(200,235,226,0.35); color: var(--ink); }
+.provider-btn--active { background: var(--mint); color: var(--ink); border-color: rgba(15,122,113,0.3); font-weight: 700; }
+
+/* Quick launch links */
+.meet-launch-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; border-radius: 0.75rem; background: rgba(52,168,83,0.1); border: 1px solid rgba(52,168,83,0.25); color: #1e6b30; font-size: 0.82rem; font-weight: 600; text-decoration: none; width: fit-content; transition: background 0.12s; }
+.meet-launch-btn:hover { background: rgba(52,168,83,0.18); }
+.meet-launch-btn--zoom { background: rgba(45,140,255,0.1); border-color: rgba(45,140,255,0.25); color: #1a5ab0; }
+.meet-launch-btn--zoom:hover { background: rgba(45,140,255,0.18); }
+
+/* CSV preview */
+.csv-preview { padding: 0.75rem 0.9rem; border-radius: 0.75rem; background: rgba(34,50,59,0.04); border: 1px solid var(--border); font-size: 0.8rem; }
+.csv-preview__label { color: var(--ink-muted); margin-bottom: 0.35rem; }
+.csv-preview__label code { font-family: monospace; background: rgba(15,122,113,0.1); padding: 0.1rem 0.35rem; border-radius: 0.3rem; }
+.csv-preview__row { color: var(--ink); padding: 0.15rem 0; border-top: 1px solid var(--border); }
+
+/* ── Teacher tool cards ──────────────────────────────────────────────────── */
+.teacher-tools-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.7rem; }
+.teacher-tool-card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 1rem 1.1rem; border-radius: 1.1rem; border: 1px solid var(--border); background: rgba(255,250,242,0.9); box-shadow: 0 3px 14px rgba(34,50,59,0.07); cursor: pointer; text-decoration: none; color: var(--ink); transition: box-shadow 0.14s, transform 0.14s; font: inherit; text-align: left; }
+.teacher-tool-card:hover { box-shadow: 0 6px 22px rgba(34,50,59,0.14); transform: translateY(-2px); }
+.teacher-tool-card__icon { display: flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 0.75rem; background: rgba(200,235,226,0.5); color: var(--accent); margin-bottom: 0.2rem; }
+.teacher-tool-card__label { font-weight: 700; font-size: 0.88rem; }
+.teacher-tool-card__hint { font-size: 0.76rem; color: var(--ink-muted); line-height: 1.4; }
+
+/* ── Add-student panel ───────────────────────────────────────────────────── */
+.add-student-panel { background: rgba(200,235,226,0.18); border: 1px solid rgba(15,122,113,0.18); border-radius: 1rem; padding: 1rem; display: grid; gap: 0.65rem; margin-bottom: 0.5rem; }
+.add-student-panel__title { display: flex; align-items: center; gap: 0.4rem; font-weight: 700; font-size: 0.88rem; color: var(--accent); }
+.add-student-search { position: relative; display: flex; align-items: center; }
+.add-student-search__icon { position: absolute; left: 0.85rem; color: var(--ink-muted); display: flex; pointer-events: none; }
+.add-student-search__input { width: 100%; min-height: 2.6rem; padding: 0.65rem 0.9rem 0.65rem 2.4rem; border-radius: 0.75rem; border: 1px solid var(--border); background: var(--paper-strong); font: inherit; font-size: 0.9rem; }
+.add-student-search__input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.add-student-search__spinner { position: absolute; right: 0.85rem; width: 1rem; height: 1rem; border-radius: 999px; border: 2px solid rgba(15,122,113,0.2); border-top-color: var(--accent); animation: spin 0.7s linear infinite; }
+
+/* ── Search results list ─────────────────────────────────────────────────── */
+.search-results-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.search-results-list__item { display: flex; align-items: center; gap: 0.7rem; padding: 0.65rem 0.75rem; border-radius: 0.7rem; border: 1px solid var(--border); background: rgba(255,250,242,0.95); }
+.search-results-list__avatar { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 999px; background: var(--mint); color: var(--ink); font-weight: 700; font-size: 0.82rem; flex-shrink: 0; }
+.search-results-list__info { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; flex: 1; }
+.search-results-list__info strong { font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.search-results-list__info small { font-size: 0.76rem; color: var(--ink-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── Error color alias ───────────────────────────────────────────────────── */
+:root { --color-error: #b14f4f; --surface-raised: rgba(255,250,242,0.98); }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .shell { grid-template-columns: 1fr; }
+  .shell__nav { border-right: 0; border-bottom: 1px solid var(--border); }
+  .page-header { flex-direction: column; }
+  .dash-metrics { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .teacher-tools-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .feature-grid { grid-template-columns: 1fr; }
+  .teacher-tools-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 980px) { .workspace-grid, .workspace-grid--secondary, .form-grid { grid-template-columns: 1fr; } }
+
+
+/* Logo de marca en la barra lateral. */
+.shell__brand {
+  line-height: 0;
+}
+
+.shell__brand img {
+  height: 3.4rem;
+  width: auto;
+  display: block;
+  user-select: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Logo animado — Academia Bryce
+
+   Dos usos distintos, dos ritmos distintos:
+
+   · ENTRADA (landing): las 15 piezas aparecen escalonadas. Se ve una vez
+     por visita, así que puede permitirse ser vistosa.
+
+   · CARGA (pantallas de espera): pulso lento en bucle. Tiene que poder
+     mirarse veinte segundos sin cansar — lo contrario de una entrada.
+
+   Solo se animan `opacity` y `transform`: las únicas que no obligan al
+   navegador a recalcular la maqueta.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.lb-p {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ── Entrada escalonada ── */
+
+.lb-anima .lb-p {
+  opacity: 0;
+  animation: lb-entra 620ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)) forwards;
+  /* 45 ms entre piezas: con 15 la cascada dura ~700 ms, que se lee
+     como una sola entrada y no como quince cosas apareciendo. */
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes lb-entra {
+  from {
+    opacity: 0;
+    /* Nunca desde scale(0): nada en el mundo real aparece de la nada. */
+    transform: scale(0.86) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Pantalla de carga ── */
+
+.lb-cargando {
+  width: 4.5rem;
+  height: auto;
+  animation: lb-late 1.8s ease-in-out infinite;
+}
+
+@keyframes lb-late {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* La onda recorre las piezas: da sensación de actividad sin girar nada. */
+.lb-cargando .lb-p {
+  animation: lb-onda 1.8s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+@keyframes lb-onda {
+  0%, 65%, 100% { opacity: 1; }
+  30% { opacity: 0.45; }
+}
+
+/* ── Movimiento reducido: se ve el logo completo y quieto ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-anima .lb-p,
+  .lb-cargando,
+  .lb-cargando .lb-p {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Pantalla de carga — el logo se construye
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* El fondo era el verde azulado de CUMBRE. Ahora es el navy de Bryce. */
+.splash-loader {
+  background: linear-gradient(140deg, #0d2c63 0%, #14356f 55%, #193f8e 100%) !important;
+}
+
+/* Sobre fondo oscuro, el logo azul desaparecía.
+   Estando el SVG en línea, se puede recolorear desde el CSS: eso no se
+   puede hacer con un <img>. El naranja se conserva — es el acento. */
+.lb-cargando .lb-p {
+  fill: #ffffff;
+}
+
+.lb-cargando .lb-p[fill="#FF7A33"] {
+  fill: #ff9557;
+}
+
+/* ── El logo, en grande ── */
+
+.splash-loader__brand,
+.lb-cargando {
+  width: clamp(7rem, 16vw, 10rem) !important;
+  height: auto !important;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.35));
+}
+
+/* ── Construcción en bucle ──────────────────────────────────────────
+   Cada pieza entra en su turno, el logo se sostiene completo, y se
+   deshace para volver a armarse. La idea es que se vea *construirse*,
+   no solo parpadear.
+
+   Ciclo de 3 s: suficiente para leerlo, sin que la espera se sienta
+   más larga de lo que es.
+   ──────────────────────────────────────────────────────────────────── */
+
+.lb-cargando {
+  animation: none;
+}
+
+.lb-cargando .lb-p {
+  opacity: 0;
+  animation: lb-construye 3s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  /* 55 ms entre piezas: las 15 tardan 825 ms en armarse. */
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+@keyframes lb-construye {
+  /* Aparece: nunca desde escala 0 — arranca visible como forma. */
+  0% {
+    opacity: 0;
+    transform: scale(0.72) translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  /* Se sostiene armado. */
+  70% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  /* Se deshace hacia afuera, no hacia adentro: sugiere que vuelve a empezar. */
+  85% {
+    opacity: 0;
+    transform: scale(1.08) translateY(-6px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.72) translateY(10px);
+  }
+}
+
+/* ── Anillos: acompañan al logo grande ── */
+
+.splash-loader__ring {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* ── Movimiento reducido: logo completo y quieto ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-cargando .lb-p {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Los anillos apretaban el logo. Ahora respiran: el más chico deja
+   margen alrededor de los 144 px del logo. */
+.splash-loader__ring--1 { width: 17rem !important;  height: 17rem !important; }
+.splash-loader__ring--2 { width: 26rem !important;  height: 26rem !important; }
+.splash-loader__ring--3 { width: 36rem !important;  height: 36rem !important; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Barra lateral plegable — Academia Bryce
+
+   Patrón tomado del proyecto Arborat:
+     · el contenedor cambia de ancho; el contenido interno NO
+     · el texto se desvanece más rápido que el ancho, así no se ve estrujado
+     · plegada, el logo ocupa el lugar del botón y sirve para reabrir
+   ══════════════════════════════════════════════════════════════════════ */
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
+  transition: grid-template-columns 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shell--plegada {
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+}
+
+.shell__nav {
+  overflow: hidden;
+  border-right: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  /* Sin transición hasta montar: si no, al recargar con la barra plegada
+     se ve cómo se cierra sola. */
+  transition: none;
+}
+
+.shell__nav[data-montado="true"] {
+  transition: width 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* El ancho interno nunca cambia: es lo que evita que el contenido salte. */
+.shell__nav-inner {
+  width: 16rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* ── Cabecera: logo a la izquierda, plegar a la derecha ── */
+
+.shell__cabecera {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+  padding: 0 0.7rem 0 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.shell__marca {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+  cursor: default;
+}
+
+.shell--plegada .shell__marca {
+  cursor: pointer;
+}
+
+.shell__marca img {
+  height: 2.4rem;
+  width: auto;
+  display: block;
+  user-select: none;
+}
+
+.shell__plegar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shell__plegar:hover {
+    background: var(--mint);
+    color: var(--bryce-navy);
+  }
+}
+
+/* ── Menú ── */
+
+.shell__menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 0.6rem;
+  overflow-y: auto;
+}
+
+.shell__link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.7rem;
+  color: var(--ink-muted);
+  font-size: 0.93rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.shell__link-ico {
+  display: flex;
+  flex-shrink: 0;
+  width: 1.25rem;
+}
+
+/* El texto se va en 120 ms: más rápido que el ancho (220 ms). */
+.shell__link-txt {
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 120ms ease;
+}
+
+.shell--plegada .shell__link-txt,
+.shell--plegada .shell__perfil-datos {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shell__link:hover {
+    background: var(--sand);
+    color: var(--ink);
+  }
+}
+
+.shell__link.active {
+  background: var(--mint);
+  color: var(--bryce-navy);
+  font-weight: 600;
+}
+
+/* ── Perfil ── */
+
+.shell__perfil {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+  margin: 0.6rem;
+  padding: 0.7rem;
+  border-radius: 0.8rem;
+  background: rgba(25, 63, 142, 0.06);
+}
+
+.shell__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--bryce-navy);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.shell__perfil-datos {
+  min-width: 0;
+  flex: 1;
+  transition: opacity 120ms ease;
+}
+
+.shell__perfil-nombre {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell__perfil-correo {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell__salir {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shell__salir:hover {
+    background: rgba(192, 57, 43, 0.1);
+    color: var(--error);
+  }
+}
+
+.shell--plegada .shell__salir {
+  display: none;
+}
+
+/* ── Responsive: en móvil la barra vive plegada ── */
+
+@media (max-width: 820px) {
+  .shell,
+  .shell--plegada {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+  }
+
+  .shell__link-txt,
+  .shell__perfil-datos,
+  .shell__salir {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell,
+  .shell__nav,
+  .shell__link-txt,
+  .shell__perfil-datos {
+    transition: none;
+  }
+}
+
+
+/* El logo pasó de <img> a SVG en línea: la regla de tamaño tenía que
+   apuntar también al svg, o se desborda de los 56 px al plegar. */
+.shell__marca svg,
+.shell__marca img {
+  height: 2.4rem;
+  width: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* El avatar tampoco debe asomarse cuando la barra está plegada. */
+.shell--plegada .shell__perfil {
+  padding: 0.5rem;
+  margin: 0.5rem 0.35rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Carga: el logo se revela entero, no por piezas
+
+   Animar las 15 piezas por separado hacía que a media animación la
+   palabra "Bryce" quedara con letras faltando — se leía como un error
+   de dibujo, no como una construcción.
+
+   Ahora se revela con una máscara que sube: en todo momento lo que se
+   ve del logo está completo, solo que aún no llegó arriba.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.lb-cargando .lb-p {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Tarjeta de fondo: el logo se apoya en algo, no flota sobre el azul. */
+.splash-loader__brand,
+.lb-cargando {
+  width: clamp(6.5rem, 14vw, 9rem) !important;
+  padding: 1.4rem !important;
+  box-sizing: content-box;
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(2px);
+  animation: lb-revela 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+@keyframes lb-revela {
+  /* Oculto desde abajo. */
+  0% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.25;
+  }
+  /* Sube hasta descubrirlo completo. */
+  38% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  /* Se sostiene entero: es el momento en que se lee la marca. */
+  72% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  /* Se retira hacia abajo y vuelve a empezar. */
+  100% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-loader__brand,
+  .lb-cargando {
+    animation: none !important;
+    clip-path: none;
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Carga, versión final: el logo NUNCA se corta
+
+   Intenté dos caminos y los dos fallaban por lo mismo:
+     · piezas escalonadas → "Bryce" quedaba con letras faltando
+     · revelado por máscara → el barrido igual muestra el logo a medias
+
+   Ambos parecen un error de dibujo, no una animación. La marca no se
+   puede mostrar incompleta.
+
+   Solución: el logo queda entero y quieto, con una respiración apenas
+   perceptible. El movimiento que dice "estoy trabajando" viene de un
+   arco girando alrededor — que sí puede estar incompleto, porque no
+   es la marca.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.lb-cargando .lb-p {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.splash-loader__brand,
+.lb-cargando {
+  position: relative;
+  z-index: 3;
+  width: clamp(6rem, 13vw, 8.5rem) !important;
+  padding: 1.5rem !important;
+  box-sizing: content-box;
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  clip-path: none !important;
+  animation: lb-respira 2.8s ease-in-out infinite !important;
+}
+
+/* Respiración mínima: se percibe vivo sin llamar la atención. */
+@keyframes lb-respira {
+  0%, 100% { transform: scale(0.985); opacity: 0.94; }
+  50%      { transform: scale(1);     opacity: 1; }
+}
+
+/* ── El arco que gira: este sí es el indicador de actividad ── */
+
+.splash-loader__ring--1 {
+  width: 15rem !important;
+  height: 15rem !important;
+  border-color: transparent !important;
+  border-top-color: rgba(255, 122, 51, 0.85) !important;
+  border-right-color: rgba(255, 255, 255, 0.28) !important;
+  border-width: 2px !important;
+  animation: lb-gira 1.5s linear infinite !important;
+}
+
+@keyframes lb-gira {
+  to { transform: rotate(360deg); }
+}
+
+/* Los otros dos anillos quedan como marco quieto. */
+.splash-loader__ring--2 {
+  width: 24rem !important;
+  height: 24rem !important;
+  animation: none !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.splash-loader__ring--3 {
+  width: 34rem !important;
+  height: 34rem !important;
+  animation: none !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-loader__brand,
+  .lb-cargando,
+  .splash-loader__ring--1 {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ── Corrección: el arco cruzaba el texto ──────────────────────────────
+   Un arco brillante e incompleto, centrado en toda la pantalla y no en
+   el logo, pasaba por encima de "Cargando tu ruta..." y se leía como una
+   raya suelta.
+
+   Los anillos vuelven a ser círculos completos y tenues — simétricos y
+   casi transparentes, así que aunque pasen por detrás del texto no
+   ensucian nada. La actividad se sugiere con un pulso que sale del
+   centro, escalonado entre los tres.
+   ────────────────────────────────────────────────────────────────────── */
+
+.splash-loader__ring--1,
+.splash-loader__ring--2,
+.splash-loader__ring--3 {
+  border-style: solid !important;
+  border-width: 1px !important;
+  animation: lb-pulso 3.2s cubic-bezier(0.23, 1, 0.32, 1) infinite !important;
+}
+
+.splash-loader__ring--1 {
+  width: 17rem !important;
+  height: 17rem !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  animation-delay: 0s !important;
+}
+
+.splash-loader__ring--2 {
+  width: 26rem !important;
+  height: 26rem !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  animation-delay: 0.35s !important;
+}
+
+.splash-loader__ring--3 {
+  width: 35rem !important;
+  height: 35rem !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  animation-delay: 0.7s !important;
+}
+
+/* Nunca arranca en escala 0: el círculo existe siempre, solo respira. */
+@keyframes lb-pulso {
+  0%, 100% { transform: scale(0.94); opacity: 0.55; }
+  50%      { transform: scale(1);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-loader__ring--1,
+  .splash-loader__ring--2,
+  .splash-loader__ring--3 {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ── Corrección: las piezas internas del icono ──────────────────────────
+   El recoloreo a blanco se aplicaba a las 15 piezas por igual. Pero dos
+   de ellas (los detalles de dentro del icono) ya eran blancas en el logo
+   original — se veían porque iban sobre la forma azul.
+
+   Al volver blanca también esa forma, quedaron blanco sobre blanco: se
+   perdían. Van en azul, que es el papel que cumplían.
+
+   La regla lleva el selector de atributo, así que gana por especificidad
+   al recoloreo general sin depender del orden. */
+.lb-cargando .lb-p[fill="#FFFFFF"] {
+  fill: #0d4980;
+}
+
+/* ── Este portal carga sobre fondo CLARO ────────────────────────────────
+   El recoloreo a blanco se copió del portal del estudiante, que muestra
+   un splash a pantalla completa sobre azul oscuro. Aquí la carga es un
+   panel dentro de la página, y la página es blanca: "Bryce GRUPO"
+   quedaba blanco sobre blanco.
+
+   Sobre claro el logo va con sus colores de marca, sin invertir nada. */
+.lb-cargando .lb-p[fill="#0D4980"] {
+  fill: #0d4980;
+}
+
+.lb-cargando .lb-p[fill="#FFFFFF"] {
+  fill: #ffffff;
+}
+
+.lb-cargando .lb-p[fill="#FF7A33"] {
+  fill: #ff7a33;
+}
+
+/* La tarjeta translúcida tampoco aplica: estaba pensada para separar el
+   logo del azul del splash. */
+.lb-cargando {
+  background: transparent;
+  border: 0;
+  padding: 0 !important;
+  width: clamp(5rem, 10vw, 7rem) !important;
+  filter: none;
+}
+
+/* La "O" de GRUPO es un anillo de ~3.8 unidades del viewBox. Por debajo
+   de unos 130 px de ancho de logo eso queda en ~1 px y el navegador
+   directamente no lo pinta: se leía "GRUP".
+
+   Medido en el navegador: a 111 px no aparece, a 139 px sí. Se deja
+   holgura por encima de ese umbral. */
+.lb-cargando {
+  width: clamp(7rem, 11vw, 9rem) !important;
+}
+
+
+/* ── La "O" de GRUPO se perdía ──────────────────────────────────────────
+   Se leía "GRUP", o una "C" a tamaños medianos.
+
+   No era el tamaño ni el grosor del trazo: el navegador aplica
+   `overflow: hidden` a todo <svg> por omisión, y esa "O" termina en
+   x=346.1 de un viewBox de 350 — pegada al borde. Con la animación de
+   respiración el SVG pasa a capa propia y el recorte se come justo esa
+   franja.
+
+   Comprobado aislando una variable a la vez: con `overflow: visible`
+   aparece completa, incluso con la animación corriendo. */
+.lb-cargando {
+  overflow: visible;
+}

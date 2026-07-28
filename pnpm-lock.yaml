@@ -171,6 +171,172 @@ importers:
 
   apps/mobile_app: {}
 
+  apps/web_academia:
+    dependencies:
+      '@cumbre/app-auth':
+        specifier: workspace:*
+        version: link:../../packages/app-auth
+      '@cumbre/app-runtime':
+        specifier: workspace:*
+        version: link:../../packages/app-runtime
+      '@cumbre/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
+      '@cumbre/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      '@cumbre/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      next:
+        specifier: ^15.3.1
+        version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.0.8
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.3
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  apps/web_academia_admin:
+    dependencies:
+      '@cumbre/app-auth':
+        specifier: workspace:*
+        version: link:../../packages/app-auth
+      '@cumbre/app-runtime':
+        specifier: workspace:*
+        version: link:../../packages/app-runtime
+      '@cumbre/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
+      '@cumbre/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      '@cumbre/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      next:
+        specifier: ^15.3.1
+        version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.0.8
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.3
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  apps/web_academia_student:
+    dependencies:
+      '@cumbre/app-auth':
+        specifier: workspace:*
+        version: link:../../packages/app-auth
+      '@cumbre/app-runtime':
+        specifier: workspace:*
+        version: link:../../packages/app-runtime
+      '@cumbre/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
+      '@cumbre/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      '@cumbre/tutor-engine':
+        specifier: workspace:*
+        version: link:../../ai/tutor_engine
+      '@cumbre/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      next:
+        specifier: ^15.3.1
+        version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      pdfjs-dist:
+        specifier: ^5.7.284
+        version: 5.7.284
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.0.8
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.3
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
+  apps/web_academia_teacher:
+    dependencies:
+      '@cumbre/app-auth':
+        specifier: workspace:*
+        version: link:../../packages/app-auth
+      '@cumbre/app-runtime':
+        specifier: workspace:*
+        version: link:../../packages/app-runtime
+      '@cumbre/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
+      '@cumbre/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      '@cumbre/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      next:
+        specifier: ^15.3.1
+        version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.0.8
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.3
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
   apps/web_admin:
     dependencies:
       '@cumbre/app-auth':
@@ -425,9 +591,6 @@ importers:
       '@cumbre/types':
         specifier: workspace:*
         version: link:../types
-      zod:
-        specifier: ^3.22.0
-        version: 3.25.76
     devDependencies:
       typescript:
         specifier: ^5.7.2
@@ -3582,4 +3745,5 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
-  zod@3.25.76: {}
+  zod@3.25.76:
+    optional: true
