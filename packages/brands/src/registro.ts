@@ -97,6 +97,10 @@ export const MARCAS: Marca[] = [CUMBRE, BRYCE];
 const DOMINIOS: Array<{ sufijo: string; marca: Marca }> = [
   { sufijo: "academiabryce.com", marca: BRYCE },
   { sufijo: "bryce.edu.pe", marca: BRYCE },
+  /* Bajo nuestro dominio, para poder lanzar sin esperar a que el cliente
+     delegue el suyo. Cuando firmen se agrega el suyo y este puede quedarse:
+     una institución puede tener varios dominios. */
+  { sufijo: "bryce.teamvastoria.com", marca: BRYCE },
   // Para probar en local sin tocar el DNS: cualquier host que empiece por
   // "bryce." — por ejemplo bryce.localhost:3100.
   { sufijo: "bryce.localhost", marca: BRYCE }
