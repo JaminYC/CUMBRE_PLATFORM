@@ -12,6 +12,7 @@ import {
   QuickAction
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import {
   fetchLearningPath,
@@ -25,7 +26,7 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
   const resource = useAsyncResource(
     async () => {
       if (!session) {
-        throw new Error("Se requiere una sesion de estudiante.");
+        throw new Error("Se requiere una sesión de estudiante.");
       }
 
       const [path, progress, topics] = await Promise.all([
@@ -43,6 +44,10 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
     [learningPathId, session?.userId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
   useEffect(() => {
     if (!resource.data) {
       return;
@@ -57,12 +62,12 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
     return (
       <LoadingPanel
         message="Preparando ruta de aprendizaje..."
-        detail="Restaurando la sesion del estudiante antes de cargar los datos de la ruta."
+        detail="Restaurando la sesión del estudiante antes de cargar los datos de la ruta."
       />
     );
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando tu ruta de aprendizaje..."
@@ -166,7 +171,7 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
           />
           <QuickAction
             title="Abrir progreso"
-            description="Revisar senales de dominio y recomendaciones de aprendizaje."
+            description="Revisar señales de dominio y recomendaciones de aprendizaje."
             href="/progress"
           />
           <QuickAction
@@ -179,7 +184,7 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
 
       <ContentCard
         title="Temas en esta ruta"
-        subtitle="Usa los temas como capa principal de navegacion hacia las lecciones y el inicio de sesiones."
+        subtitle="Usa los temas como capa principal de navegación hacia las lecciones y el inicio de sesiones."
       >
         {linkedTopics.length ? (
           <div className="tile-grid">
@@ -192,8 +197,8 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
           </div>
         ) : (
           <EmptyState
-            title="Esta ruta todavia no tiene temas vinculados."
-            description="La secuencia de contenido aparecera aqui cuando se asocien temas a la ruta."
+            title="Esta ruta todavía no tiene temas vinculados."
+            description="La secuencia de contenido aparecerá aquí cuando se asocien temas a la ruta."
             actionLabel="Recargar ruta"
             onAction={resource.reload}
           />
@@ -217,8 +222,8 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
           </ul>
         ) : (
           <EmptyState
-            title="Todavia no hay sesiones iniciadas."
-            description="Abre un tema y una leccion para crear la primera sesion de aprendizaje de esta ruta."
+            title="Todavía no hay sesiones iniciadas."
+            description="Abre un tema y una lección para crear la primera sesión de aprendizaje de esta ruta."
             actionLabel={linkedTopics[0] ? "Abrir primer tema" : "Ir al inicio"}
             actionHref={linkedTopics[0] ? `/topics/${linkedTopics[0].id}` : "/dashboard"}
           />

@@ -40,7 +40,7 @@ export function LoginForm() {
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : "No fue posible iniciar sesion con el backend actual."
+          : "No fue posible iniciar sesión con el backend actual."
       );
     } finally {
       setIsSubmitting(false);
@@ -59,7 +59,7 @@ export function LoginForm() {
         </h1>
         <p className="auth-page__copy">
           {t({
-            es: "Ingresa con la cuenta sembrada, revisa tu ruta adaptativa, inicia una sesion y sigue tu progreso contra el backend en vivo.",
+            es: "Ingresa con la cuenta sembrada, revisa tu ruta adaptativa, inicia una sesión y sigue tu progreso contra el backend en vivo.",
             en: "Start with the seeded learner account, inspect your adaptive path, launch a session, and track progress against the live backend."
           })}
         </p>

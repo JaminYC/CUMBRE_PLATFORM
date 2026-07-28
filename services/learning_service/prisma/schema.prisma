@@ -1,6 +1,10 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
+  // "native" para desarrollo en Windows/macOS; el segundo es el que
+  // necesita el contenedor. Sin el, la imagen construye bien y revienta
+  // al arrancar buscando un motor que no existe.
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {

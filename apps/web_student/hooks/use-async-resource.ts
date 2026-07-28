@@ -60,7 +60,7 @@ export function useAsyncResource<T>(
           error:
             error instanceof Error
               ? error.message
-              : "No fue posible cargar la informacion solicitada.",
+              : "No fue posible cargar la información solicitada.",
           isLoading: false,
           reload: currentState.reload
         }));

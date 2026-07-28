@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { EmptyState, ErrorPanel, LoadingPanel } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { teacherAppConfig } from "@/lib/env";
 import { fetchTeacherOverview } from "@/services/client/teacher-api";
 
@@ -138,7 +139,7 @@ const FEATURES = [
   },
   {
     href: "/exams",
-    label: "Examenes",
+    label: "Exámenes",
     desc: "Subir escaneos de exámenes físicos y obtener corrección automática con IA.",
     Icon: ExamIcon,
     color: "sand"
@@ -173,10 +174,14 @@ export function TeacherDashboard() {
     []
   );
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <AppShell title="Panel docente" breadcrumbs={[{ label: "Panel docente" }]}>
-        <LoadingPanel message="Cargando resumen docente..." detail="Recuperando resumenes de estudiantes, guia adaptativa y senales del grafo." />
+        <LoadingPanel message="Cargando resumen docente..." detail="Recuperando resúmenes de estudiantes, guía adaptativa y señales del grafo." />
       </AppShell>
     );
   }
@@ -249,7 +254,7 @@ export function TeacherDashboard() {
       <section className="dash-students" id="learner-summaries">
         <div className="dash-section-header">
           <div>
-            <h3 className="dash-section-title">Resumenes de estudiantes</h3>
+            <h3 className="dash-section-title">Resúmenes de estudiantes</h3>
             <p className="dash-section-sub">Progreso, dominio, siguiente paso y uso del tutor por estudiante.</p>
           </div>
         </div>
@@ -310,8 +315,8 @@ export function TeacherDashboard() {
           </div>
         ) : (
           <EmptyState
-            title="Todavia no hay datos de estudiantes."
-            description="Cuando existan sesiones de aprendizaje, este panel mostrara resumenes por estudiante."
+            title="Todavía no hay datos de estudiantes."
+            description="Cuando existan sesiones de aprendizaje, este panel mostrará resúmenes por estudiante."
           />
         )}
       </section>

@@ -17,7 +17,12 @@ import {
   type RequestValidation
 } from "./validation.js";
 
-export type HttpMethod = "GET" | "POST" | "DELETE";
+/**
+ * El enrutador ya despachaba PUT y PATCH (ver el manejo de cuerpo más
+ * abajo), pero el tipo se había quedado corto: la ruta PATCH /auth/me/role
+ * funcionaba en ejecución y fallaba en la comprobación de tipos.
+ */
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export interface LoggerLike {
   debug(message: string, context?: Record<string, unknown>): void;

@@ -12,6 +12,7 @@ import {
 } from "@/components/ui";
 import { KnowledgeInsightPanel } from "@/features/knowledge/knowledge-insight-panel";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import {
   fetchLessons,
@@ -38,6 +39,10 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
     [topicId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
   useEffect(() => {
     auth.patchSession({
       lastTopicId: topicId
@@ -48,12 +53,12 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
     return (
       <LoadingPanel
         message="Preparando detalle del tema..."
-        detail="Reconectando tu sesion antes de cargar el contenido del tema."
+        detail="Reconectando tu sesión antes de cargar el contenido del tema."
       />
     );
   }
 
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando tema y lecciones..."
@@ -96,7 +101,7 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
     >
       <ContentCard
         title="Resumen del tema"
-        subtitle="Esta pagina conecta la exploracion del panel con la ejecucion de lecciones."
+        subtitle="Esta pagina conecta la exploración del panel con la ejecución de lecciones."
         accent="mint"
       >
         <ul className="detail-list">
@@ -108,14 +113,14 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
           </li>
           <li>
             <strong>Prerequisitos:</strong>{" "}
-            {topic.topic.prerequisiteTopicIds?.join(", ") || "Sin prerequisitos"}
+            {topic.topic.prerequisiteTopicIds?.join(", ") || "Sin prerrequisitos"}
           </li>
         </ul>
       </ContentCard>
 
       <ContentCard
         title="Acciones del recorrido"
-        subtitle="Mantiene al estudiante avanzando desde el contexto del tema hacia el trabajo en leccion."
+        subtitle="Mantiene al estudiante avanzando desde el contexto del tema hacia el trabajo en lección."
         accent="sand"
       >
         <div className="quick-actions-grid">
@@ -125,11 +130,11 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
             href={`/learning-path/${auth.session.defaultLearningPathId}`}
           />
           <QuickAction
-            title={firstLesson ? "Empezar con la primera leccion" : "Abrir progreso"}
+            title={firstLesson ? "Empezar con la primera lección" : "Abrir progreso"}
             description={
               firstLesson
-                ? "Entrar al detalle de la leccion y disparar el flujo de sesion."
-                : "Aun no hay lecciones, asi que revisa el progreso."
+                ? "Entrar al detalle de la lección y disparar el flujo de sesión."
+                : "Aun no hay lecciones, así que revisa el progreso."
             }
             href={firstLesson ? `/topics/${topicId}/lessons/${firstLesson.id}` : "/progress"}
           />
@@ -145,7 +150,7 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
 
       <ContentCard
         title="Lecciones"
-        subtitle="Selecciona una leccion para revisar su detalle e iniciar una sesion de aprendizaje."
+        subtitle="Selecciona una lección para revisar su detalle e iniciar una sesión de aprendizaje."
         accent="sun"
       >
         {lessons.items.length ? (
@@ -157,14 +162,14 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
                 className="tile"
               >
                 <h4>{lesson.title}</h4>
-                <p>{lesson.summary ?? "Abre la leccion para iniciar una sesion."}</p>
+                <p>{lesson.summary ?? "Abre la lección para iniciar una sesión."}</p>
               </Link>
             ))}
           </div>
         ) : (
           <EmptyState
-            title="Todavia no hay lecciones publicadas para este tema."
-            description="Cuando haya lecciones disponibles, apareceran aqui como siguiente paso del recorrido de aprendizaje."
+            title="Todavía no hay lecciones publicadas para este tema."
+            description="Cuando haya lecciones disponibles, apareceran aquí como siguiente paso del recorrido de aprendizaje."
             actionLabel="Volver a la ruta"
             actionHref={`/learning-path/${auth.session.defaultLearningPathId}`}
           />

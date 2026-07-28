@@ -34,7 +34,7 @@ export function LoginForm() {
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : "No fue posible iniciar sesion en la aplicacion docente."
+          : "No fue posible iniciar sesión en la aplicación docente."
       );
     } finally {
       setIsSubmitting(false);
@@ -53,7 +53,7 @@ export function LoginForm() {
         </h1>
         <p className="auth-page__copy">
           {t({
-            es: "Ingresa con la cuenta docente sembrada para revisar el avance del estudiante, las salidas adaptativas, el uso del tutor y las dificultades con prerequisitos.",
+            es: "Ingresa con la cuenta docente sembrada para revisar el avance del estudiante, las salidas adaptativas, el uso del tutor y las dificultades con prerrequisitos.",
             en: "Sign in with the seeded teacher account to review learner momentum, adaptive outputs, tutor usage, and prerequisite struggle."
           })}
         </p>

@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
     if (response.user.id !== userId) {
       throw new BackendRequestError(
-        "El usuario solicitado no coincide con la sesion activa del estudiante.",
+        "El usuario solicitado no coincide con la sesión activa del estudiante.",
         403,
         "FORBIDDEN"
       );

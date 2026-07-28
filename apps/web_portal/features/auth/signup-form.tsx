@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { requestAppApi } from "@/lib/app-http";
+import { useMarca } from "@cumbre/brands/client";
 
 function StudentIcon() {
   return (
@@ -34,6 +35,7 @@ interface PortalSignupResponse {
 }
 
 export function SignupForm() {
+  const marca = useMarca();
   const params = useSearchParams();
   const [name, setName]           = useState("");
   const [email, setEmail]         = useState(params.get("email") ?? "");
@@ -81,7 +83,7 @@ export function SignupForm() {
       <header className="login-nav">
         <Link href="/" className="login-nav__logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/illustrations/LOGONEGRO.png" alt="CUMBRE" className="login-logo" draggable={false} />
+          <img src={marca.logo.principal} alt={marca.nombre} className="login-logo" draggable={false} />
         </Link>
         <Link href="/" className="login-nav__back">Volver al inicio</Link>
       </header>

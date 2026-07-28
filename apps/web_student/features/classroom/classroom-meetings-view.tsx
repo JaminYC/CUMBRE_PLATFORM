@@ -8,16 +8,21 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchStudentClassroomMeetings } from "@/services/client/student-api";
 
 export function ClassroomMeetingsView() {
   const resource = useAsyncResource(() => fetchStudentClassroomMeetings(), []);
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando reuniones..."
-        detail="Revisando cada aula para encontrar la siguiente sesion programada por el docente."
+        detail="Revisando cada aula para encontrar la siguiente sesión programada por el docente."
       />
     );
   }
@@ -45,7 +50,7 @@ export function ClassroomMeetingsView() {
     >
       <ContentCard
         title="Proximas sesiones"
-        subtitle="Los enlaces de reunion son generados por la automatizacion base del aula."
+        subtitle="Los enlaces de reunion son generados por la automatización base del aula."
         accent="mint"
       >
         {meetings.length ? (
@@ -64,10 +69,11 @@ export function ClassroomMeetingsView() {
         ) : (
           <EmptyState
             title="No hay reuniones programadas."
-            description="Cuando tu docente cree una sesion de clase, aparecera aqui."
+            description="Cuando tu docente cree una sesión de clase, aparecerá aquí."
           />
         )}
       </ContentCard>
     </AppShell>
   );
+
 }

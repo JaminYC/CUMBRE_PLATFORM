@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { EmptyState, ErrorPanel, LoadingPanel } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   createTeacherClassroom,
   fetchTeacherClassrooms,
@@ -133,7 +134,7 @@ export function TeacherClassroomsWorkspace() {
       await work();
       await resource.reload();
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "No fue posible completar la accion.");
+      setActionError(error instanceof Error ? error.message : "No fue posible completar la acción.");
     } finally {
       setIsSubmitting(false);
     }
@@ -181,7 +182,11 @@ export function TeacherClassroomsWorkspace() {
   }
 
   // ── Loading / Error ──────────────────────────────────────────────────────────
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <AppShell title="Aulas" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Aulas" }]}>
         <LoadingPanel message="Cargando aulas..." detail="Recuperando lista de aulas, codigos de clase y proximas reuniones." />
@@ -204,7 +209,7 @@ export function TeacherClassroomsWorkspace() {
   return (
     <AppShell
       title="Aulas"
-      description="Gestioná tus aulas, importá estudiantes y programá reuniones en Google Meet o Zoom."
+      description="Gestiona tus aulas, importa estudiantes y programa reuniones en Google Meet o Zoom."
       breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Aulas" }]}
       headerActions={
         <button className="button" type="button" onClick={() => { setIsCreating(true); setActionMessage(null); setActionError(null); }}>
@@ -494,9 +499,10 @@ export function TeacherClassroomsWorkspace() {
       ) : (
         <EmptyState
           title="Todavía no hay aulas."
-          description="Hacé clic en 'Nueva aula' para crear la primera, luego importá estudiantes y programá reuniones."
+          description="Haz clic en 'Nueva aula' para crear la primera, luego importa estudiantes y programa reuniones."
         />
       )}
     </AppShell>
   );
+
 }

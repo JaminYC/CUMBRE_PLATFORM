@@ -1,0 +1,107 @@
+# Imagen para cualquiera de los servicios de backend.
+#
+# Es una sola para los tres: cambia el argumento SERVICE y listo. Tener un
+# Dockerfile por servicio significaria arreglar el mismo fallo tres veces.
+#
+# El contexto de construccion es la RAIZ del monorepo, no la carpeta del
+# servicio: pnpm necesita ver el workspace entero para resolver las
+# dependencias `workspace:*`.
+#
+#   docker build -f deploy/Dockerfile.service --build-arg SERVICE=auth_service .
+
+# ─────────────────────────────────────────────────────────────────────────
+# 1. Dependencias
+# ─────────────────────────────────────────────────────────────────────────
+FROM node:22-alpine AS deps
+
+# openssl lo pide el motor de Prisma; libc6-compat, algunos binarios nativos.
+RUN apk add --no-cache libc6-compat openssl
+RUN corepack enable && corepack prepare pnpm@10.0.0 --activate
+
+WORKDIR /app
+
+ARG SERVICE
+RUN test -n "$SERVICE" || (echo "Falta --build-arg SERVICE" && exit 1)
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages ./packages
+COPY ai ./ai
+COPY services ./services
+
+# `--filter "./services/X..."` instala SOLO lo que ese servicio necesita.
+# Sin el filtro, pnpm resuelve el workspace entero y metia Next.js con sus
+# dos binarios de swc — 426 MB de framework de frontend dentro de una
+# imagen que solo atiende peticiones HTTP.
+#
+# learning_service se lleva ademas el motor del tutor con sus devDependencies:
+# el filtro no instala las devDeps de las dependencias, y ahi vive el CLI de
+# prisma que hace falta para generar su cliente.
+# Ojo con la forma del filtro: hay que dar el NOMBRE del paquete, no la ruta.
+# `--filter ./services/auth_service...` selecciona 1 paquete; el mismo filtro
+# con `@cumbre/auth-service...` selecciona 6 — el servicio y las librerias del
+# workspace de las que depende. Con la ruta, la imagen construia bien y
+# reventaba al arrancar con "Cannot find module 'ajv'", porque las
+# dependencias de esas librerias nunca se instalaban.
+RUN set -eu; \
+    PAQUETE="@cumbre/$(echo "$SERVICE" | tr '_' '-')"; \
+    FILTROS="--filter ${PAQUETE}..."; \
+    if [ "$SERVICE" = "learning_service" ]; then \
+      FILTROS="$FILTROS --filter @cumbre/tutor-engine"; \
+    fi; \
+    echo "instalando: $FILTROS"; \
+    pnpm install --frozen-lockfile $FILTROS
+
+# ─────────────────────────────────────────────────────────────────────────
+# 2. Cliente de Prisma
+# ─────────────────────────────────────────────────────────────────────────
+FROM deps AS build
+ARG SERVICE
+
+# Se genera aqui y no al arrancar: si el esquema esta mal, queremos saberlo
+# construyendo, no cuando el contenedor ya esta en produccion.
+RUN if [ -f "services/${SERVICE}/prisma/schema.prisma" ]; then \
+      pnpm --filter "./services/${SERVICE}" exec prisma generate --schema prisma/schema.prisma; \
+    fi
+
+# learning_service lleva dentro el motor del tutor, que tiene su propio
+# esquema y su propio cliente.
+#
+# Se invoca con el CLI del servicio, no con el del motor: al instalar
+# filtrado, tutor_engine entra como dependencia y sus devDependencies —
+# entre ellas el CLI de prisma — no se instalan. La salida sigue cayendo
+# donde toca porque la ruta del generador es relativa al esquema.
+RUN if [ "$SERVICE" = "learning_service" ] && [ -f "ai/tutor_engine/prisma/schema.prisma" ]; then \
+      pnpm --filter "./ai/tutor_engine" exec prisma generate --schema prisma/schema.prisma; \
+    fi
+
+# ─────────────────────────────────────────────────────────────────────────
+# 3. Imagen final
+# ─────────────────────────────────────────────────────────────────────────
+FROM node:22-alpine AS runtime
+
+RUN apk add --no-cache libc6-compat openssl curl
+RUN corepack enable && corepack prepare pnpm@10.0.0 --activate
+
+ARG SERVICE
+ENV SERVICE=${SERVICE}
+ENV NODE_ENV=production
+
+# No correr como root: si alguien escapa del proceso, que no sea dueño de
+# todo el contenedor. El chown va en el propio COPY — hacerlo despues con
+# `RUN chown -R` duplica /app en una capa nueva y tardaba 40 segundos.
+RUN addgroup -S cumbre && adduser -S cumbre -G cumbre
+WORKDIR /app
+COPY --from=build --chown=cumbre:cumbre /app ./
+USER cumbre
+
+# Se entra a la carpeta del servicio al construir, para que el CMD pueda ir
+# en forma de lista. En forma de cadena Docker lo envuelve en `sh -c` y la
+# señal de apagado se queda en el shell: el proceso nunca se entera, docker
+# espera diez segundos y lo mata a la fuerza, cortando lo que estuviera
+# haciendo.
+WORKDIR /app/services/${SERVICE}
+
+# No hay paso de compilacion: los servicios corren TypeScript con tsx.
+# La ruta es relativa al WORKDIR de arriba: pnpm no pone los binarios en el
+# node_modules de la raiz, sino en el de cada paquete.
+CMD ["node_modules/.bin/tsx", "src/server.ts"]

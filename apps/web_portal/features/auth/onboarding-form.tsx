@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useMarca } from "@cumbre/brands/client";
 
 function StudentIcon() {
   return (
@@ -38,6 +39,7 @@ const ROLES = [
 ];
 
 export function OnboardingForm() {
+  const marca = useMarca();
   const [selected, setSelected] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -68,7 +70,7 @@ export function OnboardingForm() {
     <main className="onboarding-page">
       <header className="login-nav">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/illustrations/LOGONEGRO.png" alt="CUMBRE" className="login-logo" draggable={false} />
+        <img src={marca.logo.principal} alt={marca.nombre} className="login-logo" draggable={false} />
         <Link href="/" className="login-nav__back">Volver al inicio</Link>
       </header>
 

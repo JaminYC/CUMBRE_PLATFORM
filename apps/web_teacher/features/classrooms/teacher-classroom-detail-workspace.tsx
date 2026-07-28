@@ -10,6 +10,7 @@ import {
   MetricCard
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   addTeacherStudentToClassroom,
   assignTeacherClassroomModules,
@@ -176,6 +177,10 @@ export function TeacherClassroomDetailWorkspace({
     [classroomId]
   );
 
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
   // Module assignment
   const [selectedModuleIds, setSelectedModuleIds] = useState<string[]>([]);
   const [learningPathIds, setLearningPathIds] = useState("");
@@ -294,7 +299,7 @@ export function TeacherClassroomDetailWorkspace({
   }
 
   // ── Loading ──────────────────────────────────────────────────────────────────
-  if (resource.isLoading) {
+  if (mostrandoCarga) {
     return (
       <AppShell
         title="Cargando aula..."

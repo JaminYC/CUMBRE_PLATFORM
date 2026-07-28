@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { commonMessages, useAppLocale } from "@cumbre/app-runtime/client";
+import { useMarca } from "@cumbre/brands/client";
 
 export interface BreadcrumbItem {
   label: string;
@@ -94,6 +95,7 @@ export function LoadingPanel({
   message: string;
   detail?: string;
 }) {
+  const marca = useMarca();
   return (
     <div className="splash-loader" role="status">
       <div className="splash-loader__rings" aria-hidden="true">
@@ -102,7 +104,13 @@ export function LoadingPanel({
         <span className="splash-loader__ring splash-loader__ring--3" />
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="splash-loader__brand" aria-hidden="true" draggable={false} />
+      <img
+        src={marca.logo.principal}
+        alt=""
+        className="splash-loader__brand"
+        aria-hidden="true"
+        draggable={false}
+      />
       <div className="splash-loader__body">
         <p className="splash-loader__message">{message}</p>
         {detail ? <p className="splash-loader__detail">{detail}</p> : null}

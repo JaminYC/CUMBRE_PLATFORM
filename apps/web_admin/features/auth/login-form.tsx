@@ -34,7 +34,7 @@ export function LoginForm() {
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : "No fue posible iniciar sesion en la aplicacion administrativa."
+          : "No fue posible iniciar sesión en la aplicación administrativa."
       );
     } finally {
       setIsSubmitting(false);
@@ -55,7 +55,7 @@ export function LoginForm() {
         </h1>
         <p className="auth-page__copy">
           {t({
-            es: "Ingresa con la cuenta administrativa sembrada para inspeccionar la estructura de contenido, los enlaces del grafo y las senales de integridad de la plataforma.",
+            es: "Ingresa con la cuenta administrativa sembrada para inspeccionar la estructura de contenido, los enlaces del grafo y las señales de integridad de la plataforma.",
             en: "Sign in with the seeded admin account to inspect content structure, graph linkage, and platform integrity signals."
           })}
         </p>

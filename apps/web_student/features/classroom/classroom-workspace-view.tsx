@@ -10,16 +10,21 @@ import {
   MetricCard
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchStudentClassroomWorkspace } from "@/services/client/student-api";
 
 export function ClassroomWorkspaceView() {
   const resource = useAsyncResource(() => fetchStudentClassroomWorkspace(), []);
 
-  if (resource.isLoading) {
+  /* Minimo visible: sin esto, cuando los datos llegan rapido el
+     indicador parpadea y se lee como un fallo de dibujo. */
+  const mostrandoCarga = useCargaMinima(resource.isLoading);
+
+  if (mostrandoCarga) {
     return (
       <LoadingPanel
         message="Cargando aulas..."
-        detail="Recuperando aulas unidas, proximas reuniones y acceso a modulos asignados."
+        detail="Recuperando aulas unidas, proximas reuniones y acceso a módulos asignados."
       />
     );
   }
@@ -39,10 +44,11 @@ export function ClassroomWorkspaceView() {
     0
   );
 
+
   return (
     <AppShell
       title="Espacio de aula"
-      description="Revisa tus aulas, modulos asignados, proximas reuniones y siguiente paso adaptativo sin ranking competitivo."
+      description="Revisa tus aulas, módulos asignados, proximas reuniones y siguiente paso adaptativo sin ranking competitivo."
       breadcrumbs={[
         { label: "Inicio", href: "/dashboard" },
         { label: "Aula" }
@@ -87,8 +93,8 @@ export function ClassroomWorkspaceView() {
         </div>
       ) : (
         <EmptyState
-          title="Todavia no te has unido a ningun aula."
-          description="Usa un codigo de clase que te comparta tu docente para desbloquear modulos y enlaces de reunion."
+          title="Todavía no te has unido a ningún aula."
+          description="Usa un código de clase que te comparta tu docente para desbloquear módulos y enlaces de reunion."
         />
       )}
     </AppShell>

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { loginStudent, loginTeacher } from "./helpers";
+import { loginStudent, loginTeacher, t, te } from "./helpers";
 
 test("teacher creates a classroom workflow and student joins assigned modules", async ({
   browser,
@@ -13,49 +13,55 @@ test("teacher creates a classroom workflow and student joins assigned modules", 
 
   await loginTeacher(page);
 
-  await page.getByRole("link", { name: "Aulas", exact: true }).click();
+  await page.getByRole("link", { name: te("Aulas") }).click();
   await expect(page).toHaveURL(/\/classrooms$/);
 
-  const createCard = page.locator("section").filter({ hasText: "Crear aula" }).first();
-  const importCard = page.locator("section").filter({ hasText: "Importacion masiva de estudiantes" }).first();
+  /* El formulario vive en un panel que se despliega: antes estaba siempre
+     visible en la pagina. */
+  await page.getByRole("button", { name: te("Nueva aula") }).click();
+  /* El panel es un div con clase propia, no un <section>. */
+  const createCard = page.locator(".create-aula-panel").first();
+  /* Por clase y no por texto: filtrar `div` por contenido acaba
+     eligiendo un contenedor anidado que tiene el texto pero no los campos. */
+  const importCard = page.locator(".aula-card--import").first();
 
-  await createCard.getByRole("textbox", { name: "Nombre" }).fill(classroomName);
-  await createCard.getByRole("textbox", { name: "Grado" }).fill("8");
-  await createCard.getByRole("textbox", { name: "Asignatura" }).fill("Science");
-  await createCard.getByRole("button", { name: "Crear aula" }).click();
-  await expect(page.getByText("Actualizacion aplicada")).toBeVisible();
+  await createCard.getByRole("textbox", { name: te("Nombre del aula") }).fill(classroomName);
+  await createCard.getByRole("combobox", { name: te("Grado") }).selectOption("2° sec");
+  await createCard.getByRole("combobox", { name: te("Asignatura") }).selectOption("Matemática");
+  await createCard.getByRole("button", { name: te("Crear aula") }).click();
+  await expect(page.getByText(t("creada con código"))).toBeVisible();
   await expect(page.getByRole("heading", { name: classroomName })).toBeVisible();
 
-  await importCard.getByRole("textbox", { name: "Contenido CSV" }).fill(
+  await importCard.getByRole("textbox", { name: t("Contenido CSV") }).fill(
     `name,email,gradeLevel\nE2E Imported Student,e2e-imported-${uniqueSuffix}@example.com,8`
   );
-  await importCard.getByRole("button", { name: "Confirmar importacion" }).click();
-  await expect(page.getByText(/Se importaron 1 estudiantes/)).toBeVisible();
+  await importCard.getByRole("button", { name: t("Confirmar importacion") }).click();
+  await expect(page.getByText(/S[eé] [ií]mp[oó]rt[aá]r[oó][nñ] 1 [eé]st[uúü]d[ií][aá][nñ]t[eé]s/i)).toBeVisible();
 
-  const classroomCard = page.locator("article.tile").filter({ hasText: classroomName }).first();
-  const classCodeLine = classroomCard.locator("li").filter({ hasText: "Codigo de clase:" }).first();
-  const classCodeText = await classCodeLine.textContent();
-  const classCodeMatch = classCodeText?.match(/Codigo de clase:\s*([A-Z0-9-]+)/i);
-  expect(classCodeMatch?.[1]).toBeTruthy();
-  const classCode = classCodeMatch![1];
+  /* La tarjeta se rediseño: era `article.tile` con el codigo en una lista
+     etiquetada, ahora es `article.aula-card` con el codigo suelto en una
+     insignia. */
+  const classroomCard = page.locator("article.aula-card").filter({ hasText: classroomName }).first();
+  const classCode = (await classroomCard.locator(".aula-code-badge").first().textContent())?.trim();
+  expect(classCode!).toBeTruthy();
 
-  await classroomCard.getByRole("link", { name: "Abrir aula" }).click();
+  await classroomCard.getByRole("link", { name: te("Abrir aula") }).click();
   await expect(page).toHaveURL(/\/classrooms\//);
 
-  await page.getByRole("link", { name: "Materiales", exact: true }).click();
+  await page.getByRole("link", { name: te("Materiales") }).click();
   await expect(page).toHaveURL(/\/materials$/);
-  await page.getByLabel("Nombre del archivo").fill(materialName);
-  await page.getByLabel("Tipo MIME").fill("text/plain");
+  await page.getByLabel(t("Nombre del archivo")).fill(materialName);
+  await page.getByLabel(t("Tipo MIME")).fill("text/plain");
   await page
-    .getByLabel("Texto extraido")
+    .getByLabel(t("Texto extraido"))
     .fill(`${materialTitle}\n\nSystems thinking foundations with guided practice.`);
   await page.getByRole("button", { name: /Upload and parse|Subir y analizar/i }).click();
   await expect(page.getByText(materialTitle)).toBeVisible();
 
-  await page.getByRole("link", { name: "Constructor de modulos", exact: true }).click();
+  await page.getByRole("link", { name: te("Constructor de modulos") }).click();
   await expect(page).toHaveURL(/\/module-builder$/);
-  const generateModuleCard = page.locator("section").filter({ hasText: /Generar modulo/i }).first();
-  const materialSelect = generateModuleCard.getByRole("combobox", { name: "Material" });
+  const generateModuleCard = page.locator("section").filter({ hasText: /G[eé][nñ][eé]r[aá]r m[oó]d[uúü]l[oó]/i }).first();
+  const materialSelect = generateModuleCard.getByRole("combobox", { name: te("Material") });
   await expect
     .poll(
       async () =>
@@ -75,24 +81,24 @@ test("teacher creates a classroom workflow and student joins assigned modules", 
   const selectedMaterialValue = materialValues[0];
   expect(selectedMaterialValue).toBeTruthy();
   await materialSelect.selectOption(selectedMaterialValue!);
-  await generateModuleCard.getByRole("button", { name: /Generar modulo/i }).click();
-  const persistedModulesCard = page.locator("section").filter({ hasText: /Modulos guardados/i }).first();
+  await generateModuleCard.getByRole("button", { name: /G[eé][nñ][eé]r[aá]r m[oó]d[uúü]l[oó]/i }).click();
+  const persistedModulesCard = page.locator("section").filter({ hasText: /M[oó]d[uúü]l[oó]s g[uúü][aá]rd[aá]d[oó]s/i }).first();
   const generatedHeading = persistedModulesCard.locator("article").first().getByRole("heading").first();
   await expect(generatedHeading).toBeVisible();
   generatedModuleTitle = (await generatedHeading.textContent())?.trim() ?? "";
   expect(generatedModuleTitle).toBeTruthy();
 
-  await page.getByRole("link", { name: "Aulas", exact: true }).click();
-  await page.getByRole("link", { name: "Abrir aula" }).first().click();
+  await page.getByRole("link", { name: te("Aulas") }).click();
+  await page.getByRole("link", { name: te("Abrir aula") }).first().click();
   await expect(page).toHaveURL(/\/classrooms\//);
   await page.getByLabel(generatedModuleTitle).first().check();
-  await page.getByRole("button", { name: /Guardar asignaciones del aula/i }).click();
-  await expect(page.getByText(/Se asignaron \d+ modulos/i)).toBeVisible();
+  await page.getByRole("button", { name: /G[uúü][aá]rd[aá]r [aá]s[ií]g[nñ][aá]c[ií][oó][nñ][eé]s/i }).click();
+  await expect(page.getByText(/S[eé] [aá]s[ií]g[nñ][aá]r[oó][nñ] \d+ m[oó]d[uúü]l[oó]s/i)).toBeVisible();
 
   const studentPage = await browser.newPage();
   await loginStudent(studentPage);
   await studentPage.goto("http://localhost:3100/join-class");
-  await studentPage.getByLabel(/Codigo de clase|Class code/i).fill(classCode);
+  await studentPage.getByLabel(/C[oó]d[ií]g[oó] d[eé] cl[aá]s[eé]|Class code/i).fill(classCode!);
   await studentPage.getByRole("button", { name: /Unirme al aula|Join classroom/i }).click();
   await expect(studentPage.getByText(`Te uniste a ${classroomName}.`)).toBeVisible();
 

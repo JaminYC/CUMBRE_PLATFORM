@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Marca } from "@cumbre/brands";
 import type { PortalRoleTarget } from "@/lib/role-targets";
 import { LpRoleHero } from "./lp-role-hero";
 
@@ -198,9 +199,11 @@ function CpuIcon() {
 }
 
 export function LandingPage({
-  activeTarget
+  activeTarget,
+  marca
 }: {
   activeTarget: PortalRoleTarget | null;
+  marca: Marca;
 }) {
   return (
     <div className="lp">
@@ -208,7 +211,7 @@ export function LandingPage({
       {/* ── NAVBAR ── */}
       <header className="lp-nav">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="lp-logo" draggable={false} />
+        <img src={marca.logo.principal} alt={marca.nombre} className="lp-logo" draggable={false} />
         <nav className="lp-nav__links">
           <a href="#que-es">Qué es</a>
           <a href="#experiencias">Experiencias</a>
@@ -329,8 +332,8 @@ export function LandingPage({
             </span>
             <h3>Docente</h3>
             <p>
-              Publicá módulos con contenido propio, asigná lecciones por aula y
-              seguí el avance de cada estudiante en tiempo real. La IA tutoriza
+              Publica módulos con contenido propio, asigna lecciones por aula y
+              sigue el avance de cada estudiante en tiempo real. La IA tutoriza
               entre clases — vos te enfocás en enseñar.
             </p>
           </article>
@@ -340,7 +343,7 @@ export function LandingPage({
             </span>
             <h3>Institución</h3>
             <p>
-              Gestioná el grafo de conocimiento, supervisá el contenido e
+              Gestiona el grafo de conocimiento, supervisa el contenido e
               integridad operativa. Visibilidad total de la adopción en toda
               la organización.
             </p>
@@ -586,14 +589,14 @@ export function LandingPage({
       {/* ── CTA FINAL ── */}
       <section className="lp-cta lp-cta--final" id="instituciones">
         <div className="lp-section-hd">
-          <p className="lp-eyebrow lp-eyebrow--light">Empezá hoy</p>
-          <h2>Elegí tu lugar en CUMBRE.</h2>
+          <p className="lp-eyebrow lp-eyebrow--light">Empieza hoy</p>
+          <h2>Elige tu lugar en CUMBRE.</h2>
         </div>
         <div className="lp-cta-cards">
           <article className="lp-cta-card">
             <span className="lp-cta-card__icon" aria-hidden="true"><GraduationCapIcon /></span>
             <h3>Soy estudiante</h3>
-            <p>Accedé a rutas adaptativas, tutor IA y seguimiento de tu progreso real.</p>
+            <p>Accede a rutas adaptativas, tutor IA y seguimiento de tu progreso real.</p>
             <Link className="button lp-btn-primary" href="/signup">
               Empieza a aprender
             </Link>
@@ -601,7 +604,7 @@ export function LandingPage({
           <article className="lp-cta-card lp-cta-card--featured">
             <span className="lp-cta-card__icon" aria-hidden="true"><BookOpenIcon /></span>
             <h3>Soy docente</h3>
-            <p>Publicá módulos propios, asigná lecciones y seguí a cada estudiante. CUMBRE se encarga del acompañamiento continuo.</p>
+            <p>Publica módulos propios, asigna lecciones y sigue a cada estudiante. CUMBRE se encarga del acompañamiento continuo.</p>
             <Link className="button lp-btn-primary" href="/signup">
               Crear mi primera aula
             </Link>
@@ -609,7 +612,7 @@ export function LandingPage({
           <article className="lp-cta-card">
             <span className="lp-cta-card__icon" aria-hidden="true"><ShieldIcon /></span>
             <h3>Soy institución</h3>
-            <p>Implementá CUMBRE en tu organización con visibilidad total y soporte dedicado.</p>
+            <p>Implementa CUMBRE en tu organización con visibilidad total y soporte dedicado.</p>
             <a
               className="button lp-btn-primary"
               href="mailto:demo@cumbre.teamvastoria.com?subject=Solicitud%20de%20demo%20CUMBRE"
@@ -623,7 +626,7 @@ export function LandingPage({
       {/* ── FOOTER ── */}
       <footer className="lp-footer">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/illustrations/LOGOBLANCO.png" alt="CUMBRE" className="lp-logo lp-logo--sm" draggable={false} />
+        <img src={marca.logo.principal} alt={marca.nombre} className="lp-logo lp-logo--sm" draggable={false} />
         <p>© 2025 CUMBRE · Plataforma educativa adaptativa</p>
         <Link href="/login">Iniciar sesión</Link>
       </footer>

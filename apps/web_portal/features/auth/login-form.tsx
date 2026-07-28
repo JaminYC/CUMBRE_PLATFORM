@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { requestAppApi } from "@/lib/app-http";
+import { useMarca } from "@cumbre/brands/client";
 
 interface PortalLoginResponse {
   redirectTo: string;
@@ -12,6 +13,7 @@ interface PortalLoginResponse {
 }
 
 export function LoginForm() {
+  const marca = useMarca();
   const params = useSearchParams();
   const [email, setEmail] = useState(params.get("email") ?? "");
   const [credential, setCredential] = useState("");
@@ -57,7 +59,7 @@ export function LoginForm() {
       <header className="login-nav">
         <Link href="/" className="login-nav__logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/illustrations/LOGONEGRO.png" alt="CUMBRE" className="login-logo" draggable={false} />
+          <img src={marca.logo.principal} alt={marca.nombre} className="login-logo" draggable={false} />
         </Link>
         <Link href="/" className="login-nav__back">Volver al inicio</Link>
       </header>
@@ -78,7 +80,7 @@ export function LoginForm() {
       <form className="auth-card" onSubmit={onSubmit}>
         <div>
           <p className="eyebrow">Ingreso centralizado</p>
-          <h1>Continuar en CUMBRE</h1>
+          <h1>Continuar en {marca.nombre}</h1>
         </div>
 
         <label className="field">
@@ -93,7 +95,12 @@ export function LoginForm() {
         </label>
 
         <label className="field">
-          <span>Contrasena</span>
+          <span className="field__label-fila">
+            Contraseña
+            <Link href="/recuperar" className="field__ayuda">
+              ¿La olvidaste?
+            </Link>
+          </span>
           <input
             value={credential}
             onChange={(event) => setCredential(event.target.value)}
@@ -106,7 +113,7 @@ export function LoginForm() {
         {error ? (
           <div className="field-error-block">
             <p className="field-error">{error}</p>
-            {isNew ? (
+            {isNew && marca.permiteRegistroPublico ? (
               <Link href={`/signup?email=${encodeURIComponent(email)}`} className="field-error-action">
                 Crear cuenta nueva →
               </Link>
@@ -144,9 +151,15 @@ export function LoginForm() {
           Continuar con Google
         </a>
 
-        <p className="auth-switch">
-          ¿No tienes cuenta? <Link href="/signup">Regístrate</Link>
-        </p>
+        {marca.permiteRegistroPublico ? (
+          <p className="auth-switch">
+            ¿No tienes cuenta? <Link href="/signup">Regístrate</Link>
+          </p>
+        ) : (
+          <p className="auth-switch">
+            ¿No tienes cuenta? Solicítala a {marca.nombre}.
+          </p>
+        )}
       </form>
       </div>
     </main>

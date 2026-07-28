@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useAppLocale } from "@cumbre/app-runtime/client";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui";
 import { SignOutButton } from "@/components/sign-out-button";
+import { useMarca } from "@cumbre/brands/client";
 
 // ── Inline SVG icons ──────────────────────────────────────────────────────────
 function GridIcon() {
@@ -91,7 +92,7 @@ const NAV_ITEMS = [
   { href: "/yarinet",        es: "YariNET",               en: "YariNET",         Icon: YariNetIcon,   badge: "Nuevo" },
   { href: "/materials",      es: "Materiales",            en: "Materials",       Icon: FilesIcon,     badge: null },
   { href: "/module-builder", es: "Constructor de módulos", en: "Module builder",  Icon: BlocksIcon,    badge: null },
-  { href: "/exams",          es: "Examenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },
+  { href: "/exams",          es: "Exámenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },
   { href: "/authoring",      es: "Estudio de autoría",    en: "Authoring",       Icon: PenIcon,       badge: null },
 ] as const;
 
@@ -109,6 +110,7 @@ export function AppShell({
   breadcrumbs?: BreadcrumbItem[];
   headerActions?: ReactNode;
 }) {
+  const marca = useMarca();
   const pathname = usePathname();
   const { t } = useAppLocale();
 
@@ -118,7 +120,7 @@ export function AppShell({
         {/* Brand */}
         <div className="shell__brand-block">
           <p className="shell__eyebrow">{t({ es: "Espacio docente", en: "Teacher space" })}</p>
-          <h1 className="shell__brand">Cumbre</h1>
+          <h1 className="shell__brand">{marca.nombreCorto}</h1>
         </div>
 
         {/* Nav */}
@@ -144,7 +146,7 @@ export function AppShell({
           <div className="shell__profile-info">
             <p className="shell__profile-name">{t({ es: "Docente", en: "Teacher" })}</p>
             <p className="shell__profile-meta">
-              {t({ es: "Autoria y seguimiento", en: "Authoring & tracking" })}
+              {t({ es: "Autoría y seguimiento", en: "Authoring & tracking" })}
             </p>
           </div>
           <SignOutButton />

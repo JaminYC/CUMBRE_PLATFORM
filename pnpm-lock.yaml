@@ -179,6 +179,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -219,6 +222,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -259,6 +265,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -305,6 +314,9 @@ importers:
       '@cumbre/app-runtime':
         specifier: workspace:*
         version: link:../../packages/app-runtime
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../../packages/brands
       '@cumbre/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -400,6 +412,22 @@ importers:
         specifier: ^5.7.2
         version: 5.9.3
 
+  packages/brands:
+    dependencies:
+      react:
+        specifier: ^19.1.0
+        version: 19.2.4
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.1.0
+        version: 19.2.14
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
   packages/config: {}
 
   packages/llm-runtime:
@@ -425,9 +453,6 @@ importers:
       '@cumbre/types':
         specifier: workspace:*
         version: link:../types
-      zod:
-        specifier: ^3.22.0
-        version: 3.25.76
     devDependencies:
       typescript:
         specifier: ^5.7.2
@@ -3582,4 +3607,5 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
-  zod@3.25.76: {}
+  zod@3.25.76:
+    optional: true

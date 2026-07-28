@@ -14,6 +14,10 @@ model AuthUser {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   metadata          Json?
+  /// Institución dueña de la cuenta. Separa los datos de cada academia:
+  /// sin esto, el administrador de una vería los usuarios de las demás.
+  /// "cumbre" es el valor por defecto para no romper lo ya existente.
+  tenant            String        @default("cumbre")
   primaryRole       String
   roles             String[]
   status            String
@@ -29,6 +33,9 @@ model AuthUser {
   credentialHash    String?
   sessions          AuthSession[]
 
+  /// Toda consulta de usuarios filtra por institución, así que conviene
+  /// el índice desde el principio.
+  @@index([tenant])
   @@map("auth_users")
 }
 
