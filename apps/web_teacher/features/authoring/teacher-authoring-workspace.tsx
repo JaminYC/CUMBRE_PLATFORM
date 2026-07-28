@@ -165,7 +165,7 @@ export function TeacherAuthoringWorkspace() {
       await knowledgeResource.reload();
     } catch (error) {
       setActionError(
-        error instanceof Error ? error.message : "No fue posible completar esta accion."
+        error instanceof Error ? error.message : "No fue posible completar esta acción."
       );
     } finally {
       setIsSubmitting(false);
@@ -197,7 +197,7 @@ export function TeacherAuthoringWorkspace() {
 
   async function handleUpdateLesson() {
     if (!lessonEditDraft.lessonId) {
-      setActionError("Elige una leccion antes de actualizarla.");
+      setActionError("Elige una lección antes de actualizarla.");
       return;
     }
 
@@ -239,7 +239,7 @@ export function TeacherAuthoringWorkspace() {
 
   async function handleUpdateMappings() {
     if (!selectedLessonId) {
-      setActionError("Elige una leccion antes de actualizar el mapeo de conceptos.");
+      setActionError("Elige una lección antes de actualizar el mapeo de conceptos.");
       return;
     }
 
@@ -266,7 +266,7 @@ export function TeacherAuthoringWorkspace() {
   if (mostrandoCarga) {
     return (
       <AppShell title="Estudio de autoría" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Estudio de autoría" }]}>
-        <LoadingPanel message="Cargando estudio de autoria..." detail="Recuperando temas, lecciones, conceptos, relaciones e inventario de contenido de apoyo." />
+        <LoadingPanel message="Cargando estudio de autoría..." detail="Recuperando temas, lecciones, conceptos, relaciones e inventario de contenido de apoyo." />
       </AppShell>
     );
   }
@@ -274,7 +274,7 @@ export function TeacherAuthoringWorkspace() {
   if (resource.error || !resource.data) {
     return (
       <AppShell title="Estudio de autoría" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Estudio de autoría" }]}>
-        <ErrorPanel message={resource.error ?? "No fue posible cargar los datos de autoria docente."} onRetry={resource.reload} />
+        <ErrorPanel message={resource.error ?? "No fue posible cargar los datos de autoría docente."} onRetry={resource.reload} />
       </AppShell>
     );
   }
@@ -283,11 +283,11 @@ export function TeacherAuthoringWorkspace() {
 
   return (
     <AppShell
-      title="Estudio de autoria"
-      description="Crea lecciones, curata contenido de apoyo, mapea conceptos y revisa prerequisitos antes de publicar cambios instruccionales."
+      title="Estudio de autoría"
+      description="Crea lecciones, curata contenido de apoyo, mapea conceptos y revisa prerrequisitos antes de publicar cambios instruccionales."
       breadcrumbs={[
         { label: "Panel docente", href: "/dashboard" },
-        { label: "Estudio de autoria" }
+        { label: "Estudio de autoría" }
       ]}
       headerActions={
         <button className="button button--ghost" type="button" onClick={resource.reload}>
@@ -296,7 +296,7 @@ export function TeacherAuthoringWorkspace() {
       }
     >
       <section className="dashboard-grid">
-        <MetricCard label="Temas" value={String(resource.data.topics.length)} helper="Agrupaciones instruccionales disponibles para autoria" />
+        <MetricCard label="Temas" value={String(resource.data.topics.length)} helper="Agrupaciones instruccionales disponibles para autoría" />
         <MetricCard label="Lecciones" value={String(resource.data.lessons.length)} helper="Registros editables visibles en este espacio" />
         <MetricCard label="Conceptos" value={String(resource.data.concepts.length)} helper="Conceptos del grafo disponibles para mapear y revisar" />
       </section>
@@ -310,14 +310,14 @@ export function TeacherAuthoringWorkspace() {
 
       {actionError ? (
         <div className="state-panel state-panel--error">
-          <p className="state-panel__title">La accion fallo</p>
+          <p className="state-panel__title">La acción fallo</p>
           <p className="state-panel__detail">{actionError}</p>
         </div>
       ) : null}
 
       <div className="workspace-grid" data-testid="teacher-authoring-workspace">
         <ContentCard
-          title="Creacion de lecciones"
+          title="Creación de lecciones"
           subtitle="El docente puede crear o refinar lecciones alineadas al recorrido sin esperar un estudio completo."
           accent="mint"
         >
@@ -337,7 +337,7 @@ export function TeacherAuthoringWorkspace() {
               </select>
             </label>
             <label className="field">
-              <span>Titulo de la leccion</span>
+              <span>Título de la lección</span>
               <input
                 value={lessonDraft.title}
                 onChange={(event) =>
@@ -353,7 +353,7 @@ export function TeacherAuthoringWorkspace() {
                 onChange={(event) =>
                   setLessonDraft((current) => ({ ...current, summary: event.target.value }))
                 }
-                placeholder="Describe la intencion pedagogica de esta leccion."
+                placeholder="Describe la intención pedagógica de esta lección."
               />
             </label>
             <label className="field">
@@ -373,7 +373,7 @@ export function TeacherAuthoringWorkspace() {
               </select>
             </label>
             <label className="field">
-              <span>Tipo de leccion</span>
+              <span>Tipo de lección</span>
               <input
                 value={lessonDraft.lessonType}
                 onChange={(event) =>
@@ -432,15 +432,15 @@ export function TeacherAuthoringWorkspace() {
         </ContentCard>
 
         <ContentCard
-          title="Edicion de lecciones"
-          subtitle="Mantiene la leccion seleccionada coherente con las metas del tema y su estructura de prerequisitos."
+          title="Edición de lecciones"
+          subtitle="Mantiene la lección seleccionada coherente con las metas del tema y su estructura de prerrequisitos."
           accent="sun"
         >
           {filteredLessons.length ? (
             <>
               <div className="form-grid">
                 <label className="field">
-                  <span>Leccion</span>
+                  <span>Lección</span>
                   <select
                     value={lessonEditDraft.lessonId}
                     onChange={(event) => setSelectedLessonId(event.target.value)}
@@ -453,7 +453,7 @@ export function TeacherAuthoringWorkspace() {
                   </select>
                 </label>
                 <label className="field">
-                  <span>Titulo</span>
+                  <span>Título</span>
                   <input
                     value={lessonEditDraft.title}
                     onChange={(event) =>
@@ -510,15 +510,15 @@ export function TeacherAuthoringWorkspace() {
             </>
           ) : (
             <EmptyState
-              title="Todavia no hay lecciones para editar."
-              description="Crea una leccion en el tema actual y aparecera aqui para refinarla."
+              title="Todavía no hay lecciones para editar."
+              description="Crea una lección en el tema actual y aparecerá aquí para refinarla."
             />
           )}
         </ContentCard>
 
         <ContentCard
           title="Mapeo de conceptos"
-          subtitle="Asocia las lecciones con los conceptos que refuerzan para que el tutor y la adaptacion sigan bien anclados."
+          subtitle="Asocia las lecciones con los conceptos que refuerzan para que el tutor y la adaptación sigan bien anclados."
           accent="sand"
         >
           {selectedLessonId ? (
@@ -552,26 +552,26 @@ export function TeacherAuthoringWorkspace() {
             </>
           ) : (
             <EmptyState
-              title="Primero elige una leccion."
-              description="El mapeo entre lecciones y conceptos se habilita cuando seleccionas una leccion."
+              title="Primero elige una lección."
+              description="El mapeo entre lecciones y conceptos se habilita cuando seleccionas una lección."
             />
           )}
         </ContentCard>
 
         <ContentCard
-          title="Curacion de contenido instruccional"
-          subtitle="Agrega material de apoyo que refuerce la leccion y el recorrido de aprendizaje actual."
+          title="Curación de contenido instruccional"
+          subtitle="Agrega material de apoyo que refuerce la lección y el recorrido de aprendizaje actual."
           accent="mint"
         >
           <div className="form-grid">
             <label className="field">
-              <span>Titulo del contenido</span>
+              <span>Título del contenido</span>
               <input
                 value={contentDraft.title}
                 onChange={(event) =>
                   setContentDraft((current) => ({ ...current, title: event.target.value }))
                 }
-                placeholder="Caso de estudio: planificacion bajo incertidumbre"
+                placeholder="Caso de estudio: planificación bajo incertidumbre"
               />
             </label>
             <label className="field">
@@ -596,7 +596,7 @@ export function TeacherAuthoringWorkspace() {
               />
             </label>
             <label className="field">
-              <span>Leccion</span>
+              <span>Lección</span>
               <select
                 value={contentDraft.lessonId}
                 onChange={(event) =>
@@ -635,8 +635,8 @@ export function TeacherAuthoringWorkspace() {
 
       <div className="workspace-grid workspace-grid--secondary">
         <ContentCard
-          title="Revision de prerequisitos"
-          subtitle="Usa la exploracion guiada por el grafo para revisar cadenas de prerequisitos y conceptos relacionados antes de que el alumnado entre en friccion."
+          title="Revisión de prerrequisitos"
+          subtitle="Usa la exploración guiada por el grafo para revisar cadenas de prerrequisitos y conceptos relacionados antes de que el alumnado entre en fricción."
           accent="sun"
         >
           <div className="form-grid">
@@ -648,7 +648,7 @@ export function TeacherAuthoringWorkspace() {
                   setExploreAnchorType(event.target.value as "topic" | "lesson" | "concept")
                 }
               >
-                <option value="lesson">Leccion</option>
+                <option value="lesson">Lección</option>
                 <option value="topic">Tema</option>
                 <option value="concept">Concepto</option>
               </select>
@@ -676,21 +676,21 @@ export function TeacherAuthoringWorkspace() {
           {knowledgeResource.isLoading ? (
             <LoadingPanel
               message="Cargando contexto del grafo..."
-              detail="Armando cadenas de prerequisitos, conceptos relacionados y contenido mapeado."
+              detail="Armando cadenas de prerrequisitos, conceptos relacionados y contenido mapeado."
             />
           ) : knowledgeResource.error ? (
             <ErrorPanel message={knowledgeResource.error} onRetry={knowledgeResource.reload} />
           ) : exploration ? (
             <div className="knowledge-grid">
               <article className="tile tile--dense">
-                <p className="auth-card__eyebrow">Cadena de prerequisitos</p>
+                <p className="auth-card__eyebrow">Cadena de prerrequisitos</p>
                 <ul className="detail-list">
                   {exploration.prerequisiteChain.length ? (
                     exploration.prerequisiteChain.map((concept) => (
                       <li key={concept.id}>{concept.title}</li>
                     ))
                   ) : (
-                    <li>No se encontraron prerequisitos explicitos.</li>
+                    <li>No se encontraron prerrequisitos explicitos.</li>
                   )}
                 </ul>
               </article>
@@ -702,12 +702,12 @@ export function TeacherAuthoringWorkspace() {
                       <li key={concept.id}>{concept.title}</li>
                     ))
                   ) : (
-                    <li>Todavia no hay conceptos relacionados conectados.</li>
+                    <li>Todavía no hay conceptos relacionados conectados.</li>
                   )}
                 </ul>
               </article>
               <article className="tile tile--dense">
-                <p className="auth-card__eyebrow">Explicacion del grafo</p>
+                <p className="auth-card__eyebrow">Explicación del grafo</p>
                 <ul className="detail-list">
                   {exploration.explanation.map((entry) => (
                     <li key={entry}>{entry}</li>
@@ -717,15 +717,15 @@ export function TeacherAuthoringWorkspace() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no has seleccionado un ancla."
-              description="Elige una leccion, un tema o un concepto para inspeccionar prerequisitos y contenido relacionado."
+              title="Todavía no has seleccionado un ancla."
+              description="Elige una lección, un tema o un concepto para inspeccionar prerrequisitos y contenido relacionado."
             />
           )}
         </ContentCard>
 
         <ContentCard
           title="Inventario actual"
-          subtitle="Vista rapida operativa de lo que el docente ya puede reutilizar en este espacio."
+          subtitle="Vista rápida operativa de lo que el docente ya puede reutilizar en este espacio."
           accent="sand"
         >
           <div className="inventory-grid">
@@ -755,7 +755,7 @@ export function TeacherAuthoringWorkspace() {
                     <li key={item.id}>{item.title}</li>
                   ))
                 ) : (
-                  <li>Todavia no se ha creado contenido de apoyo.</li>
+                  <li>Todavía no se ha creado contenido de apoyo.</li>
                 )}
               </ul>
             </article>

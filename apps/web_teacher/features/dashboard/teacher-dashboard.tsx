@@ -139,7 +139,7 @@ const FEATURES = [
   },
   {
     href: "/exams",
-    label: "Examenes",
+    label: "Exámenes",
     desc: "Subir escaneos de exámenes físicos y obtener corrección automática con IA.",
     Icon: ExamIcon,
     color: "sand"
@@ -181,7 +181,7 @@ export function TeacherDashboard() {
   if (mostrandoCarga) {
     return (
       <AppShell title="Panel docente" breadcrumbs={[{ label: "Panel docente" }]}>
-        <LoadingPanel message="Cargando resumen docente..." detail="Recuperando resumenes de estudiantes, guia adaptativa y senales del grafo." />
+        <LoadingPanel message="Cargando resumen docente..." detail="Recuperando resúmenes de estudiantes, guía adaptativa y señales del grafo." />
       </AppShell>
     );
   }
@@ -254,7 +254,7 @@ export function TeacherDashboard() {
       <section className="dash-students" id="learner-summaries">
         <div className="dash-section-header">
           <div>
-            <h3 className="dash-section-title">Resumenes de estudiantes</h3>
+            <h3 className="dash-section-title">Resúmenes de estudiantes</h3>
             <p className="dash-section-sub">Progreso, dominio, siguiente paso y uso del tutor por estudiante.</p>
           </div>
         </div>
@@ -315,8 +315,8 @@ export function TeacherDashboard() {
           </div>
         ) : (
           <EmptyState
-            title="Todavia no hay datos de estudiantes."
-            description="Cuando existan sesiones de aprendizaje, este panel mostrara resumenes por estudiante."
+            title="Todavía no hay datos de estudiantes."
+            description="Cuando existan sesiones de aprendizaje, este panel mostrará resúmenes por estudiante."
           />
         )}
       </section>

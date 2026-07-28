@@ -89,7 +89,7 @@ export function TeacherMaterialsWorkspace() {
   return (
     <AppShell
       title="Materiales"
-      description="Sube materiales fuente, analiza su estructura y revisa las sugerencias de IA antes de construir modulos de aula."
+      description="Sube materiales fuente, analiza su estructura y revisa las sugerencias de IA antes de construir módulos de aula."
       breadcrumbs={[
         { label: "Panel docente", href: "/dashboard" },
         { label: "Materiales" }
@@ -98,7 +98,7 @@ export function TeacherMaterialsWorkspace() {
       <div className="workspace-grid">
         <ContentCard
           title="Subir material"
-          subtitle="Usa el selector de archivos para capturar metadatos de origen y agrega pistas OCR o de texto cuando el analisis binario sea limitado."
+          subtitle="Usa el selector de archivos para capturar metadatos de origen y agrega pistas OCR o de texto cuando el análisis binario sea limitado."
           accent="mint"
         >
           <div className="form-grid">
@@ -145,13 +145,13 @@ export function TeacherMaterialsWorkspace() {
 
         <ContentCard
           title="Ultima propuesta analizada"
-          subtitle="Previsualiza la salida estructurada que alimentara el constructor de modulos."
+          subtitle="Previsualiza la salida estructurada que alimentará el constructor de módulos."
           accent="sun"
         >
           {proposal ? (
             <div className="tile-grid">
               <article className="tile tile--dense">
-                <p className="auth-card__eyebrow">Titulo</p>
+                <p className="auth-card__eyebrow">Título</p>
                 <h4>{proposal.material.parsedStructure.title}</h4>
                 <p>{proposal.material.fileName}</p>
               </article>
@@ -174,8 +174,8 @@ export function TeacherMaterialsWorkspace() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no hay material analizado."
-              description="Sube material para previsualizar secciones extraidas, conceptos y lecciones sugeridas."
+              title="Todavía no hay material analizado."
+              description="Sube material para previsualizar secciones extraídas, conceptos y lecciones sugeridas."
             />
           )}
         </ContentCard>
@@ -183,7 +183,7 @@ export function TeacherMaterialsWorkspace() {
 
       <ContentCard
         title="Materiales subidos"
-        subtitle="Inventario operativo de lo disponible para generar modulos."
+        subtitle="Inventario operativo de lo disponible para generar módulos."
         accent="sand"
       >
         {resource.data.items.length ? (
@@ -201,8 +201,8 @@ export function TeacherMaterialsWorkspace() {
           </div>
         ) : (
           <EmptyState
-            title="Todavia no se han subido materiales."
-            description="Cuando un docente suba un libro, guia, presentacion o escaneo, aparecera aqui."
+            title="Todavía no se han subido materiales."
+            description="Cuando un docente suba un libro, guía, presentación o escaneo, aparecerá aquí."
           />
         )}
       </ContentCard>

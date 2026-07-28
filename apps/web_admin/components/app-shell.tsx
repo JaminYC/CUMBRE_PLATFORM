@@ -62,7 +62,7 @@ export function AppShell({
             {t({ es: "Base administrativa", en: "Admin baseline" })}
           </p>
           <p className="shell__profile-meta">
-            {t({ es: "Supervision y gestion operativa", en: "Operational oversight and management" })}
+            {t({ es: "Supervisión y gestion operativa", en: "Operational oversight and management" })}
           </p>
           <SignOutButton />
         </div>

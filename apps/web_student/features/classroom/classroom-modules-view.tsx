@@ -22,7 +22,7 @@ export function ClassroomModulesView() {
     return (
       <LoadingPanel
         message="Cargando modulos asignados..."
-        detail="Recuperando modulos publicados para el aula y cuestionarios disponibles."
+        detail="Recuperando módulos publicados para el aula y cuestionarios disponibles."
       />
     );
   }
@@ -30,7 +30,7 @@ export function ClassroomModulesView() {
   if (resource.error || !resource.data) {
     return (
       <ErrorPanel
-        message={resource.error ?? "No fue posible cargar los modulos del aula."}
+        message={resource.error ?? "No fue posible cargar los módulos del aula."}
         onRetry={resource.reload}
       />
     );
@@ -38,18 +38,18 @@ export function ClassroomModulesView() {
 
   return (
     <AppShell
-      title="Modulos del aula"
-      description="Modulos y cuestionarios publicados por tu docente para el trabajo actual del aula."
+      title="Módulos del aula"
+      description="Módulos y cuestionarios publicados por tu docente para el trabajo actual del aula."
       breadcrumbs={[
         { label: "Inicio", href: "/dashboard" },
         { label: "Aula", href: "/classroom" },
-        { label: "Modulos" }
+        { label: "Módulos" }
       ]}
     >
       <div className="workspace-grid">
         <ContentCard
           title="Modulos asignados"
-          subtitle="Estos modulos vienen de materiales aprobados por docentes y construccion de modulos con IA."
+          subtitle="Estos módulos vienen de materiales aprobados por docentes y construcción de módulos con IA."
           accent="mint"
         >
           {resource.data.modules.length ? (
@@ -67,15 +67,15 @@ export function ClassroomModulesView() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no hay modulos asignados."
-              description="Cuando un docente publique un modulo para tu aula, aparecera aqui."
+              title="Todavía no hay módulos asignados."
+              description="Cuando un docente publique un módulo para tu aula, aparecerá aquí."
             />
           )}
         </ContentCard>
 
         <ContentCard
           title="Cuestionarios relacionados"
-          subtitle="Cuestionarios pedagogicos asociados a los modulos del aula."
+          subtitle="Cuestionarios pedagogicos asociados a los módulos del aula."
           accent="sun"
         >
           {resource.data.quizzes.length ? (
@@ -92,8 +92,8 @@ export function ClassroomModulesView() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no hay cuestionarios publicados."
-              description="Los cuestionarios generados por tu docente apareceran aqui cuando esten disponibles."
+              title="Todavía no hay cuestionarios publicados."
+              description="Los cuestionarios generados por tu docente apareceran aquí cuando esten disponibles."
             />
           )}
         </ContentCard>

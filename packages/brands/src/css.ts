@@ -70,7 +70,8 @@ export function variablesDeMarca(marca: Marca): string {
     ["mint-strong", t.mintStrong],
     ["sun", t.sun],
     ["sand", t.sand],
-    ["accent", t.accent]
+    ["accent", t.accent],
+    ["error", t.error]
   ];
 
   for (const [nombre, valor] of conAlfa) {

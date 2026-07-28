@@ -10,7 +10,7 @@ export async function GET() {
     if (!existingSession) {
       const response = errorResponse(
         new BackendRequestError(
-          "No hay una sesion autenticada de estudiante disponible.",
+          "No hay una sesión autenticada de estudiante disponible.",
           401,
           "UNAUTHORIZED"
         )

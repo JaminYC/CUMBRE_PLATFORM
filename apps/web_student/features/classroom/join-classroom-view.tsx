@@ -32,20 +32,20 @@ export function JoinClassroomView() {
   return (
     <AppShell
       title="Unirme a un aula"
-      description="Ingresa el codigo que te compartio tu docente para desbloquear modulos, reuniones y trabajo guiado."
+      description="Ingresa el código que te compartio tu docente para desbloquear módulos, reuniones y trabajo guiado."
       breadcrumbs={[
         { label: "Inicio", href: "/dashboard" },
         { label: "Unirme a un aula" }
       ]}
     >
       <ContentCard
-        title="Unirme con codigo de clase"
+        title="Unirme con código de clase"
         subtitle="La experiencia del estudiante sigue siendo saludable: sin ranking, solo acceso al aula y trabajo asignado."
         accent="mint"
       >
         <div className="form-grid">
           <label className="field">
-            <span>Codigo de clase</span>
+            <span>Código de clase</span>
             <input
               value={classCode}
               onChange={(event) => setClassCode(event.target.value.toUpperCase())}

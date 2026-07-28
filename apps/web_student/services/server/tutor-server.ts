@@ -151,7 +151,7 @@ function buildRetrievalQuery(input: {
 function validateTutorSessionRequest(request: StartTutorSessionRequest) {
   if (!request.learnerUserId || !request.lessonId || !request.topicId) {
     throw new BackendRequestError(
-      "Se requieren learnerUserId, lessonId y topicId para iniciar una sesion de tutor.",
+      "Se requieren learnerUserId, lessonId y topicId para iniciar una sesión de tutor.",
       400,
       "VALIDATION_ERROR"
     );
@@ -169,7 +169,7 @@ function validateTutorInteractionRequest(request: CreateTutorInteractionRequest)
 
   if (!request.action) {
     throw new BackendRequestError(
-      "Se requiere action para la interaccion con el tutor.",
+      "Se requiere action para la interacción con el tutor.",
       400,
       "VALIDATION_ERROR"
     );
@@ -187,7 +187,7 @@ function validateTutorInteractionRequest(request: CreateTutorInteractionRequest)
 function validateTutorSessionLookupRequest(request: GetTutorSessionRequest) {
   if (!request.learnerUserId || !request.lessonId || !request.topicId) {
     throw new BackendRequestError(
-      "Se requieren learnerUserId, lessonId y topicId para consultar una sesion de tutor.",
+      "Se requieren learnerUserId, lessonId y topicId para consultar una sesión de tutor.",
       400,
       "VALIDATION_ERROR"
     );

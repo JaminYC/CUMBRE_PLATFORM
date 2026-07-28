@@ -157,7 +157,7 @@ export function AdminManagementWorkspace() {
       await resource.reload();
       await knowledgeResource.reload();
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "No fue posible completar esta accion.");
+      setActionError(error instanceof Error ? error.message : "No fue posible completar esta acción.");
     } finally {
       setIsSubmitting(false);
     }
@@ -200,7 +200,7 @@ export function AdminManagementWorkspace() {
 
   async function handleUpdateLesson() {
     if (!lessonEditDraft.lessonId) {
-      setActionError("Elige una leccion antes de actualizarla.");
+      setActionError("Elige una lección antes de actualizarla.");
       return;
     }
 
@@ -249,7 +249,7 @@ export function AdminManagementWorkspace() {
         directed: true
       });
 
-      setActionMessage(`Relacion de conocimiento creada: ${response.edge.edgeType}`);
+      setActionMessage(`Relación de conocimiento creada: ${response.edge.edgeType}`);
       setEdgeDraft((current) => ({
         ...current,
         label: ""
@@ -259,7 +259,7 @@ export function AdminManagementWorkspace() {
 
   async function handleUpdateLessonMappings() {
     if (!selectedLessonId) {
-      setActionError("Elige una leccion antes de actualizar el mapeo de conceptos.");
+      setActionError("Elige una lección antes de actualizar el mapeo de conceptos.");
       return;
     }
 
@@ -313,7 +313,7 @@ export function AdminManagementWorkspace() {
     return (
       <LoadingPanel
         message="Cargando espacio de gestion..."
-        detail="Recuperando temas, lecciones, nodos conceptuales, relaciones del grafo y senales de integridad."
+        detail="Recuperando temas, lecciones, nodos conceptuales, relaciones del grafo y señales de integridad."
       />
     );
   }
@@ -345,7 +345,7 @@ export function AdminManagementWorkspace() {
     >
       <section className="dashboard-grid">
         <MetricCard label="Temas" value={String(topics.length)} helper="Registros de temas que se pueden gestionar" />
-        <MetricCard label="Lecciones" value={String(lessons.length)} helper="Lecciones visibles para supervision y correccion" />
+        <MetricCard label="Lecciones" value={String(lessons.length)} helper="Lecciones visibles para supervisión y corrección" />
         <MetricCard label="Problemas de integridad" value={String(overview.integrityIssues.length)} helper="Alertas corregibles o manuales detectadas" />
       </section>
 
@@ -358,7 +358,7 @@ export function AdminManagementWorkspace() {
 
       {actionError ? (
         <div className="state-panel state-panel--error">
-          <p className="state-panel__title">La accion fallo</p>
+          <p className="state-panel__title">La acción fallo</p>
           <p className="state-panel__detail">{actionError}</p>
         </div>
       ) : null}
@@ -366,12 +366,12 @@ export function AdminManagementWorkspace() {
       <div className="workspace-grid" data-testid="admin-management-workspace">
         <ContentCard
           title="Gestion de temas y lecciones"
-          subtitle="La administracion puede agregar contenido estructural y corregir metadatos de lecciones sin depender de una suite completa de autoria."
+          subtitle="La administración puede agregar contenido estructural y corregir metadatos de lecciones sin depender de una suite completa de autoría."
           accent="mint"
         >
           <div className="form-grid">
             <label className="field">
-              <span>Titulo del nuevo tema</span>
+              <span>Título del nuevo tema</span>
               <input
                 value={topicDraft.title}
                 onChange={(event) =>
@@ -403,7 +403,7 @@ export function AdminManagementWorkspace() {
 
           <div className="form-grid">
             <label className="field">
-              <span>Titulo de la nueva leccion</span>
+              <span>Título de la nueva lección</span>
               <input
                 value={lessonDraft.title}
                 onChange={(event) =>
@@ -428,7 +428,7 @@ export function AdminManagementWorkspace() {
               </select>
             </label>
             <label className="field field--full">
-              <span>Resumen de la leccion</span>
+              <span>Resumen de la lección</span>
               <textarea
                 value={lessonDraft.summary}
                 onChange={(event) =>
@@ -479,7 +479,7 @@ export function AdminManagementWorkspace() {
         >
           <div className="form-grid">
             <label className="field">
-              <span>Titulo del concepto</span>
+              <span>Título del concepto</span>
               <input
                 value={conceptDraft.title}
                 onChange={(event) =>
@@ -500,7 +500,7 @@ export function AdminManagementWorkspace() {
               >
                 <option value="">Sin entidad origen</option>
                 <option value="topic">Tema</option>
-                <option value="lesson">Leccion</option>
+                <option value="lesson">Lección</option>
               </select>
             </label>
             <label className="field">
@@ -577,7 +577,7 @@ export function AdminManagementWorkspace() {
               </select>
             </label>
             <label className="field">
-              <span>Tipo de relacion</span>
+              <span>Tipo de relación</span>
               <select
                 value={edgeDraft.edgeType}
                 onChange={(event) =>
@@ -614,15 +614,15 @@ export function AdminManagementWorkspace() {
         </ContentCard>
 
         <ContentCard
-          title="Vinculacion entre leccion y concepto"
-          subtitle="Repara o mejora la forma en que el contenido de la leccion se mapea dentro del grafo de conocimiento."
+          title="Vinculación entre lección y concepto"
+          subtitle="Repara o mejora la forma en que el contenido de la lección se mapea dentro del grafo de conocimiento."
           accent="sand"
         >
           {lessons.length ? (
             <>
               <div className="form-grid">
                 <label className="field">
-                  <span>Leccion</span>
+                  <span>Lección</span>
                   <select
                     value={lessonEditDraft.lessonId}
                     onChange={(event) => setSelectedLessonId(event.target.value)}
@@ -635,7 +635,7 @@ export function AdminManagementWorkspace() {
                   </select>
                 </label>
                 <label className="field">
-                  <span>Titulo de la leccion</span>
+                  <span>Título de la lección</span>
                   <input
                     value={lessonEditDraft.title}
                     onChange={(event) =>
@@ -644,7 +644,7 @@ export function AdminManagementWorkspace() {
                   />
                 </label>
                 <label className="field field--full">
-                  <span>Resumen de la leccion</span>
+                  <span>Resumen de la lección</span>
                   <textarea
                     value={lessonEditDraft.summary}
                     onChange={(event) =>
@@ -689,8 +689,8 @@ export function AdminManagementWorkspace() {
             </>
           ) : (
             <EmptyState
-              title="Todavia no hay lecciones disponibles."
-              description="Crea primero una leccion y aparecera aqui para gestionar su vinculacion con el grafo."
+              title="Todavía no hay lecciones disponibles."
+              description="Crea primero una lección y aparecerá aquí para gestionar su vinculación con el grafo."
             />
           )}
         </ContentCard>
@@ -699,7 +699,7 @@ export function AdminManagementWorkspace() {
       <div className="workspace-grid workspace-grid--secondary">
         <ContentCard
           title="Crear usuario"
-          subtitle="Registra un nuevo estudiante, docente o administrador directamente desde el panel. El usuario podra iniciar sesion con las credenciales ingresadas."
+          subtitle="Registra un nuevo estudiante, docente o administrador directamente desde el panel. El usuario podra iniciar sesión con las credenciales ingresadas."
           accent="mint"
         >
           <div className="form-grid">
@@ -785,7 +785,7 @@ export function AdminManagementWorkspace() {
                       {issue.suggestedActionLabel ?? "Ejecutar correccion"}
                     </button>
                   ) : (
-                    <p className="muted-copy">Se requiere revision manual.</p>
+                    <p className="muted-copy">Se requiere revisión manual.</p>
                   )}
                 </article>
               ))}
@@ -793,14 +793,14 @@ export function AdminManagementWorkspace() {
           ) : (
             <EmptyState
               title="No se detectaron problemas de integridad."
-              description="La vinculacion actual entre grafo y contenido se ve saludable en esta linea base."
+              description="La vinculación actual entre grafo y contenido se ve saludable en esta línea base."
             />
           )}
         </ContentCard>
 
         <ContentCard
           title="Brechas de cobertura"
-          subtitle="Las brechas de cobertura muestran donde la autoria y la vinculacion del grafo todavia necesitan atencion."
+          subtitle="Las brechas de cobertura muestran donde la autoría y la vinculación del grafo todavía necesitan atención."
           accent="sun"
         >
           {overview.coverageGaps.length ? (
@@ -814,14 +814,14 @@ export function AdminManagementWorkspace() {
           ) : (
             <EmptyState
               title="No se detectaron brechas de cobertura."
-              description="La cobertura de temas, la vinculacion conceptual y el mapeo de lecciones cumplen con los chequeos base."
+              description="La cobertura de temas, la vinculación conceptual y el mapeo de lecciones cumplen con los chequeos base."
             />
           )}
         </ContentCard>
 
         <ContentCard
-          title="Exploracion del conocimiento"
-          subtitle="Inspecciona clusters de conceptos, cadenas de prerequisitos y contenido mapeado antes de modificar la estructura del grafo."
+          title="Exploración del conocimiento"
+          subtitle="Inspecciona clusters de conceptos, cadenas de prerrequisitos y contenido mapeado antes de modificar la estructura del grafo."
           accent="sand"
         >
           <div className="form-grid">
@@ -834,7 +834,7 @@ export function AdminManagementWorkspace() {
                 }
               >
                 <option value="concept">Concepto</option>
-                <option value="lesson">Leccion</option>
+                <option value="lesson">Lección</option>
                 <option value="topic">Tema</option>
               </select>
             </label>
@@ -861,21 +861,21 @@ export function AdminManagementWorkspace() {
           {knowledgeResource.isLoading ? (
             <LoadingPanel
               message="Cargando contexto del grafo..."
-              detail="Armando cadenas de prerequisitos, clusters de conceptos y contenido mapeado."
+              detail="Armando cadenas de prerrequisitos, clusters de conceptos y contenido mapeado."
             />
           ) : knowledgeResource.error ? (
             <ErrorPanel message={knowledgeResource.error} onRetry={knowledgeResource.reload} />
           ) : exploration ? (
             <div className="knowledge-grid">
               <article className="tile tile--dense">
-                <p className="auth-card__eyebrow">Cadena de prerequisitos</p>
+                <p className="auth-card__eyebrow">Cadena de prerrequisitos</p>
                 <ul className="detail-list">
                   {exploration.prerequisiteChain.length ? (
                     exploration.prerequisiteChain.map((concept) => (
                       <li key={concept.id}>{concept.title}</li>
                     ))
                   ) : (
-                    <li>No se encontro una cadena de prerequisitos.</li>
+                    <li>No se encontro una cadena de prerrequisitos.</li>
                   )}
                 </ul>
               </article>
@@ -887,7 +887,7 @@ export function AdminManagementWorkspace() {
                       <li key={concept.id}>{concept.title}</li>
                     ))
                   ) : (
-                    <li>Todavia no se ha formado un cluster de conceptos.</li>
+                    <li>Todavía no se ha formado un cluster de conceptos.</li>
                   )}
                 </ul>
               </article>
@@ -906,8 +906,8 @@ export function AdminManagementWorkspace() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no has seleccionado un ancla."
-              description="Elige un tema, una leccion o un concepto para inspeccionar la estructura del grafo."
+              title="Todavía no has seleccionado un ancla."
+              description="Elige un tema, una lección o un concepto para inspeccionar la estructura del grafo."
             />
           )}
         </ContentCard>

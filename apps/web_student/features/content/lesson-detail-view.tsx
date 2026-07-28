@@ -93,7 +93,7 @@ export function LessonDetailView({
       });
     } catch (error) {
       setSessionError(
-        error instanceof Error ? error.message : "No fue posible iniciar la sesion de aprendizaje."
+        error instanceof Error ? error.message : "No fue posible iniciar la sesión de aprendizaje."
       );
     } finally {
       setIsStarting(false);
@@ -103,7 +103,7 @@ export function LessonDetailView({
   if (!auth.isHydrated || !session) {
     return (
       <LoadingPanel
-        message="Preparando detalle de la leccion..."
+        message="Preparando detalle de la lección..."
         detail="Restaurando tu contexto de aprendizaje antes de abrir el contenido."
       />
     );
@@ -112,8 +112,8 @@ export function LessonDetailView({
   if (mostrandoCarga) {
     return (
       <LoadingPanel
-        message="Cargando detalle de la leccion..."
-        detail="Recuperando la leccion desde content_service y preparando el flujo de inicio de sesion."
+        message="Cargando detalle de la lección..."
+        detail="Recuperando la lección desde content_service y preparando el flujo de inicio de sesión."
       />
     );
   }
@@ -121,7 +121,7 @@ export function LessonDetailView({
   if (lessonState.error || !lessonState.data) {
     return (
       <ErrorPanel
-        message={lessonState.error ?? "No fue posible cargar el detalle de la leccion."}
+        message={lessonState.error ?? "No fue posible cargar el detalle de la lección."}
         onRetry={lessonState.reload}
       />
     );
@@ -132,7 +132,7 @@ export function LessonDetailView({
   return (
     <AppShell
       title={lesson.title}
-      description={lesson.summary ?? "Vista de leccion con disparador real de sesion de aprendizaje."}
+      description={lesson.summary ?? "Vista de lección con disparador real de sesión de aprendizaje."}
       breadcrumbs={[
         { label: "Inicio", href: "/dashboard" },
         {
@@ -149,10 +149,10 @@ export function LessonDetailView({
       }
     >
       <div className="page-grid">
-        <ContentCard title="Detalles de la leccion" subtitle="Conectado a content_service" accent="mint">
+        <ContentCard title="Detalles de la lección" subtitle="Conectado a content_service" accent="mint">
           <ul className="detail-list">
             <li>
-              <strong>Tipo de leccion:</strong> {lesson.lessonType}
+              <strong>Tipo de lección:</strong> {lesson.lessonType}
             </li>
             <li>
               <strong>Dificultad:</strong> {lesson.difficultyLevel ?? "intermediate"}
@@ -168,8 +168,8 @@ export function LessonDetailView({
         </ContentCard>
 
         <ContentCard
-          title="Iniciar una sesion de aprendizaje"
-          subtitle="Este flujo crea una sesion persistida real en learning_service."
+          title="Iniciar una sesión de aprendizaje"
+          subtitle="Este flujo crea una sesión persistida real en learning_service."
           accent="sun"
         >
           <button
@@ -214,24 +214,24 @@ export function LessonDetailView({
       <KnowledgeInsightPanel insight={lessonKnowledge} accent="sand" />
 
       <ContentCard
-        title="Despues de esta leccion"
+        title="Después de esta lección"
         subtitle="Mantiene el recorrido conectado en lugar de dejar al estudiante en un punto muerto."
         accent="sand"
       >
         <div className="quick-actions-grid">
           <QuickAction
             title="Volver al tema"
-            description="Comparar esta leccion con las otras lecciones disponibles en el mismo tema."
+            description="Comparar esta lección con las otras lecciones disponibles en el mismo tema."
             href={`/topics/${topicId}`}
           />
           <QuickAction
             title="Abrir progreso"
-            description="Inspeccionar la sesion una vez iniciada y persistida."
+            description="Inspeccionar la sesión una vez iniciada y persistida."
             href="/progress"
           />
           <QuickAction
             title="Volver a la ruta"
-            description="Reconectar la leccion con la secuencia general de aprendizaje."
+            description="Reconectar la lección con la secuencia general de aprendizaje."
             href={`/learning-path/${session.defaultLearningPathId}`}
           />
         </div>

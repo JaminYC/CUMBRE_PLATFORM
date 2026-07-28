@@ -73,7 +73,7 @@ export function DashboardOverview() {
   const dashboard = useAsyncResource(
     async () => {
       if (!session) {
-        throw new Error("Necesitas una sesion activa para cargar el panel.");
+        throw new Error("Necesitas una sesión activa para cargar el panel.");
       }
 
       const [student, learningPath, progress, topics] = await Promise.all([
@@ -103,7 +103,7 @@ export function DashboardOverview() {
     return (
       <LoadingPanel
         message="Preparando tu espacio de estudiante..."
-        detail="Restaurando sesion y reconectando con los servicios."
+        detail="Restaurando sesión y reconectando con los servicios."
       />
     );
   }
@@ -212,8 +212,8 @@ export function DashboardOverview() {
         </ContentCard>
       ) : (
         <EmptyState
-          title="Todavia no hay temas disponibles."
-          description="Cuando se publiquen temas apareceran aqui como primer paso hacia las lecciones."
+          title="Todavía no hay temas disponibles."
+          description="Cuando se publiquen temas apareceran aquí como primer paso hacia las lecciones."
           actionLabel="Recargar"
           onAction={dashboard.reload}
         />
@@ -233,7 +233,7 @@ export function DashboardOverview() {
           />
           <QuickAction
             title="Espacio de aula"
-            description="Aulas unidas, modulos y sesiones en vivo."
+            description="Aulas unidas, módulos y sesiones en vivo."
             href="/classroom"
           />
           <QuickAction

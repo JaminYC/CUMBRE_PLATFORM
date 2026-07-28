@@ -92,7 +92,7 @@ const NAV_ITEMS = [
   { href: "/yarinet",        es: "YariNET",               en: "YariNET",         Icon: YariNetIcon,   badge: "Nuevo" },
   { href: "/materials",      es: "Materiales",            en: "Materials",       Icon: FilesIcon,     badge: null },
   { href: "/module-builder", es: "Constructor de módulos", en: "Module builder",  Icon: BlocksIcon,    badge: null },
-  { href: "/exams",          es: "Examenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },
+  { href: "/exams",          es: "Exámenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },
   { href: "/authoring",      es: "Estudio de autoría",    en: "Authoring",       Icon: PenIcon,       badge: null },
 ] as const;
 
@@ -146,7 +146,7 @@ export function AppShell({
           <div className="shell__profile-info">
             <p className="shell__profile-name">{t({ es: "Docente", en: "Teacher" })}</p>
             <p className="shell__profile-meta">
-              {t({ es: "Autoria y seguimiento", en: "Authoring & tracking" })}
+              {t({ es: "Autoría y seguimiento", en: "Authoring & tracking" })}
             </p>
           </div>
           <SignOutButton />

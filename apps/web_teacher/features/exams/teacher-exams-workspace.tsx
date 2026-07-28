@@ -92,33 +92,33 @@ export function TeacherExamsWorkspace() {
 
   if (mostrandoCarga) {
     return (
-      <AppShell title="Examenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Examenes" }]}>
-        <LoadingPanel message="Cargando herramientas de examenes..." detail="Recuperando listas de aula y cuestionarios disponibles para verificar escaneos." />
+      <AppShell title="Exámenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Exámenes" }]}>
+        <LoadingPanel message="Cargando herramientas de exámenes..." detail="Recuperando listas de aula y cuestionarios disponibles para verificar escaneos." />
       </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <AppShell title="Examenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Examenes" }]}>
-        <ErrorPanel message={resource.error ?? "No fue posible cargar las herramientas de procesamiento de examenes."} onRetry={resource.reload} />
+      <AppShell title="Exámenes" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Exámenes" }]}>
+        <ErrorPanel message={resource.error ?? "No fue posible cargar las herramientas de procesamiento de exámenes."} onRetry={resource.reload} />
       </AppShell>
     );
   }
 
   return (
     <AppShell
-      title="Captura de examenes"
-      description="Sube respuestas de examen escaneadas o fotografiadas, ejecuta el analisis tipo OCR y verifica las respuestas extraidas antes de calificar."
+      title="Captura de exámenes"
+      description="Sube respuestas de examen escaneadas o fotografiadas, ejecuta el análisis tipo OCR y verifica las respuestas extraídas antes de calificar."
       breadcrumbs={[
         { label: "Panel docente", href: "/dashboard" },
-        { label: "Examenes" }
+        { label: "Exámenes" }
       ]}
     >
       <div className="workspace-grid">
         <ContentCard
           title="Subir escaneo"
-          subtitle="Esta base acepta escaneos con texto extraido o pistas OCR y guarda automaticamente un intento preliminar."
+          subtitle="Esta base acepta escaneos con texto extraído o pistas OCR y guarda automáticamente un intento preliminar."
           accent="mint"
         >
           <div className="form-grid">
@@ -196,7 +196,7 @@ export function TeacherExamsWorkspace() {
 
         <ContentCard
           title="Intento detectado"
-          subtitle="Revisa el intento almacenado producido por el pipeline base de OCR para examenes."
+          subtitle="Revisa el intento almacenado producido por el pipeline base de OCR para exámenes."
           accent="sun"
         >
           {attemptResponse ? (
@@ -222,8 +222,8 @@ export function TeacherExamsWorkspace() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no se ha procesado ningun escaneo."
-              description="Sube un escaneo o texto de respuestas y el intento detectado aparecera aqui."
+              title="Todavía no se ha procesado ningún escaneo."
+              description="Sube un escaneo o texto de respuestas y el intento detectado aparecerá aquí."
             />
           )}
         </ContentCard>

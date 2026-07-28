@@ -56,7 +56,7 @@ export function TeacherModuleBuilderWorkspace() {
       await resource.reload();
     } catch (caughtError) {
       setError(
-        caughtError instanceof Error ? caughtError.message : "No fue posible generar el modulo."
+        caughtError instanceof Error ? caughtError.message : "No fue posible generar el módulo."
       );
     }
   }
@@ -80,7 +80,7 @@ export function TeacherModuleBuilderWorkspace() {
   if (mostrandoCarga) {
     return (
       <AppShell title="Constructor de módulos" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Constructor de módulos" }]}>
-        <LoadingPanel message="Cargando constructor de modulos..." detail="Recuperando materiales analizados, modulos propuestos y cuestionarios generados." />
+        <LoadingPanel message="Cargando constructor de módulos..." detail="Recuperando materiales analizados, módulos propuestos y cuestionarios generados." />
       </AppShell>
     );
   }
@@ -88,24 +88,24 @@ export function TeacherModuleBuilderWorkspace() {
   if (resource.error || !resource.data) {
     return (
       <AppShell title="Constructor de módulos" breadcrumbs={[{ label: "Panel docente", href: "/dashboard" }, { label: "Constructor de módulos" }]}>
-        <ErrorPanel message={resource.error ?? "No fue posible cargar los datos del constructor de modulos."} onRetry={resource.reload} />
+        <ErrorPanel message={resource.error ?? "No fue posible cargar los datos del constructor de módulos."} onRetry={resource.reload} />
       </AppShell>
     );
   }
 
   return (
     <AppShell
-      title="Constructor de modulos"
-      description="Transforma materiales docentes analizados en modulos propuestos y cuestionarios equilibrados pedagogicamente antes de publicarlos al aula."
+      title="Constructor de módulos"
+      description="Transforma materiales docentes analizados en módulos propuestos y cuestionarios equilibrados pedagogicamente antes de publicarlos al aula."
       breadcrumbs={[
         { label: "Panel docente", href: "/dashboard" },
-        { label: "Constructor de modulos" }
+        { label: "Constructor de módulos" }
       ]}
     >
       {error ? (
         <div className="state-panel state-panel--error">
           <div className="state-panel__content">
-            <p className="state-panel__title">La generacion fallo</p>
+            <p className="state-panel__title">La generación fallo</p>
             <p className="state-panel__detail">{error}</p>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function TeacherModuleBuilderWorkspace() {
       <div className="workspace-grid">
         <ContentCard
           title="Generar modulo"
-          subtitle="Usa el material analizado, los conceptos vinculados y las lecciones de apoyo para construir un modulo de aula."
+          subtitle="Usa el material analizado, los conceptos vinculados y las lecciones de apoyo para construir un módulo de aula."
           accent="mint"
         >
           <div className="form-grid">
@@ -135,7 +135,7 @@ export function TeacherModuleBuilderWorkspace() {
                 checked={approveModule}
                 onChange={(event) => setApproveModule(event.target.checked)}
               />
-              <span>Aprobar y guardar modulo</span>
+              <span>Aprobar y guardar módulo</span>
             </label>
           </div>
           <button className="button" type="button" disabled={!materialId} onClick={handleGenerateModule}>
@@ -166,14 +166,14 @@ export function TeacherModuleBuilderWorkspace() {
         >
           <div className="form-grid">
             <label className="field">
-              <span>Modulo</span>
+              <span>Módulo</span>
               <select
                 value={quizDraft.moduleId}
                 onChange={(event) =>
                   setQuizDraft((current) => ({ ...current, moduleId: event.target.value }))
                 }
               >
-                <option value="">Selecciona un modulo</option>
+                <option value="">Selecciona un módulo</option>
                 {resource.data.modules.items.map((module) => (
                   <option key={module.id} value={module.id}>
                     {module.title}
@@ -182,13 +182,13 @@ export function TeacherModuleBuilderWorkspace() {
               </select>
             </label>
             <label className="field">
-              <span>Titulo del cuestionario</span>
+              <span>Título del cuestionario</span>
               <input
                 value={quizDraft.title}
                 onChange={(event) =>
                   setQuizDraft((current) => ({ ...current, title: event.target.value }))
                 }
-                placeholder="Checkpoint del modulo"
+                placeholder="Checkpoint del módulo"
               />
             </label>
           </div>
@@ -207,7 +207,7 @@ export function TeacherModuleBuilderWorkspace() {
       <div className="workspace-grid workspace-grid--secondary">
         <ContentCard
           title="Modulos guardados"
-          subtitle="Modulos aprobados o propuestos disponibles para asignar a las aulas."
+          subtitle="Módulos aprobados o propuestos disponibles para asignar a las aulas."
           accent="sand"
         >
           {resource.data.modules.items.length ? (
@@ -225,15 +225,15 @@ export function TeacherModuleBuilderWorkspace() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no hay modulos."
-              description="Genera un modulo a partir de materiales subidos para verlo disponible aqui."
+              title="Todavía no hay módulos."
+              description="Genera un módulo a partir de materiales subidos para verlo disponible aquí."
             />
           )}
         </ContentCard>
 
         <ContentCard
           title="Cuestionarios generados"
-          subtitle="Recursos de evaluacion listos para publicar o usar en seguimiento."
+          subtitle="Recursos de evaluación listos para publicar o usar en seguimiento."
           accent="mint"
         >
           {resource.data.quizzes.items.length ? (
@@ -250,8 +250,8 @@ export function TeacherModuleBuilderWorkspace() {
             </div>
           ) : (
             <EmptyState
-              title="Todavia no hay cuestionarios."
-              description="Genera un cuestionario pedagogico y aparecera aqui."
+              title="Todavía no hay cuestionarios."
+              description="Genera un cuestionario pedagógico y aparecerá aquí."
             />
           )}
         </ContentCard>

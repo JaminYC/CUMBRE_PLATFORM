@@ -134,7 +134,7 @@ export function TeacherClassroomsWorkspace() {
       await work();
       await resource.reload();
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "No fue posible completar la accion.");
+      setActionError(error instanceof Error ? error.message : "No fue posible completar la acción.");
     } finally {
       setIsSubmitting(false);
     }

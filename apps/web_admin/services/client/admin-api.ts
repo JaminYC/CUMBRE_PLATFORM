@@ -112,3 +112,69 @@ export function fetchAdminKnowledgeExplore(
     `/api/admin/knowledge/explore?${query.toString()}`
   );
 }
+
+/* ── Gestión de personas ─────────────────────────────────────────────
+   Vive detrás de rutas propias del panel y no contra auth_service
+   directo: el navegador nunca habla con los servicios, para que la
+   sesión se compruebe del lado del servidor. */
+
+export interface UsuarioDeAcademia {
+  id: string;
+  nombre: string;
+  correo: string | null;
+  rol: string;
+  estado: string;
+  creado: string;
+}
+
+export interface ListadoDeUsuarios {
+  usuarios: UsuarioDeAcademia[];
+  total: number;
+  porRol: Record<string, number>;
+}
+
+export function fetchUsuarios(filtro?: { rol?: string; busqueda?: string }) {
+  const parametros = new URLSearchParams();
+  if (filtro?.rol) parametros.set("rol", filtro.rol);
+  if (filtro?.busqueda) parametros.set("busqueda", filtro.busqueda);
+  const consulta = parametros.toString();
+
+  return requestAppApi<ListadoDeUsuarios>(
+    `/api/admin/usuarios${consulta ? `?${consulta}` : ""}`
+  );
+}
+
+export function cambiarEstadoDeUsuario(
+  id: string,
+  estado: "active" | "suspended"
+) {
+  return requestAppApi<{ actualizado: true; estado: string }>(
+    "/api/admin/usuarios",
+    {
+      method: "PATCH",
+      body: JSON.stringify({ id, estado })
+    }
+  );
+}
+
+export function crearPersona(input: {
+  displayName: string;
+  email: string;
+  credential: string;
+  requestedRole: "student" | "teacher" | "administrator";
+}) {
+  return requestAppApi<{ user: User }>("/api/admin/users", {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+}
+
+export function generarContrasenaTemporal(id: string) {
+  return requestAppApi<{ contrasenaTemporal: string; nombre: string }>(
+    "/api/admin/usuarios/clave",
+    {
+      method: "POST",
+      body: JSON.stringify({ id })
+    }
+  );
+}

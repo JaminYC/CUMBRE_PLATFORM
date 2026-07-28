@@ -22,7 +22,7 @@ export function ProgressView() {
   const progressState = useAsyncResource(
     async () => {
       if (!session) {
-        throw new Error("No hay una sesion de estudiante disponible.");
+        throw new Error("No hay una sesión de estudiante disponible.");
       }
 
       return fetchLearningProgress(session.userId, session.defaultLearningPathId);
@@ -38,7 +38,7 @@ export function ProgressView() {
     return (
       <LoadingPanel
         message="Preparando vista de progreso..."
-        detail="Restaurando la sesion del estudiante antes de leer sus datos de progreso."
+        detail="Restaurando la sesión del estudiante antes de leer sus datos de progreso."
       />
     );
   }
@@ -47,7 +47,7 @@ export function ProgressView() {
     return (
       <LoadingPanel
         message="Cargando progreso desde learning_service..."
-        detail="Leyendo sesiones, senales de dominio y recomendaciones."
+        detail="Leyendo sesiones, señales de dominio y recomendaciones."
       />
     );
   }
@@ -69,12 +69,12 @@ export function ProgressView() {
   const latestSession = progress.sessions[0] ?? null;
   const masteryLabel = progress.estimatedMastery
     ? `${progress.estimatedMastery.level} al ${Math.round(progress.estimatedMastery.score * 100)}%`
-    : "Dominio todavia en formacion";
+    : "Dominio todavía en formación";
 
   return (
     <AppShell
       title="Progreso"
-      description="Vista compacta del progreso del estudiante con sesiones, dominio, recomendaciones y la siguiente mejor accion."
+      description="Vista compacta del progreso del estudiante con sesiones, dominio, recomendaciones y la siguiente mejor acción."
       breadcrumbs={[
         { label: "Inicio", href: "/dashboard" },
         { label: "Progreso" }
@@ -86,7 +86,7 @@ export function ProgressView() {
       }
     >
       <div className="page-grid">
-        <ContentCard title="Puntaje de progreso" subtitle="Promedio de avance por sesion" accent="mint">
+        <ContentCard title="Puntaje de progreso" subtitle="Promedio de avance por sesión" accent="mint">
           <p className="emphasis-number">{Math.round(progress.progressPercent)}%</p>
           <ProgressBar value={progress.progressPercent} />
         </ContentCard>
@@ -101,7 +101,7 @@ export function ProgressView() {
               <strong>Dominio estimado:</strong> {masteryLabel}
             </li>
             <li>
-              <strong>Ultima sesion:</strong> {latestSession?.status ?? "Todavia sin sesiones"}
+              <strong>Ultima sesion:</strong> {latestSession?.status ?? "Todavía sin sesiones"}
             </li>
             <li>
               <strong>Siguiente paso recomendado:</strong>{" "}
@@ -129,7 +129,7 @@ export function ProgressView() {
         <div className="quick-actions-grid">
           <QuickAction
             title="Retomar aprendizaje"
-            description="Volver a la ultima leccion abierta o a la ruta actual."
+            description="Volver a la última lección abierta o a la ruta actual."
             href={progress.nextBestAction?.actionUrl ?? resumeHref}
           />
           <QuickAction
@@ -161,8 +161,8 @@ export function ProgressView() {
           </ul>
         ) : (
           <EmptyState
-            title="Todavia no hay sesiones de aprendizaje."
-            description="Comienza desde el detalle de una leccion para crear la primera sesion persistida."
+            title="Todavía no hay sesiones de aprendizaje."
+            description="Comienza desde el detalle de una lección para crear la primera sesión persistida."
             actionLabel="Ir a la ruta de aprendizaje"
             actionHref={`/learning-path/${session.defaultLearningPathId}`}
           />
@@ -171,7 +171,7 @@ export function ProgressView() {
 
       <ContentCard
         title="Estados de dominio"
-        subtitle="Senales ya expuestas por learning_service"
+        subtitle="Señales ya expuestas por learning_service"
         accent="mint"
       >
         {progress.masteryStates.length ? (
@@ -185,8 +185,8 @@ export function ProgressView() {
           </ul>
         ) : (
           <EmptyState
-            title="Todavia no hay senales de dominio registradas."
-            description="Los datos de dominio apareceran despues de capturar mas actividad de aprendizaje."
+            title="Todavía no hay señales de dominio registradas."
+            description="Los datos de dominio apareceran después de capturar más actividad de aprendizaje."
             actionLabel="Retomar aprendizaje"
             actionHref={resumeHref}
           />

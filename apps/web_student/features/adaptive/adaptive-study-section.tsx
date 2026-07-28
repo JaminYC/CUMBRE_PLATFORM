@@ -25,7 +25,7 @@ export function AdaptiveStudySection({
       <div className="page-grid">
         <ContentCard
           title="Siguiente mejor accion"
-          subtitle="Una recomendacion unica y explicable sobre lo que el estudiante deberia hacer ahora."
+          subtitle="Una recomendación unica y explicable sobre lo que el estudiante deberia hacer ahora."
           accent="sun"
         >
           {nextAction ? (
@@ -52,8 +52,8 @@ export function AdaptiveStudySection({
             </>
           ) : (
             <EmptyState
-              title="Todavia no hay una siguiente accion."
-              description="La capa adaptativa necesita mas senales de progreso antes de elegir un siguiente paso mas fuerte."
+              title="Todavía no hay una siguiente acción."
+              description="La capa adaptativa necesita más señales de progreso antes de elegir un siguiente paso más fuerte."
               actionLabel="Continuar aprendiendo"
               actionHref={fallbackHref}
             />
@@ -87,8 +87,8 @@ export function AdaptiveStudySection({
             </>
           ) : (
             <EmptyState
-              title="Todavia no hay estimacion de dominio."
-              description="La estimacion aparece cuando el estudiante ya tiene suficiente actividad persistida."
+              title="Todavía no hay estimación de dominio."
+              description="La estimación aparece cuando el estudiante ya tiene suficiente actividad persistida."
               actionLabel="Retomar aprendizaje"
               actionHref={fallbackHref}
             />
@@ -97,7 +97,7 @@ export function AdaptiveStudySection({
       </div>
 
       <ContentCard
-        title="Guia de estudio adaptativa"
+        title="Guía de estudio adaptativa"
         subtitle="Estas tarjetas combinan heuristicas explicables con recomendaciones accionables."
         accent="sand"
       >
@@ -105,7 +105,7 @@ export function AdaptiveStudySection({
           <div className="tile-grid">
             {guidance.map((item, index) => (
               <article className="tile" key={`${item.title}-${index}`}>
-                <p className="auth-card__eyebrow">Guia</p>
+                <p className="auth-card__eyebrow">Guía</p>
                 <h4>{item.title}</h4>
                 <p>{item.summary}</p>
                 <p className="muted-copy">{item.rationale}</p>
@@ -139,7 +139,7 @@ export function AdaptiveStudySection({
           </div>
         ) : (
           <EmptyState
-            title="Todavia no hay guia adaptativa."
+            title="Todavía no hay guía adaptativa."
             description="Continua el flujo de aprendizaje para que la plataforma identifique patrones de repaso, continuidad y apoyo del tutor."
             actionLabel="Retomar aprendizaje"
             actionHref={fallbackHref}

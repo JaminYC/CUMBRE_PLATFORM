@@ -91,7 +91,7 @@ export function AppShell({
           <p className="shell__profile-meta">
             {session?.email ??
               t({
-                es: "Sesion iniciada con el backend local",
+                es: "Sesión iniciada con el backend local",
                 en: "Signed in with local backend"
               })}
           </p>
@@ -106,7 +106,7 @@ export function AppShell({
           <div className="page-header__content">
             {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
             <p className="page-header__eyebrow">
-              {t({ es: "Aplicacion del estudiante", en: "Student application" })}
+              {t({ es: "Aplicación del estudiante", en: "Student application" })}
             </p>
             <h2>{title}</h2>
             {description ? <p className="page-header__description">{description}</p> : null}

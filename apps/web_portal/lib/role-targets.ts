@@ -67,7 +67,7 @@ export function isPortalSupportedRole(
 export function resolvePortalTargetForRole(role: UserRole) {
   if (!isPortalSupportedRole(role)) {
     throw new Error(
-      "Este rol todavia no tiene una aplicacion de destino dentro del portal."
+      "Este rol todavía no tiene una aplicación de destino dentro del portal."
     );
   }
 

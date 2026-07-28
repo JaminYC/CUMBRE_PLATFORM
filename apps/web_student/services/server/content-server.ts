@@ -62,7 +62,7 @@ export async function getLessonByTopic(topicId: string, lessonId: string) {
   const lesson = response.items.find((item) => item.id === lessonId);
 
   if (!lesson) {
-    throw new BackendRequestError("No se encontro la leccion.", 404, "NOT_FOUND");
+    throw new BackendRequestError("No se encontro la lección.", 404, "NOT_FOUND");
   }
 
   return {

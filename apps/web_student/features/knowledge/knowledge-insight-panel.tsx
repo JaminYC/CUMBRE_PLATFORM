@@ -17,8 +17,8 @@ export function KnowledgeInsightPanel({
     <>
       <div className="page-grid">
         <ContentCard
-          title="Insight de prerequisitos"
-          subtitle="Una alerta basada en el grafo sobre lo que sostiene esta leccion o tema."
+          title="Insight de prerrequisitos"
+          subtitle="Una alerta basada en el grafo sobre lo que sostiene esta lección o tema."
           accent={accent}
         >
           {insight.prerequisiteConcepts.length || insight.recommendedReviewConcept ? (
@@ -31,7 +31,7 @@ export function KnowledgeInsightPanel({
                   </p>
                   <p>
                     {insight.recommendedReviewConcept.summary ??
-                      "Este concepto parece ser el prerequisito faltante mas probable."}
+                      "Este concepto parece ser el prerrequisito faltante más probable."}
                   </p>
                   {reviewHref ? (
                     <div className="card-actions">
@@ -53,15 +53,15 @@ export function KnowledgeInsightPanel({
             </>
           ) : (
             <EmptyState
-              title="No hay alerta de prerequisitos en este momento."
-              description="Este ancla no expone actualmente presion de conceptos prerequisito."
+              title="No hay alerta de prerrequisitos en este momento."
+              description="Este ancla no expone actualmente presión de conceptos prerrequisito."
             />
           )}
         </ContentCard>
 
         <ContentCard
           title="Fragmento de mapa conceptual"
-          subtitle="Una explicacion compacta de como esta unidad se conecta con conceptos cercanos."
+          subtitle="Una explicación compacta de como esta unidad se conecta con conceptos cercanos."
           accent="mint"
         >
           <ul className="detail-list">
@@ -74,7 +74,7 @@ export function KnowledgeInsightPanel({
 
       <ContentCard
         title="Conceptos relacionados"
-        subtitle="Estos enlaces vuelven mas explicable la ruta de aprendizaje sin exigir una visualizacion completa del grafo."
+        subtitle="Estos enlaces vuelven más explicable la ruta de aprendizaje sin exigir una visualización completa del grafo."
         accent="sun"
       >
         {insight.coveredConcepts.length || insight.relatedConcepts.length ? (
@@ -97,7 +97,7 @@ export function KnowledgeInsightPanel({
         ) : (
           <EmptyState
             title="No hay conceptos relacionados disponibles."
-            description="El grafo de conocimiento mostrara aqui conceptos conectados cuando esten mapeados."
+            description="El grafo de conocimiento mostrará aquí conceptos conectados cuando esten mapeados."
           />
         )}
       </ContentCard>

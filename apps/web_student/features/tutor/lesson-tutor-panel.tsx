@@ -46,7 +46,7 @@ const responseTypeClasses: Record<TutorResponseType, string> = {
 };
 
 const retrievalSourceLabels: Record<string, string> = {
-  lesson: "Leccion",
+  lesson: "Lección",
   topic: "Tema",
   learning_path: "Ruta",
   related_lesson: "Leccion relacionada",
@@ -152,7 +152,7 @@ export function LessonTutorPanel({
       }
     } catch (error) {
       setPanelError(
-        error instanceof Error ? error.message : "No fue posible restaurar la sesion del tutor."
+        error instanceof Error ? error.message : "No fue posible restaurar la sesión del tutor."
       );
     } finally {
       setIsHydratingConversation(false);
@@ -357,18 +357,18 @@ export function LessonTutorPanel({
 
   return (
     <ContentCard
-      title="Tutor IA de la leccion"
+      title="Tutor IA de la lección"
       subtitle={`Contextualizado en ${lessonTitle} y ${topicTitle}.`}
       accent="mint"
     >
       {!isOpen ? (
         <EmptyState
-          title={hasPersistedConversation ? "Retoma tu sesion con el tutor." : "Abre el tutor cuando necesites apoyo."}
+          title={hasPersistedConversation ? "Retoma tu sesión con el tutor." : "Abre el tutor cuando necesites apoyo."}
           description={
             hasPersistedConversation
-              ? "Tu sesion del tutor esta persistida y lista para continuar desde el ultimo intercambio."
+              ? "Tu sesión del tutor esta persistida y lista para continuar desde el último intercambio."
               : lessonSummary ??
-                "Pide explicaciones, resumenes, pistas o una respuesta libre basada en la leccion actual."
+                "Pide explicaciones, resúmenes, pistas o una respuesta libre basada en la lección actual."
           }
           actionLabel={hasPersistedConversation ? "Retomar tutor" : "Abrir tutor"}
           actionTestId="student-open-tutor"
@@ -383,8 +383,8 @@ export function LessonTutorPanel({
           message="Preparando el tutor..."
           detail={
             isHydratingConversation
-              ? "Restaurando la conversacion persistida para esta leccion."
-              : "Creando una sesion del tutor contextualizada para este tema y leccion."
+              ? "Restaurando la conversación persistida para esta lección."
+              : "Creando una sesión del tutor contextualizada para este tema y lección."
           }
         />
       ) : null}
@@ -448,7 +448,7 @@ export function LessonTutorPanel({
                 data-testid="student-tutor-input"
                 value={draft}
                 onChange={(event) => setDraft(event.target.value)}
-                placeholder="Que parte de esta leccion deberia entender primero?"
+                placeholder="Que parte de esta lección deberia entender primero?"
               />
             </label>
             <button
@@ -587,7 +587,7 @@ export function LessonTutorPanel({
                   ? "El tutor esta transmitiendo una respuesta contextualizada..."
                   : "El tutor esta preparando una respuesta contextualizada..."
               }
-              detail="Usando el contexto actual de leccion, tema y ruta de aprendizaje."
+              detail="Usando el contexto actual de lección, tema y ruta de aprendizaje."
             />
           ) : null}
         </>
@@ -629,7 +629,7 @@ function buildOptimisticLearnerTurn(
     content:
       prompt ??
       (action === "summarize_lesson"
-        ? "Resume esta leccion."
+        ? "Resume esta lección."
         : action === "give_hint"
           ? "Dame una pista."
           : action === "ask_question"
