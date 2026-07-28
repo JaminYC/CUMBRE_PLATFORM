@@ -26,3 +26,7 @@ test-results
 # artefactos a medio escribir de `prisma generate` en Windows:
 # cuando el servicio esta corriendo, el rename del motor falla y deja .tmpNNNN
 **/generated/prisma/*.tmp*
+
+# el proxy de Cloud SQL, que se descarga solo
+deploy/gcp/cloud-sql-proxy
+deploy/gcp/cloud-sql-proxy.exe
