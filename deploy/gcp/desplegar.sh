@@ -65,13 +65,18 @@ done
 # NO se define AUTH_SERVICE_PORT ni sus equivalentes: los servicios los
 # prefieren sobre PORT, y Cloud Run exige escuchar en el PORT que inyecta.
 
+# `--set-env-vars` y `--update-env-vars` NO se pueden usar en la misma
+# llamada: gcloud las considera excluyentes y responde con la lista de
+# opciones, sin decir cual es el problema. Por eso las variables comunes y
+# las propias de cada servicio se juntan en una sola cadena.
+BASE_ENV="NODE_ENV=production,LOG_LEVEL=info,DATABASE_URL=${URL_BD},DIRECT_URL=${URL_BD}"
+
 comun=(
   --project "${PROYECTO}"
   --region "${REGION}"
   --platform managed
   --allow-unauthenticated
   --add-cloudsql-instances "${CONEXION}"
-  --set-env-vars "NODE_ENV=production,LOG_LEVEL=info,DATABASE_URL=${URL_BD},DIRECT_URL=${URL_BD}"
   # Una instancia siempre viva: sin esto la primera peticion tras un rato
   # sin uso tarda varios segundos, y un alumno que entra a las 7 a. m. se
   # come esa espera.
@@ -82,32 +87,32 @@ comun=(
 
 echo ""
 echo "── desplegando auth ──"
-gcloud run deploy auth \
-  --image "${REGISTRO}/auth:latest" \
-  "${comun[@]}" \
-  --update-env-vars "PORTAL_URL=${PORTAL_URL:-}"
+gcloud run deploy auth   --image "${REGISTRO}/auth:latest"   "${comun[@]}"   --set-env-vars "${BASE_ENV},PORTAL_URL=${PORTAL_URL:-}"
 
 URL_AUTH="$(gcloud run services describe auth --project "${PROYECTO}" --region "${REGION}" --format 'value(status.url)')"
 echo "auth -> ${URL_AUTH}"
 
 echo ""
 echo "── desplegando content ──"
-gcloud run deploy content \
-  --image "${REGISTRO}/content:latest" \
-  "${comun[@]}" \
-  --update-env-vars "AUTH_SERVICE_URL=${URL_AUTH}"
+gcloud run deploy content   --image "${REGISTRO}/content:latest"   "${comun[@]}"   --set-env-vars "${BASE_ENV},AUTH_SERVICE_URL=${URL_AUTH}"
 
 URL_CONTENT="$(gcloud run services describe content --project "${PROYECTO}" --region "${REGION}" --format 'value(status.url)')"
 echo "content -> ${URL_CONTENT}"
 
 echo ""
 echo "── desplegando learning ──"
-gcloud run deploy learning \
-  --image "${REGISTRO}/learning:latest" \
-  "${comun[@]}" \
-  --update-env-vars "AUTH_SERVICE_URL=${URL_AUTH},CONTENT_SERVICE_URL=${URL_CONTENT}"
+gcloud run deploy learning   --image "${REGISTRO}/learning:latest"   "${comun[@]}"   --set-env-vars "${BASE_ENV},AUTH_SERVICE_URL=${URL_AUTH},CONTENT_SERVICE_URL=${URL_CONTENT}"
 
 URL_LEARNING="$(gcloud run services describe learning --project "${PROYECTO}" --region "${REGION}" --format 'value(status.url)')"
+
+# gcloud intenta hacer publico el servicio al desplegar, pero si la politica
+# de la organizacion acababa de cambiar todavia no ha propagado y falla con
+# un aviso facil de pasar por alto. Se reintenta aqui, donde ya seguro.
+echo ""
+echo "── permitiendo el acceso publico ──"
+for SERVICIO in auth content learning; do
+  gcloud run services add-iam-policy-binding "${SERVICIO}"     --region="${REGION}" --project="${PROYECTO}"     --member="allUsers" --role="roles/run.invoker" >/dev/null 2>&1     && echo "   ${SERVICIO}: accesible"     || echo "   ${SERVICIO}: NO se pudo — revisa la politica de la organizacion"
+done
 
 echo ""
 echo "════════════════════════════════════════════════════════════"

@@ -44,17 +44,44 @@ if [ ! -f "$BIN" ]; then
   chmod +x "$BIN"
 fi
 
+# El proxy usa las "credenciales predeterminadas de aplicacion", que son
+# distintas de las de `gcloud auth login`. Se comprueba antes de intentar,
+# porque el error que da si faltan no dice cual es el comando que lo arregla.
+if ! gcloud auth application-default print-access-token >/dev/null 2>&1; then
+  echo ""
+  echo "Faltan las credenciales de aplicacion. Corre esto y vuelve a intentar:"
+  echo ""
+  echo "    gcloud auth application-default login"
+  echo ""
+  echo 'Es un login aparte del de "gcloud auth login": ese autentica el CLI,'
+  echo 'este autentica a las librerias y al proxy de Cloud SQL.'
+  exit 1
+fi
+
 echo "── abriendo el tunel a ${CONEXION} ──"
 "./$BIN" "${CONEXION}" --port "${PUERTO}" &
 PROXY_PID=$!
 # Que el tunel se cierre pase lo que pase, tambien si algo falla en medio.
 trap 'kill ${PROXY_PID} 2>/dev/null || true' EXIT
 
-# Esperar a que acepte conexiones en vez de dormir a ciegas
+# Esperar a que acepte conexiones en vez de dormir a ciegas.
+#
+# Si no levanta hay que ABORTAR, no seguir: la version anterior continuaba y
+# lanzaba las migraciones contra una base inalcanzable, con lo que el error
+# que veias era "no puedo conectar a 127.0.0.1" en vez del motivo real.
+LISTO=0
 for _ in $(seq 1 30); do
-  if (echo > "/dev/tcp/127.0.0.1/${PUERTO}") 2>/dev/null; then break; fi
+  if (echo > "/dev/tcp/127.0.0.1/${PUERTO}") 2>/dev/null; then LISTO=1; break; fi
+  # Si el proxy ya murio, no tiene sentido seguir esperando.
+  if ! kill -0 "${PROXY_PID}" 2>/dev/null; then break; fi
   sleep 1
 done
+
+if [ "$LISTO" -ne 1 ]; then
+  echo ""
+  echo "El tunel no llego a abrirse. Revisa el error del proxy arriba."
+  exit 1
+fi
 
 export DATABASE_URL="postgresql://${BD_USUARIO}:${BD_CLAVE}@127.0.0.1:${PUERTO}/${BD_NOMBRE}"
 export DIRECT_URL="${DATABASE_URL}"

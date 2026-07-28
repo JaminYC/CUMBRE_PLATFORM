@@ -96,6 +96,36 @@ else
 fi
 
 echo ""
+echo "── permisos de la cuenta de servicio ──"
+# Sin esto los servicios arrancan, responden /health y fallan al primer
+# acceso a datos con un 500 opaco. El log de Cloud Run no lo dice: hay que
+# ir a Cloud Logging para ver "missing permission cloudsql.instances.get".
+NUMERO="$(gcloud projects describe "${PROYECTO}" --format='value(projectNumber)')"
+CUENTA="${NUMERO}-compute@developer.gserviceaccount.com"
+
+gcloud projects add-iam-policy-binding "${PROYECTO}" \
+  --member="serviceAccount:${CUENTA}" \
+  --role="roles/cloudsql.client" \
+  --condition=None >/dev/null
+echo "   ${CUENTA} puede usar Cloud SQL"
+
+# Los servicios tienen que ser alcanzables desde fuera de Google: las
+# aplicaciones de Vercel les hablan desde internet. En una organizacion
+# nueva esto lo bloquea la politica de comparticion restringida por
+# dominio, que hay que relajar para este proyecto.
+if ! gcloud resource-manager org-policies describe \
+      constraints/iam.allowedPolicyMemberDomains --project="${PROYECTO}" \
+      --effective 2>/dev/null | grep -q "allValues: ALLOW"; then
+  echo ""
+  echo "   AVISO: la organizacion restringe a quien se pueden dar permisos."
+  echo "   Los servicios no podran ser publicos y Vercel no los alcanzara."
+  echo "   Hace falta el rol roles/orgpolicy.policyAdmin y luego:"
+  echo ""
+  echo "     printf 'constraint: constraints/iam.allowedPolicyMemberDomains\\nlistPolicy:\\n  allValues: ALLOW\\n' > /tmp/politica.yaml"
+  echo "     gcloud resource-manager org-policies set-policy /tmp/politica.yaml --project=${PROYECTO}"
+fi
+
+echo ""
 echo "════════════════════════════════════════════════════════════"
 echo " Preparado. Ahora:"
 echo ""
