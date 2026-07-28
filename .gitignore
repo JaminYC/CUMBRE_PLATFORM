@@ -18,3 +18,11 @@ test-results
 !.env.example
 !.env.local.example
 *.mp4
+
+# credenciales de correo (Academia Bryce)
+.env.correo
+**/.env.correo
+
+# artefactos a medio escribir de `prisma generate` en Windows:
+# cuando el servicio esta corriendo, el rename del motor falla y deja .tmpNNNN
+**/generated/prisma/*.tmp*
