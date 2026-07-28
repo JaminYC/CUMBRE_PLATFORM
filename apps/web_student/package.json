@@ -14,6 +14,7 @@
   "dependencies": {
     "@cumbre/app-auth": "workspace:*",
     "@cumbre/app-runtime": "workspace:*",
+    "@cumbre/brands": "workspace:*",
     "@cumbre/schemas": "workspace:*",
     "@cumbre/sdk": "workspace:*",
     "@cumbre/tutor-engine": "workspace:*",

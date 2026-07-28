@@ -2,8 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import { requestAppApi } from "@/lib/app-http";
+import { useMarca } from "@cumbre/brands/client";
 
 export function LoginForm() {
+  const marca = useMarca();
   const [email, setEmail] = useState("");
   const [credential, setCredential] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +44,12 @@ export function LoginForm() {
     <main className="login-page">
       <header className="login-nav">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/LOGOBLANCO.png" alt="CUMBRE" className="login-logo" draggable={false} />
+        <img
+          src={marca.logo.principal}
+          alt={marca.nombre}
+          className="login-logo"
+          draggable={false}
+        />
       </header>
 
       <div className="login-layout">

@@ -1,0 +1,25 @@
+{
+  "name": "@cumbre/brands",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.tsx"
+  },
+  "scripts": {
+    "build": "echo brands build no requiere compilacion",
+    "lint": "echo brands lint pendiente",
+    "test": "echo brands test pendiente",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.1.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "react": "^19.1.0"
+  }
+}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { commonMessages, useAppLocale } from "@cumbre/app-runtime/client";
 import { useAuthSession } from "@/features/auth/auth-session";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui";
+import { useMarca } from "@cumbre/brands/client";
 
 export function AppShell({
   title,
@@ -22,6 +23,7 @@ export function AppShell({
 }) {
   const pathname = usePathname();
   const { t } = useAppLocale();
+  const marca = useMarca();
   const { session, signOut, rememberRoute } = useAuthSession();
   const navItems = [
     { href: "/dashboard", label: t({ es: "Inicio", en: "Dashboard" }) },
@@ -48,7 +50,7 @@ export function AppShell({
           <p className="shell__eyebrow">
             {t({ es: "Espacio del estudiante", en: "Student space" })}
           </p>
-          <h1 className="shell__brand">Cumbre</h1>
+          <h1 className="shell__brand">{marca.nombreCorto}</h1>
           <p className="shell__caption">
             {t({
               es: "Aprendizaje adaptativo, hitos claros y siguientes pasos guiados.",

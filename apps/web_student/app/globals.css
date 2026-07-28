@@ -905,3 +905,18 @@ h4 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── El logo del acceso ────────────────────────────────────────────────
+   No habia regla: la imagen salia a tamano natural. Se notaba poco con el
+   logo ancho de CUMBRE y se volvio evidente al servir el de Bryce, que es
+   casi cuadrado.
+
+   Se limita por ALTO y no por ancho, que es lo unico que funciona para
+   cualquier proporcion: un logo apaisado y uno cuadrado ocupan la misma
+   franja vertical, que es lo que el ojo compara. */
+.login-logo {
+  height: 2.75rem;
+  width: auto;
+  max-width: 14rem;
+  object-fit: contain;
+}
