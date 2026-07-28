@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     const payload = await request.json();
     const authResponse = await signupFromPortal(payload);
-    const bridged = bridgePortalLoginToRoleApp(authResponse);
+    const bridged = await bridgePortalLoginToRoleApp(authResponse);
     const appResponse = successResponse({
       redirectTo: bridged.redirectTo,
       role: authResponse.user.primaryRole,

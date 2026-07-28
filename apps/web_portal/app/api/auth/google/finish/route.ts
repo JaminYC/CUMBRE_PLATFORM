@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
       refreshExpiresAt
     };
 
-    const bridged = bridgePortalLoginToRoleApp(authResponse);
+    const bridged = await bridgePortalLoginToRoleApp(authResponse);
 
     if (isNew) {
       // New user — set temporary session then redirect to role onboarding

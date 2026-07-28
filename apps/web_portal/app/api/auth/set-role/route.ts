@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseAppSession, isRefreshExpired } from "@cumbre/app-auth";
-import { portalRoleTargetOrder } from "@/lib/role-targets";
+import { cookiesDeRol } from "@/lib/role-targets";
 import { applyPortalRoleSession, bridgePortalLoginToRoleApp } from "@/lib/session-bridge";
 import { validateSessionFromPortal } from "@/services/server/auth-server";
 import { portalAppConfig } from "@/lib/env";
@@ -21,9 +21,9 @@ export async function POST(request: NextRequest) {
   let expiresAt: string | null = null;
   let refreshExpiresAt: string | null = null;
 
-  for (const target of portalRoleTargetOrder) {
-    const cookieValue = cookieStore.get(target.sessionCookieName)?.value;
-    const session = parseAppSession(cookieValue, target.sessionSecret);
+  for (const cookie of cookiesDeRol) {
+    const cookieValue = cookieStore.get(cookie.sessionCookieName)?.value;
+    const session = parseAppSession(cookieValue, cookie.sessionSecret);
     if (session && !isRefreshExpired(session)) {
       accessToken = session.accessToken;
       refreshToken = session.refreshToken;
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     refreshExpiresAt
   };
 
-  const bridged = bridgePortalLoginToRoleApp(authResponse);
+  const bridged = await bridgePortalLoginToRoleApp(authResponse);
   const response = NextResponse.json({ redirectTo: bridged.redirectTo });
   applyPortalRoleSession(response, bridged);
 
