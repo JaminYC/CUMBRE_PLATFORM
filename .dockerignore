@@ -1,17 +1,64 @@
-node_modules
-.next
-.turbo
-.git
-.github
-test-results
-playwright-report
-coverage
-dist
-tmp
-*.log
-*.tsbuildinfo
+# Que NO entra a las imagenes de Docker.
+#
+# Los patrones sin `**/` solo alcanzan la raiz del contexto. Con `.env` y
+# `node_modules` a secas, los de `services/*/` entraban igual: la imagen
+# pesaba 1.76 GB y llevaba dentro las credenciales de la base de desarrollo.
+
+# ── Secretos ─────────────────────────────────────────────────────────────
+# Lo primero. Las variables se inyectan al arrancar el contenedor; nunca se
+# hornean dentro, porque viajan a donde vaya la imagen.
 .env
 .env.*
+**/.env
+**/.env.*
 !.env.example
 !.env.local.example
+!**/.env.example
+!**/.env.local.example
 
+# ── Dependencias del anfitrion ───────────────────────────────────────────
+# Se instalan dentro del contenedor. Copiar las de Windows a una imagen
+# Linux, ademas de inutil, arrastra binarios de la plataforma equivocada.
+node_modules
+**/node_modules
+.pnpm-store
+
+# ── Frontends ────────────────────────────────────────────────────────────
+# Estas imagenes son solo de backend; las aplicaciones Next.js van a Vercel.
+apps
+
+# ── Resultados de compilacion ────────────────────────────────────────────
+.next
+**/.next
+.turbo
+dist
+**/dist
+**/build
+**/*.tsbuildinfo
+coverage
+**/coverage
+**/generated/prisma
+test-results
+playwright-report
+tmp
+
+# ── Historial y herramientas ─────────────────────────────────────────────
+.git
+.github
+.vscode
+.idea
+.claude
+
+# ── Pruebas ──────────────────────────────────────────────────────────────
+# No hacen falta para atender peticiones, y ademas borran la base al correr.
+**/test
+**/tests
+**/*.test.ts
+**/*.spec.ts
+e2e
+
+# ── Otros ────────────────────────────────────────────────────────────────
+infrastructure/docker
+docs
+*.log
+*.mp4

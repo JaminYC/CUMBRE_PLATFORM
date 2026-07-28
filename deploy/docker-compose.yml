@@ -1,0 +1,155 @@
+# Backend completo en una sola maquina.
+#
+# Los tres servicios que la plataforma necesita, la base de datos y un proxy
+# que resuelve HTTPS solo. Todo definido aqui: levantar esto de cero en un
+# VPS nuevo es `docker compose up -d`, no una tarde recordando clics.
+#
+# Un unico backend atiende a TODAS las academias. La separacion entre ellas
+# es la columna `tenant` en la base, no infraestructura repetida: sumar la
+# academia numero diez no agrega ni un contenedor.
+#
+#   cp .env.example .env   y completarlo
+#   docker compose --profile migrate run --rm migrate
+#   docker compose up -d
+
+name: cumbre
+
+x-servicio: &servicio
+  build:
+    context: ..
+    dockerfile: deploy/Dockerfile.service
+  restart: unless-stopped
+  environment: &entorno-comun
+    NODE_ENV: production
+    LOG_LEVEL: ${LOG_LEVEL:-info}
+    # Red interna de Docker: los servicios se hablan por nombre, sin salir a
+    # internet ni pasar por el proxy.
+    DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    DIRECT_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+  depends_on:
+    postgres:
+      condition: service_healthy
+  networks: [interna]
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - datos_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Sin `ports`: la base NO se expone a internet. Para entrar desde fuera,
+    # un tunel SSH. Una Postgres con puerto abierto se encuentra en horas.
+    networks: [interna]
+
+  auth:
+    <<: *servicio
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.service
+      args:
+        SERVICE: auth_service
+    environment:
+      <<: *entorno-comun
+      AUTH_SERVICE_PORT: 3001
+      PORTAL_URL: ${PORTAL_URL}
+      AUTH_ACCESS_TOKEN_TTL_MINUTES: ${AUTH_ACCESS_TOKEN_TTL_MINUTES:-30}
+      AUTH_REFRESH_TOKEN_TTL_DAYS: ${AUTH_REFRESH_TOKEN_TTL_DAYS:-30}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  content:
+    <<: *servicio
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.service
+      args:
+        SERVICE: content_service
+    environment:
+      <<: *entorno-comun
+      CONTENT_SERVICE_PORT: 3003
+      AUTH_SERVICE_URL: http://auth:3001
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  learning:
+    <<: *servicio
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.service
+      args:
+        SERVICE: learning_service
+    environment:
+      <<: *entorno-comun
+      LEARNING_SERVICE_PORT: 3002
+      AUTH_SERVICE_URL: http://auth:3001
+      CONTENT_SERVICE_URL: http://content:3003
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  # Migraciones. No corren solas al arrancar: aplicar cambios de esquema
+  # mientras hay gente conectada es como se pierden datos. Se invoca a mano,
+  # antes de levantar el resto.
+  #
+  #   docker compose --profile migrate run --rm migrate
+  migrate:
+    <<: *servicio
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.service
+      args:
+        SERVICE: auth_service
+    profiles: [migrate]
+    restart: "no"
+    command: >
+      sh -c "
+        pnpm --filter @cumbre/auth-service db:migrate &&
+        pnpm --filter @cumbre/content-service db:migrate &&
+        pnpm --filter @cumbre/learning-service db:migrate
+      "
+
+  # Certificados HTTPS automaticos de Let's Encrypt, renovados solos.
+  # Es lo unico que mira a internet.
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMINIO: ${DOMINIO}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - datos_caddy:/data
+      - config_caddy:/config
+    depends_on: [auth, learning, content]
+    networks: [interna]
+
+networks:
+  interna:
+    driver: bridge
+
+volumes:
+  datos_postgres:
+  datos_caddy:
+  config_caddy:

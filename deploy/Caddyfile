@@ -1,0 +1,42 @@
+# Proxy de entrada. Caddy pide y renueva los certificados de Let's Encrypt
+# solo — no hay que tocar nada ni acordarse de renovar.
+#
+# Cada servicio sale por su propio subdominio. Los tres apuntan por DNS a la
+# IP del VPS con un registro A.
+
+{
+	# Cambiar por un correo real: es donde Let's Encrypt avisa si algo falla
+	# con la renovacion.
+	email {$ACME_EMAIL:admin@teamvastoria.com}
+}
+
+auth-api.{$DOMINIO} {
+	reverse_proxy auth:3001
+	encode gzip
+	header {
+		# El navegador nunca debe volver a este dominio por HTTP.
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+}
+
+learning-api.{$DOMINIO} {
+	reverse_proxy learning:3002
+	encode gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+}
+
+content-api.{$DOMINIO} {
+	reverse_proxy content:3003
+	encode gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+}
