@@ -33,7 +33,7 @@ export interface RecommendationEngineOutput {
 }
 
 export function describeModule(): string {
-  return "Produce siguientes acciones y recomendaciones explicables a partir de senales de aprendizaje adaptativo.";
+  return "Produce siguientes acciones y recomendaciones explicables a partir de señales de aprendizaje adaptativo.";
 }
 
 export function generateRecommendations(
@@ -61,11 +61,11 @@ export function generateRecommendations(
       recommendationType: "review",
       priority: "high",
       title: `Revisar concepto prerequisito: ${input.graphInsight.recommendedReviewConcept.title}`,
-      summary: "El grafo de conocimiento apunta a un concepto prerequisito que conviene estabilizar antes de avanzar.",
+      summary: "El grafo de conocimiento apunta a un concepto prerrequisito que conviene estabilizar antes de avanzar.",
       rationale:
         [
           input.graphInsight.explanation.at(-1) ??
-            "La cobertura de conceptos prerequisito sugiere un desvio de repaso.",
+            "La cobertura de conceptos prerrequisito sugiere un desvío de repaso.",
           topRetrievedContext
             ? `Soporte recuperado: ${topRetrievedContext.title}.`
             : ""
@@ -74,7 +74,7 @@ export function generateRecommendations(
           .join(" "),
       targetEntityType: reviewLessonId ? "lesson" : "topic",
       targetEntityId: reviewLessonId ?? reviewTopicId,
-      actionLabel: reviewLessonId ? "Abrir leccion de repaso" : "Abrir tema de repaso",
+      actionLabel: reviewLessonId ? "Abrir lección de repaso" : "Abrir tema de repaso",
       actionUrl:
         reviewLessonId && reviewTopicId
           ? buildLessonUrl(reviewTopicId, reviewLessonId)
@@ -92,10 +92,10 @@ export function generateRecommendations(
       recipientUserId: input.learnerUserId,
       recommendationType: "review",
       priority: "high",
-      title: "Volver a la leccion con dificultad reciente",
-      summary: "Hay multiples intentos incompletos en la misma leccion. Repasarla ahora deberia reducir la friccion.",
+      title: "Volver a la lección con dificultad reciente",
+      summary: "Hay múltiples intentos incompletos en la misma lección. Repasarla ahora debería reducir la fricción.",
       rationale: [
-        "Los reinicios repetidos sin completar indican que la leccion todavia necesita refuerzo.",
+        "Los reinicios repetidos sin completar indican que la lección todavía necesita refuerzo.",
         topRetrievedContext ? `Soporte recuperado: ${topRetrievedContext.rationale}` : ""
       ]
         .filter(Boolean)
@@ -115,10 +115,10 @@ export function generateRecommendations(
       recipientUserId: input.learnerUserId,
       recommendationType: "review",
       priority: "medium",
-      title: "Revisar el tema prerequisito",
-      summary: "Repasar el tema deberia estabilizar la secuencia de lecciones antes de seguir avanzando.",
+      title: "Revisar el tema prerrequisito",
+      summary: "Repasar el tema debería estabilizar la secuencia de lecciones antes de seguir avanzando.",
       rationale: [
-        "El bajo impulso en una leccion suele apuntar a brechas del tema, no solo al ritmo.",
+        "El bajo impulso en una lección suele apuntar a brechas del tema, no solo al ritmo.",
         topRetrievedContext ? `Soporte recuperado: ${topRetrievedContext.title}.` : ""
       ]
         .filter(Boolean)
@@ -138,10 +138,10 @@ export function generateRecommendations(
       recipientUserId: input.learnerUserId,
       recommendationType: "tutor_prompt",
       priority: "medium",
-      title: "Pedir una aclaracion al tutor",
-      summary: "Un intercambio breve con el tutor puede destrabar el siguiente paso sin salir del flujo de la leccion.",
+      title: "Pedir una aclaración al tutor",
+      summary: "Un intercambio breve con el tutor puede destrabar el siguiente paso sin salir del flujo de la lección.",
       rationale: [
-        "El uso reciente del tutor y la friccion actual sugieren que una aclaracion sigue siendo valiosa.",
+        "El uso reciente del tutor y la fricción actual sugieren que una aclaración sigue siendo valiosa.",
         topRetrievedContext ? `Soporte recuperado: ${topRetrievedContext.rationale}` : ""
       ]
         .filter(Boolean)
@@ -165,10 +165,10 @@ export function generateRecommendations(
       recipientUserId: input.learnerUserId,
       recommendationType: "lesson",
       priority: "medium",
-      title: "Avanzar a la siguiente leccion",
+      title: "Avanzar a la siguiente lección",
       summary: "Tu trabajo reciente sugiere que ya puedes seguir avanzando por la ruta actual.",
       rationale: [
-        "Las senales de progreso y dominio ya son suficientes para continuar la secuencia.",
+        "Las señales de progreso y dominio ya son suficientes para continuar la secuencia.",
         topRetrievedContext ? `Soporte recuperado: ${topRetrievedContext.title}.` : ""
       ]
         .filter(Boolean)
@@ -193,7 +193,7 @@ export function generateRecommendations(
       title: "Continuar tu ruta de aprendizaje actual",
       summary: "Mantente en la ruta actual y sigue construyendo progreso estable.",
       rationale: [
-        "La mezcla actual de senales es lo bastante estable para seguir sin un desvio de repaso.",
+        "La mezcla actual de señales es lo bastante estable para seguir sin un desvío de repaso.",
         topRetrievedContext ? `Soporte recuperado: ${topRetrievedContext.title}.` : ""
       ]
         .filter(Boolean)
@@ -226,7 +226,7 @@ function selectNextBestAction(
       summary: primaryRecommendation.summary,
       rationale:
         primaryRecommendation.rationale ??
-        "Conviene revisar un concepto prerequisito antes de avanzar.",
+        "Conviene revisar un concepto prerrequisito antes de avanzar.",
       confidence: 0.84,
       targetEntityType: primaryRecommendation.targetEntityType,
       targetEntityId: primaryRecommendation.targetEntityId,
@@ -240,7 +240,7 @@ function selectNextBestAction(
       actionType: "revisit_struggled_lesson",
       title: primaryRecommendation.title,
       summary: primaryRecommendation.summary,
-      rationale: primaryRecommendation.rationale ?? "Las sesiones recientes muestran dificultad repetida en la misma leccion.",
+      rationale: primaryRecommendation.rationale ?? "Las sesiones recientes muestran dificultad repetida en la misma lección.",
       confidence: 0.82,
       targetEntityType: "lesson",
       targetEntityId: input.stalledLessonId,
@@ -254,7 +254,7 @@ function selectNextBestAction(
       actionType: "review_prerequisite_topic",
       title: primaryRecommendation.title,
       summary: primaryRecommendation.summary,
-      rationale: primaryRecommendation.rationale ?? "El repaso del tema deberia estabilizar la secuencia actual.",
+      rationale: primaryRecommendation.rationale ?? "El repaso del tema debería estabilizar la secuencia actual.",
       confidence: 0.76,
       targetEntityType: "topic",
       targetEntityId: input.stalledTopicId,
@@ -268,7 +268,7 @@ function selectNextBestAction(
       actionType: "ask_tutor_for_clarification",
       title: primaryRecommendation.title,
       summary: primaryRecommendation.summary,
-      rationale: primaryRecommendation.rationale ?? "La aclaracion del tutor es ahora mismo la via mas rapida para destrabar.",
+      rationale: primaryRecommendation.rationale ?? "La aclaración del tutor es ahora mismo la via más rápida para destrabar.",
       confidence: 0.7,
       targetEntityType: primaryRecommendation.targetEntityType,
       targetEntityId: primaryRecommendation.targetEntityId,
@@ -282,7 +282,7 @@ function selectNextBestAction(
       actionType: "advance_to_next_lesson",
       title: primaryRecommendation.title,
       summary: primaryRecommendation.summary,
-      rationale: primaryRecommendation.rationale ?? "El progreso reciente indica preparacion para la siguiente leccion.",
+      rationale: primaryRecommendation.rationale ?? "El progreso reciente indica preparación para la siguiente lección.",
       confidence: 0.74,
       targetEntityType: "lesson",
       targetEntityId: input.nextLessonId,
@@ -295,7 +295,7 @@ function selectNextBestAction(
     actionType: "continue_current_path",
     title: "Continuar la ruta de aprendizaje actual",
     summary: input.adaptiveGuidance[0]?.summary ?? "Mantente en la ruta actual y conserva el impulso.",
-    rationale: input.adaptiveGuidance[0]?.rationale ?? "Las senales actuales no exigen un desvio por ahora.",
+    rationale: input.adaptiveGuidance[0]?.rationale ?? "Las señales actuales no exigen un desvío por ahora.",
     confidence: 0.66,
     targetEntityType: input.learningPath ? "learning_path" : undefined,
     targetEntityId: input.learningPath?.id,

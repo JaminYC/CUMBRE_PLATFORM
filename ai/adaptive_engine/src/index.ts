@@ -104,13 +104,13 @@ export function evaluateAdaptiveState(
 
   if (input.graphInsight) {
     contributingSignals.push(
-      `${input.graphInsight.prerequisiteConcepts.length} conceptos prerequisito desde el grafo de conocimiento`
+      `${input.graphInsight.prerequisiteConcepts.length} conceptos prerrequisito desde el grafo de conocimiento`
     );
   }
 
   if (input.retrievedContext?.items.length) {
     contributingSignals.push(
-      `${input.retrievedContext.items.length} elementos de contexto priorizados por recuperacion apoyando la estimacion actual`
+      `${input.retrievedContext.items.length} elementos de contexto priorizados por recuperación apoyando la estimación actual`
     );
   }
 
@@ -121,14 +121,14 @@ export function evaluateAdaptiveState(
     level,
     confidence: round(confidence),
     rationale: recommendedReviewConcept
-      ? `El grafo sugiere que ${recommendedReviewConcept.title} es el prerequisito faltante detras de la friccion actual.`
+      ? `El grafo sugiere que ${recommendedReviewConcept.title} es el prerrequisito faltante detrás de la fricción actual.`
       : stalledLesson
-        ? "El estudiante muestra friccion repetida en la misma leccion y necesita refuerzo antes de avanzar."
+        ? "El estudiante muestra fricción repetida en la misma lección y necesita refuerzo antes de avanzar."
         : tutorHelpCount >= 3
-          ? "El uso frecuente del tutor indica busqueda activa de ayuda y friccion conceptual parcial."
+          ? "El uso frecuente del tutor indica búsqueda activa de ayuda y fricción conceptual parcial."
           : completedSessions.length > 0
             ? "El trabajo completado recientemente y el progreso de sesiones sugieren un avance estable."
-            : "La estimacion se basa en senales tempranas de aprendizaje todavia limitadas.",
+            : "La estimación se basa en señales tempranas de aprendizaje todavía limitadas.",
     contributingSignals,
     recommendedDifficulty: suggestDifficulty(estimatedScore)
   };
@@ -141,14 +141,14 @@ export function evaluateAdaptiveState(
         recommendedReviewConcept
           ? `Revisa ${recommendedReviewConcept.title} antes de profundizar en la secuencia actual de lecciones.`
           : stalledLesson
-            ? "Baja el ritmo y repasa la leccion con mas dificultad antes de seguir."
+            ? "Baja el ritmo y repasa la lección con más dificultad antes de seguir."
             : recentProgressAverage >= 0.7
-            ? "Mantén el ritmo actual y extiende ese mismo patron de aprendizaje a la siguiente leccion."
-              : "Usa ciclos de estudio mas cortos y enfocados, confirmando comprension en cada paso.",
+            ? "Mantén el ritmo actual y extiende ese mismo patrón de aprendizaje a la siguiente lección."
+              : "Usa ciclos de estudio más cortos y enfocados, confirmando comprensión en cada paso.",
       rationale:
         recommendedReviewConcept
           ? input.graphInsight?.explanation.at(-1) ??
-            "Los prerequisitos conceptuales indican un patron de repaso antes de avanzar."
+            "Los prerrequisitos conceptuales indican un patrón de repaso antes de avanzar."
           : input.retrievedContext?.items[0]
             ? `${input.retrievedContext.items[0].rationale} ${input.retrievedContext.explanation[0] ?? ""}`.trim()
           : tutorHelpCount >= 3
@@ -170,11 +170,11 @@ export function evaluateAdaptiveState(
 
   if (recommendedReviewConcept) {
     adaptiveGuidance.push({
-      title: "Senal de prerequisito faltante",
+      title: "Señal de prerrequisito faltante",
       summary: `${recommendedReviewConcept.title} parece ser el concepto que conviene repasar antes de seguir avanzando.`,
       rationale:
         input.graphInsight?.explanation.at(-1) ??
-        "Los prerequisitos del grafo apuntan a una brecha conceptual.",
+        "Los prerrequisitos del grafo apuntan a una brecha conceptual.",
       relatedEntityType: "topic",
       relatedEntityId: input.graphInsight?.recommendedReviewTopicId
     });
@@ -182,9 +182,9 @@ export function evaluateAdaptiveState(
 
   if (tutorHelpCount >= 2) {
     adaptiveGuidance.push({
-      title: "Senal de apoyo del tutor",
-      summary: "Las interacciones recientes con el tutor sugieren que el estudiante deberia mantener ayuda cercana.",
-      rationale: "El estudiante ha necesitado multiples respuestas del tutor en la ventana de estudio reciente.",
+      title: "Señal de apoyo del tutor",
+      summary: "Las interacciones recientes con el tutor sugieren que el estudiante debería mantener ayuda cercana.",
+      rationale: "El estudiante ha necesitado múltiples respuestas del tutor en la ventana de estudio reciente.",
       relatedEntityType: stalledLesson?.lessonId ? "lesson" : undefined,
       relatedEntityId: stalledLesson?.lessonId
     });
