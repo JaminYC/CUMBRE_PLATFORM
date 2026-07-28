@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: [
     "@cumbre/llm-runtime",
-    "@cumbre/tutor-engine",
     "@cumbre/retrieval-engine"
   ],
   webpack: (config) => {

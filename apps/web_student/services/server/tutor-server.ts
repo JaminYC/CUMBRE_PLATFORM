@@ -6,197 +6,122 @@ import type {
   StartTutorSessionRequest,
   StartTutorSessionResponse
 } from "@cumbre/schemas";
-import {
-  createTutorInteraction,
-  getTutorSession,
-  startTutorSession,
-  streamTutorInteraction
-} from "@cumbre/tutor-engine";
-import { BackendRequestError } from "@/lib/backend-http";
-import {
-  getLessonKnowledge,
-  getTopic,
-  getLessonByTopic,
-  listLessons,
-  searchContent
-} from "@/services/server/content-server";
-import {
-  getLearningPath,
-  getLearningProgress
-} from "@/services/server/learning-server";
-import type { TutorAction } from "@cumbre/types";
+import { BackendRequestError, fetchBackendData } from "@/lib/backend-http";
+import { serverServiceEndpoints } from "@/lib/env";
+import { getServerSession } from "@/lib/server-session";
 
-export async function startLessonTutorSession(
+/**
+ * El tutor vive en learning_service, no aqui.
+ *
+ * Antes este archivo armaba el contexto y llamaba al motor dentro del mismo
+ * proceso de Next. Funcionaba en local y era imposible en Vercel: el motor
+ * abre su propia conexion a la base, y desde Vercel no se llega a Cloud SQL
+ * sin dejar la base expuesta a internet. En produccion las tres rutas del
+ * tutor devolvian 500.
+ *
+ * Ahora esto es un intermediario y nada mas: recibe del navegador y reenvia
+ * al servicio, que si tiene la conexion y ademas ya conoce el progreso del
+ * estudiante, que era la mitad del contexto que habia que reunir.
+ */
+
+export function startLessonTutorSession(
   request: StartTutorSessionRequest
 ): Promise<StartTutorSessionResponse> {
-  validateTutorSessionRequest(request);
-  const context = await buildGroundingContext({
-    learnerUserId: request.learnerUserId,
-    topicId: request.topicId!,
-    lessonId: request.lessonId!,
-    learningPathId: request.learningPathId
-  });
-  return startTutorSession(request, context);
+  return fetchBackendData<StartTutorSessionResponse>(
+    "learning",
+    "/tutor/session/start",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request)
+    }
+  );
 }
 
-export async function createLessonTutorInteraction(
+export function createLessonTutorInteraction(
   request: CreateTutorInteractionRequest
 ): Promise<CreateTutorInteractionResponse> {
-  validateTutorInteractionRequest(request);
-  const context = await buildGroundingContext({
-    learnerUserId: request.learnerUserId,
-    topicId: request.topicId,
-    lessonId: request.lessonId,
-    learningPathId: request.learningPathId,
-    prompt: request.prompt,
-    action: request.action
-  });
-  return createTutorInteraction(request, context);
+  return fetchBackendData<CreateTutorInteractionResponse>(
+    "learning",
+    "/tutor/interaction",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request)
+    }
+  );
 }
 
-export async function getLessonTutorSession(
+export function getLessonTutorSession(
   request: GetTutorSessionRequest
 ): Promise<GetTutorSessionResponse> {
-  validateTutorSessionLookupRequest(request);
-  return getTutorSession(request);
+  const query = new URLSearchParams({
+    learnerUserId: request.learnerUserId,
+    lessonId: request.lessonId ?? "",
+    topicId: request.topicId ?? ""
+  });
+
+  return fetchBackendData<GetTutorSessionResponse>(
+    "learning",
+    `/tutor/session?${query.toString()}`
+  );
 }
 
+/**
+ * La respuesta por partes.
+ *
+ * Va aparte de las otras tres porque `fetchBackendData` convierte la
+ * respuesta a JSON, y eso obligaria a esperar el texto completo antes de
+ * mostrar nada: justo lo que el streaming existe para evitar. Aqui el cuerpo
+ * se devuelve tal como llega, para reenviarlo al navegador sin tocarlo.
+ *
+ * El precio es que se pierde el reintento automatico cuando vence el token.
+ * Se comprueba la sesion antes de empezar; si vence a mitad de una respuesta,
+ * el flujo se corta y el panel lo muestra como error.
+ */
 export async function streamLessonTutorInteraction(
   request: CreateTutorInteractionRequest
-) {
-  validateTutorInteractionRequest(request);
-  const context = await buildGroundingContext({
-    learnerUserId: request.learnerUserId,
-    topicId: request.topicId,
-    lessonId: request.lessonId,
-    learningPathId: request.learningPathId,
-    prompt: request.prompt,
-    action: request.action
-  });
-  return createTutorInteractionStream(request, context);
-}
+): Promise<ReadableStream<Uint8Array>> {
+  const session = await getServerSession();
 
-async function buildGroundingContext(input: {
-  learnerUserId: string;
-  topicId: string;
-  lessonId: string;
-  learningPathId?: string;
-  prompt?: string;
-  action?: TutorAction;
-}) {
-  const [
-    topicResponse,
-    lessonResponse,
-    learningPathResponse,
-    relatedLessonsResponse,
-    progressResponse,
-    lessonKnowledgeResponse
-  ] =
-    await Promise.all([
-      getTopic(input.topicId),
-      getLessonByTopic(input.topicId, input.lessonId),
-      input.learningPathId
-        ? getLearningPath(input.learningPathId)
-        : Promise.resolve(null),
-      listLessons({ topicId: input.topicId }),
-      getLearningProgress(input.learnerUserId, input.learningPathId),
-      getLessonKnowledge(input.lessonId)
-    ]);
-  const contentSearchResponse = await searchContent({
-    query: buildRetrievalQuery({
-      prompt: input.prompt,
-      action: input.action,
-      topicTitle: topicResponse.topic.title,
-      lessonTitle: lessonResponse.lesson.title
-    }),
-    topicId: input.topicId,
-    limit: 4
-  });
+  if (!session) {
+    throw new BackendRequestError(
+      "Se requiere una sesión activa para hablar con el tutor.",
+      401,
+      "UNAUTHORIZED"
+    );
+  }
 
-  return {
-    topic: topicResponse.topic,
-    lesson: lessonResponse.lesson,
-    learningPath: learningPathResponse?.learningPath,
-    relatedLessons: relatedLessonsResponse.items,
-    contentItems: contentSearchResponse.items,
-    graphInsight: lessonKnowledgeResponse.insight,
-    adaptiveContext: {
-      progressPercent: progressResponse.progressPercent,
-      nextBestAction: progressResponse.nextBestAction,
-      adaptiveGuidance: progressResponse.adaptiveGuidance
+  const response = await fetch(
+    `${serverServiceEndpoints.learningServiceUrl}/tutor/interaction/stream`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.accessToken}`
+      },
+      body: JSON.stringify(request)
     }
-  };
-}
+  );
 
-function buildRetrievalQuery(input: {
-  prompt?: string;
-  action?: TutorAction;
-  topicTitle: string;
-  lessonTitle: string;
-}) {
-  const actionQuery =
-    input.action === "summarize_lesson"
-      ? "resumen general"
-      : input.action === "give_hint"
-        ? "pista primer paso"
-        : input.action === "ask_question"
-          ? "aclaracion de pregunta"
-          : "explicacion de concepto";
+  if (!response.ok || !response.body) {
+    let mensaje = `El tutor respondió ${response.status}.`;
 
-  return [input.prompt, actionQuery, input.topicTitle, input.lessonTitle]
-    .filter(Boolean)
-    .join(" ");
-}
+    try {
+      const cuerpo = (await response.json()) as {
+        error?: { message?: string };
+      };
+      mensaje = cuerpo.error?.message ?? mensaje;
+    } catch {
+      /* La respuesta no era JSON; se queda el mensaje generico. */
+    }
 
-function validateTutorSessionRequest(request: StartTutorSessionRequest) {
-  if (!request.learnerUserId || !request.lessonId || !request.topicId) {
     throw new BackendRequestError(
-      "Se requieren learnerUserId, lessonId y topicId para iniciar una sesión de tutor.",
-      400,
-      "VALIDATION_ERROR"
-    );
-  }
-}
-
-function validateTutorInteractionRequest(request: CreateTutorInteractionRequest) {
-  if (!request.learnerUserId || !request.lessonId || !request.topicId) {
-    throw new BackendRequestError(
-      "Se requieren learnerUserId, lessonId y topicId para interactuar con el tutor.",
-      400,
-      "VALIDATION_ERROR"
+      mensaje,
+      response.status,
+      "TUTOR_STREAM_FAILED"
     );
   }
 
-  if (!request.action) {
-    throw new BackendRequestError(
-      "Se requiere action para la interacción con el tutor.",
-      400,
-      "VALIDATION_ERROR"
-    );
-  }
-
-  if (request.action === "ask_question" && !request.prompt?.trim()) {
-    throw new BackendRequestError(
-      "Se requiere prompt cuando action es ask_question.",
-      400,
-      "VALIDATION_ERROR"
-    );
-  }
-}
-
-function validateTutorSessionLookupRequest(request: GetTutorSessionRequest) {
-  if (!request.learnerUserId || !request.lessonId || !request.topicId) {
-    throw new BackendRequestError(
-      "Se requieren learnerUserId, lessonId y topicId para consultar una sesión de tutor.",
-      400,
-      "VALIDATION_ERROR"
-    );
-  }
-}
-
-async function* createTutorInteractionStream(
-  request: CreateTutorInteractionRequest,
-  context: Awaited<ReturnType<typeof buildGroundingContext>>
-) {
-  yield* streamTutorInteraction(request, context);
+  return response.body;
 }

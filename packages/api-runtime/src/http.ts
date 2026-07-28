@@ -65,6 +65,18 @@ export interface RouteDefinition {
   validation?: RequestValidation;
   successStatusCode?: number;
   authorization?: RouteAuthorization;
+  /**
+   * Tiempo limite propio, en milisegundos, para esta ruta.
+   *
+   * Casi ninguna lo necesita: 10 segundos sobran para leer o escribir en la
+   * base. Lo pide el tutor, que responde en streaming mientras el modelo
+   * genera texto y puede pasar de un minuto.
+   *
+   * Se pone por ruta y no subiendo el limite del servicio entero porque un
+   * limite generoso en todas partes deja pasar consultas colgadas que hoy se
+   * cortan solas.
+   */
+  requestTimeoutMs?: number;
 }
 
 interface MatchedRoute {
@@ -149,7 +161,7 @@ export function createRouter(
             validatedParams
           })
         ),
-        options.requestTimeoutMs ?? 10_000
+        matched.route.requestTimeoutMs ?? options.requestTimeoutMs ?? 10_000
       );
 
       if (!res.writableEnded && response !== undefined) {

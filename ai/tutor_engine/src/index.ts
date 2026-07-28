@@ -545,11 +545,23 @@ function resolveLearnerPrompt(request: CreateTutorInteractionRequest) {
   return "Explain this concept.";
 }
 
+/**
+ * `values` sale de la respuesta del modelo, asi que su tipo es una promesa
+ * que nadie firmo: puede llegar un texto suelto, un objeto o nada.
+ *
+ * Antes se confiaba en la anotacion y se llamaba `.filter` directamente. Con
+ * una respuesta de forma inesperada eso lanza "(values ?? []).filter is not a
+ * function" y tumba la interaccion entera —cuando lo correcto es quedarse sin
+ * sugerencias y responder igual—. Se veia recien ahora porque en produccion
+ * el tutor fallaba antes de llegar hasta aqui.
+ *
+ * Cada elemento ya se comprobaba uno por uno; faltaba comprobar el envase.
+ */
 function normalizePromptList(
-  values: string[] | undefined,
+  values: unknown,
   fallbackValues: string[] | undefined
 ) {
-  const normalizedValues = (values ?? [])
+  const normalizedValues = (Array.isArray(values) ? values : [])
     .filter((value): value is string => typeof value === "string")
     .map((value) => value.trim())
     .filter(Boolean)

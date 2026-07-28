@@ -11,6 +11,10 @@ import { registerHealthRoutes } from "./routes/health-routes.js";
 import { AuthServiceClient } from "./services/auth-service-client.js";
 import { registerLearningRoutes } from "./routes/learning-routes.js";
 import { ContentKnowledgeClient } from "./services/content-knowledge-client.js";
+import { ContentClient } from "./services/content-client.js";
+import { TutorService } from "./services/tutor-service.js";
+import { TutorController } from "./controllers/tutor-controller.js";
+import { registerTutorRoutes } from "./routes/tutor-routes.js";
 import { ClassroomProvisioningClient } from "./services/classroom-provisioning-client.js";
 import { LearningApplicationService } from "./services/learning-service.js";
 import type { Logger } from "./utils/logger.js";
@@ -53,6 +57,12 @@ export function createLearningApp({
     logger
   );
   const learningController = new LearningController(learningService);
+  const tutorService = new TutorService(
+    learningService,
+    new ContentClient(config.contentServiceUrl, logger),
+    contentKnowledgeClient
+  );
+  const tutorController = new TutorController(tutorService);
   const healthController = new HealthController(
     config.serviceName,
     async () => {
@@ -77,7 +87,8 @@ export function createLearningApp({
   return createRouter(
     [
       ...registerHealthRoutes(healthController),
-      ...registerLearningRoutes(learningController)
+      ...registerLearningRoutes(learningController),
+      ...registerTutorRoutes(tutorController)
     ],
     logger
     ,

@@ -17,7 +17,6 @@
     "@cumbre/brands": "workspace:*",
     "@cumbre/schemas": "workspace:*",
     "@cumbre/sdk": "workspace:*",
-    "@cumbre/tutor-engine": "workspace:*",
     "@cumbre/types": "workspace:*",
     "next": "^15.3.1",
     "pdfjs-dist": "^5.7.284",

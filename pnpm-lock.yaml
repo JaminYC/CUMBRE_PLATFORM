@@ -274,9 +274,6 @@ importers:
       '@cumbre/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
-      '@cumbre/tutor-engine':
-        specifier: workspace:*
-        version: link:../../ai/tutor_engine
       '@cumbre/types':
         specifier: workspace:*
         version: link:../../packages/types

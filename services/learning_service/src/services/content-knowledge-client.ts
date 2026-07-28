@@ -20,28 +20,50 @@ export class ContentKnowledgeClient {
     private readonly logger: Logger
   ) {}
 
-  async getLessonKnowledge(lessonId: string): Promise<KnowledgeGraphInsight | null> {
+  async getLessonKnowledge(
+    lessonId: string,
+    autorizacion?: string
+  ): Promise<KnowledgeGraphInsight | null> {
     const response = await this.request<GetLessonKnowledgeResponse>(
-      `/content/knowledge/lesson/${encodeURIComponent(lessonId)}`
+      `/content/knowledge/lesson/${encodeURIComponent(lessonId)}`,
+      autorizacion
     );
 
     return response?.insight ?? null;
   }
 
-  async getTopicKnowledge(topicId: string): Promise<KnowledgeGraphInsight | null> {
+  async getTopicKnowledge(
+    topicId: string,
+    autorizacion?: string
+  ): Promise<KnowledgeGraphInsight | null> {
     const response = await this.request<GetTopicKnowledgeResponse>(
-      `/content/knowledge/topic/${encodeURIComponent(topicId)}`
+      `/content/knowledge/topic/${encodeURIComponent(topicId)}`,
+      autorizacion
     );
 
     return response?.insight ?? null;
   }
 
-  private async request<T>(path: string): Promise<T | null> {
+  /**
+   * `autorizacion` es opcional para no romper a quien ya llamaba sin token,
+   * pero sin ella content_service responde 401 y esto devuelve null.
+   *
+   * Conviene saberlo: las tres llamadas desde learning-service.ts —las de la
+   * guia adaptativa— todavia van sin token, asi que hoy reciben null siempre
+   * y el enriquecimiento del grafo no llega. Se descubrio al montar el tutor
+   * y esta pendiente aparte, porque arreglarlo obliga a llevar el token por
+   * dentro del calculo de progreso.
+   */
+  private async request<T>(
+    path: string,
+    autorizacion?: string
+  ): Promise<T | null> {
     try {
       const response = await fetch(`${this.baseUrl}${path}`, {
         method: "GET",
         headers: {
-          Accept: "application/json"
+          Accept: "application/json",
+          ...(autorizacion ? { Authorization: autorizacion } : {})
         }
       });
 
