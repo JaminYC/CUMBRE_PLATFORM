@@ -37,7 +37,8 @@ export const CUMBRE: Marca = {
     paperTop: "#fcf8f0",
     mintAlt: "#18a68f",
     cargaGradiente: ["#0d1f28", "#122c38", "#0d4c48"]
-  }
+  },
+  permiteRegistroPublico: true
 };
 
 /** Academia Preuniversitaria Bryce — Arequipa. */
@@ -68,6 +69,8 @@ export const BRYCE: Marca = {
     mintAlt: "#2a5cc4",
     cargaGradiente: ["#0d2c63", "#14356f", "#193f8e"]
   },
+  // Las cuentas de Bryce las crea Dirección desde su panel.
+  permiteRegistroPublico: false,
   contacto: {
     direccion: "Santa Marta 209, Cercado — Arequipa",
     telefonos: ["940 161 725", "054 263701"],

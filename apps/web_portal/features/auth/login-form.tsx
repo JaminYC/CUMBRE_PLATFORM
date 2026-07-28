@@ -108,7 +108,7 @@ export function LoginForm() {
         {error ? (
           <div className="field-error-block">
             <p className="field-error">{error}</p>
-            {isNew ? (
+            {isNew && marca.permiteRegistroPublico ? (
               <Link href={`/signup?email=${encodeURIComponent(email)}`} className="field-error-action">
                 Crear cuenta nueva →
               </Link>
@@ -146,9 +146,15 @@ export function LoginForm() {
           Continuar con Google
         </a>
 
-        <p className="auth-switch">
-          ¿No tienes cuenta? <Link href="/signup">Regístrate</Link>
-        </p>
+        {marca.permiteRegistroPublico ? (
+          <p className="auth-switch">
+            ¿No tienes cuenta? <Link href="/signup">Regístrate</Link>
+          </p>
+        ) : (
+          <p className="auth-switch">
+            ¿No tienes cuenta? Solicítala a {marca.nombre}.
+          </p>
+        )}
       </form>
       </div>
     </main>

@@ -73,6 +73,18 @@ export interface Marca {
 
   tokens: TokensDeMarca;
 
+  /**
+   * Si desde esta marca alguien puede crearse una cuenta solo.
+   *
+   * Las academias van en `false`: sus alumnos reciben la cuenta de la
+   * institución, y un registro abierto significaria gente al azar
+   * apareciendo en la lista de estudiantes de un cliente.
+   *
+   * No basta con esconder el enlace — la ruta tambien lo comprueba, porque
+   * esconder un boton no impide que alguien llame al endpoint.
+   */
+  permiteRegistroPublico: boolean;
+
   /** Aparece en la landing y el pie de página. */
   contacto?: {
     direccion?: string;
