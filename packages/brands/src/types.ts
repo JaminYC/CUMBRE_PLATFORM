@@ -113,6 +113,25 @@ export interface Marca {
    */
   landing: "producto" | "editorial";
 
+  /**
+   * Que partes del producto ve esta institucion.
+   *
+   * Sirve para lo que esta a medio construir. YariNET aparecia en el menu
+   * del docente de todas las marcas, pero su servicio no esta desplegado:
+   * la pagina cargaba y los datos nunca llegaban. Un cliente encontrandose
+   * un menu que no lleva a ninguna parte es peor que no tener el menu.
+   *
+   * Se apaga por institucion y no del todo, para poder seguir
+   * desarrollandolo en CUMBRE mientras Bryce no lo ve. Cuando este listo,
+   * se enciende cambiando un booleano.
+   *
+   * Igual que con el registro publico: esconder el enlace no basta, la
+   * pagina tambien lo comprueba. Un menu oculto no impide escribir la URL.
+   */
+  funcionalidades: {
+    yarinet: boolean;
+  };
+
   /** Aparece en la landing y el pie de página. */
   contacto?: {
     direccion?: string;

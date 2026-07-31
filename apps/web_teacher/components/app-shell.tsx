@@ -86,10 +86,14 @@ function YariNetIcon() {
 }
 
 // ── Nav config ────────────────────────────────────────────────────────────────
+/**
+ * `funcionalidad` marca las entradas que dependen de la institucion. Sin ese
+ * campo, la entrada la ven todas.
+ */
 const NAV_ITEMS = [
   { href: "/dashboard",      es: "Panel docente",         en: "Dashboard",       Icon: GridIcon,      badge: null },
   { href: "/classrooms",     es: "Aulas",                 en: "Classrooms",      Icon: UsersIcon,     badge: null },
-  { href: "/yarinet",        es: "YariNET",               en: "YariNET",         Icon: YariNetIcon,   badge: "Nuevo" },
+  { href: "/yarinet",        es: "YariNET",               en: "YariNET",         Icon: YariNetIcon,   badge: "Nuevo", funcionalidad: "yarinet" },
   { href: "/materials",      es: "Materiales",            en: "Materials",       Icon: FilesIcon,     badge: null },
   { href: "/module-builder", es: "Constructor de módulos", en: "Module builder",  Icon: BlocksIcon,    badge: null },
   { href: "/exams",          es: "Exámenes",              en: "Exams",           Icon: ClipboardIcon, badge: null },
@@ -125,7 +129,13 @@ export function AppShell({
 
         {/* Nav */}
         <nav className="shell__menu">
-          {NAV_ITEMS.map(({ href, es, en, Icon }) => {
+          {NAV_ITEMS.filter(
+            (item) =>
+              !("funcionalidad" in item) ||
+              marca.funcionalidades[
+                item.funcionalidad as keyof typeof marca.funcionalidades
+              ]
+          ).map(({ href, es, en, Icon }) => {
             const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
             return (
               <Link
