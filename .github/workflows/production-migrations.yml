@@ -92,6 +92,19 @@ jobs:
           DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}
         run: corepack pnpm --filter @cumbre/learning-service db:seed
 
+      # El temario oficial de la UNSA y el banco de preguntas. Van aparte del
+      # seed de demo porque son dato real: se pueden volver a correr sin tocar
+      # nada mas, y el temario tiene que existir antes que las preguntas.
+      - name: Seed UNSA syllabus
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}
+        run: corepack pnpm --filter @cumbre/learning-service db:seed:temario
+
+      - name: Seed question bank
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}
+        run: corepack pnpm --filter @cumbre/learning-service db:seed:preguntas
+
       - name: Seed content service
         env:
           DATABASE_URL: ${{ secrets.PRODUCTION_DIRECT_URL }}

@@ -1,6 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  // "native" para desarrollo en Windows/macOS; el segundo es el que
+  // necesita el contenedor. Sin el, la imagen construye bien y revienta
+  // al arrancar buscando un motor que no existe.
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -140,4 +144,114 @@ model ClassroomMeetingRecord {
   classroom          ClassroomRecord @relation(fields: [classroomId], references: [id], onDelete: Cascade)
 
   @@map("classroom_meetings")
+}
+
+// ---------------------------------------------------------------------------
+// Motor de practica — Academia Bryce / admision UNSA
+//
+// Vive aqui y no en content_service porque el camino caliente (servir pregunta,
+// registrar respuesta, actualizar racha, decidir la siguiente) tiene que ser
+// una transaccion local: cruzar de servicio seria un salto de red por pregunta.
+//
+// Las tablas llevan prefijo practica_ y el codigo vive en src/practica/ para
+// que extraerlo a su propio servicio mas adelante sea mover carpetas.
+// ---------------------------------------------------------------------------
+
+model AsignaturaRecord {
+  id        String       @id
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  eje       String
+  nombre    String
+  orden     Int
+  temas     TemaRecord[]
+
+  @@unique([eje, nombre])
+  @@map("practica_asignaturas")
+}
+
+model TemaRecord {
+  id           String           @id
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  asignaturaId String
+  romano       String
+  nombre       String
+  // De aqui sale el modo secuencial. Es el orden del temario oficial, que no
+  // es lo mismo que el orden de dificultad real: eso se mide despues.
+  orden        Int
+  bloque       String?
+  asignatura   AsignaturaRecord @relation(fields: [asignaturaId], references: [id], onDelete: Cascade)
+  preguntas    PreguntaRecord[]
+
+  @@unique([asignaturaId, orden])
+  @@map("practica_temas")
+}
+
+model PreguntaRecord {
+  id            String     @id
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  temaId        String
+  enunciado     String
+  alternativas  Json
+  claveCorrecta String
+  solucion      String?
+  fuente        String?
+  // Las preguntas ancla salen de examenes reales y se reservan para medir
+  // transferencia. Nunca entran al banco de practica.
+  esAncla       Boolean    @default(false)
+  // Dificultad estimada por Elo. Arranca en 0 y la mueven las respuestas.
+  dificultad    Float      @default(0)
+  vecesServida  Int        @default(0)
+  activa        Boolean    @default(true)
+  tema          TemaRecord @relation(fields: [temaId], references: [id], onDelete: Cascade)
+
+  @@index([temaId, activa, esAncla])
+  @@map("practica_preguntas")
+}
+
+model IntentoRecord {
+  id            String   @id
+  creadoEn      DateTime @default(now())
+  alumnoId      String
+  preguntaId    String
+  temaId        String
+  asignaturaId  String
+  // "blanco" va aparte de "incorrecta" a proposito: en el examen de admision
+  // dejar en blanco es una decision estrategica, no un fallo.
+  resultado     String
+  tiempoMs      Int
+  modo          String
+  perfil        String
+  // Se guarda el theta del momento, no solo el actual, para poder reconstruir
+  // el historico sin reprocesar toda la secuencia.
+  thetaAlumno   Float?
+  thetaPregunta Float?
+
+  @@index([alumnoId, temaId, creadoEn])
+  @@index([preguntaId])
+  @@map("practica_intentos")
+}
+
+model ProgresoTemaRecord {
+  id              String    @id
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  alumnoId        String
+  temaId          String
+  rachaActual     Int       @default(0)
+  mejorRacha      Int       @default(0)
+  intentosEnTema  Int       @default(0)
+  // Dos etiquetas, no una: practicado responde "puede seguir avanzando",
+  // consolidado responde "lo resolvera en el examen". La evidencia dice que
+  // 3 al hilo sirve para lo primero y hace falta 5 para lo segundo.
+  practicado      Boolean   @default(false)
+  consolidado     Boolean   @default(false)
+  theta           Float     @default(0)
+  ultimoIntentoEn DateTime?
+
+  @@unique([alumnoId, temaId])
+  @@index([alumnoId, practicado])
+  @@map("practica_progreso_temas")
 }

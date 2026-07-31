@@ -30,3 +30,7 @@ test-results
 # el proxy de Cloud SQL, que se descarga solo
 deploy/gcp/cloud-sql-proxy
 deploy/gcp/cloud-sql-proxy.exe
+
+# Motores de consulta de Prisma: binarios de 17 MB que genera "prisma generate".
+# Se reconstruyen en cada instalacion; no tienen por que viajar en el repositorio.
+services/*/src/generated/prisma/libquery_engine-*.node

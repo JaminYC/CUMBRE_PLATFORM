@@ -1,0 +1,675 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{tinta}{HTML}{1B2A41}
+\definecolor{acento}{HTML}{C75B12}
+\definecolor{suave}{HTML}{F2F4F7}
+\definecolor{alerta}{HTML}{8B1E3F}
+
+\titleformat{\section}{\Large\bfseries\color{tinta}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\bfseries\color{tinta}}{\thesubsubsection.}{0.6em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small\color{tinta}Motor de práctica adaptativa — Academia preuniversitaria}
+\rfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlist[itemize]{leftmargin=1.4em,itemsep=2pt,topsep=4pt}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=2pt,topsep=4pt}
+
+\newcommand{\aviso}[1]{%
+  \begin{center}
+  \fcolorbox{acento}{suave}{%
+    \begin{minipage}{0.93\textwidth}
+    \vspace{5pt}#1\vspace{5pt}
+    \end{minipage}}
+  \end{center}}
+
+\newcommand{\cita}[1]{\begin{quote}\itshape\small #1\end{quote}}
+
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries\color{tinta} Motor de práctica adaptativa}\\[6pt]
+{\Large\color{tinta} Evidencia publicada y propuesta de diseño}\\[10pt]
+{\small Academia preuniversitaria orientada al examen de admisión}\\
+{\small Vastoria Solutions S.A.C. — 30 de julio de 2026}
+\end{center}
+
+\vspace{8pt}
+
+\aviso{\textbf{Qué es este documento.} En la reunión del 28 de julio se tomaron decisiones de diseño ---el criterio de \textbf{3 respuestas correctas al hilo} y la simplificación del grafo de prerrequisitos a una secuencia lineal--- sin saber que ambas están estudiadas desde hace décadas. La primera parte reúne esa evidencia con sus números. La segunda examina qué de esa evidencia transfiere a un examen de admisión y qué no. La tercera propone un diseño concreto. La cuarta define cómo comprobar, con datos propios, si funciona.
+
+Cada afirmación va con su fuente. Donde se saca una conclusión propia, se dice explícitamente.}
+
+\tableofcontents
+
+\vspace{10pt}
+\hrule
+\vspace{14pt}
+
+\part*{Parte I --- Qué dice la evidencia}
+\addcontentsline{toc}{section}{\textbf{PARTE I --- Qué dice la evidencia}}
+
+\section{El criterio de dominio: ``N al hilo''}
+
+\textbf{Kelly, K., Wang, Y., Thompson, T. \& Heffernan, N. (2015).} \emph{Defining Mastery: Knowledge Tracing Versus N-Consecutive Correct Responses.} EDM 2015. Worcester Polytechnic Institute.
+
+Datos de \textbf{ASSISTments}, un sistema de tutoría inteligente en uso real. Compararon \textbf{N respuestas correctas consecutivas} (N-CCR) contra \textbf{Bayesian Knowledge Tracing} (KT) con umbral de probabilidad de dominio mayor a 95\%.
+
+\subsection{Con 3 al hilo, ¿acierta las siguientes?}
+
+Sí. De los estudiantes que responden tres correctas seguidas:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Quinta pregunta} & \textbf{Cuarta incorrecta} & \textbf{Cuarta correcta} \\
+\midrule
+Incorrecta & 1{,}8\% (5) & 9{,}8\% (24) \\
+Correcta   & 8{,}4\% (28) & \textbf{80{,}0\% (228)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{4pt}
+{\small Tabla 1 del paper. $n = 285$.}
+
+\cita{``N-CCR, specifically 3-CCR, is a simple, yet effective way to determine mastery within an ITS. This threshold has been found to predict next problem correctness with at least 80\% accuracy.''}
+
+\subsection{Con 3 al hilo, ¿resuelve una pregunta nueva?}
+
+Aquí está el hallazgo decisivo. Midieron también el desempeño en una \textbf{pregunta de transferencia}: un problema distinto, no una más del mismo montón.
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Umbral de 3 al hilo} & \textbf{Alcanzó el umbral} & \textbf{No lo alcanzó} \\
+\midrule
+Transferencia correcta   & 46\% (17) & 0\% \\
+Transferencia incorrecta & 43\% (16) & 11\% (4) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Umbral de 5 al hilo} & \textbf{Alcanzó el umbral} & \textbf{No lo alcanzó} \\
+\midrule
+Transferencia correcta   & 43\% (16) & 8\% (3) \\
+Transferencia incorrecta & 19\% (7)  & 30\% (11) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{4pt}
+{\small Tablas 2 y 3 del paper. $n = 37$ en ambas.}
+
+\vspace{6pt}
+Lo que se desprende de esos números (cálculo propio):
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Umbral} & \textbf{De los que lo alcanzaron, aciertan la transferencia} \\
+\midrule
+3 al hilo & $17/(17{+}16) = $ \textbf{51{,}5\%} \\
+5 al hilo & $16/(16{+}7) = $ \textbf{69{,}6\%} \\
+Knowledge Tracing ($>$95\%) & $31/(31{+}29) = $ \textbf{51{,}7\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\cita{``However, when predicting performance on a transfer task, a higher threshold (5-CCR) is more effective.''}
+
+\cita{``When mastery is defined by performance on a transfer question, results indicate that KT is comparable to 3-CCR, but less accurate than 5-CCR.''}
+
+\subsection{Lo simple le ganó a lo complejo}
+
+\cita{``Both thresholds of N-CCR were more accurate than the more complicated method, knowledge tracing, when determining mastery.''}
+
+Contar aciertos seguidos midió el dominio mejor que un modelo probabilístico entrenado. Es el resultado que más peso tiene para un equipo pequeño con plazo corto.
+
+\subsection{El primer fallo suele ser un descuido}
+
+\cita{``Of the students who reached the final 5-CCR threshold, 90\% of them reached it without an error. Those who made at least one error tended to reach the threshold with N attempts following the error. This suggests that the error was a slip.''}
+
+Quien va a dominar el tema lo domina limpio; y cuando falla una vez, se recupera de inmediato. \textbf{Un solo error no debería disparar castigo ni alarma.}
+
+\subsection{Límites de este estudio}
+
+La parte de transferencia son \textbf{37 estudiantes}. La dirección es clara y coherente con la teoría, pero no es un número para tallar en piedra. La parte de ``predice las siguientes'' sí tiene $n = 285$.
+
+\section{Calibrar el umbral pesa más que elegir el algoritmo}
+
+\textbf{Pelánek, R. \& Řihák, J. (2018).} \emph{Analysis and Design of Mastery Learning Criteria.} New Review of Hypermedia and Multimedia, 24(3), 133--159.
+
+Es la revisión más completa del tema, con datos simulados y reales.
+
+\cita{``The results show that the choice of data sources used for mastery decision and the setting of thresholds are more important than the choice of a learner modeling technique.''}
+
+\cita{``We argue that a simple exponential moving average method is a suitable technique for mastery criterion.''}
+
+Media móvil exponencial, no BKT. Refuerza lo mismo que Kelly: \textbf{no invertir en el modelo, invertir en calibrar el número.}
+
+\subsection{La distinción que define nuestro caso}
+
+\cita{``In the context of high-stakes testing, for example in medical education, it is important to avoid false positives, since premature declaration of mastery can cause harm. In the context of practice, particularly in online educational tools like Khan Academy, which are used by learners on voluntary basis, it is important to avoid false negatives --- if learners are forced to do unnecessary practice, they may lose interest and stop using the system.''}
+
+Una academia preuniversitaria está \textbf{en los dos lados a la vez}:
+
+\begin{itemize}
+\item La práctica es voluntaria. Si aburre, la abandonan. Hay que evitar \textbf{falsos negativos}.
+\item El objetivo es un examen de alto riesgo. Hay que evitar \textbf{falsos positivos}.
+\end{itemize}
+
+Esta tensión es el eje de toda la propuesta de la Parte III.
+
+\section{Grafos de prerrequisitos}
+
+\subsection{El grafo hecho bien: Knowledge Space Theory}
+
+\textbf{Doignon, J.-P. \& Falmagne, J.-C. (1985).} \emph{Knowledge Spaces.} Base matemática de \textbf{ALEKS}, producto comercial en operación desde hace décadas.
+
+Una estructura de conocimiento $(Q, K)$ es un dominio finito $Q$ de ítems y una familia $K$ de \textbf{estados de conocimiento}. La pieza clave es la \textbf{relación de surmise}: $q \leq q'$ significa que dominar $q'$ implica haber dominado $q$.
+
+Dos razones por las que no es viable en este alcance:
+
+\begin{itemize}
+\item \textbf{Granularidad.} ALEKS trabaja a nivel de ítem: su dominio ``Preparation for Calculus'' tiene unos 182 ítems. Aquí se decidió bajar solo hasta el punto del temario.
+\item \textbf{Madurez.} Son cuarenta años de trabajo psicométrico.
+\end{itemize}
+
+\textbf{Conclusión propia:} correcto no intentarlo ahora. Pero conviene saber que el techo del diseño actual es una lista ordenada, no un grafo.
+
+\subsection{Los grafos de expertos casi nunca se validan}
+
+\textbf{Chen, Y., Wuillemin, P.-H. \& Labat, J.-M. (2015).} \emph{Discovering Prerequisite Structure of Skills through Probabilistic Association Rules Mining.} EDM 2015.
+
+\cita{``The prerequisite structures of skills are usually studied by human experts, but they are seldom tested empirically.''}
+
+\cita{``It is quite likely that the prerequisite structures from different experts on the same set of skills are difficult to come to an agreement.''}
+
+Esto valida directamente la advertencia que se hizo en la reunión: que una pregunta de geometría 3D puede ser más fácil que una de 2D, y que por tanto el orden del temario refleja el currículo y no la dependencia real.
+
+\subsection{La prueba estadística que lo resuelve}
+
+\textbf{Vuong, A., Nixon, T. \& Towle, B. (2011).} \emph{A Method for Finding Prerequisites Within a Curriculum.} EDM 2011.
+
+\cita{``They used the statistic binominal test to look for a significant difference between the performance of students who used the potential prerequisite unit and the performance of students who did not. If a significant difference is found, the prerequisite relation is deemed to exist.''}
+
+En castellano llano, para cada par candidato de temas $A \rightarrow B$:
+
+\begin{enumerate}
+\item Separar los alumnos que pasaron por $A$ antes de $B$ de los que llegaron a $B$ sin pasar por $A$.
+\item Comparar su desempeño en $B$ con un test binomial.
+\item Si la diferencia es significativa, la arista existe. Si no, es imaginaria.
+\end{enumerate}
+
+Convierte ``¿está bien ordenado el temario?'' de una discusión de opiniones en una medición.
+
+\subsection{Precedente de producto: Khan Academy}
+
+Khan Academy tuvo un \emph{Knowledge Map} navegable con prerrequisitos y lo retiró. La razón técnica declarada fue la dependencia de una API externa, pero la respuesta de soporte a quienes pedían recuperarlo fue que la mayoría de estudiantes y profesores encuentra que \textbf{la progresión lineal del curso les funciona mejor}, y que no hay planes de reponerlo.
+
+{\small\textbf{Aviso de honestidad:} esto proviene de respuestas del centro de ayuda, no de un estudio publicado. No tiene el peso de las fuentes anteriores. Como precedente de producto vale: una organización con órdenes de magnitud más datos construyó el grafo, lo puso en la interfaz, y terminó en la lista ordenada.}
+
+La queja recurrente de sus usuarios es reveladora: lo que se perdió fue \textbf{el valor diagnóstico} (``ver en qué concepto estaba flojo y volver a los prerrequisitos''), no el de navegación.
+
+\section{Modelado adaptativo: qué hay disponible hoy}
+
+\subsection{Elo aplicado a educación}
+
+\textbf{Pelánek, R. (2016).} \emph{Applications of the Elo Rating System in Adaptive Educational Systems.} Computers \& Education.
+
+La idea es tratar \textbf{cada respuesta como una partida entre el alumno y la pregunta}. Ambos tienen un rating. Si un alumno de nivel bajo acierta una pregunta difícil, ambos ratings se mueven mucho; si un alumno fuerte acierta una fácil, casi nada.
+
+Son dos ecuaciones. La probabilidad esperada de acierto, dados el nivel del alumno $\theta_i$ y la dificultad de la pregunta $\theta_j$:
+
+\[
+P(R_{ij} = 1) = \frac{1}{1 + e^{-(\theta_i - \theta_j)}}
+\]
+
+Y la regla de actualización tras cada respuesta, donde $K$ regula la sensibilidad al último intento:
+
+\[
+\theta_i := \theta_i + K \cdot \bigl(R_{ij} - P(R_{ij} = 1)\bigr)
+\]
+
+Lo que el propio paper dice sobre por qué esto y no lo demás:
+
+\cita{``All these models [IRT, BKT, Performance Factor Analysis], however, are not easy to use: they may require calibration on large samples using nontrivial parameter estimation or are hard to use in an online educational system.''}
+
+\cita{``It is a simple system, which is easy to implement in educational systems; it has only a small number of parameters that need to be set; it can be easily used in an online setting; and it also provides comparable performance to more complex models.''}
+
+\aviso{\textbf{Por qué esto resuelve el problema del 3D contra el 2D.} Elo \textbf{no asume} la dificultad de una pregunta: la \textbf{mide}. Tras unos cientos de respuestas reales, cada pregunta tiene su dificultad estimada por datos, no por la posición que ocupa en el temario. Nadie tiene que opinar sobre el orden. Y de ahí sale la selección adaptativa gratis: para poner al alumno en zona de reto se le sirve una pregunta con $\theta_{\text{pregunta}} \approx \theta_{\text{alumno}}$.}
+
+En términos de implementación: dos columnas de tipo real ---una en la tabla de preguntas, otra en la de progreso del alumno--- y una actualización tras cada respuesta. Sin entrenamiento, sin pipeline de aprendizaje automático, sin dependencia externa.
+
+\subsection{Knowledge tracing profundo: dónde crecer, no dónde empezar}
+
+El estado del arte académico son las redes neuronales: DKT (recurrentes), luego AKT y SAINT (transformers), después redes de grafos y modelos basados en lenguaje. Un survey de 2025 los agrupa en cinco familias.
+
+Dos razones por las que no aplican ahora:
+
+\begin{itemize}
+\item \textbf{No hay datos.} Estos modelos se entrenan con millones de interacciones. El sistema arranca en cero.
+\item \textbf{La ganancia real está en disputa dentro del propio campo.} La librería \texttt{pyKT} nació para estandarizar comparaciones que no eran fiables, y \texttt{simpleKT} es literalmente un trabajo que propone una línea base simple y difícil de superar.
+\end{itemize}
+
+\textbf{Conclusión propia:} es a dónde crecer cuando haya volumen, no dónde empezar. Y Elo produce exactamente los datos que después alimentan un modelo profundo.
+
+\subsection{Modelos de lenguaje para seguir el conocimiento del alumno}
+
+\textbf{Hooshyar, D. et al. (diciembre 2025).} \emph{Problems With Large Language Models for Learner Modelling: Why LLMs Alone Fall Short for Responsible Tutoring in K--12 Education.} arXiv:2512.23036.
+
+Compararon DKT contra modelos de lenguaje, en cero disparos y afinados, para seguir el conocimiento del alumno y predecir el siguiente acierto:
+
+\begin{itemize}
+\item El modelo afinado mejoró alrededor de 8\% y \textbf{aun así quedó 6\% por debajo de DKT}.
+\item Requirió \textbf{198 horas de cómputo} de entrenamiento; DKT lo superó con mucho menos.
+\item Fallos observados: \emph{``higher early-sequence errors, where incorrect predictions are most harmful for adaptive support''} e \emph{``inconsistent and wrong-direction updates''}.
+\end{itemize}
+
+\textbf{Para decidir si un alumno domina un tema, el modelo de lenguaje es peor y más caro.} Esto respalda la decisión tomada en la reunión de no depender del API para la lógica de avance.
+
+\subsubsection{Un matiz que corrige en parte el supuesto de la reunión}
+
+En la reunión se descartó el etiquetado automático por miedo a la alucinación. Hay evidencia en sentido contrario: en un trabajo presentado en \emph{Learning @ Scale} 2024 sobre generación y etiquetado automático de componentes de conocimiento en preguntas de opción múltiple, \textbf{evaluadores expertos prefirieron las etiquetas generadas por GPT-4 sobre las asignadas por humanos aproximadamente dos tercios de las veces}.
+
+La diferencia importa: el miedo era sobre \textbf{competencias con solapamiento} (``esto es geometría pero tiene algo de álgebra''); el estudio mide \textbf{etiquetado de tema en preguntas de opción múltiple}, que es más acotado. No es la misma tarea, pero sugiere que etiquetar el banco con IA ---una vez, en el flujo de carga, con revisión humana por muestreo--- es más viable de lo que se supuso. Eso es distinto de llamar al API en tiempo de ejecución.
+
+\subsection{Repetición espaciada}
+
+En la reunión quedó abierto un problema: la métrica de progreso no puede ser un 100\% que se completa y se acaba. Se pidió ``algo infinito''.
+
+Eso tiene solución madura: \textbf{FSRS} (Free Spaced Repetition Scheduler), hoy integrado en Anki. Modela tres valores por ítem ---dificultad, estabilidad y probabilidad de recuerdo--- y programa cuándo volver a preguntar justo antes de que se olvide.
+
+Cifras del proyecto: predice el recuerdo mejor que el algoritmo clásico SM-2 para el 99{,}5\% de los usuarios evaluados, y necesita entre 20\% y 30\% menos repasos para la misma retención, medido sobre más de 500 millones de repasos.
+
+{\small\textbf{Aviso de honestidad:} esas cifras provienen de la documentación del proyecto y de fuentes secundarias, no de un artículo con revisión por pares. Trátense como indicativas.}
+
+\vspace{14pt}
+\hrule
+\vspace{14pt}
+
+\part*{Parte II --- Qué transfiere a un examen de admisión}
+\addcontentsline{toc}{section}{\textbf{PARTE II --- Qué transfiere a un examen de admisión}}
+
+\section{La diferencia que lo cambia todo}
+
+Casi toda la literatura anterior mide el dominio de una de dos formas: \textbf{acertar el siguiente problema del mismo tipo}, o \textbf{acertar un problema nuevo} (transferencia). Un examen de admisión no es ninguna de las dos exactamente. Tiene cinco propiedades que obligan a adaptar las conclusiones.
+
+\subsection{Es transferencia, no repetición}
+
+Nadie le va a poner al postulante la pregunta 101 del mismo tema. Le van a poner una que no vio.
+
+\textbf{Consecuencia directa:} el resultado que aplica es el de transferencia, no el de ``siguiente problema''. Y ahí el 3 al hilo acierta prácticamente como una moneda al aire (51{,}5\%), mientras el 5 al hilo llega a 69{,}6\%.
+
+Esto \textbf{no} significa que haya que cambiar el 3 al hilo. Significa que el 3 al hilo mide ``practicó el tema'' y no mide ``lo va a resolver en el examen'', y que hacen falta \textbf{dos etiquetas distintas}, no una.
+
+\subsection{Es norma, no criterio}
+
+Y esta es la propiedad que la literatura de \emph{mastery learning} no cubre.
+
+Un examen de admisión no se aprueba alcanzando un nivel absoluto. Se aprueba \textbf{quedando por encima del corte}, que lo fija el número de vacantes y el desempeño del resto de postulantes. Es una competencia por puestos, no una certificación.
+
+Ningún criterio de dominio responde ``¿voy a ingresar?''. Pero \textbf{un sistema de rating sí}, porque es ordinal por construcción: Elo nació precisamente para ordenar jugadores de ajedrez por fuerza relativa.
+
+\aviso{\textbf{Esta es, a nuestro juicio, la oportunidad más grande del proyecto.} La academia ya tiene el dato de qué alumnos ingresaron en ciclos anteriores. Cruzar el rating $\theta$ con ese resultado real permite calibrar una frase que ninguna plataforma del mercado ofrece: \emph{``de los alumnos que llegaron a este nivel, ingresó el N\%''}. Convierte un puntaje abstracto en el único número que le importa a la familia que paga la academia.}
+
+\subsection{El tiempo es parte de la nota}
+
+Ya se reconoció en la reunión con el semáforo de tiempo esperado. La literatura lo respalda indirectamente: Pelánek describe una extensión del criterio de dominio que incorpora la intensidad temporal de los ítems.
+
+\textbf{Consecuencia:} el tiempo no es una estadística decorativa. Es una segunda dimensión del desempeño, y debe registrarse desde el primer día para poder usarse después.
+
+\subsection{Hay una fecha fija}
+
+La repetición espaciada clásica es de horizonte abierto: mantener el recuerdo indefinidamente. Aquí el horizonte termina el día del examen.
+
+\textbf{Consecuencia:} el calendario de repasos debe \textbf{comprimirse} conforme se acerca la fecha, no espaciarse. Un tema visto en marzo debe volver en junio y otra vez en la semana previa.
+
+\subsection{Puede haber penalización por error}
+
+Muchos exámenes de admisión descuentan por respuesta incorrecta pero no por respuesta en blanco. Eso hace que dejar en blanco sea una \textbf{decisión estratégica}, no un fallo.
+
+\textbf{Consecuencia:} ya se decidió registrar ``en blanco'' como categoría separada de ``incorrecta''. Es la decisión correcta, y hay que sostenerla en todo el sistema: en el motor, en las estadísticas y en el panel del profesor.
+
+\section{Resumen: qué se conserva y qué se adapta}
+
+\begin{center}
+\small
+\begin{longtable}{p{4.3cm}p{5.2cm}p{5.2cm}}
+\toprule
+\textbf{Decisión de la reunión} & \textbf{Qué dice la evidencia} & \textbf{Adaptación propuesta} \\
+\midrule
+\endhead
+3 correctas al hilo & Predice el siguiente acierto con 80\% (Kelly 2015) & \textbf{Se conserva} para avanzar en la práctica \\
+\addlinespace
+Un solo umbral & Para transferencia hace falta 5 (Kelly 2015) & \textbf{Añadir un segundo umbral} para ``tema consolidado'' \\
+\addlinespace
+Sin IA en la lógica de avance & N-CCR superó a KT; los LLM quedan 6\% por debajo de DKT (Kelly 2015; Hooshyar 2025) & \textbf{Se conserva}, con respaldo fuerte \\
+\addlinespace
+Grafo simplificado a lista & Khan Academy llegó a lo mismo; ALEKS mantiene el grafo con otra granularidad & \textbf{Se conserva}; modelar aristas sin recorrerlas \\
+\addlinespace
+Orden del temario como dificultad & Los grafos de expertos casi no se validan (Chen 2015) & \textbf{Medir la dificultad con Elo} en lugar de asumirla \\
+\addlinespace
+Bypass manual del alumno & Resuelve la tensión falso positivo / falso negativo (Pelánek 2018) & \textbf{Se conserva}; es buen diseño \\
+\addlinespace
+Solucionario siempre visible & Coherente con evitar falsos negativos en práctica voluntaria & \textbf{Se conserva} \\
+\addlinespace
+Umbral de 10 preguntas para el bypass & El 90\% que domina llega sin error (Kelly 2015) & \textbf{Se conserva}; no castigar el primer fallo \\
+\addlinespace
+Progreso que se completa al 100\% & Quedó abierto en la reunión & \textbf{Repaso espaciado} con horizonte en la fecha del examen \\
+\addlinespace
+Etiquetado manual de preguntas & Expertos prefirieron etiquetas de GPT-4 dos de cada tres veces (L@S 2024) & \textbf{Etiquetar con IA en la carga}, con revisión por muestreo \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\vspace{10pt}
+\hrule
+\vspace{14pt}
+
+\part*{Parte III --- Propuesta de diseño}
+\addcontentsline{toc}{section}{\textbf{PARTE III --- Propuesta de diseño}}
+
+\section{Capa 0 --- El registro (no negociable)}
+
+Todo lo demás depende de esto, y es lo único que \textbf{no se puede añadir después}. Si el motor solo guarda ``pasó el tema, sí o no'', ninguna de las capas siguientes es posible sin volver a empezar.
+
+Cada intento debe registrar:
+
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Campo} & \textbf{Para qué sirve después} \\
+\midrule
+alumno, pregunta, tema, curso & Todo \\
+resultado: correcta / incorrecta / en blanco & Penalización del examen real \\
+tiempo en milisegundos & Semáforo, y segunda dimensión del desempeño \\
+modo: secuencial / foco / quiz / simulacro & Separar práctica de medición \\
+marca de tiempo & Repaso espaciado, curvas de avance \\
+$\theta$ del alumno y de la pregunta en ese instante & Reconstruir el histórico sin recalcular \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+Guardar el $\theta$ del momento (no solo el actual) permite responder después preguntas como ``¿cuánto había avanzado este alumno en abril?'' sin reprocesar toda la historia.
+
+\section{Capa 1 --- Motor de avance (versión 1)}
+
+Sin cambios respecto a lo acordado en la reunión:
+
+\begin{itemize}
+\item Temas ordenados por curso; se avanza en secuencia.
+\item \textbf{3 correctas al hilo} desbloquean el siguiente tema.
+\item Avance persistido en base de datos.
+\item Umbral de 10 preguntas; al siguiente error, pantalla intermedia con: ver solucionario, continuar intentando, o saltar y reforzar después.
+\item El salto siempre es decisión manual del alumno.
+\item Modo foco: uno o más temas elegidos, pantalla intermedia cada 5 preguntas.
+\end{itemize}
+
+Esta capa es la única imprescindible para el plazo de diez días.
+
+\section{Capa 2 --- Elo}
+
+Dos columnas y una actualización tras cada respuesta.
+
+\begin{itemize}
+\item $\theta_{\text{pregunta}}$: dificultad estimada. Arranca en el promedio de su tema (arranque en frío).
+\item $\theta_{\text{alumno,tema}}$: nivel estimado del alumno en ese tema.
+\item $K$ alto mientras hay pocas observaciones, bajo cuando el rating se estabiliza.
+\end{itemize}
+
+\textbf{Qué desbloquea:}
+
+\begin{enumerate}
+\item \textbf{Dificultad medida, no supuesta.} Resuelve el problema del 3D contra el 2D sin discutir el temario con nadie.
+\item \textbf{Selección adaptativa.} Servir preguntas con $\theta_{\text{pregunta}} \approx \theta_{\text{alumno}}$ pone al alumno en zona de reto. Es el comportamiento tipo Duolingo que se pidió en la reunión.
+\item \textbf{Detección de preguntas defectuosas.} Una pregunta cuyo rating se dispara fuera de rango casi siempre está mal redactada o mal respondida en el solucionario. Control de calidad gratuito sobre el banco.
+\end{enumerate}
+
+\section{Capa 3 --- Doble umbral}
+
+La adaptación central de este documento. Dos etiquetas distintas para dos preguntas distintas:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Etiqueta} & \textbf{Criterio} & \textbf{Responde a} \\
+\midrule
+Tema practicado & 3 al hilo & ¿Puede seguir avanzando? \\
+Tema consolidado & 5 al hilo & ¿Lo resolverá en el examen? \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\begin{itemize}
+\item El \textbf{alumno} avanza con el umbral de 3. No se le frena: evita el falso negativo que lo haría abandonar.
+\item El \textbf{panel del profesor} muestra el de 5. Es el que responde a la pregunta que el profesor realmente hace.
+\item El \textbf{simulacro} usa el de 5 para decidir si un tema ya no necesita refuerzo.
+\end{itemize}
+
+Cuesta un contador adicional. Resuelve la tensión de Pelánek sin obligar a elegir un solo lado.
+
+\section{Capa 4 --- Índice de admisión}
+
+La pieza diferenciadora, y la que convierte todo lo anterior en argumento comercial.
+
+\begin{enumerate}
+\item Recuperar de los ciclos anteriores qué alumnos ingresaron y cuáles no.
+\item Calcular su $\theta$ agregado con los datos de práctica de la plataforma.
+\item Ajustar la relación entre $\theta$ y probabilidad de ingreso.
+\end{enumerate}
+
+Resultado: una frase calibrada con datos propios, del tipo \emph{``de los alumnos que llegaron a este nivel en Aritmética, ingresó el N\%''}.
+
+\textbf{Por qué es sólido:} es exactamente el método de validación por transferencia de Kelly et al., pero usando \textbf{la tarea de transferencia real} ---el examen de admisión--- en lugar de una pregunta sustituta. Es metodológicamente más fuerte que el paper, porque el criterio no es un proxy.
+
+\textbf{Requisito:} un ciclo completo de datos. No es para la versión 1.
+
+\section{Capa 5 --- Repaso con horizonte en la fecha del examen}
+
+Repetición espaciada, pero con el calendario comprimiéndose hacia la fecha de admisión en lugar de expandiéndose indefinidamente.
+
+\begin{itemize}
+\item Un tema consolidado en marzo reaparece en junio, y otra vez en la semana previa.
+\item La frecuencia se calcula desde los días restantes, no desde la curva de olvido pura.
+\item Resuelve el problema de la métrica que ``se completa'': siempre hay algo que repasar.
+\end{itemize}
+
+\section{Capa 6 --- Validación del temario}
+
+Aplicar el test binomial de Vuong sobre el orden de temas cuando haya datos de un ciclo. Salida esperada: una lista de aristas confirmadas y otra de aristas imaginarias.
+
+Esto alimenta directamente el panel del profesor, permitiendo pasar de ``falla en polígonos'' a ``falla en polígonos porque le faltan ángulos''.
+
+\vspace{12pt}
+\hrule
+\vspace{14pt}
+
+\part*{Parte IV --- Cómo comprobar que funciona}
+\addcontentsline{toc}{section}{\textbf{PARTE IV --- Cómo comprobar que funciona}}
+
+\section{Adoptar los métodos de validación, no solo las conclusiones}
+
+Los papers citados no son útiles solo por lo que encontraron, sino por \textbf{cómo lo comprobaron}. Sus métodos se pueden replicar con los datos propios a un costo muy bajo. Ordenados de más barato a más caro:
+
+\subsection{A. Replicar la Tabla 1 de Kelly con datos propios}
+
+\textbf{Costo: una consulta SQL.}
+
+Tras cada racha de 3 correctas, ¿qué porcentaje acierta la cuarta y la quinta? El estudio original obtuvo 80{,}0\%.
+
+\begin{itemize}
+\item Si sale cerca de 80\%, el umbral está bien calibrado para esta población.
+\item Si sale claramente por debajo, hay que subirlo a 4 o 5.
+\end{itemize}
+
+Esto no es investigación: es un informe de control que puede correr cada semana.
+
+\subsection{B. Preguntas ancla de exámenes reales}
+
+\textbf{Costo: unas pocas preguntas por tema.}
+
+Reservar preguntas de exámenes de admisión reales de años anteriores, \textbf{excluidas del banco de práctica}, y servirlas al cerrar cada tema.
+
+Comparar el desempeño de quienes alcanzaron el umbral contra quienes no. Es el diseño del Estudio II de Kelly, sin necesidad de un ensayo aleatorizado, y con la ventaja de que la tarea de transferencia es la real.
+
+\subsection{C. Calibración del Elo}
+
+\textbf{Costo: una consulta y un gráfico.}
+
+Agrupar las predicciones $P(\text{acierta})$ en tramos ---0--10\%, 10--20\%, etc.--- y comparar la probabilidad predicha con la frecuencia observada. Si el modelo está bien calibrado, ambas coinciden.
+
+Es la comprobación estándar y detecta de inmediato si $K$ está mal elegido.
+
+\subsection{D. Test binomial sobre el orden del temario}
+
+\textbf{Costo: un script, más un ciclo de datos.}
+
+El método de Vuong descrito en la sección 3.3. Produce la lista de prerrequisitos reales frente a los supuestos.
+
+\subsection{E. Comparación de umbrales}
+
+\textbf{Costo: volumen de alumnos.}
+
+Cuando haya suficientes usuarios, asignar aleatoriamente el umbral de 3 o el de 5 y medir contra las preguntas ancla del punto B. Es la réplica directa del ensayo controlado de Kelly, con la población propia.
+
+\section{Métricas de seguimiento sugeridas}
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Métrica} & \textbf{Qué detecta} & \textbf{Frecuencia} \\
+\midrule
+\% que acierta 4.\textsuperscript{a} y 5.\textsuperscript{a} tras 3 al hilo & Umbral mal calibrado & Semanal \\
+Preguntas con $\theta$ fuera de rango & Preguntas defectuosas & Semanal \\
+\% de temas donde se agota el banco & Falta de preguntas frescas & Mensual \\
+Curva de abandono por número de intentos & Frustración, falso negativo & Mensual \\
+Desempeño en preguntas ancla & Validez real del sistema & Por ciclo \\
+Correlación $\theta$ contra ingreso efectivo & Poder predictivo & Por ciclo \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{12pt}
+\hrule
+\vspace{14pt}
+
+\part*{Parte V --- Orden de ejecución}
+\addcontentsline{toc}{section}{\textbf{PARTE V --- Orden de ejecución}}
+
+\section{Fases}
+
+\begin{center}
+\small
+\begin{longtable}{p{0.7cm}p{5.6cm}p{3.5cm}p{4.2cm}}
+\toprule
+\textbf{\#} & \textbf{Qué} & \textbf{Cuándo} & \textbf{Costo} \\
+\midrule
+\endhead
+0 & Registro completo de cada intento & Con el motor, versión 1 & Una tabla \\
+1 & Motor secuencial con 3 al hilo, isla y bypass & Versión 1 --- 10 días & Ya planificado \\
+2 & Informe semanal de control (validación A) & Semana siguiente & Una consulta \\
+3 & Preguntas ancla de exámenes reales & Cuando haya banco & Pocas preguntas \\
+4 & Elo para dificultad y nivel & Semanas 3--4 & Bajo \\
+5 & Selección adaptativa por Elo en modo foco & Tras unas 200 respuestas por pregunta & Bajo \\
+6 & Doble umbral: practicado / consolidado & Con el panel del profesor & Un contador \\
+7 & Repaso espaciado hacia la fecha del examen & Versión 2 & Medio \\
+8 & Validación del temario (test de Vuong) & Tras un ciclo & Un script \\
+9 & Índice de admisión calibrado & Tras un ciclo & Medio, alto valor \\
+10 & Knowledge tracing profundo & 2027, con volumen & Alto \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Lo que conviene no hacer}
+
+\begin{itemize}
+\item \textbf{No construir un knowledge space.} No alcanza el tiempo y no hace falta para este alcance.
+\item \textbf{No llamar a un modelo de lenguaje por cada respuesta del alumno.} Es peor y más caro que un script, con evidencia publicada (Hooshyar 2025).
+\item \textbf{No mostrar el grafo en la interfaz.} Khan Academy lo hizo y lo retiró; el valor está en el diagnóstico, no en la navegación.
+\item \textbf{No empezar por las estadísticas.} Sin registro de calidad no hay estadística posible; con registro de calidad, la estadística se construye después en cualquier momento.
+\item \textbf{No subir el umbral a 5 para todos.} Frenaría a alumnos capaces y aumentaría el abandono. El doble umbral existe justamente para no tener que elegir.
+\end{itemize}
+
+\vspace{14pt}
+\hrule
+\vspace{12pt}
+
+\section*{Fuentes}
+\addcontentsline{toc}{section}{Fuentes}
+
+\begin{itemize}[leftmargin=1.2em]
+\item Kelly, K., Wang, Y., Thompson, T. \& Heffernan, N. (2015). \emph{Defining Mastery: Knowledge Tracing Versus N-Consecutive Correct Responses.} EDM 2015.\\
+{\footnotesize\url{https://www.educationaldatamining.org/EDM2015/uploads/papers/paper_311.pdf}}
+
+\item Pelánek, R. \& Řihák, J. (2018). \emph{Analysis and Design of Mastery Learning Criteria.} New Review of Hypermedia and Multimedia, 24(3), 133--159.\\
+{\footnotesize\url{https://www.fi.muni.cz/~xpelanek/publications/nrhm-mastery.pdf}}
+
+\item Pelánek, R. (2016). \emph{Applications of the Elo Rating System in Adaptive Educational Systems.} Computers \& Education.\\
+{\footnotesize\url{https://www.fi.muni.cz/~xpelanek/publications/CAE-elo.pdf}}
+
+\item Chen, Y., Wuillemin, P.-H. \& Labat, J.-M. (2015). \emph{Discovering Prerequisite Structure of Skills through Probabilistic Association Rules Mining.} EDM 2015.\\
+{\footnotesize\url{https://files.eric.ed.gov/fulltext/ED560515.pdf}}
+
+\item Vuong, A., Nixon, T. \& Towle, B. (2011). \emph{A Method for Finding Prerequisites Within a Curriculum.} EDM 2011.\\
+{\footnotesize\url{https://educationaldatamining.org/EDM2011/wp-content/uploads/proc/edm2011_paper8_short_Vuong.pdf}}
+
+\item Hooshyar, D. et al. (2025). \emph{Problems With Large Language Models for Learner Modelling.} arXiv:2512.23036.\\
+{\footnotesize\url{https://arxiv.org/abs/2512.23036}}
+
+\item \emph{Automated Generation and Tagging of Knowledge Components from Multiple-Choice Questions.} Learning @ Scale 2024.\\
+{\footnotesize\url{https://arxiv.org/pdf/2405.20526}}
+
+\item Doignon, J.-P. \& Falmagne, J.-C. \emph{Knowledge Spaces} --- Research Behind ALEKS.\\
+{\footnotesize\url{https://www.aleks.com/about_aleks/knowledge_space_theory}}
+
+\item Matayoshi, J. et al. (2021). \emph{A practical perspective on knowledge space theory: ALEKS and its data.} Journal of Mathematical Psychology.\\
+{\footnotesize\url{https://jmatayoshi.github.io/publications/JMP2021_KST_ALEKS_preprint.pdf}}
+
+\item \emph{Deep Learning Based Knowledge Tracing: A Review} (2025). arXiv:2501.14256.\\
+{\footnotesize\url{https://arxiv.org/pdf/2501.14256}}
+
+\item \emph{simpleKT: A Simple but Tough-to-Beat Baseline for Knowledge Tracing.}\\
+{\footnotesize\url{https://openreview.net/pdf?id=vZEgj0clDp}}
+
+\item FSRS --- Free Spaced Repetition Scheduler. Documentación y comparación con SM-2.\\
+{\footnotesize\url{https://github.com/open-spaced-repetition/fsrs4anki}}
+
+\item Khan Academy Help Center --- \emph{What happened to the knowledge map?}\\
+{\footnotesize\url{https://support.khanacademy.org/hc/en-us/community/posts/360027982751-What-happened-to-the-knowledge-map}}
+\end{itemize}
+
+\vspace{10pt}
+
+\aviso{\textbf{Sobre el peso de la evidencia.} Las fuentes de este documento no son todas equivalentes. Kelly (2015), Pelánek (2018 y 2016), Chen (2015) y Vuong (2011) son artículos con revisión por pares en conferencias y revistas del campo. Hooshyar (2025) es un preprint reciente en arXiv. Las cifras de FSRS y el caso de Khan Academy provienen de documentación de proyecto y respuestas de soporte, no de estudios publicados, y se marcan como tales en el texto. Los tamaños de muestra pequeños ---en particular los 37 estudiantes de la prueba de transferencia--- se señalan donde corresponde.}
+
+\end{document}

@@ -48,6 +48,31 @@ export type StudentEnrollmentRecord = $Result.DefaultSelection<Prisma.$StudentEn
  * 
  */
 export type ClassroomMeetingRecord = $Result.DefaultSelection<Prisma.$ClassroomMeetingRecordPayload>
+/**
+ * Model AsignaturaRecord
+ * 
+ */
+export type AsignaturaRecord = $Result.DefaultSelection<Prisma.$AsignaturaRecordPayload>
+/**
+ * Model TemaRecord
+ * 
+ */
+export type TemaRecord = $Result.DefaultSelection<Prisma.$TemaRecordPayload>
+/**
+ * Model PreguntaRecord
+ * 
+ */
+export type PreguntaRecord = $Result.DefaultSelection<Prisma.$PreguntaRecordPayload>
+/**
+ * Model IntentoRecord
+ * 
+ */
+export type IntentoRecord = $Result.DefaultSelection<Prisma.$IntentoRecordPayload>
+/**
+ * Model ProgresoTemaRecord
+ * 
+ */
+export type ProgresoTemaRecord = $Result.DefaultSelection<Prisma.$ProgresoTemaRecordPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -236,6 +261,56 @@ export class PrismaClient<
     * ```
     */
   get classroomMeetingRecord(): Prisma.ClassroomMeetingRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.asignaturaRecord`: Exposes CRUD operations for the **AsignaturaRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AsignaturaRecords
+    * const asignaturaRecords = await prisma.asignaturaRecord.findMany()
+    * ```
+    */
+  get asignaturaRecord(): Prisma.AsignaturaRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.temaRecord`: Exposes CRUD operations for the **TemaRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TemaRecords
+    * const temaRecords = await prisma.temaRecord.findMany()
+    * ```
+    */
+  get temaRecord(): Prisma.TemaRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.preguntaRecord`: Exposes CRUD operations for the **PreguntaRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PreguntaRecords
+    * const preguntaRecords = await prisma.preguntaRecord.findMany()
+    * ```
+    */
+  get preguntaRecord(): Prisma.PreguntaRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.intentoRecord`: Exposes CRUD operations for the **IntentoRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IntentoRecords
+    * const intentoRecords = await prisma.intentoRecord.findMany()
+    * ```
+    */
+  get intentoRecord(): Prisma.IntentoRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.progresoTemaRecord`: Exposes CRUD operations for the **ProgresoTemaRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProgresoTemaRecords
+    * const progresoTemaRecords = await prisma.progresoTemaRecord.findMany()
+    * ```
+    */
+  get progresoTemaRecord(): Prisma.ProgresoTemaRecordDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -683,7 +758,12 @@ export namespace Prisma {
     ClassroomRecord: 'ClassroomRecord',
     ClassroomStudentProfileRecord: 'ClassroomStudentProfileRecord',
     StudentEnrollmentRecord: 'StudentEnrollmentRecord',
-    ClassroomMeetingRecord: 'ClassroomMeetingRecord'
+    ClassroomMeetingRecord: 'ClassroomMeetingRecord',
+    AsignaturaRecord: 'AsignaturaRecord',
+    TemaRecord: 'TemaRecord',
+    PreguntaRecord: 'PreguntaRecord',
+    IntentoRecord: 'IntentoRecord',
+    ProgresoTemaRecord: 'ProgresoTemaRecord'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -702,7 +782,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "learningPathRecord" | "learningSessionRecord" | "masteryStateRecord" | "classroomRecord" | "classroomStudentProfileRecord" | "studentEnrollmentRecord" | "classroomMeetingRecord"
+      modelProps: "learningPathRecord" | "learningSessionRecord" | "masteryStateRecord" | "classroomRecord" | "classroomStudentProfileRecord" | "studentEnrollmentRecord" | "classroomMeetingRecord" | "asignaturaRecord" | "temaRecord" | "preguntaRecord" | "intentoRecord" | "progresoTemaRecord"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1224,6 +1304,376 @@ export namespace Prisma {
           }
         }
       }
+      AsignaturaRecord: {
+        payload: Prisma.$AsignaturaRecordPayload<ExtArgs>
+        fields: Prisma.AsignaturaRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AsignaturaRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AsignaturaRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.AsignaturaRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AsignaturaRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>
+          }
+          findMany: {
+            args: Prisma.AsignaturaRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>[]
+          }
+          create: {
+            args: Prisma.AsignaturaRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>
+          }
+          createMany: {
+            args: Prisma.AsignaturaRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AsignaturaRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.AsignaturaRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>
+          }
+          update: {
+            args: Prisma.AsignaturaRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.AsignaturaRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AsignaturaRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AsignaturaRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.AsignaturaRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AsignaturaRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.AsignaturaRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAsignaturaRecord>
+          }
+          groupBy: {
+            args: Prisma.AsignaturaRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AsignaturaRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AsignaturaRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<AsignaturaRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      TemaRecord: {
+        payload: Prisma.$TemaRecordPayload<ExtArgs>
+        fields: Prisma.TemaRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TemaRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TemaRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.TemaRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TemaRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>
+          }
+          findMany: {
+            args: Prisma.TemaRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>[]
+          }
+          create: {
+            args: Prisma.TemaRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>
+          }
+          createMany: {
+            args: Prisma.TemaRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TemaRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.TemaRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>
+          }
+          update: {
+            args: Prisma.TemaRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.TemaRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TemaRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TemaRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.TemaRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TemaRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.TemaRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTemaRecord>
+          }
+          groupBy: {
+            args: Prisma.TemaRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TemaRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TemaRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<TemaRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      PreguntaRecord: {
+        payload: Prisma.$PreguntaRecordPayload<ExtArgs>
+        fields: Prisma.PreguntaRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PreguntaRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PreguntaRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.PreguntaRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PreguntaRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>
+          }
+          findMany: {
+            args: Prisma.PreguntaRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>[]
+          }
+          create: {
+            args: Prisma.PreguntaRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>
+          }
+          createMany: {
+            args: Prisma.PreguntaRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PreguntaRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.PreguntaRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>
+          }
+          update: {
+            args: Prisma.PreguntaRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.PreguntaRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PreguntaRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PreguntaRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.PreguntaRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreguntaRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.PreguntaRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePreguntaRecord>
+          }
+          groupBy: {
+            args: Prisma.PreguntaRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PreguntaRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PreguntaRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<PreguntaRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      IntentoRecord: {
+        payload: Prisma.$IntentoRecordPayload<ExtArgs>
+        fields: Prisma.IntentoRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntentoRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntentoRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.IntentoRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntentoRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>
+          }
+          findMany: {
+            args: Prisma.IntentoRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>[]
+          }
+          create: {
+            args: Prisma.IntentoRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>
+          }
+          createMany: {
+            args: Prisma.IntentoRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntentoRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.IntentoRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>
+          }
+          update: {
+            args: Prisma.IntentoRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.IntentoRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntentoRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntentoRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.IntentoRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntentoRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.IntentoRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntentoRecord>
+          }
+          groupBy: {
+            args: Prisma.IntentoRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntentoRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntentoRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<IntentoRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProgresoTemaRecord: {
+        payload: Prisma.$ProgresoTemaRecordPayload<ExtArgs>
+        fields: Prisma.ProgresoTemaRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProgresoTemaRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProgresoTemaRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.ProgresoTemaRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProgresoTemaRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>
+          }
+          findMany: {
+            args: Prisma.ProgresoTemaRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>[]
+          }
+          create: {
+            args: Prisma.ProgresoTemaRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>
+          }
+          createMany: {
+            args: Prisma.ProgresoTemaRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProgresoTemaRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.ProgresoTemaRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>
+          }
+          update: {
+            args: Prisma.ProgresoTemaRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProgresoTemaRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProgresoTemaRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProgresoTemaRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProgresoTemaRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgresoTemaRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.ProgresoTemaRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProgresoTemaRecord>
+          }
+          groupBy: {
+            args: Prisma.ProgresoTemaRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProgresoTemaRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProgresoTemaRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<ProgresoTemaRecordCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1327,6 +1777,11 @@ export namespace Prisma {
     classroomStudentProfileRecord?: ClassroomStudentProfileRecordOmit
     studentEnrollmentRecord?: StudentEnrollmentRecordOmit
     classroomMeetingRecord?: ClassroomMeetingRecordOmit
+    asignaturaRecord?: AsignaturaRecordOmit
+    temaRecord?: TemaRecordOmit
+    preguntaRecord?: PreguntaRecordOmit
+    intentoRecord?: IntentoRecordOmit
+    progresoTemaRecord?: ProgresoTemaRecordOmit
   }
 
   /* Types for Logging */
@@ -1510,6 +1965,68 @@ export namespace Prisma {
    */
   export type ClassroomStudentProfileRecordCountOutputTypeCountEnrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: StudentEnrollmentRecordWhereInput
+  }
+
+
+  /**
+   * Count Type AsignaturaRecordCountOutputType
+   */
+
+  export type AsignaturaRecordCountOutputType = {
+    temas: number
+  }
+
+  export type AsignaturaRecordCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    temas?: boolean | AsignaturaRecordCountOutputTypeCountTemasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AsignaturaRecordCountOutputType without action
+   */
+  export type AsignaturaRecordCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecordCountOutputType
+     */
+    select?: AsignaturaRecordCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AsignaturaRecordCountOutputType without action
+   */
+  export type AsignaturaRecordCountOutputTypeCountTemasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TemaRecordWhereInput
+  }
+
+
+  /**
+   * Count Type TemaRecordCountOutputType
+   */
+
+  export type TemaRecordCountOutputType = {
+    preguntas: number
+  }
+
+  export type TemaRecordCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    preguntas?: boolean | TemaRecordCountOutputTypeCountPreguntasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TemaRecordCountOutputType without action
+   */
+  export type TemaRecordCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecordCountOutputType
+     */
+    select?: TemaRecordCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TemaRecordCountOutputType without action
+   */
+  export type TemaRecordCountOutputTypeCountPreguntasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PreguntaRecordWhereInput
   }
 
 
@@ -9739,6 +10256,5740 @@ export namespace Prisma {
 
 
   /**
+   * Model AsignaturaRecord
+   */
+
+  export type AggregateAsignaturaRecord = {
+    _count: AsignaturaRecordCountAggregateOutputType | null
+    _avg: AsignaturaRecordAvgAggregateOutputType | null
+    _sum: AsignaturaRecordSumAggregateOutputType | null
+    _min: AsignaturaRecordMinAggregateOutputType | null
+    _max: AsignaturaRecordMaxAggregateOutputType | null
+  }
+
+  export type AsignaturaRecordAvgAggregateOutputType = {
+    orden: number | null
+  }
+
+  export type AsignaturaRecordSumAggregateOutputType = {
+    orden: number | null
+  }
+
+  export type AsignaturaRecordMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    eje: string | null
+    nombre: string | null
+    orden: number | null
+  }
+
+  export type AsignaturaRecordMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    eje: string | null
+    nombre: string | null
+    orden: number | null
+  }
+
+  export type AsignaturaRecordCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    eje: number
+    nombre: number
+    orden: number
+    _all: number
+  }
+
+
+  export type AsignaturaRecordAvgAggregateInputType = {
+    orden?: true
+  }
+
+  export type AsignaturaRecordSumAggregateInputType = {
+    orden?: true
+  }
+
+  export type AsignaturaRecordMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    eje?: true
+    nombre?: true
+    orden?: true
+  }
+
+  export type AsignaturaRecordMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    eje?: true
+    nombre?: true
+    orden?: true
+  }
+
+  export type AsignaturaRecordCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    eje?: true
+    nombre?: true
+    orden?: true
+    _all?: true
+  }
+
+  export type AsignaturaRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AsignaturaRecord to aggregate.
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AsignaturaRecords to fetch.
+     */
+    orderBy?: AsignaturaRecordOrderByWithRelationInput | AsignaturaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AsignaturaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AsignaturaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AsignaturaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AsignaturaRecords
+    **/
+    _count?: true | AsignaturaRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AsignaturaRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AsignaturaRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AsignaturaRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AsignaturaRecordMaxAggregateInputType
+  }
+
+  export type GetAsignaturaRecordAggregateType<T extends AsignaturaRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateAsignaturaRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAsignaturaRecord[P]>
+      : GetScalarType<T[P], AggregateAsignaturaRecord[P]>
+  }
+
+
+
+
+  export type AsignaturaRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AsignaturaRecordWhereInput
+    orderBy?: AsignaturaRecordOrderByWithAggregationInput | AsignaturaRecordOrderByWithAggregationInput[]
+    by: AsignaturaRecordScalarFieldEnum[] | AsignaturaRecordScalarFieldEnum
+    having?: AsignaturaRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AsignaturaRecordCountAggregateInputType | true
+    _avg?: AsignaturaRecordAvgAggregateInputType
+    _sum?: AsignaturaRecordSumAggregateInputType
+    _min?: AsignaturaRecordMinAggregateInputType
+    _max?: AsignaturaRecordMaxAggregateInputType
+  }
+
+  export type AsignaturaRecordGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    eje: string
+    nombre: string
+    orden: number
+    _count: AsignaturaRecordCountAggregateOutputType | null
+    _avg: AsignaturaRecordAvgAggregateOutputType | null
+    _sum: AsignaturaRecordSumAggregateOutputType | null
+    _min: AsignaturaRecordMinAggregateOutputType | null
+    _max: AsignaturaRecordMaxAggregateOutputType | null
+  }
+
+  type GetAsignaturaRecordGroupByPayload<T extends AsignaturaRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AsignaturaRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AsignaturaRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AsignaturaRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], AsignaturaRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AsignaturaRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    eje?: boolean
+    nombre?: boolean
+    orden?: boolean
+    temas?: boolean | AsignaturaRecord$temasArgs<ExtArgs>
+    _count?: boolean | AsignaturaRecordCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["asignaturaRecord"]>
+
+  export type AsignaturaRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    eje?: boolean
+    nombre?: boolean
+    orden?: boolean
+  }, ExtArgs["result"]["asignaturaRecord"]>
+
+  export type AsignaturaRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    eje?: boolean
+    nombre?: boolean
+    orden?: boolean
+  }, ExtArgs["result"]["asignaturaRecord"]>
+
+  export type AsignaturaRecordSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    eje?: boolean
+    nombre?: boolean
+    orden?: boolean
+  }
+
+  export type AsignaturaRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "eje" | "nombre" | "orden", ExtArgs["result"]["asignaturaRecord"]>
+  export type AsignaturaRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    temas?: boolean | AsignaturaRecord$temasArgs<ExtArgs>
+    _count?: boolean | AsignaturaRecordCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AsignaturaRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AsignaturaRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AsignaturaRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AsignaturaRecord"
+    objects: {
+      temas: Prisma.$TemaRecordPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      eje: string
+      nombre: string
+      orden: number
+    }, ExtArgs["result"]["asignaturaRecord"]>
+    composites: {}
+  }
+
+  type AsignaturaRecordGetPayload<S extends boolean | null | undefined | AsignaturaRecordDefaultArgs> = $Result.GetResult<Prisma.$AsignaturaRecordPayload, S>
+
+  type AsignaturaRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AsignaturaRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AsignaturaRecordCountAggregateInputType | true
+    }
+
+  export interface AsignaturaRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AsignaturaRecord'], meta: { name: 'AsignaturaRecord' } }
+    /**
+     * Find zero or one AsignaturaRecord that matches the filter.
+     * @param {AsignaturaRecordFindUniqueArgs} args - Arguments to find a AsignaturaRecord
+     * @example
+     * // Get one AsignaturaRecord
+     * const asignaturaRecord = await prisma.asignaturaRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AsignaturaRecordFindUniqueArgs>(args: SelectSubset<T, AsignaturaRecordFindUniqueArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AsignaturaRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AsignaturaRecordFindUniqueOrThrowArgs} args - Arguments to find a AsignaturaRecord
+     * @example
+     * // Get one AsignaturaRecord
+     * const asignaturaRecord = await prisma.asignaturaRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AsignaturaRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, AsignaturaRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AsignaturaRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordFindFirstArgs} args - Arguments to find a AsignaturaRecord
+     * @example
+     * // Get one AsignaturaRecord
+     * const asignaturaRecord = await prisma.asignaturaRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AsignaturaRecordFindFirstArgs>(args?: SelectSubset<T, AsignaturaRecordFindFirstArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AsignaturaRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordFindFirstOrThrowArgs} args - Arguments to find a AsignaturaRecord
+     * @example
+     * // Get one AsignaturaRecord
+     * const asignaturaRecord = await prisma.asignaturaRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AsignaturaRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, AsignaturaRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AsignaturaRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AsignaturaRecords
+     * const asignaturaRecords = await prisma.asignaturaRecord.findMany()
+     * 
+     * // Get first 10 AsignaturaRecords
+     * const asignaturaRecords = await prisma.asignaturaRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const asignaturaRecordWithIdOnly = await prisma.asignaturaRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AsignaturaRecordFindManyArgs>(args?: SelectSubset<T, AsignaturaRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AsignaturaRecord.
+     * @param {AsignaturaRecordCreateArgs} args - Arguments to create a AsignaturaRecord.
+     * @example
+     * // Create one AsignaturaRecord
+     * const AsignaturaRecord = await prisma.asignaturaRecord.create({
+     *   data: {
+     *     // ... data to create a AsignaturaRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends AsignaturaRecordCreateArgs>(args: SelectSubset<T, AsignaturaRecordCreateArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AsignaturaRecords.
+     * @param {AsignaturaRecordCreateManyArgs} args - Arguments to create many AsignaturaRecords.
+     * @example
+     * // Create many AsignaturaRecords
+     * const asignaturaRecord = await prisma.asignaturaRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AsignaturaRecordCreateManyArgs>(args?: SelectSubset<T, AsignaturaRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AsignaturaRecords and returns the data saved in the database.
+     * @param {AsignaturaRecordCreateManyAndReturnArgs} args - Arguments to create many AsignaturaRecords.
+     * @example
+     * // Create many AsignaturaRecords
+     * const asignaturaRecord = await prisma.asignaturaRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AsignaturaRecords and only return the `id`
+     * const asignaturaRecordWithIdOnly = await prisma.asignaturaRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AsignaturaRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, AsignaturaRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AsignaturaRecord.
+     * @param {AsignaturaRecordDeleteArgs} args - Arguments to delete one AsignaturaRecord.
+     * @example
+     * // Delete one AsignaturaRecord
+     * const AsignaturaRecord = await prisma.asignaturaRecord.delete({
+     *   where: {
+     *     // ... filter to delete one AsignaturaRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AsignaturaRecordDeleteArgs>(args: SelectSubset<T, AsignaturaRecordDeleteArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AsignaturaRecord.
+     * @param {AsignaturaRecordUpdateArgs} args - Arguments to update one AsignaturaRecord.
+     * @example
+     * // Update one AsignaturaRecord
+     * const asignaturaRecord = await prisma.asignaturaRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AsignaturaRecordUpdateArgs>(args: SelectSubset<T, AsignaturaRecordUpdateArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AsignaturaRecords.
+     * @param {AsignaturaRecordDeleteManyArgs} args - Arguments to filter AsignaturaRecords to delete.
+     * @example
+     * // Delete a few AsignaturaRecords
+     * const { count } = await prisma.asignaturaRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AsignaturaRecordDeleteManyArgs>(args?: SelectSubset<T, AsignaturaRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AsignaturaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AsignaturaRecords
+     * const asignaturaRecord = await prisma.asignaturaRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AsignaturaRecordUpdateManyArgs>(args: SelectSubset<T, AsignaturaRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AsignaturaRecords and returns the data updated in the database.
+     * @param {AsignaturaRecordUpdateManyAndReturnArgs} args - Arguments to update many AsignaturaRecords.
+     * @example
+     * // Update many AsignaturaRecords
+     * const asignaturaRecord = await prisma.asignaturaRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AsignaturaRecords and only return the `id`
+     * const asignaturaRecordWithIdOnly = await prisma.asignaturaRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AsignaturaRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, AsignaturaRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AsignaturaRecord.
+     * @param {AsignaturaRecordUpsertArgs} args - Arguments to update or create a AsignaturaRecord.
+     * @example
+     * // Update or create a AsignaturaRecord
+     * const asignaturaRecord = await prisma.asignaturaRecord.upsert({
+     *   create: {
+     *     // ... data to create a AsignaturaRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AsignaturaRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AsignaturaRecordUpsertArgs>(args: SelectSubset<T, AsignaturaRecordUpsertArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AsignaturaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordCountArgs} args - Arguments to filter AsignaturaRecords to count.
+     * @example
+     * // Count the number of AsignaturaRecords
+     * const count = await prisma.asignaturaRecord.count({
+     *   where: {
+     *     // ... the filter for the AsignaturaRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends AsignaturaRecordCountArgs>(
+      args?: Subset<T, AsignaturaRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AsignaturaRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AsignaturaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AsignaturaRecordAggregateArgs>(args: Subset<T, AsignaturaRecordAggregateArgs>): Prisma.PrismaPromise<GetAsignaturaRecordAggregateType<T>>
+
+    /**
+     * Group by AsignaturaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AsignaturaRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AsignaturaRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AsignaturaRecordGroupByArgs['orderBy'] }
+        : { orderBy?: AsignaturaRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AsignaturaRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAsignaturaRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AsignaturaRecord model
+   */
+  readonly fields: AsignaturaRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AsignaturaRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AsignaturaRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    temas<T extends AsignaturaRecord$temasArgs<ExtArgs> = {}>(args?: Subset<T, AsignaturaRecord$temasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AsignaturaRecord model
+   */
+  interface AsignaturaRecordFieldRefs {
+    readonly id: FieldRef<"AsignaturaRecord", 'String'>
+    readonly createdAt: FieldRef<"AsignaturaRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"AsignaturaRecord", 'DateTime'>
+    readonly eje: FieldRef<"AsignaturaRecord", 'String'>
+    readonly nombre: FieldRef<"AsignaturaRecord", 'String'>
+    readonly orden: FieldRef<"AsignaturaRecord", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AsignaturaRecord findUnique
+   */
+  export type AsignaturaRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which AsignaturaRecord to fetch.
+     */
+    where: AsignaturaRecordWhereUniqueInput
+  }
+
+  /**
+   * AsignaturaRecord findUniqueOrThrow
+   */
+  export type AsignaturaRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which AsignaturaRecord to fetch.
+     */
+    where: AsignaturaRecordWhereUniqueInput
+  }
+
+  /**
+   * AsignaturaRecord findFirst
+   */
+  export type AsignaturaRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which AsignaturaRecord to fetch.
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AsignaturaRecords to fetch.
+     */
+    orderBy?: AsignaturaRecordOrderByWithRelationInput | AsignaturaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AsignaturaRecords.
+     */
+    cursor?: AsignaturaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AsignaturaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AsignaturaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AsignaturaRecords.
+     */
+    distinct?: AsignaturaRecordScalarFieldEnum | AsignaturaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * AsignaturaRecord findFirstOrThrow
+   */
+  export type AsignaturaRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which AsignaturaRecord to fetch.
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AsignaturaRecords to fetch.
+     */
+    orderBy?: AsignaturaRecordOrderByWithRelationInput | AsignaturaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AsignaturaRecords.
+     */
+    cursor?: AsignaturaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AsignaturaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AsignaturaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AsignaturaRecords.
+     */
+    distinct?: AsignaturaRecordScalarFieldEnum | AsignaturaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * AsignaturaRecord findMany
+   */
+  export type AsignaturaRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which AsignaturaRecords to fetch.
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AsignaturaRecords to fetch.
+     */
+    orderBy?: AsignaturaRecordOrderByWithRelationInput | AsignaturaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AsignaturaRecords.
+     */
+    cursor?: AsignaturaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AsignaturaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AsignaturaRecords.
+     */
+    skip?: number
+    distinct?: AsignaturaRecordScalarFieldEnum | AsignaturaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * AsignaturaRecord create
+   */
+  export type AsignaturaRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AsignaturaRecord.
+     */
+    data: XOR<AsignaturaRecordCreateInput, AsignaturaRecordUncheckedCreateInput>
+  }
+
+  /**
+   * AsignaturaRecord createMany
+   */
+  export type AsignaturaRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AsignaturaRecords.
+     */
+    data: AsignaturaRecordCreateManyInput | AsignaturaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AsignaturaRecord createManyAndReturn
+   */
+  export type AsignaturaRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many AsignaturaRecords.
+     */
+    data: AsignaturaRecordCreateManyInput | AsignaturaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AsignaturaRecord update
+   */
+  export type AsignaturaRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AsignaturaRecord.
+     */
+    data: XOR<AsignaturaRecordUpdateInput, AsignaturaRecordUncheckedUpdateInput>
+    /**
+     * Choose, which AsignaturaRecord to update.
+     */
+    where: AsignaturaRecordWhereUniqueInput
+  }
+
+  /**
+   * AsignaturaRecord updateMany
+   */
+  export type AsignaturaRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AsignaturaRecords.
+     */
+    data: XOR<AsignaturaRecordUpdateManyMutationInput, AsignaturaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which AsignaturaRecords to update
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * Limit how many AsignaturaRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AsignaturaRecord updateManyAndReturn
+   */
+  export type AsignaturaRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update AsignaturaRecords.
+     */
+    data: XOR<AsignaturaRecordUpdateManyMutationInput, AsignaturaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which AsignaturaRecords to update
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * Limit how many AsignaturaRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AsignaturaRecord upsert
+   */
+  export type AsignaturaRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AsignaturaRecord to update in case it exists.
+     */
+    where: AsignaturaRecordWhereUniqueInput
+    /**
+     * In case the AsignaturaRecord found by the `where` argument doesn't exist, create a new AsignaturaRecord with this data.
+     */
+    create: XOR<AsignaturaRecordCreateInput, AsignaturaRecordUncheckedCreateInput>
+    /**
+     * In case the AsignaturaRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AsignaturaRecordUpdateInput, AsignaturaRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * AsignaturaRecord delete
+   */
+  export type AsignaturaRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+    /**
+     * Filter which AsignaturaRecord to delete.
+     */
+    where: AsignaturaRecordWhereUniqueInput
+  }
+
+  /**
+   * AsignaturaRecord deleteMany
+   */
+  export type AsignaturaRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AsignaturaRecords to delete
+     */
+    where?: AsignaturaRecordWhereInput
+    /**
+     * Limit how many AsignaturaRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AsignaturaRecord.temas
+   */
+  export type AsignaturaRecord$temasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    where?: TemaRecordWhereInput
+    orderBy?: TemaRecordOrderByWithRelationInput | TemaRecordOrderByWithRelationInput[]
+    cursor?: TemaRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TemaRecordScalarFieldEnum | TemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * AsignaturaRecord without action
+   */
+  export type AsignaturaRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AsignaturaRecord
+     */
+    select?: AsignaturaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AsignaturaRecord
+     */
+    omit?: AsignaturaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AsignaturaRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TemaRecord
+   */
+
+  export type AggregateTemaRecord = {
+    _count: TemaRecordCountAggregateOutputType | null
+    _avg: TemaRecordAvgAggregateOutputType | null
+    _sum: TemaRecordSumAggregateOutputType | null
+    _min: TemaRecordMinAggregateOutputType | null
+    _max: TemaRecordMaxAggregateOutputType | null
+  }
+
+  export type TemaRecordAvgAggregateOutputType = {
+    orden: number | null
+  }
+
+  export type TemaRecordSumAggregateOutputType = {
+    orden: number | null
+  }
+
+  export type TemaRecordMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    asignaturaId: string | null
+    romano: string | null
+    nombre: string | null
+    orden: number | null
+    bloque: string | null
+  }
+
+  export type TemaRecordMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    asignaturaId: string | null
+    romano: string | null
+    nombre: string | null
+    orden: number | null
+    bloque: string | null
+  }
+
+  export type TemaRecordCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    asignaturaId: number
+    romano: number
+    nombre: number
+    orden: number
+    bloque: number
+    _all: number
+  }
+
+
+  export type TemaRecordAvgAggregateInputType = {
+    orden?: true
+  }
+
+  export type TemaRecordSumAggregateInputType = {
+    orden?: true
+  }
+
+  export type TemaRecordMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    asignaturaId?: true
+    romano?: true
+    nombre?: true
+    orden?: true
+    bloque?: true
+  }
+
+  export type TemaRecordMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    asignaturaId?: true
+    romano?: true
+    nombre?: true
+    orden?: true
+    bloque?: true
+  }
+
+  export type TemaRecordCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    asignaturaId?: true
+    romano?: true
+    nombre?: true
+    orden?: true
+    bloque?: true
+    _all?: true
+  }
+
+  export type TemaRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TemaRecord to aggregate.
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TemaRecords to fetch.
+     */
+    orderBy?: TemaRecordOrderByWithRelationInput | TemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TemaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TemaRecords
+    **/
+    _count?: true | TemaRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TemaRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TemaRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TemaRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TemaRecordMaxAggregateInputType
+  }
+
+  export type GetTemaRecordAggregateType<T extends TemaRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateTemaRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTemaRecord[P]>
+      : GetScalarType<T[P], AggregateTemaRecord[P]>
+  }
+
+
+
+
+  export type TemaRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TemaRecordWhereInput
+    orderBy?: TemaRecordOrderByWithAggregationInput | TemaRecordOrderByWithAggregationInput[]
+    by: TemaRecordScalarFieldEnum[] | TemaRecordScalarFieldEnum
+    having?: TemaRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TemaRecordCountAggregateInputType | true
+    _avg?: TemaRecordAvgAggregateInputType
+    _sum?: TemaRecordSumAggregateInputType
+    _min?: TemaRecordMinAggregateInputType
+    _max?: TemaRecordMaxAggregateInputType
+  }
+
+  export type TemaRecordGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    asignaturaId: string
+    romano: string
+    nombre: string
+    orden: number
+    bloque: string | null
+    _count: TemaRecordCountAggregateOutputType | null
+    _avg: TemaRecordAvgAggregateOutputType | null
+    _sum: TemaRecordSumAggregateOutputType | null
+    _min: TemaRecordMinAggregateOutputType | null
+    _max: TemaRecordMaxAggregateOutputType | null
+  }
+
+  type GetTemaRecordGroupByPayload<T extends TemaRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TemaRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TemaRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TemaRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], TemaRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TemaRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    asignaturaId?: boolean
+    romano?: boolean
+    nombre?: boolean
+    orden?: boolean
+    bloque?: boolean
+    asignatura?: boolean | AsignaturaRecordDefaultArgs<ExtArgs>
+    preguntas?: boolean | TemaRecord$preguntasArgs<ExtArgs>
+    _count?: boolean | TemaRecordCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["temaRecord"]>
+
+  export type TemaRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    asignaturaId?: boolean
+    romano?: boolean
+    nombre?: boolean
+    orden?: boolean
+    bloque?: boolean
+    asignatura?: boolean | AsignaturaRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["temaRecord"]>
+
+  export type TemaRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    asignaturaId?: boolean
+    romano?: boolean
+    nombre?: boolean
+    orden?: boolean
+    bloque?: boolean
+    asignatura?: boolean | AsignaturaRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["temaRecord"]>
+
+  export type TemaRecordSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    asignaturaId?: boolean
+    romano?: boolean
+    nombre?: boolean
+    orden?: boolean
+    bloque?: boolean
+  }
+
+  export type TemaRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "asignaturaId" | "romano" | "nombre" | "orden" | "bloque", ExtArgs["result"]["temaRecord"]>
+  export type TemaRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    asignatura?: boolean | AsignaturaRecordDefaultArgs<ExtArgs>
+    preguntas?: boolean | TemaRecord$preguntasArgs<ExtArgs>
+    _count?: boolean | TemaRecordCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TemaRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    asignatura?: boolean | AsignaturaRecordDefaultArgs<ExtArgs>
+  }
+  export type TemaRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    asignatura?: boolean | AsignaturaRecordDefaultArgs<ExtArgs>
+  }
+
+  export type $TemaRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TemaRecord"
+    objects: {
+      asignatura: Prisma.$AsignaturaRecordPayload<ExtArgs>
+      preguntas: Prisma.$PreguntaRecordPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      asignaturaId: string
+      romano: string
+      nombre: string
+      orden: number
+      bloque: string | null
+    }, ExtArgs["result"]["temaRecord"]>
+    composites: {}
+  }
+
+  type TemaRecordGetPayload<S extends boolean | null | undefined | TemaRecordDefaultArgs> = $Result.GetResult<Prisma.$TemaRecordPayload, S>
+
+  type TemaRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TemaRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TemaRecordCountAggregateInputType | true
+    }
+
+  export interface TemaRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TemaRecord'], meta: { name: 'TemaRecord' } }
+    /**
+     * Find zero or one TemaRecord that matches the filter.
+     * @param {TemaRecordFindUniqueArgs} args - Arguments to find a TemaRecord
+     * @example
+     * // Get one TemaRecord
+     * const temaRecord = await prisma.temaRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TemaRecordFindUniqueArgs>(args: SelectSubset<T, TemaRecordFindUniqueArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TemaRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TemaRecordFindUniqueOrThrowArgs} args - Arguments to find a TemaRecord
+     * @example
+     * // Get one TemaRecord
+     * const temaRecord = await prisma.temaRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TemaRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, TemaRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TemaRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordFindFirstArgs} args - Arguments to find a TemaRecord
+     * @example
+     * // Get one TemaRecord
+     * const temaRecord = await prisma.temaRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TemaRecordFindFirstArgs>(args?: SelectSubset<T, TemaRecordFindFirstArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TemaRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordFindFirstOrThrowArgs} args - Arguments to find a TemaRecord
+     * @example
+     * // Get one TemaRecord
+     * const temaRecord = await prisma.temaRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TemaRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, TemaRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TemaRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TemaRecords
+     * const temaRecords = await prisma.temaRecord.findMany()
+     * 
+     * // Get first 10 TemaRecords
+     * const temaRecords = await prisma.temaRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const temaRecordWithIdOnly = await prisma.temaRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TemaRecordFindManyArgs>(args?: SelectSubset<T, TemaRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TemaRecord.
+     * @param {TemaRecordCreateArgs} args - Arguments to create a TemaRecord.
+     * @example
+     * // Create one TemaRecord
+     * const TemaRecord = await prisma.temaRecord.create({
+     *   data: {
+     *     // ... data to create a TemaRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends TemaRecordCreateArgs>(args: SelectSubset<T, TemaRecordCreateArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TemaRecords.
+     * @param {TemaRecordCreateManyArgs} args - Arguments to create many TemaRecords.
+     * @example
+     * // Create many TemaRecords
+     * const temaRecord = await prisma.temaRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TemaRecordCreateManyArgs>(args?: SelectSubset<T, TemaRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TemaRecords and returns the data saved in the database.
+     * @param {TemaRecordCreateManyAndReturnArgs} args - Arguments to create many TemaRecords.
+     * @example
+     * // Create many TemaRecords
+     * const temaRecord = await prisma.temaRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TemaRecords and only return the `id`
+     * const temaRecordWithIdOnly = await prisma.temaRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TemaRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, TemaRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TemaRecord.
+     * @param {TemaRecordDeleteArgs} args - Arguments to delete one TemaRecord.
+     * @example
+     * // Delete one TemaRecord
+     * const TemaRecord = await prisma.temaRecord.delete({
+     *   where: {
+     *     // ... filter to delete one TemaRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TemaRecordDeleteArgs>(args: SelectSubset<T, TemaRecordDeleteArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TemaRecord.
+     * @param {TemaRecordUpdateArgs} args - Arguments to update one TemaRecord.
+     * @example
+     * // Update one TemaRecord
+     * const temaRecord = await prisma.temaRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TemaRecordUpdateArgs>(args: SelectSubset<T, TemaRecordUpdateArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TemaRecords.
+     * @param {TemaRecordDeleteManyArgs} args - Arguments to filter TemaRecords to delete.
+     * @example
+     * // Delete a few TemaRecords
+     * const { count } = await prisma.temaRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TemaRecordDeleteManyArgs>(args?: SelectSubset<T, TemaRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TemaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TemaRecords
+     * const temaRecord = await prisma.temaRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TemaRecordUpdateManyArgs>(args: SelectSubset<T, TemaRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TemaRecords and returns the data updated in the database.
+     * @param {TemaRecordUpdateManyAndReturnArgs} args - Arguments to update many TemaRecords.
+     * @example
+     * // Update many TemaRecords
+     * const temaRecord = await prisma.temaRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TemaRecords and only return the `id`
+     * const temaRecordWithIdOnly = await prisma.temaRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TemaRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, TemaRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TemaRecord.
+     * @param {TemaRecordUpsertArgs} args - Arguments to update or create a TemaRecord.
+     * @example
+     * // Update or create a TemaRecord
+     * const temaRecord = await prisma.temaRecord.upsert({
+     *   create: {
+     *     // ... data to create a TemaRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TemaRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TemaRecordUpsertArgs>(args: SelectSubset<T, TemaRecordUpsertArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TemaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordCountArgs} args - Arguments to filter TemaRecords to count.
+     * @example
+     * // Count the number of TemaRecords
+     * const count = await prisma.temaRecord.count({
+     *   where: {
+     *     // ... the filter for the TemaRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends TemaRecordCountArgs>(
+      args?: Subset<T, TemaRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TemaRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TemaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TemaRecordAggregateArgs>(args: Subset<T, TemaRecordAggregateArgs>): Prisma.PrismaPromise<GetTemaRecordAggregateType<T>>
+
+    /**
+     * Group by TemaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TemaRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TemaRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TemaRecordGroupByArgs['orderBy'] }
+        : { orderBy?: TemaRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TemaRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTemaRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TemaRecord model
+   */
+  readonly fields: TemaRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TemaRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TemaRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    asignatura<T extends AsignaturaRecordDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AsignaturaRecordDefaultArgs<ExtArgs>>): Prisma__AsignaturaRecordClient<$Result.GetResult<Prisma.$AsignaturaRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    preguntas<T extends TemaRecord$preguntasArgs<ExtArgs> = {}>(args?: Subset<T, TemaRecord$preguntasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TemaRecord model
+   */
+  interface TemaRecordFieldRefs {
+    readonly id: FieldRef<"TemaRecord", 'String'>
+    readonly createdAt: FieldRef<"TemaRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"TemaRecord", 'DateTime'>
+    readonly asignaturaId: FieldRef<"TemaRecord", 'String'>
+    readonly romano: FieldRef<"TemaRecord", 'String'>
+    readonly nombre: FieldRef<"TemaRecord", 'String'>
+    readonly orden: FieldRef<"TemaRecord", 'Int'>
+    readonly bloque: FieldRef<"TemaRecord", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TemaRecord findUnique
+   */
+  export type TemaRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which TemaRecord to fetch.
+     */
+    where: TemaRecordWhereUniqueInput
+  }
+
+  /**
+   * TemaRecord findUniqueOrThrow
+   */
+  export type TemaRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which TemaRecord to fetch.
+     */
+    where: TemaRecordWhereUniqueInput
+  }
+
+  /**
+   * TemaRecord findFirst
+   */
+  export type TemaRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which TemaRecord to fetch.
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TemaRecords to fetch.
+     */
+    orderBy?: TemaRecordOrderByWithRelationInput | TemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TemaRecords.
+     */
+    cursor?: TemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TemaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TemaRecords.
+     */
+    distinct?: TemaRecordScalarFieldEnum | TemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * TemaRecord findFirstOrThrow
+   */
+  export type TemaRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which TemaRecord to fetch.
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TemaRecords to fetch.
+     */
+    orderBy?: TemaRecordOrderByWithRelationInput | TemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TemaRecords.
+     */
+    cursor?: TemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TemaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TemaRecords.
+     */
+    distinct?: TemaRecordScalarFieldEnum | TemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * TemaRecord findMany
+   */
+  export type TemaRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which TemaRecords to fetch.
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TemaRecords to fetch.
+     */
+    orderBy?: TemaRecordOrderByWithRelationInput | TemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TemaRecords.
+     */
+    cursor?: TemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TemaRecords.
+     */
+    skip?: number
+    distinct?: TemaRecordScalarFieldEnum | TemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * TemaRecord create
+   */
+  export type TemaRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TemaRecord.
+     */
+    data: XOR<TemaRecordCreateInput, TemaRecordUncheckedCreateInput>
+  }
+
+  /**
+   * TemaRecord createMany
+   */
+  export type TemaRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TemaRecords.
+     */
+    data: TemaRecordCreateManyInput | TemaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TemaRecord createManyAndReturn
+   */
+  export type TemaRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many TemaRecords.
+     */
+    data: TemaRecordCreateManyInput | TemaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TemaRecord update
+   */
+  export type TemaRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TemaRecord.
+     */
+    data: XOR<TemaRecordUpdateInput, TemaRecordUncheckedUpdateInput>
+    /**
+     * Choose, which TemaRecord to update.
+     */
+    where: TemaRecordWhereUniqueInput
+  }
+
+  /**
+   * TemaRecord updateMany
+   */
+  export type TemaRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TemaRecords.
+     */
+    data: XOR<TemaRecordUpdateManyMutationInput, TemaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which TemaRecords to update
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * Limit how many TemaRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TemaRecord updateManyAndReturn
+   */
+  export type TemaRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update TemaRecords.
+     */
+    data: XOR<TemaRecordUpdateManyMutationInput, TemaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which TemaRecords to update
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * Limit how many TemaRecords to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TemaRecord upsert
+   */
+  export type TemaRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TemaRecord to update in case it exists.
+     */
+    where: TemaRecordWhereUniqueInput
+    /**
+     * In case the TemaRecord found by the `where` argument doesn't exist, create a new TemaRecord with this data.
+     */
+    create: XOR<TemaRecordCreateInput, TemaRecordUncheckedCreateInput>
+    /**
+     * In case the TemaRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TemaRecordUpdateInput, TemaRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * TemaRecord delete
+   */
+  export type TemaRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+    /**
+     * Filter which TemaRecord to delete.
+     */
+    where: TemaRecordWhereUniqueInput
+  }
+
+  /**
+   * TemaRecord deleteMany
+   */
+  export type TemaRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TemaRecords to delete
+     */
+    where?: TemaRecordWhereInput
+    /**
+     * Limit how many TemaRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TemaRecord.preguntas
+   */
+  export type TemaRecord$preguntasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    where?: PreguntaRecordWhereInput
+    orderBy?: PreguntaRecordOrderByWithRelationInput | PreguntaRecordOrderByWithRelationInput[]
+    cursor?: PreguntaRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PreguntaRecordScalarFieldEnum | PreguntaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * TemaRecord without action
+   */
+  export type TemaRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TemaRecord
+     */
+    select?: TemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TemaRecord
+     */
+    omit?: TemaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TemaRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PreguntaRecord
+   */
+
+  export type AggregatePreguntaRecord = {
+    _count: PreguntaRecordCountAggregateOutputType | null
+    _avg: PreguntaRecordAvgAggregateOutputType | null
+    _sum: PreguntaRecordSumAggregateOutputType | null
+    _min: PreguntaRecordMinAggregateOutputType | null
+    _max: PreguntaRecordMaxAggregateOutputType | null
+  }
+
+  export type PreguntaRecordAvgAggregateOutputType = {
+    dificultad: number | null
+    vecesServida: number | null
+  }
+
+  export type PreguntaRecordSumAggregateOutputType = {
+    dificultad: number | null
+    vecesServida: number | null
+  }
+
+  export type PreguntaRecordMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    temaId: string | null
+    enunciado: string | null
+    claveCorrecta: string | null
+    solucion: string | null
+    fuente: string | null
+    esAncla: boolean | null
+    dificultad: number | null
+    vecesServida: number | null
+    activa: boolean | null
+  }
+
+  export type PreguntaRecordMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    temaId: string | null
+    enunciado: string | null
+    claveCorrecta: string | null
+    solucion: string | null
+    fuente: string | null
+    esAncla: boolean | null
+    dificultad: number | null
+    vecesServida: number | null
+    activa: boolean | null
+  }
+
+  export type PreguntaRecordCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    temaId: number
+    enunciado: number
+    alternativas: number
+    claveCorrecta: number
+    solucion: number
+    fuente: number
+    esAncla: number
+    dificultad: number
+    vecesServida: number
+    activa: number
+    _all: number
+  }
+
+
+  export type PreguntaRecordAvgAggregateInputType = {
+    dificultad?: true
+    vecesServida?: true
+  }
+
+  export type PreguntaRecordSumAggregateInputType = {
+    dificultad?: true
+    vecesServida?: true
+  }
+
+  export type PreguntaRecordMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    temaId?: true
+    enunciado?: true
+    claveCorrecta?: true
+    solucion?: true
+    fuente?: true
+    esAncla?: true
+    dificultad?: true
+    vecesServida?: true
+    activa?: true
+  }
+
+  export type PreguntaRecordMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    temaId?: true
+    enunciado?: true
+    claveCorrecta?: true
+    solucion?: true
+    fuente?: true
+    esAncla?: true
+    dificultad?: true
+    vecesServida?: true
+    activa?: true
+  }
+
+  export type PreguntaRecordCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    temaId?: true
+    enunciado?: true
+    alternativas?: true
+    claveCorrecta?: true
+    solucion?: true
+    fuente?: true
+    esAncla?: true
+    dificultad?: true
+    vecesServida?: true
+    activa?: true
+    _all?: true
+  }
+
+  export type PreguntaRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PreguntaRecord to aggregate.
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PreguntaRecords to fetch.
+     */
+    orderBy?: PreguntaRecordOrderByWithRelationInput | PreguntaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PreguntaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PreguntaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PreguntaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PreguntaRecords
+    **/
+    _count?: true | PreguntaRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PreguntaRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PreguntaRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PreguntaRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PreguntaRecordMaxAggregateInputType
+  }
+
+  export type GetPreguntaRecordAggregateType<T extends PreguntaRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregatePreguntaRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePreguntaRecord[P]>
+      : GetScalarType<T[P], AggregatePreguntaRecord[P]>
+  }
+
+
+
+
+  export type PreguntaRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PreguntaRecordWhereInput
+    orderBy?: PreguntaRecordOrderByWithAggregationInput | PreguntaRecordOrderByWithAggregationInput[]
+    by: PreguntaRecordScalarFieldEnum[] | PreguntaRecordScalarFieldEnum
+    having?: PreguntaRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PreguntaRecordCountAggregateInputType | true
+    _avg?: PreguntaRecordAvgAggregateInputType
+    _sum?: PreguntaRecordSumAggregateInputType
+    _min?: PreguntaRecordMinAggregateInputType
+    _max?: PreguntaRecordMaxAggregateInputType
+  }
+
+  export type PreguntaRecordGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    temaId: string
+    enunciado: string
+    alternativas: JsonValue
+    claveCorrecta: string
+    solucion: string | null
+    fuente: string | null
+    esAncla: boolean
+    dificultad: number
+    vecesServida: number
+    activa: boolean
+    _count: PreguntaRecordCountAggregateOutputType | null
+    _avg: PreguntaRecordAvgAggregateOutputType | null
+    _sum: PreguntaRecordSumAggregateOutputType | null
+    _min: PreguntaRecordMinAggregateOutputType | null
+    _max: PreguntaRecordMaxAggregateOutputType | null
+  }
+
+  type GetPreguntaRecordGroupByPayload<T extends PreguntaRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PreguntaRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PreguntaRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PreguntaRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], PreguntaRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PreguntaRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    temaId?: boolean
+    enunciado?: boolean
+    alternativas?: boolean
+    claveCorrecta?: boolean
+    solucion?: boolean
+    fuente?: boolean
+    esAncla?: boolean
+    dificultad?: boolean
+    vecesServida?: boolean
+    activa?: boolean
+    tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["preguntaRecord"]>
+
+  export type PreguntaRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    temaId?: boolean
+    enunciado?: boolean
+    alternativas?: boolean
+    claveCorrecta?: boolean
+    solucion?: boolean
+    fuente?: boolean
+    esAncla?: boolean
+    dificultad?: boolean
+    vecesServida?: boolean
+    activa?: boolean
+    tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["preguntaRecord"]>
+
+  export type PreguntaRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    temaId?: boolean
+    enunciado?: boolean
+    alternativas?: boolean
+    claveCorrecta?: boolean
+    solucion?: boolean
+    fuente?: boolean
+    esAncla?: boolean
+    dificultad?: boolean
+    vecesServida?: boolean
+    activa?: boolean
+    tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["preguntaRecord"]>
+
+  export type PreguntaRecordSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    temaId?: boolean
+    enunciado?: boolean
+    alternativas?: boolean
+    claveCorrecta?: boolean
+    solucion?: boolean
+    fuente?: boolean
+    esAncla?: boolean
+    dificultad?: boolean
+    vecesServida?: boolean
+    activa?: boolean
+  }
+
+  export type PreguntaRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "temaId" | "enunciado" | "alternativas" | "claveCorrecta" | "solucion" | "fuente" | "esAncla" | "dificultad" | "vecesServida" | "activa", ExtArgs["result"]["preguntaRecord"]>
+  export type PreguntaRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
+  }
+  export type PreguntaRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
+  }
+  export type PreguntaRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
+  }
+
+  export type $PreguntaRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PreguntaRecord"
+    objects: {
+      tema: Prisma.$TemaRecordPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      temaId: string
+      enunciado: string
+      alternativas: Prisma.JsonValue
+      claveCorrecta: string
+      solucion: string | null
+      fuente: string | null
+      esAncla: boolean
+      dificultad: number
+      vecesServida: number
+      activa: boolean
+    }, ExtArgs["result"]["preguntaRecord"]>
+    composites: {}
+  }
+
+  type PreguntaRecordGetPayload<S extends boolean | null | undefined | PreguntaRecordDefaultArgs> = $Result.GetResult<Prisma.$PreguntaRecordPayload, S>
+
+  type PreguntaRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PreguntaRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PreguntaRecordCountAggregateInputType | true
+    }
+
+  export interface PreguntaRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PreguntaRecord'], meta: { name: 'PreguntaRecord' } }
+    /**
+     * Find zero or one PreguntaRecord that matches the filter.
+     * @param {PreguntaRecordFindUniqueArgs} args - Arguments to find a PreguntaRecord
+     * @example
+     * // Get one PreguntaRecord
+     * const preguntaRecord = await prisma.preguntaRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PreguntaRecordFindUniqueArgs>(args: SelectSubset<T, PreguntaRecordFindUniqueArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PreguntaRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PreguntaRecordFindUniqueOrThrowArgs} args - Arguments to find a PreguntaRecord
+     * @example
+     * // Get one PreguntaRecord
+     * const preguntaRecord = await prisma.preguntaRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PreguntaRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, PreguntaRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PreguntaRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordFindFirstArgs} args - Arguments to find a PreguntaRecord
+     * @example
+     * // Get one PreguntaRecord
+     * const preguntaRecord = await prisma.preguntaRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PreguntaRecordFindFirstArgs>(args?: SelectSubset<T, PreguntaRecordFindFirstArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PreguntaRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordFindFirstOrThrowArgs} args - Arguments to find a PreguntaRecord
+     * @example
+     * // Get one PreguntaRecord
+     * const preguntaRecord = await prisma.preguntaRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PreguntaRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, PreguntaRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PreguntaRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PreguntaRecords
+     * const preguntaRecords = await prisma.preguntaRecord.findMany()
+     * 
+     * // Get first 10 PreguntaRecords
+     * const preguntaRecords = await prisma.preguntaRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const preguntaRecordWithIdOnly = await prisma.preguntaRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PreguntaRecordFindManyArgs>(args?: SelectSubset<T, PreguntaRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PreguntaRecord.
+     * @param {PreguntaRecordCreateArgs} args - Arguments to create a PreguntaRecord.
+     * @example
+     * // Create one PreguntaRecord
+     * const PreguntaRecord = await prisma.preguntaRecord.create({
+     *   data: {
+     *     // ... data to create a PreguntaRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends PreguntaRecordCreateArgs>(args: SelectSubset<T, PreguntaRecordCreateArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PreguntaRecords.
+     * @param {PreguntaRecordCreateManyArgs} args - Arguments to create many PreguntaRecords.
+     * @example
+     * // Create many PreguntaRecords
+     * const preguntaRecord = await prisma.preguntaRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PreguntaRecordCreateManyArgs>(args?: SelectSubset<T, PreguntaRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PreguntaRecords and returns the data saved in the database.
+     * @param {PreguntaRecordCreateManyAndReturnArgs} args - Arguments to create many PreguntaRecords.
+     * @example
+     * // Create many PreguntaRecords
+     * const preguntaRecord = await prisma.preguntaRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PreguntaRecords and only return the `id`
+     * const preguntaRecordWithIdOnly = await prisma.preguntaRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PreguntaRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, PreguntaRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PreguntaRecord.
+     * @param {PreguntaRecordDeleteArgs} args - Arguments to delete one PreguntaRecord.
+     * @example
+     * // Delete one PreguntaRecord
+     * const PreguntaRecord = await prisma.preguntaRecord.delete({
+     *   where: {
+     *     // ... filter to delete one PreguntaRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PreguntaRecordDeleteArgs>(args: SelectSubset<T, PreguntaRecordDeleteArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PreguntaRecord.
+     * @param {PreguntaRecordUpdateArgs} args - Arguments to update one PreguntaRecord.
+     * @example
+     * // Update one PreguntaRecord
+     * const preguntaRecord = await prisma.preguntaRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PreguntaRecordUpdateArgs>(args: SelectSubset<T, PreguntaRecordUpdateArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PreguntaRecords.
+     * @param {PreguntaRecordDeleteManyArgs} args - Arguments to filter PreguntaRecords to delete.
+     * @example
+     * // Delete a few PreguntaRecords
+     * const { count } = await prisma.preguntaRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PreguntaRecordDeleteManyArgs>(args?: SelectSubset<T, PreguntaRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PreguntaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PreguntaRecords
+     * const preguntaRecord = await prisma.preguntaRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PreguntaRecordUpdateManyArgs>(args: SelectSubset<T, PreguntaRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PreguntaRecords and returns the data updated in the database.
+     * @param {PreguntaRecordUpdateManyAndReturnArgs} args - Arguments to update many PreguntaRecords.
+     * @example
+     * // Update many PreguntaRecords
+     * const preguntaRecord = await prisma.preguntaRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PreguntaRecords and only return the `id`
+     * const preguntaRecordWithIdOnly = await prisma.preguntaRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PreguntaRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, PreguntaRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PreguntaRecord.
+     * @param {PreguntaRecordUpsertArgs} args - Arguments to update or create a PreguntaRecord.
+     * @example
+     * // Update or create a PreguntaRecord
+     * const preguntaRecord = await prisma.preguntaRecord.upsert({
+     *   create: {
+     *     // ... data to create a PreguntaRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PreguntaRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PreguntaRecordUpsertArgs>(args: SelectSubset<T, PreguntaRecordUpsertArgs<ExtArgs>>): Prisma__PreguntaRecordClient<$Result.GetResult<Prisma.$PreguntaRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PreguntaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordCountArgs} args - Arguments to filter PreguntaRecords to count.
+     * @example
+     * // Count the number of PreguntaRecords
+     * const count = await prisma.preguntaRecord.count({
+     *   where: {
+     *     // ... the filter for the PreguntaRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends PreguntaRecordCountArgs>(
+      args?: Subset<T, PreguntaRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PreguntaRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PreguntaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PreguntaRecordAggregateArgs>(args: Subset<T, PreguntaRecordAggregateArgs>): Prisma.PrismaPromise<GetPreguntaRecordAggregateType<T>>
+
+    /**
+     * Group by PreguntaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreguntaRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PreguntaRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PreguntaRecordGroupByArgs['orderBy'] }
+        : { orderBy?: PreguntaRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PreguntaRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPreguntaRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PreguntaRecord model
+   */
+  readonly fields: PreguntaRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PreguntaRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PreguntaRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tema<T extends TemaRecordDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TemaRecordDefaultArgs<ExtArgs>>): Prisma__TemaRecordClient<$Result.GetResult<Prisma.$TemaRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PreguntaRecord model
+   */
+  interface PreguntaRecordFieldRefs {
+    readonly id: FieldRef<"PreguntaRecord", 'String'>
+    readonly createdAt: FieldRef<"PreguntaRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"PreguntaRecord", 'DateTime'>
+    readonly temaId: FieldRef<"PreguntaRecord", 'String'>
+    readonly enunciado: FieldRef<"PreguntaRecord", 'String'>
+    readonly alternativas: FieldRef<"PreguntaRecord", 'Json'>
+    readonly claveCorrecta: FieldRef<"PreguntaRecord", 'String'>
+    readonly solucion: FieldRef<"PreguntaRecord", 'String'>
+    readonly fuente: FieldRef<"PreguntaRecord", 'String'>
+    readonly esAncla: FieldRef<"PreguntaRecord", 'Boolean'>
+    readonly dificultad: FieldRef<"PreguntaRecord", 'Float'>
+    readonly vecesServida: FieldRef<"PreguntaRecord", 'Int'>
+    readonly activa: FieldRef<"PreguntaRecord", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PreguntaRecord findUnique
+   */
+  export type PreguntaRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PreguntaRecord to fetch.
+     */
+    where: PreguntaRecordWhereUniqueInput
+  }
+
+  /**
+   * PreguntaRecord findUniqueOrThrow
+   */
+  export type PreguntaRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PreguntaRecord to fetch.
+     */
+    where: PreguntaRecordWhereUniqueInput
+  }
+
+  /**
+   * PreguntaRecord findFirst
+   */
+  export type PreguntaRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PreguntaRecord to fetch.
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PreguntaRecords to fetch.
+     */
+    orderBy?: PreguntaRecordOrderByWithRelationInput | PreguntaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PreguntaRecords.
+     */
+    cursor?: PreguntaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PreguntaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PreguntaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PreguntaRecords.
+     */
+    distinct?: PreguntaRecordScalarFieldEnum | PreguntaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * PreguntaRecord findFirstOrThrow
+   */
+  export type PreguntaRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PreguntaRecord to fetch.
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PreguntaRecords to fetch.
+     */
+    orderBy?: PreguntaRecordOrderByWithRelationInput | PreguntaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PreguntaRecords.
+     */
+    cursor?: PreguntaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PreguntaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PreguntaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PreguntaRecords.
+     */
+    distinct?: PreguntaRecordScalarFieldEnum | PreguntaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * PreguntaRecord findMany
+   */
+  export type PreguntaRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PreguntaRecords to fetch.
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PreguntaRecords to fetch.
+     */
+    orderBy?: PreguntaRecordOrderByWithRelationInput | PreguntaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PreguntaRecords.
+     */
+    cursor?: PreguntaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PreguntaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PreguntaRecords.
+     */
+    skip?: number
+    distinct?: PreguntaRecordScalarFieldEnum | PreguntaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * PreguntaRecord create
+   */
+  export type PreguntaRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PreguntaRecord.
+     */
+    data: XOR<PreguntaRecordCreateInput, PreguntaRecordUncheckedCreateInput>
+  }
+
+  /**
+   * PreguntaRecord createMany
+   */
+  export type PreguntaRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PreguntaRecords.
+     */
+    data: PreguntaRecordCreateManyInput | PreguntaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PreguntaRecord createManyAndReturn
+   */
+  export type PreguntaRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many PreguntaRecords.
+     */
+    data: PreguntaRecordCreateManyInput | PreguntaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PreguntaRecord update
+   */
+  export type PreguntaRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PreguntaRecord.
+     */
+    data: XOR<PreguntaRecordUpdateInput, PreguntaRecordUncheckedUpdateInput>
+    /**
+     * Choose, which PreguntaRecord to update.
+     */
+    where: PreguntaRecordWhereUniqueInput
+  }
+
+  /**
+   * PreguntaRecord updateMany
+   */
+  export type PreguntaRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PreguntaRecords.
+     */
+    data: XOR<PreguntaRecordUpdateManyMutationInput, PreguntaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which PreguntaRecords to update
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * Limit how many PreguntaRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PreguntaRecord updateManyAndReturn
+   */
+  export type PreguntaRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update PreguntaRecords.
+     */
+    data: XOR<PreguntaRecordUpdateManyMutationInput, PreguntaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which PreguntaRecords to update
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * Limit how many PreguntaRecords to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PreguntaRecord upsert
+   */
+  export type PreguntaRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PreguntaRecord to update in case it exists.
+     */
+    where: PreguntaRecordWhereUniqueInput
+    /**
+     * In case the PreguntaRecord found by the `where` argument doesn't exist, create a new PreguntaRecord with this data.
+     */
+    create: XOR<PreguntaRecordCreateInput, PreguntaRecordUncheckedCreateInput>
+    /**
+     * In case the PreguntaRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PreguntaRecordUpdateInput, PreguntaRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * PreguntaRecord delete
+   */
+  export type PreguntaRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+    /**
+     * Filter which PreguntaRecord to delete.
+     */
+    where: PreguntaRecordWhereUniqueInput
+  }
+
+  /**
+   * PreguntaRecord deleteMany
+   */
+  export type PreguntaRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PreguntaRecords to delete
+     */
+    where?: PreguntaRecordWhereInput
+    /**
+     * Limit how many PreguntaRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PreguntaRecord without action
+   */
+  export type PreguntaRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PreguntaRecord
+     */
+    select?: PreguntaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PreguntaRecord
+     */
+    omit?: PreguntaRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreguntaRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IntentoRecord
+   */
+
+  export type AggregateIntentoRecord = {
+    _count: IntentoRecordCountAggregateOutputType | null
+    _avg: IntentoRecordAvgAggregateOutputType | null
+    _sum: IntentoRecordSumAggregateOutputType | null
+    _min: IntentoRecordMinAggregateOutputType | null
+    _max: IntentoRecordMaxAggregateOutputType | null
+  }
+
+  export type IntentoRecordAvgAggregateOutputType = {
+    tiempoMs: number | null
+    thetaAlumno: number | null
+    thetaPregunta: number | null
+  }
+
+  export type IntentoRecordSumAggregateOutputType = {
+    tiempoMs: number | null
+    thetaAlumno: number | null
+    thetaPregunta: number | null
+  }
+
+  export type IntentoRecordMinAggregateOutputType = {
+    id: string | null
+    creadoEn: Date | null
+    alumnoId: string | null
+    preguntaId: string | null
+    temaId: string | null
+    asignaturaId: string | null
+    resultado: string | null
+    tiempoMs: number | null
+    modo: string | null
+    perfil: string | null
+    thetaAlumno: number | null
+    thetaPregunta: number | null
+  }
+
+  export type IntentoRecordMaxAggregateOutputType = {
+    id: string | null
+    creadoEn: Date | null
+    alumnoId: string | null
+    preguntaId: string | null
+    temaId: string | null
+    asignaturaId: string | null
+    resultado: string | null
+    tiempoMs: number | null
+    modo: string | null
+    perfil: string | null
+    thetaAlumno: number | null
+    thetaPregunta: number | null
+  }
+
+  export type IntentoRecordCountAggregateOutputType = {
+    id: number
+    creadoEn: number
+    alumnoId: number
+    preguntaId: number
+    temaId: number
+    asignaturaId: number
+    resultado: number
+    tiempoMs: number
+    modo: number
+    perfil: number
+    thetaAlumno: number
+    thetaPregunta: number
+    _all: number
+  }
+
+
+  export type IntentoRecordAvgAggregateInputType = {
+    tiempoMs?: true
+    thetaAlumno?: true
+    thetaPregunta?: true
+  }
+
+  export type IntentoRecordSumAggregateInputType = {
+    tiempoMs?: true
+    thetaAlumno?: true
+    thetaPregunta?: true
+  }
+
+  export type IntentoRecordMinAggregateInputType = {
+    id?: true
+    creadoEn?: true
+    alumnoId?: true
+    preguntaId?: true
+    temaId?: true
+    asignaturaId?: true
+    resultado?: true
+    tiempoMs?: true
+    modo?: true
+    perfil?: true
+    thetaAlumno?: true
+    thetaPregunta?: true
+  }
+
+  export type IntentoRecordMaxAggregateInputType = {
+    id?: true
+    creadoEn?: true
+    alumnoId?: true
+    preguntaId?: true
+    temaId?: true
+    asignaturaId?: true
+    resultado?: true
+    tiempoMs?: true
+    modo?: true
+    perfil?: true
+    thetaAlumno?: true
+    thetaPregunta?: true
+  }
+
+  export type IntentoRecordCountAggregateInputType = {
+    id?: true
+    creadoEn?: true
+    alumnoId?: true
+    preguntaId?: true
+    temaId?: true
+    asignaturaId?: true
+    resultado?: true
+    tiempoMs?: true
+    modo?: true
+    perfil?: true
+    thetaAlumno?: true
+    thetaPregunta?: true
+    _all?: true
+  }
+
+  export type IntentoRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntentoRecord to aggregate.
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntentoRecords to fetch.
+     */
+    orderBy?: IntentoRecordOrderByWithRelationInput | IntentoRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntentoRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntentoRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntentoRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IntentoRecords
+    **/
+    _count?: true | IntentoRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntentoRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntentoRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntentoRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntentoRecordMaxAggregateInputType
+  }
+
+  export type GetIntentoRecordAggregateType<T extends IntentoRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntentoRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntentoRecord[P]>
+      : GetScalarType<T[P], AggregateIntentoRecord[P]>
+  }
+
+
+
+
+  export type IntentoRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntentoRecordWhereInput
+    orderBy?: IntentoRecordOrderByWithAggregationInput | IntentoRecordOrderByWithAggregationInput[]
+    by: IntentoRecordScalarFieldEnum[] | IntentoRecordScalarFieldEnum
+    having?: IntentoRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntentoRecordCountAggregateInputType | true
+    _avg?: IntentoRecordAvgAggregateInputType
+    _sum?: IntentoRecordSumAggregateInputType
+    _min?: IntentoRecordMinAggregateInputType
+    _max?: IntentoRecordMaxAggregateInputType
+  }
+
+  export type IntentoRecordGroupByOutputType = {
+    id: string
+    creadoEn: Date
+    alumnoId: string
+    preguntaId: string
+    temaId: string
+    asignaturaId: string
+    resultado: string
+    tiempoMs: number
+    modo: string
+    perfil: string
+    thetaAlumno: number | null
+    thetaPregunta: number | null
+    _count: IntentoRecordCountAggregateOutputType | null
+    _avg: IntentoRecordAvgAggregateOutputType | null
+    _sum: IntentoRecordSumAggregateOutputType | null
+    _min: IntentoRecordMinAggregateOutputType | null
+    _max: IntentoRecordMaxAggregateOutputType | null
+  }
+
+  type GetIntentoRecordGroupByPayload<T extends IntentoRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntentoRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntentoRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntentoRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], IntentoRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntentoRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    creadoEn?: boolean
+    alumnoId?: boolean
+    preguntaId?: boolean
+    temaId?: boolean
+    asignaturaId?: boolean
+    resultado?: boolean
+    tiempoMs?: boolean
+    modo?: boolean
+    perfil?: boolean
+    thetaAlumno?: boolean
+    thetaPregunta?: boolean
+  }, ExtArgs["result"]["intentoRecord"]>
+
+  export type IntentoRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    creadoEn?: boolean
+    alumnoId?: boolean
+    preguntaId?: boolean
+    temaId?: boolean
+    asignaturaId?: boolean
+    resultado?: boolean
+    tiempoMs?: boolean
+    modo?: boolean
+    perfil?: boolean
+    thetaAlumno?: boolean
+    thetaPregunta?: boolean
+  }, ExtArgs["result"]["intentoRecord"]>
+
+  export type IntentoRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    creadoEn?: boolean
+    alumnoId?: boolean
+    preguntaId?: boolean
+    temaId?: boolean
+    asignaturaId?: boolean
+    resultado?: boolean
+    tiempoMs?: boolean
+    modo?: boolean
+    perfil?: boolean
+    thetaAlumno?: boolean
+    thetaPregunta?: boolean
+  }, ExtArgs["result"]["intentoRecord"]>
+
+  export type IntentoRecordSelectScalar = {
+    id?: boolean
+    creadoEn?: boolean
+    alumnoId?: boolean
+    preguntaId?: boolean
+    temaId?: boolean
+    asignaturaId?: boolean
+    resultado?: boolean
+    tiempoMs?: boolean
+    modo?: boolean
+    perfil?: boolean
+    thetaAlumno?: boolean
+    thetaPregunta?: boolean
+  }
+
+  export type IntentoRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creadoEn" | "alumnoId" | "preguntaId" | "temaId" | "asignaturaId" | "resultado" | "tiempoMs" | "modo" | "perfil" | "thetaAlumno" | "thetaPregunta", ExtArgs["result"]["intentoRecord"]>
+
+  export type $IntentoRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IntentoRecord"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      creadoEn: Date
+      alumnoId: string
+      preguntaId: string
+      temaId: string
+      asignaturaId: string
+      resultado: string
+      tiempoMs: number
+      modo: string
+      perfil: string
+      thetaAlumno: number | null
+      thetaPregunta: number | null
+    }, ExtArgs["result"]["intentoRecord"]>
+    composites: {}
+  }
+
+  type IntentoRecordGetPayload<S extends boolean | null | undefined | IntentoRecordDefaultArgs> = $Result.GetResult<Prisma.$IntentoRecordPayload, S>
+
+  type IntentoRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntentoRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntentoRecordCountAggregateInputType | true
+    }
+
+  export interface IntentoRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IntentoRecord'], meta: { name: 'IntentoRecord' } }
+    /**
+     * Find zero or one IntentoRecord that matches the filter.
+     * @param {IntentoRecordFindUniqueArgs} args - Arguments to find a IntentoRecord
+     * @example
+     * // Get one IntentoRecord
+     * const intentoRecord = await prisma.intentoRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntentoRecordFindUniqueArgs>(args: SelectSubset<T, IntentoRecordFindUniqueArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IntentoRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntentoRecordFindUniqueOrThrowArgs} args - Arguments to find a IntentoRecord
+     * @example
+     * // Get one IntentoRecord
+     * const intentoRecord = await prisma.intentoRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntentoRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, IntentoRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntentoRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordFindFirstArgs} args - Arguments to find a IntentoRecord
+     * @example
+     * // Get one IntentoRecord
+     * const intentoRecord = await prisma.intentoRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntentoRecordFindFirstArgs>(args?: SelectSubset<T, IntentoRecordFindFirstArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntentoRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordFindFirstOrThrowArgs} args - Arguments to find a IntentoRecord
+     * @example
+     * // Get one IntentoRecord
+     * const intentoRecord = await prisma.intentoRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntentoRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, IntentoRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IntentoRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IntentoRecords
+     * const intentoRecords = await prisma.intentoRecord.findMany()
+     * 
+     * // Get first 10 IntentoRecords
+     * const intentoRecords = await prisma.intentoRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const intentoRecordWithIdOnly = await prisma.intentoRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IntentoRecordFindManyArgs>(args?: SelectSubset<T, IntentoRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IntentoRecord.
+     * @param {IntentoRecordCreateArgs} args - Arguments to create a IntentoRecord.
+     * @example
+     * // Create one IntentoRecord
+     * const IntentoRecord = await prisma.intentoRecord.create({
+     *   data: {
+     *     // ... data to create a IntentoRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntentoRecordCreateArgs>(args: SelectSubset<T, IntentoRecordCreateArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IntentoRecords.
+     * @param {IntentoRecordCreateManyArgs} args - Arguments to create many IntentoRecords.
+     * @example
+     * // Create many IntentoRecords
+     * const intentoRecord = await prisma.intentoRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntentoRecordCreateManyArgs>(args?: SelectSubset<T, IntentoRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IntentoRecords and returns the data saved in the database.
+     * @param {IntentoRecordCreateManyAndReturnArgs} args - Arguments to create many IntentoRecords.
+     * @example
+     * // Create many IntentoRecords
+     * const intentoRecord = await prisma.intentoRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IntentoRecords and only return the `id`
+     * const intentoRecordWithIdOnly = await prisma.intentoRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntentoRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, IntentoRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IntentoRecord.
+     * @param {IntentoRecordDeleteArgs} args - Arguments to delete one IntentoRecord.
+     * @example
+     * // Delete one IntentoRecord
+     * const IntentoRecord = await prisma.intentoRecord.delete({
+     *   where: {
+     *     // ... filter to delete one IntentoRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntentoRecordDeleteArgs>(args: SelectSubset<T, IntentoRecordDeleteArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IntentoRecord.
+     * @param {IntentoRecordUpdateArgs} args - Arguments to update one IntentoRecord.
+     * @example
+     * // Update one IntentoRecord
+     * const intentoRecord = await prisma.intentoRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntentoRecordUpdateArgs>(args: SelectSubset<T, IntentoRecordUpdateArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IntentoRecords.
+     * @param {IntentoRecordDeleteManyArgs} args - Arguments to filter IntentoRecords to delete.
+     * @example
+     * // Delete a few IntentoRecords
+     * const { count } = await prisma.intentoRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntentoRecordDeleteManyArgs>(args?: SelectSubset<T, IntentoRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntentoRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IntentoRecords
+     * const intentoRecord = await prisma.intentoRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntentoRecordUpdateManyArgs>(args: SelectSubset<T, IntentoRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntentoRecords and returns the data updated in the database.
+     * @param {IntentoRecordUpdateManyAndReturnArgs} args - Arguments to update many IntentoRecords.
+     * @example
+     * // Update many IntentoRecords
+     * const intentoRecord = await prisma.intentoRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IntentoRecords and only return the `id`
+     * const intentoRecordWithIdOnly = await prisma.intentoRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntentoRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, IntentoRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IntentoRecord.
+     * @param {IntentoRecordUpsertArgs} args - Arguments to update or create a IntentoRecord.
+     * @example
+     * // Update or create a IntentoRecord
+     * const intentoRecord = await prisma.intentoRecord.upsert({
+     *   create: {
+     *     // ... data to create a IntentoRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IntentoRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntentoRecordUpsertArgs>(args: SelectSubset<T, IntentoRecordUpsertArgs<ExtArgs>>): Prisma__IntentoRecordClient<$Result.GetResult<Prisma.$IntentoRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IntentoRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordCountArgs} args - Arguments to filter IntentoRecords to count.
+     * @example
+     * // Count the number of IntentoRecords
+     * const count = await prisma.intentoRecord.count({
+     *   where: {
+     *     // ... the filter for the IntentoRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntentoRecordCountArgs>(
+      args?: Subset<T, IntentoRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntentoRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IntentoRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntentoRecordAggregateArgs>(args: Subset<T, IntentoRecordAggregateArgs>): Prisma.PrismaPromise<GetIntentoRecordAggregateType<T>>
+
+    /**
+     * Group by IntentoRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntentoRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntentoRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntentoRecordGroupByArgs['orderBy'] }
+        : { orderBy?: IntentoRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntentoRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntentoRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IntentoRecord model
+   */
+  readonly fields: IntentoRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IntentoRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntentoRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IntentoRecord model
+   */
+  interface IntentoRecordFieldRefs {
+    readonly id: FieldRef<"IntentoRecord", 'String'>
+    readonly creadoEn: FieldRef<"IntentoRecord", 'DateTime'>
+    readonly alumnoId: FieldRef<"IntentoRecord", 'String'>
+    readonly preguntaId: FieldRef<"IntentoRecord", 'String'>
+    readonly temaId: FieldRef<"IntentoRecord", 'String'>
+    readonly asignaturaId: FieldRef<"IntentoRecord", 'String'>
+    readonly resultado: FieldRef<"IntentoRecord", 'String'>
+    readonly tiempoMs: FieldRef<"IntentoRecord", 'Int'>
+    readonly modo: FieldRef<"IntentoRecord", 'String'>
+    readonly perfil: FieldRef<"IntentoRecord", 'String'>
+    readonly thetaAlumno: FieldRef<"IntentoRecord", 'Float'>
+    readonly thetaPregunta: FieldRef<"IntentoRecord", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IntentoRecord findUnique
+   */
+  export type IntentoRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which IntentoRecord to fetch.
+     */
+    where: IntentoRecordWhereUniqueInput
+  }
+
+  /**
+   * IntentoRecord findUniqueOrThrow
+   */
+  export type IntentoRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which IntentoRecord to fetch.
+     */
+    where: IntentoRecordWhereUniqueInput
+  }
+
+  /**
+   * IntentoRecord findFirst
+   */
+  export type IntentoRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which IntentoRecord to fetch.
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntentoRecords to fetch.
+     */
+    orderBy?: IntentoRecordOrderByWithRelationInput | IntentoRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntentoRecords.
+     */
+    cursor?: IntentoRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntentoRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntentoRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntentoRecords.
+     */
+    distinct?: IntentoRecordScalarFieldEnum | IntentoRecordScalarFieldEnum[]
+  }
+
+  /**
+   * IntentoRecord findFirstOrThrow
+   */
+  export type IntentoRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which IntentoRecord to fetch.
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntentoRecords to fetch.
+     */
+    orderBy?: IntentoRecordOrderByWithRelationInput | IntentoRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntentoRecords.
+     */
+    cursor?: IntentoRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntentoRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntentoRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntentoRecords.
+     */
+    distinct?: IntentoRecordScalarFieldEnum | IntentoRecordScalarFieldEnum[]
+  }
+
+  /**
+   * IntentoRecord findMany
+   */
+  export type IntentoRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which IntentoRecords to fetch.
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntentoRecords to fetch.
+     */
+    orderBy?: IntentoRecordOrderByWithRelationInput | IntentoRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IntentoRecords.
+     */
+    cursor?: IntentoRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntentoRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntentoRecords.
+     */
+    skip?: number
+    distinct?: IntentoRecordScalarFieldEnum | IntentoRecordScalarFieldEnum[]
+  }
+
+  /**
+   * IntentoRecord create
+   */
+  export type IntentoRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * The data needed to create a IntentoRecord.
+     */
+    data: XOR<IntentoRecordCreateInput, IntentoRecordUncheckedCreateInput>
+  }
+
+  /**
+   * IntentoRecord createMany
+   */
+  export type IntentoRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IntentoRecords.
+     */
+    data: IntentoRecordCreateManyInput | IntentoRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntentoRecord createManyAndReturn
+   */
+  export type IntentoRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many IntentoRecords.
+     */
+    data: IntentoRecordCreateManyInput | IntentoRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntentoRecord update
+   */
+  export type IntentoRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * The data needed to update a IntentoRecord.
+     */
+    data: XOR<IntentoRecordUpdateInput, IntentoRecordUncheckedUpdateInput>
+    /**
+     * Choose, which IntentoRecord to update.
+     */
+    where: IntentoRecordWhereUniqueInput
+  }
+
+  /**
+   * IntentoRecord updateMany
+   */
+  export type IntentoRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IntentoRecords.
+     */
+    data: XOR<IntentoRecordUpdateManyMutationInput, IntentoRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which IntentoRecords to update
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * Limit how many IntentoRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntentoRecord updateManyAndReturn
+   */
+  export type IntentoRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update IntentoRecords.
+     */
+    data: XOR<IntentoRecordUpdateManyMutationInput, IntentoRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which IntentoRecords to update
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * Limit how many IntentoRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntentoRecord upsert
+   */
+  export type IntentoRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * The filter to search for the IntentoRecord to update in case it exists.
+     */
+    where: IntentoRecordWhereUniqueInput
+    /**
+     * In case the IntentoRecord found by the `where` argument doesn't exist, create a new IntentoRecord with this data.
+     */
+    create: XOR<IntentoRecordCreateInput, IntentoRecordUncheckedCreateInput>
+    /**
+     * In case the IntentoRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntentoRecordUpdateInput, IntentoRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * IntentoRecord delete
+   */
+  export type IntentoRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+    /**
+     * Filter which IntentoRecord to delete.
+     */
+    where: IntentoRecordWhereUniqueInput
+  }
+
+  /**
+   * IntentoRecord deleteMany
+   */
+  export type IntentoRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntentoRecords to delete
+     */
+    where?: IntentoRecordWhereInput
+    /**
+     * Limit how many IntentoRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntentoRecord without action
+   */
+  export type IntentoRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntentoRecord
+     */
+    select?: IntentoRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntentoRecord
+     */
+    omit?: IntentoRecordOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProgresoTemaRecord
+   */
+
+  export type AggregateProgresoTemaRecord = {
+    _count: ProgresoTemaRecordCountAggregateOutputType | null
+    _avg: ProgresoTemaRecordAvgAggregateOutputType | null
+    _sum: ProgresoTemaRecordSumAggregateOutputType | null
+    _min: ProgresoTemaRecordMinAggregateOutputType | null
+    _max: ProgresoTemaRecordMaxAggregateOutputType | null
+  }
+
+  export type ProgresoTemaRecordAvgAggregateOutputType = {
+    rachaActual: number | null
+    mejorRacha: number | null
+    intentosEnTema: number | null
+    theta: number | null
+  }
+
+  export type ProgresoTemaRecordSumAggregateOutputType = {
+    rachaActual: number | null
+    mejorRacha: number | null
+    intentosEnTema: number | null
+    theta: number | null
+  }
+
+  export type ProgresoTemaRecordMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    alumnoId: string | null
+    temaId: string | null
+    rachaActual: number | null
+    mejorRacha: number | null
+    intentosEnTema: number | null
+    practicado: boolean | null
+    consolidado: boolean | null
+    theta: number | null
+    ultimoIntentoEn: Date | null
+  }
+
+  export type ProgresoTemaRecordMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    alumnoId: string | null
+    temaId: string | null
+    rachaActual: number | null
+    mejorRacha: number | null
+    intentosEnTema: number | null
+    practicado: boolean | null
+    consolidado: boolean | null
+    theta: number | null
+    ultimoIntentoEn: Date | null
+  }
+
+  export type ProgresoTemaRecordCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    alumnoId: number
+    temaId: number
+    rachaActual: number
+    mejorRacha: number
+    intentosEnTema: number
+    practicado: number
+    consolidado: number
+    theta: number
+    ultimoIntentoEn: number
+    _all: number
+  }
+
+
+  export type ProgresoTemaRecordAvgAggregateInputType = {
+    rachaActual?: true
+    mejorRacha?: true
+    intentosEnTema?: true
+    theta?: true
+  }
+
+  export type ProgresoTemaRecordSumAggregateInputType = {
+    rachaActual?: true
+    mejorRacha?: true
+    intentosEnTema?: true
+    theta?: true
+  }
+
+  export type ProgresoTemaRecordMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    alumnoId?: true
+    temaId?: true
+    rachaActual?: true
+    mejorRacha?: true
+    intentosEnTema?: true
+    practicado?: true
+    consolidado?: true
+    theta?: true
+    ultimoIntentoEn?: true
+  }
+
+  export type ProgresoTemaRecordMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    alumnoId?: true
+    temaId?: true
+    rachaActual?: true
+    mejorRacha?: true
+    intentosEnTema?: true
+    practicado?: true
+    consolidado?: true
+    theta?: true
+    ultimoIntentoEn?: true
+  }
+
+  export type ProgresoTemaRecordCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    alumnoId?: true
+    temaId?: true
+    rachaActual?: true
+    mejorRacha?: true
+    intentosEnTema?: true
+    practicado?: true
+    consolidado?: true
+    theta?: true
+    ultimoIntentoEn?: true
+    _all?: true
+  }
+
+  export type ProgresoTemaRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProgresoTemaRecord to aggregate.
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProgresoTemaRecords to fetch.
+     */
+    orderBy?: ProgresoTemaRecordOrderByWithRelationInput | ProgresoTemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProgresoTemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProgresoTemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProgresoTemaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProgresoTemaRecords
+    **/
+    _count?: true | ProgresoTemaRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProgresoTemaRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProgresoTemaRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProgresoTemaRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProgresoTemaRecordMaxAggregateInputType
+  }
+
+  export type GetProgresoTemaRecordAggregateType<T extends ProgresoTemaRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateProgresoTemaRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProgresoTemaRecord[P]>
+      : GetScalarType<T[P], AggregateProgresoTemaRecord[P]>
+  }
+
+
+
+
+  export type ProgresoTemaRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgresoTemaRecordWhereInput
+    orderBy?: ProgresoTemaRecordOrderByWithAggregationInput | ProgresoTemaRecordOrderByWithAggregationInput[]
+    by: ProgresoTemaRecordScalarFieldEnum[] | ProgresoTemaRecordScalarFieldEnum
+    having?: ProgresoTemaRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProgresoTemaRecordCountAggregateInputType | true
+    _avg?: ProgresoTemaRecordAvgAggregateInputType
+    _sum?: ProgresoTemaRecordSumAggregateInputType
+    _min?: ProgresoTemaRecordMinAggregateInputType
+    _max?: ProgresoTemaRecordMaxAggregateInputType
+  }
+
+  export type ProgresoTemaRecordGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    alumnoId: string
+    temaId: string
+    rachaActual: number
+    mejorRacha: number
+    intentosEnTema: number
+    practicado: boolean
+    consolidado: boolean
+    theta: number
+    ultimoIntentoEn: Date | null
+    _count: ProgresoTemaRecordCountAggregateOutputType | null
+    _avg: ProgresoTemaRecordAvgAggregateOutputType | null
+    _sum: ProgresoTemaRecordSumAggregateOutputType | null
+    _min: ProgresoTemaRecordMinAggregateOutputType | null
+    _max: ProgresoTemaRecordMaxAggregateOutputType | null
+  }
+
+  type GetProgresoTemaRecordGroupByPayload<T extends ProgresoTemaRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProgresoTemaRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProgresoTemaRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProgresoTemaRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], ProgresoTemaRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProgresoTemaRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    alumnoId?: boolean
+    temaId?: boolean
+    rachaActual?: boolean
+    mejorRacha?: boolean
+    intentosEnTema?: boolean
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: boolean
+    ultimoIntentoEn?: boolean
+  }, ExtArgs["result"]["progresoTemaRecord"]>
+
+  export type ProgresoTemaRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    alumnoId?: boolean
+    temaId?: boolean
+    rachaActual?: boolean
+    mejorRacha?: boolean
+    intentosEnTema?: boolean
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: boolean
+    ultimoIntentoEn?: boolean
+  }, ExtArgs["result"]["progresoTemaRecord"]>
+
+  export type ProgresoTemaRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    alumnoId?: boolean
+    temaId?: boolean
+    rachaActual?: boolean
+    mejorRacha?: boolean
+    intentosEnTema?: boolean
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: boolean
+    ultimoIntentoEn?: boolean
+  }, ExtArgs["result"]["progresoTemaRecord"]>
+
+  export type ProgresoTemaRecordSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    alumnoId?: boolean
+    temaId?: boolean
+    rachaActual?: boolean
+    mejorRacha?: boolean
+    intentosEnTema?: boolean
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: boolean
+    ultimoIntentoEn?: boolean
+  }
+
+  export type ProgresoTemaRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "alumnoId" | "temaId" | "rachaActual" | "mejorRacha" | "intentosEnTema" | "practicado" | "consolidado" | "theta" | "ultimoIntentoEn", ExtArgs["result"]["progresoTemaRecord"]>
+
+  export type $ProgresoTemaRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProgresoTemaRecord"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      alumnoId: string
+      temaId: string
+      rachaActual: number
+      mejorRacha: number
+      intentosEnTema: number
+      practicado: boolean
+      consolidado: boolean
+      theta: number
+      ultimoIntentoEn: Date | null
+    }, ExtArgs["result"]["progresoTemaRecord"]>
+    composites: {}
+  }
+
+  type ProgresoTemaRecordGetPayload<S extends boolean | null | undefined | ProgresoTemaRecordDefaultArgs> = $Result.GetResult<Prisma.$ProgresoTemaRecordPayload, S>
+
+  type ProgresoTemaRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProgresoTemaRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProgresoTemaRecordCountAggregateInputType | true
+    }
+
+  export interface ProgresoTemaRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProgresoTemaRecord'], meta: { name: 'ProgresoTemaRecord' } }
+    /**
+     * Find zero or one ProgresoTemaRecord that matches the filter.
+     * @param {ProgresoTemaRecordFindUniqueArgs} args - Arguments to find a ProgresoTemaRecord
+     * @example
+     * // Get one ProgresoTemaRecord
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProgresoTemaRecordFindUniqueArgs>(args: SelectSubset<T, ProgresoTemaRecordFindUniqueArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProgresoTemaRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProgresoTemaRecordFindUniqueOrThrowArgs} args - Arguments to find a ProgresoTemaRecord
+     * @example
+     * // Get one ProgresoTemaRecord
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProgresoTemaRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, ProgresoTemaRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProgresoTemaRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordFindFirstArgs} args - Arguments to find a ProgresoTemaRecord
+     * @example
+     * // Get one ProgresoTemaRecord
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProgresoTemaRecordFindFirstArgs>(args?: SelectSubset<T, ProgresoTemaRecordFindFirstArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProgresoTemaRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordFindFirstOrThrowArgs} args - Arguments to find a ProgresoTemaRecord
+     * @example
+     * // Get one ProgresoTemaRecord
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProgresoTemaRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, ProgresoTemaRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProgresoTemaRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProgresoTemaRecords
+     * const progresoTemaRecords = await prisma.progresoTemaRecord.findMany()
+     * 
+     * // Get first 10 ProgresoTemaRecords
+     * const progresoTemaRecords = await prisma.progresoTemaRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const progresoTemaRecordWithIdOnly = await prisma.progresoTemaRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProgresoTemaRecordFindManyArgs>(args?: SelectSubset<T, ProgresoTemaRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProgresoTemaRecord.
+     * @param {ProgresoTemaRecordCreateArgs} args - Arguments to create a ProgresoTemaRecord.
+     * @example
+     * // Create one ProgresoTemaRecord
+     * const ProgresoTemaRecord = await prisma.progresoTemaRecord.create({
+     *   data: {
+     *     // ... data to create a ProgresoTemaRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProgresoTemaRecordCreateArgs>(args: SelectSubset<T, ProgresoTemaRecordCreateArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProgresoTemaRecords.
+     * @param {ProgresoTemaRecordCreateManyArgs} args - Arguments to create many ProgresoTemaRecords.
+     * @example
+     * // Create many ProgresoTemaRecords
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProgresoTemaRecordCreateManyArgs>(args?: SelectSubset<T, ProgresoTemaRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProgresoTemaRecords and returns the data saved in the database.
+     * @param {ProgresoTemaRecordCreateManyAndReturnArgs} args - Arguments to create many ProgresoTemaRecords.
+     * @example
+     * // Create many ProgresoTemaRecords
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProgresoTemaRecords and only return the `id`
+     * const progresoTemaRecordWithIdOnly = await prisma.progresoTemaRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProgresoTemaRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, ProgresoTemaRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProgresoTemaRecord.
+     * @param {ProgresoTemaRecordDeleteArgs} args - Arguments to delete one ProgresoTemaRecord.
+     * @example
+     * // Delete one ProgresoTemaRecord
+     * const ProgresoTemaRecord = await prisma.progresoTemaRecord.delete({
+     *   where: {
+     *     // ... filter to delete one ProgresoTemaRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProgresoTemaRecordDeleteArgs>(args: SelectSubset<T, ProgresoTemaRecordDeleteArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProgresoTemaRecord.
+     * @param {ProgresoTemaRecordUpdateArgs} args - Arguments to update one ProgresoTemaRecord.
+     * @example
+     * // Update one ProgresoTemaRecord
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProgresoTemaRecordUpdateArgs>(args: SelectSubset<T, ProgresoTemaRecordUpdateArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProgresoTemaRecords.
+     * @param {ProgresoTemaRecordDeleteManyArgs} args - Arguments to filter ProgresoTemaRecords to delete.
+     * @example
+     * // Delete a few ProgresoTemaRecords
+     * const { count } = await prisma.progresoTemaRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProgresoTemaRecordDeleteManyArgs>(args?: SelectSubset<T, ProgresoTemaRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProgresoTemaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProgresoTemaRecords
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProgresoTemaRecordUpdateManyArgs>(args: SelectSubset<T, ProgresoTemaRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProgresoTemaRecords and returns the data updated in the database.
+     * @param {ProgresoTemaRecordUpdateManyAndReturnArgs} args - Arguments to update many ProgresoTemaRecords.
+     * @example
+     * // Update many ProgresoTemaRecords
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProgresoTemaRecords and only return the `id`
+     * const progresoTemaRecordWithIdOnly = await prisma.progresoTemaRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProgresoTemaRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, ProgresoTemaRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProgresoTemaRecord.
+     * @param {ProgresoTemaRecordUpsertArgs} args - Arguments to update or create a ProgresoTemaRecord.
+     * @example
+     * // Update or create a ProgresoTemaRecord
+     * const progresoTemaRecord = await prisma.progresoTemaRecord.upsert({
+     *   create: {
+     *     // ... data to create a ProgresoTemaRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProgresoTemaRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProgresoTemaRecordUpsertArgs>(args: SelectSubset<T, ProgresoTemaRecordUpsertArgs<ExtArgs>>): Prisma__ProgresoTemaRecordClient<$Result.GetResult<Prisma.$ProgresoTemaRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProgresoTemaRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordCountArgs} args - Arguments to filter ProgresoTemaRecords to count.
+     * @example
+     * // Count the number of ProgresoTemaRecords
+     * const count = await prisma.progresoTemaRecord.count({
+     *   where: {
+     *     // ... the filter for the ProgresoTemaRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProgresoTemaRecordCountArgs>(
+      args?: Subset<T, ProgresoTemaRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProgresoTemaRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProgresoTemaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProgresoTemaRecordAggregateArgs>(args: Subset<T, ProgresoTemaRecordAggregateArgs>): Prisma.PrismaPromise<GetProgresoTemaRecordAggregateType<T>>
+
+    /**
+     * Group by ProgresoTemaRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgresoTemaRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProgresoTemaRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProgresoTemaRecordGroupByArgs['orderBy'] }
+        : { orderBy?: ProgresoTemaRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProgresoTemaRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProgresoTemaRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProgresoTemaRecord model
+   */
+  readonly fields: ProgresoTemaRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProgresoTemaRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProgresoTemaRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProgresoTemaRecord model
+   */
+  interface ProgresoTemaRecordFieldRefs {
+    readonly id: FieldRef<"ProgresoTemaRecord", 'String'>
+    readonly createdAt: FieldRef<"ProgresoTemaRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProgresoTemaRecord", 'DateTime'>
+    readonly alumnoId: FieldRef<"ProgresoTemaRecord", 'String'>
+    readonly temaId: FieldRef<"ProgresoTemaRecord", 'String'>
+    readonly rachaActual: FieldRef<"ProgresoTemaRecord", 'Int'>
+    readonly mejorRacha: FieldRef<"ProgresoTemaRecord", 'Int'>
+    readonly intentosEnTema: FieldRef<"ProgresoTemaRecord", 'Int'>
+    readonly practicado: FieldRef<"ProgresoTemaRecord", 'Boolean'>
+    readonly consolidado: FieldRef<"ProgresoTemaRecord", 'Boolean'>
+    readonly theta: FieldRef<"ProgresoTemaRecord", 'Float'>
+    readonly ultimoIntentoEn: FieldRef<"ProgresoTemaRecord", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProgresoTemaRecord findUnique
+   */
+  export type ProgresoTemaRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which ProgresoTemaRecord to fetch.
+     */
+    where: ProgresoTemaRecordWhereUniqueInput
+  }
+
+  /**
+   * ProgresoTemaRecord findUniqueOrThrow
+   */
+  export type ProgresoTemaRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which ProgresoTemaRecord to fetch.
+     */
+    where: ProgresoTemaRecordWhereUniqueInput
+  }
+
+  /**
+   * ProgresoTemaRecord findFirst
+   */
+  export type ProgresoTemaRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which ProgresoTemaRecord to fetch.
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProgresoTemaRecords to fetch.
+     */
+    orderBy?: ProgresoTemaRecordOrderByWithRelationInput | ProgresoTemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProgresoTemaRecords.
+     */
+    cursor?: ProgresoTemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProgresoTemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProgresoTemaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProgresoTemaRecords.
+     */
+    distinct?: ProgresoTemaRecordScalarFieldEnum | ProgresoTemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * ProgresoTemaRecord findFirstOrThrow
+   */
+  export type ProgresoTemaRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which ProgresoTemaRecord to fetch.
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProgresoTemaRecords to fetch.
+     */
+    orderBy?: ProgresoTemaRecordOrderByWithRelationInput | ProgresoTemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProgresoTemaRecords.
+     */
+    cursor?: ProgresoTemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProgresoTemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProgresoTemaRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProgresoTemaRecords.
+     */
+    distinct?: ProgresoTemaRecordScalarFieldEnum | ProgresoTemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * ProgresoTemaRecord findMany
+   */
+  export type ProgresoTemaRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which ProgresoTemaRecords to fetch.
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProgresoTemaRecords to fetch.
+     */
+    orderBy?: ProgresoTemaRecordOrderByWithRelationInput | ProgresoTemaRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProgresoTemaRecords.
+     */
+    cursor?: ProgresoTemaRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProgresoTemaRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProgresoTemaRecords.
+     */
+    skip?: number
+    distinct?: ProgresoTemaRecordScalarFieldEnum | ProgresoTemaRecordScalarFieldEnum[]
+  }
+
+  /**
+   * ProgresoTemaRecord create
+   */
+  export type ProgresoTemaRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ProgresoTemaRecord.
+     */
+    data: XOR<ProgresoTemaRecordCreateInput, ProgresoTemaRecordUncheckedCreateInput>
+  }
+
+  /**
+   * ProgresoTemaRecord createMany
+   */
+  export type ProgresoTemaRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProgresoTemaRecords.
+     */
+    data: ProgresoTemaRecordCreateManyInput | ProgresoTemaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProgresoTemaRecord createManyAndReturn
+   */
+  export type ProgresoTemaRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProgresoTemaRecords.
+     */
+    data: ProgresoTemaRecordCreateManyInput | ProgresoTemaRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProgresoTemaRecord update
+   */
+  export type ProgresoTemaRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ProgresoTemaRecord.
+     */
+    data: XOR<ProgresoTemaRecordUpdateInput, ProgresoTemaRecordUncheckedUpdateInput>
+    /**
+     * Choose, which ProgresoTemaRecord to update.
+     */
+    where: ProgresoTemaRecordWhereUniqueInput
+  }
+
+  /**
+   * ProgresoTemaRecord updateMany
+   */
+  export type ProgresoTemaRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProgresoTemaRecords.
+     */
+    data: XOR<ProgresoTemaRecordUpdateManyMutationInput, ProgresoTemaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which ProgresoTemaRecords to update
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * Limit how many ProgresoTemaRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProgresoTemaRecord updateManyAndReturn
+   */
+  export type ProgresoTemaRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update ProgresoTemaRecords.
+     */
+    data: XOR<ProgresoTemaRecordUpdateManyMutationInput, ProgresoTemaRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which ProgresoTemaRecords to update
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * Limit how many ProgresoTemaRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProgresoTemaRecord upsert
+   */
+  export type ProgresoTemaRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ProgresoTemaRecord to update in case it exists.
+     */
+    where: ProgresoTemaRecordWhereUniqueInput
+    /**
+     * In case the ProgresoTemaRecord found by the `where` argument doesn't exist, create a new ProgresoTemaRecord with this data.
+     */
+    create: XOR<ProgresoTemaRecordCreateInput, ProgresoTemaRecordUncheckedCreateInput>
+    /**
+     * In case the ProgresoTemaRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProgresoTemaRecordUpdateInput, ProgresoTemaRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * ProgresoTemaRecord delete
+   */
+  export type ProgresoTemaRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+    /**
+     * Filter which ProgresoTemaRecord to delete.
+     */
+    where: ProgresoTemaRecordWhereUniqueInput
+  }
+
+  /**
+   * ProgresoTemaRecord deleteMany
+   */
+  export type ProgresoTemaRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProgresoTemaRecords to delete
+     */
+    where?: ProgresoTemaRecordWhereInput
+    /**
+     * Limit how many ProgresoTemaRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProgresoTemaRecord without action
+   */
+  export type ProgresoTemaRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgresoTemaRecord
+     */
+    select?: ProgresoTemaRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProgresoTemaRecord
+     */
+    omit?: ProgresoTemaRecordOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9881,6 +16132,87 @@ export namespace Prisma {
   export type ClassroomMeetingRecordScalarFieldEnum = (typeof ClassroomMeetingRecordScalarFieldEnum)[keyof typeof ClassroomMeetingRecordScalarFieldEnum]
 
 
+  export const AsignaturaRecordScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    eje: 'eje',
+    nombre: 'nombre',
+    orden: 'orden'
+  };
+
+  export type AsignaturaRecordScalarFieldEnum = (typeof AsignaturaRecordScalarFieldEnum)[keyof typeof AsignaturaRecordScalarFieldEnum]
+
+
+  export const TemaRecordScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    asignaturaId: 'asignaturaId',
+    romano: 'romano',
+    nombre: 'nombre',
+    orden: 'orden',
+    bloque: 'bloque'
+  };
+
+  export type TemaRecordScalarFieldEnum = (typeof TemaRecordScalarFieldEnum)[keyof typeof TemaRecordScalarFieldEnum]
+
+
+  export const PreguntaRecordScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    temaId: 'temaId',
+    enunciado: 'enunciado',
+    alternativas: 'alternativas',
+    claveCorrecta: 'claveCorrecta',
+    solucion: 'solucion',
+    fuente: 'fuente',
+    esAncla: 'esAncla',
+    dificultad: 'dificultad',
+    vecesServida: 'vecesServida',
+    activa: 'activa'
+  };
+
+  export type PreguntaRecordScalarFieldEnum = (typeof PreguntaRecordScalarFieldEnum)[keyof typeof PreguntaRecordScalarFieldEnum]
+
+
+  export const IntentoRecordScalarFieldEnum: {
+    id: 'id',
+    creadoEn: 'creadoEn',
+    alumnoId: 'alumnoId',
+    preguntaId: 'preguntaId',
+    temaId: 'temaId',
+    asignaturaId: 'asignaturaId',
+    resultado: 'resultado',
+    tiempoMs: 'tiempoMs',
+    modo: 'modo',
+    perfil: 'perfil',
+    thetaAlumno: 'thetaAlumno',
+    thetaPregunta: 'thetaPregunta'
+  };
+
+  export type IntentoRecordScalarFieldEnum = (typeof IntentoRecordScalarFieldEnum)[keyof typeof IntentoRecordScalarFieldEnum]
+
+
+  export const ProgresoTemaRecordScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    alumnoId: 'alumnoId',
+    temaId: 'temaId',
+    rachaActual: 'rachaActual',
+    mejorRacha: 'mejorRacha',
+    intentosEnTema: 'intentosEnTema',
+    practicado: 'practicado',
+    consolidado: 'consolidado',
+    theta: 'theta',
+    ultimoIntentoEn: 'ultimoIntentoEn'
+  };
+
+  export type ProgresoTemaRecordScalarFieldEnum = (typeof ProgresoTemaRecordScalarFieldEnum)[keyof typeof ProgresoTemaRecordScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -9895,6 +16227,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -10668,6 +17007,421 @@ export namespace Prisma {
     createdByTeacherId?: StringWithAggregatesFilter<"ClassroomMeetingRecord"> | string
   }
 
+  export type AsignaturaRecordWhereInput = {
+    AND?: AsignaturaRecordWhereInput | AsignaturaRecordWhereInput[]
+    OR?: AsignaturaRecordWhereInput[]
+    NOT?: AsignaturaRecordWhereInput | AsignaturaRecordWhereInput[]
+    id?: StringFilter<"AsignaturaRecord"> | string
+    createdAt?: DateTimeFilter<"AsignaturaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"AsignaturaRecord"> | Date | string
+    eje?: StringFilter<"AsignaturaRecord"> | string
+    nombre?: StringFilter<"AsignaturaRecord"> | string
+    orden?: IntFilter<"AsignaturaRecord"> | number
+    temas?: TemaRecordListRelationFilter
+  }
+
+  export type AsignaturaRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    eje?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    temas?: TemaRecordOrderByRelationAggregateInput
+  }
+
+  export type AsignaturaRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    eje_nombre?: AsignaturaRecordEjeNombreCompoundUniqueInput
+    AND?: AsignaturaRecordWhereInput | AsignaturaRecordWhereInput[]
+    OR?: AsignaturaRecordWhereInput[]
+    NOT?: AsignaturaRecordWhereInput | AsignaturaRecordWhereInput[]
+    createdAt?: DateTimeFilter<"AsignaturaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"AsignaturaRecord"> | Date | string
+    eje?: StringFilter<"AsignaturaRecord"> | string
+    nombre?: StringFilter<"AsignaturaRecord"> | string
+    orden?: IntFilter<"AsignaturaRecord"> | number
+    temas?: TemaRecordListRelationFilter
+  }, "id" | "eje_nombre">
+
+  export type AsignaturaRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    eje?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    _count?: AsignaturaRecordCountOrderByAggregateInput
+    _avg?: AsignaturaRecordAvgOrderByAggregateInput
+    _max?: AsignaturaRecordMaxOrderByAggregateInput
+    _min?: AsignaturaRecordMinOrderByAggregateInput
+    _sum?: AsignaturaRecordSumOrderByAggregateInput
+  }
+
+  export type AsignaturaRecordScalarWhereWithAggregatesInput = {
+    AND?: AsignaturaRecordScalarWhereWithAggregatesInput | AsignaturaRecordScalarWhereWithAggregatesInput[]
+    OR?: AsignaturaRecordScalarWhereWithAggregatesInput[]
+    NOT?: AsignaturaRecordScalarWhereWithAggregatesInput | AsignaturaRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AsignaturaRecord"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AsignaturaRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AsignaturaRecord"> | Date | string
+    eje?: StringWithAggregatesFilter<"AsignaturaRecord"> | string
+    nombre?: StringWithAggregatesFilter<"AsignaturaRecord"> | string
+    orden?: IntWithAggregatesFilter<"AsignaturaRecord"> | number
+  }
+
+  export type TemaRecordWhereInput = {
+    AND?: TemaRecordWhereInput | TemaRecordWhereInput[]
+    OR?: TemaRecordWhereInput[]
+    NOT?: TemaRecordWhereInput | TemaRecordWhereInput[]
+    id?: StringFilter<"TemaRecord"> | string
+    createdAt?: DateTimeFilter<"TemaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"TemaRecord"> | Date | string
+    asignaturaId?: StringFilter<"TemaRecord"> | string
+    romano?: StringFilter<"TemaRecord"> | string
+    nombre?: StringFilter<"TemaRecord"> | string
+    orden?: IntFilter<"TemaRecord"> | number
+    bloque?: StringNullableFilter<"TemaRecord"> | string | null
+    asignatura?: XOR<AsignaturaRecordScalarRelationFilter, AsignaturaRecordWhereInput>
+    preguntas?: PreguntaRecordListRelationFilter
+  }
+
+  export type TemaRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    asignaturaId?: SortOrder
+    romano?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    bloque?: SortOrderInput | SortOrder
+    asignatura?: AsignaturaRecordOrderByWithRelationInput
+    preguntas?: PreguntaRecordOrderByRelationAggregateInput
+  }
+
+  export type TemaRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    asignaturaId_orden?: TemaRecordAsignaturaIdOrdenCompoundUniqueInput
+    AND?: TemaRecordWhereInput | TemaRecordWhereInput[]
+    OR?: TemaRecordWhereInput[]
+    NOT?: TemaRecordWhereInput | TemaRecordWhereInput[]
+    createdAt?: DateTimeFilter<"TemaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"TemaRecord"> | Date | string
+    asignaturaId?: StringFilter<"TemaRecord"> | string
+    romano?: StringFilter<"TemaRecord"> | string
+    nombre?: StringFilter<"TemaRecord"> | string
+    orden?: IntFilter<"TemaRecord"> | number
+    bloque?: StringNullableFilter<"TemaRecord"> | string | null
+    asignatura?: XOR<AsignaturaRecordScalarRelationFilter, AsignaturaRecordWhereInput>
+    preguntas?: PreguntaRecordListRelationFilter
+  }, "id" | "asignaturaId_orden">
+
+  export type TemaRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    asignaturaId?: SortOrder
+    romano?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    bloque?: SortOrderInput | SortOrder
+    _count?: TemaRecordCountOrderByAggregateInput
+    _avg?: TemaRecordAvgOrderByAggregateInput
+    _max?: TemaRecordMaxOrderByAggregateInput
+    _min?: TemaRecordMinOrderByAggregateInput
+    _sum?: TemaRecordSumOrderByAggregateInput
+  }
+
+  export type TemaRecordScalarWhereWithAggregatesInput = {
+    AND?: TemaRecordScalarWhereWithAggregatesInput | TemaRecordScalarWhereWithAggregatesInput[]
+    OR?: TemaRecordScalarWhereWithAggregatesInput[]
+    NOT?: TemaRecordScalarWhereWithAggregatesInput | TemaRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TemaRecord"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TemaRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TemaRecord"> | Date | string
+    asignaturaId?: StringWithAggregatesFilter<"TemaRecord"> | string
+    romano?: StringWithAggregatesFilter<"TemaRecord"> | string
+    nombre?: StringWithAggregatesFilter<"TemaRecord"> | string
+    orden?: IntWithAggregatesFilter<"TemaRecord"> | number
+    bloque?: StringNullableWithAggregatesFilter<"TemaRecord"> | string | null
+  }
+
+  export type PreguntaRecordWhereInput = {
+    AND?: PreguntaRecordWhereInput | PreguntaRecordWhereInput[]
+    OR?: PreguntaRecordWhereInput[]
+    NOT?: PreguntaRecordWhereInput | PreguntaRecordWhereInput[]
+    id?: StringFilter<"PreguntaRecord"> | string
+    createdAt?: DateTimeFilter<"PreguntaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PreguntaRecord"> | Date | string
+    temaId?: StringFilter<"PreguntaRecord"> | string
+    enunciado?: StringFilter<"PreguntaRecord"> | string
+    alternativas?: JsonFilter<"PreguntaRecord">
+    claveCorrecta?: StringFilter<"PreguntaRecord"> | string
+    solucion?: StringNullableFilter<"PreguntaRecord"> | string | null
+    fuente?: StringNullableFilter<"PreguntaRecord"> | string | null
+    esAncla?: BoolFilter<"PreguntaRecord"> | boolean
+    dificultad?: FloatFilter<"PreguntaRecord"> | number
+    vecesServida?: IntFilter<"PreguntaRecord"> | number
+    activa?: BoolFilter<"PreguntaRecord"> | boolean
+    tema?: XOR<TemaRecordScalarRelationFilter, TemaRecordWhereInput>
+  }
+
+  export type PreguntaRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    temaId?: SortOrder
+    enunciado?: SortOrder
+    alternativas?: SortOrder
+    claveCorrecta?: SortOrder
+    solucion?: SortOrderInput | SortOrder
+    fuente?: SortOrderInput | SortOrder
+    esAncla?: SortOrder
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+    activa?: SortOrder
+    tema?: TemaRecordOrderByWithRelationInput
+  }
+
+  export type PreguntaRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PreguntaRecordWhereInput | PreguntaRecordWhereInput[]
+    OR?: PreguntaRecordWhereInput[]
+    NOT?: PreguntaRecordWhereInput | PreguntaRecordWhereInput[]
+    createdAt?: DateTimeFilter<"PreguntaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PreguntaRecord"> | Date | string
+    temaId?: StringFilter<"PreguntaRecord"> | string
+    enunciado?: StringFilter<"PreguntaRecord"> | string
+    alternativas?: JsonFilter<"PreguntaRecord">
+    claveCorrecta?: StringFilter<"PreguntaRecord"> | string
+    solucion?: StringNullableFilter<"PreguntaRecord"> | string | null
+    fuente?: StringNullableFilter<"PreguntaRecord"> | string | null
+    esAncla?: BoolFilter<"PreguntaRecord"> | boolean
+    dificultad?: FloatFilter<"PreguntaRecord"> | number
+    vecesServida?: IntFilter<"PreguntaRecord"> | number
+    activa?: BoolFilter<"PreguntaRecord"> | boolean
+    tema?: XOR<TemaRecordScalarRelationFilter, TemaRecordWhereInput>
+  }, "id">
+
+  export type PreguntaRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    temaId?: SortOrder
+    enunciado?: SortOrder
+    alternativas?: SortOrder
+    claveCorrecta?: SortOrder
+    solucion?: SortOrderInput | SortOrder
+    fuente?: SortOrderInput | SortOrder
+    esAncla?: SortOrder
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+    activa?: SortOrder
+    _count?: PreguntaRecordCountOrderByAggregateInput
+    _avg?: PreguntaRecordAvgOrderByAggregateInput
+    _max?: PreguntaRecordMaxOrderByAggregateInput
+    _min?: PreguntaRecordMinOrderByAggregateInput
+    _sum?: PreguntaRecordSumOrderByAggregateInput
+  }
+
+  export type PreguntaRecordScalarWhereWithAggregatesInput = {
+    AND?: PreguntaRecordScalarWhereWithAggregatesInput | PreguntaRecordScalarWhereWithAggregatesInput[]
+    OR?: PreguntaRecordScalarWhereWithAggregatesInput[]
+    NOT?: PreguntaRecordScalarWhereWithAggregatesInput | PreguntaRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PreguntaRecord"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PreguntaRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PreguntaRecord"> | Date | string
+    temaId?: StringWithAggregatesFilter<"PreguntaRecord"> | string
+    enunciado?: StringWithAggregatesFilter<"PreguntaRecord"> | string
+    alternativas?: JsonWithAggregatesFilter<"PreguntaRecord">
+    claveCorrecta?: StringWithAggregatesFilter<"PreguntaRecord"> | string
+    solucion?: StringNullableWithAggregatesFilter<"PreguntaRecord"> | string | null
+    fuente?: StringNullableWithAggregatesFilter<"PreguntaRecord"> | string | null
+    esAncla?: BoolWithAggregatesFilter<"PreguntaRecord"> | boolean
+    dificultad?: FloatWithAggregatesFilter<"PreguntaRecord"> | number
+    vecesServida?: IntWithAggregatesFilter<"PreguntaRecord"> | number
+    activa?: BoolWithAggregatesFilter<"PreguntaRecord"> | boolean
+  }
+
+  export type IntentoRecordWhereInput = {
+    AND?: IntentoRecordWhereInput | IntentoRecordWhereInput[]
+    OR?: IntentoRecordWhereInput[]
+    NOT?: IntentoRecordWhereInput | IntentoRecordWhereInput[]
+    id?: StringFilter<"IntentoRecord"> | string
+    creadoEn?: DateTimeFilter<"IntentoRecord"> | Date | string
+    alumnoId?: StringFilter<"IntentoRecord"> | string
+    preguntaId?: StringFilter<"IntentoRecord"> | string
+    temaId?: StringFilter<"IntentoRecord"> | string
+    asignaturaId?: StringFilter<"IntentoRecord"> | string
+    resultado?: StringFilter<"IntentoRecord"> | string
+    tiempoMs?: IntFilter<"IntentoRecord"> | number
+    modo?: StringFilter<"IntentoRecord"> | string
+    perfil?: StringFilter<"IntentoRecord"> | string
+    thetaAlumno?: FloatNullableFilter<"IntentoRecord"> | number | null
+    thetaPregunta?: FloatNullableFilter<"IntentoRecord"> | number | null
+  }
+
+  export type IntentoRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    creadoEn?: SortOrder
+    alumnoId?: SortOrder
+    preguntaId?: SortOrder
+    temaId?: SortOrder
+    asignaturaId?: SortOrder
+    resultado?: SortOrder
+    tiempoMs?: SortOrder
+    modo?: SortOrder
+    perfil?: SortOrder
+    thetaAlumno?: SortOrderInput | SortOrder
+    thetaPregunta?: SortOrderInput | SortOrder
+  }
+
+  export type IntentoRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IntentoRecordWhereInput | IntentoRecordWhereInput[]
+    OR?: IntentoRecordWhereInput[]
+    NOT?: IntentoRecordWhereInput | IntentoRecordWhereInput[]
+    creadoEn?: DateTimeFilter<"IntentoRecord"> | Date | string
+    alumnoId?: StringFilter<"IntentoRecord"> | string
+    preguntaId?: StringFilter<"IntentoRecord"> | string
+    temaId?: StringFilter<"IntentoRecord"> | string
+    asignaturaId?: StringFilter<"IntentoRecord"> | string
+    resultado?: StringFilter<"IntentoRecord"> | string
+    tiempoMs?: IntFilter<"IntentoRecord"> | number
+    modo?: StringFilter<"IntentoRecord"> | string
+    perfil?: StringFilter<"IntentoRecord"> | string
+    thetaAlumno?: FloatNullableFilter<"IntentoRecord"> | number | null
+    thetaPregunta?: FloatNullableFilter<"IntentoRecord"> | number | null
+  }, "id">
+
+  export type IntentoRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    creadoEn?: SortOrder
+    alumnoId?: SortOrder
+    preguntaId?: SortOrder
+    temaId?: SortOrder
+    asignaturaId?: SortOrder
+    resultado?: SortOrder
+    tiempoMs?: SortOrder
+    modo?: SortOrder
+    perfil?: SortOrder
+    thetaAlumno?: SortOrderInput | SortOrder
+    thetaPregunta?: SortOrderInput | SortOrder
+    _count?: IntentoRecordCountOrderByAggregateInput
+    _avg?: IntentoRecordAvgOrderByAggregateInput
+    _max?: IntentoRecordMaxOrderByAggregateInput
+    _min?: IntentoRecordMinOrderByAggregateInput
+    _sum?: IntentoRecordSumOrderByAggregateInput
+  }
+
+  export type IntentoRecordScalarWhereWithAggregatesInput = {
+    AND?: IntentoRecordScalarWhereWithAggregatesInput | IntentoRecordScalarWhereWithAggregatesInput[]
+    OR?: IntentoRecordScalarWhereWithAggregatesInput[]
+    NOT?: IntentoRecordScalarWhereWithAggregatesInput | IntentoRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    creadoEn?: DateTimeWithAggregatesFilter<"IntentoRecord"> | Date | string
+    alumnoId?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    preguntaId?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    temaId?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    asignaturaId?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    resultado?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    tiempoMs?: IntWithAggregatesFilter<"IntentoRecord"> | number
+    modo?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    perfil?: StringWithAggregatesFilter<"IntentoRecord"> | string
+    thetaAlumno?: FloatNullableWithAggregatesFilter<"IntentoRecord"> | number | null
+    thetaPregunta?: FloatNullableWithAggregatesFilter<"IntentoRecord"> | number | null
+  }
+
+  export type ProgresoTemaRecordWhereInput = {
+    AND?: ProgresoTemaRecordWhereInput | ProgresoTemaRecordWhereInput[]
+    OR?: ProgresoTemaRecordWhereInput[]
+    NOT?: ProgresoTemaRecordWhereInput | ProgresoTemaRecordWhereInput[]
+    id?: StringFilter<"ProgresoTemaRecord"> | string
+    createdAt?: DateTimeFilter<"ProgresoTemaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"ProgresoTemaRecord"> | Date | string
+    alumnoId?: StringFilter<"ProgresoTemaRecord"> | string
+    temaId?: StringFilter<"ProgresoTemaRecord"> | string
+    rachaActual?: IntFilter<"ProgresoTemaRecord"> | number
+    mejorRacha?: IntFilter<"ProgresoTemaRecord"> | number
+    intentosEnTema?: IntFilter<"ProgresoTemaRecord"> | number
+    practicado?: BoolFilter<"ProgresoTemaRecord"> | boolean
+    consolidado?: BoolFilter<"ProgresoTemaRecord"> | boolean
+    theta?: FloatFilter<"ProgresoTemaRecord"> | number
+    ultimoIntentoEn?: DateTimeNullableFilter<"ProgresoTemaRecord"> | Date | string | null
+  }
+
+  export type ProgresoTemaRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    alumnoId?: SortOrder
+    temaId?: SortOrder
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    practicado?: SortOrder
+    consolidado?: SortOrder
+    theta?: SortOrder
+    ultimoIntentoEn?: SortOrderInput | SortOrder
+  }
+
+  export type ProgresoTemaRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    alumnoId_temaId?: ProgresoTemaRecordAlumnoIdTemaIdCompoundUniqueInput
+    AND?: ProgresoTemaRecordWhereInput | ProgresoTemaRecordWhereInput[]
+    OR?: ProgresoTemaRecordWhereInput[]
+    NOT?: ProgresoTemaRecordWhereInput | ProgresoTemaRecordWhereInput[]
+    createdAt?: DateTimeFilter<"ProgresoTemaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"ProgresoTemaRecord"> | Date | string
+    alumnoId?: StringFilter<"ProgresoTemaRecord"> | string
+    temaId?: StringFilter<"ProgresoTemaRecord"> | string
+    rachaActual?: IntFilter<"ProgresoTemaRecord"> | number
+    mejorRacha?: IntFilter<"ProgresoTemaRecord"> | number
+    intentosEnTema?: IntFilter<"ProgresoTemaRecord"> | number
+    practicado?: BoolFilter<"ProgresoTemaRecord"> | boolean
+    consolidado?: BoolFilter<"ProgresoTemaRecord"> | boolean
+    theta?: FloatFilter<"ProgresoTemaRecord"> | number
+    ultimoIntentoEn?: DateTimeNullableFilter<"ProgresoTemaRecord"> | Date | string | null
+  }, "id" | "alumnoId_temaId">
+
+  export type ProgresoTemaRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    alumnoId?: SortOrder
+    temaId?: SortOrder
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    practicado?: SortOrder
+    consolidado?: SortOrder
+    theta?: SortOrder
+    ultimoIntentoEn?: SortOrderInput | SortOrder
+    _count?: ProgresoTemaRecordCountOrderByAggregateInput
+    _avg?: ProgresoTemaRecordAvgOrderByAggregateInput
+    _max?: ProgresoTemaRecordMaxOrderByAggregateInput
+    _min?: ProgresoTemaRecordMinOrderByAggregateInput
+    _sum?: ProgresoTemaRecordSumOrderByAggregateInput
+  }
+
+  export type ProgresoTemaRecordScalarWhereWithAggregatesInput = {
+    AND?: ProgresoTemaRecordScalarWhereWithAggregatesInput | ProgresoTemaRecordScalarWhereWithAggregatesInput[]
+    OR?: ProgresoTemaRecordScalarWhereWithAggregatesInput[]
+    NOT?: ProgresoTemaRecordScalarWhereWithAggregatesInput | ProgresoTemaRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProgresoTemaRecord"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ProgresoTemaRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProgresoTemaRecord"> | Date | string
+    alumnoId?: StringWithAggregatesFilter<"ProgresoTemaRecord"> | string
+    temaId?: StringWithAggregatesFilter<"ProgresoTemaRecord"> | string
+    rachaActual?: IntWithAggregatesFilter<"ProgresoTemaRecord"> | number
+    mejorRacha?: IntWithAggregatesFilter<"ProgresoTemaRecord"> | number
+    intentosEnTema?: IntWithAggregatesFilter<"ProgresoTemaRecord"> | number
+    practicado?: BoolWithAggregatesFilter<"ProgresoTemaRecord"> | boolean
+    consolidado?: BoolWithAggregatesFilter<"ProgresoTemaRecord"> | boolean
+    theta?: FloatWithAggregatesFilter<"ProgresoTemaRecord"> | number
+    ultimoIntentoEn?: DateTimeNullableWithAggregatesFilter<"ProgresoTemaRecord"> | Date | string | null
+  }
+
   export type LearningPathRecordCreateInput = {
     id: string
     createdAt?: Date | string
@@ -11439,6 +18193,474 @@ export namespace Prisma {
     createdByTeacherId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type AsignaturaRecordCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    eje: string
+    nombre: string
+    orden: number
+    temas?: TemaRecordCreateNestedManyWithoutAsignaturaInput
+  }
+
+  export type AsignaturaRecordUncheckedCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    eje: string
+    nombre: string
+    orden: number
+    temas?: TemaRecordUncheckedCreateNestedManyWithoutAsignaturaInput
+  }
+
+  export type AsignaturaRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eje?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    temas?: TemaRecordUpdateManyWithoutAsignaturaNestedInput
+  }
+
+  export type AsignaturaRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eje?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    temas?: TemaRecordUncheckedUpdateManyWithoutAsignaturaNestedInput
+  }
+
+  export type AsignaturaRecordCreateManyInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    eje: string
+    nombre: string
+    orden: number
+  }
+
+  export type AsignaturaRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eje?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AsignaturaRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eje?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TemaRecordCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+    asignatura: AsignaturaRecordCreateNestedOneWithoutTemasInput
+    preguntas?: PreguntaRecordCreateNestedManyWithoutTemaInput
+  }
+
+  export type TemaRecordUncheckedCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    asignaturaId: string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+    preguntas?: PreguntaRecordUncheckedCreateNestedManyWithoutTemaInput
+  }
+
+  export type TemaRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+    asignatura?: AsignaturaRecordUpdateOneRequiredWithoutTemasNestedInput
+    preguntas?: PreguntaRecordUpdateManyWithoutTemaNestedInput
+  }
+
+  export type TemaRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+    preguntas?: PreguntaRecordUncheckedUpdateManyWithoutTemaNestedInput
+  }
+
+  export type TemaRecordCreateManyInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    asignaturaId: string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+  }
+
+  export type TemaRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TemaRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PreguntaRecordCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enunciado: string
+    alternativas: JsonNullValueInput | InputJsonValue
+    claveCorrecta: string
+    solucion?: string | null
+    fuente?: string | null
+    esAncla?: boolean
+    dificultad?: number
+    vecesServida?: number
+    activa?: boolean
+    tema: TemaRecordCreateNestedOneWithoutPreguntasInput
+  }
+
+  export type PreguntaRecordUncheckedCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    temaId: string
+    enunciado: string
+    alternativas: JsonNullValueInput | InputJsonValue
+    claveCorrecta: string
+    solucion?: string | null
+    fuente?: string | null
+    esAncla?: boolean
+    dificultad?: number
+    vecesServida?: number
+    activa?: boolean
+  }
+
+  export type PreguntaRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    tema?: TemaRecordUpdateOneRequiredWithoutPreguntasNestedInput
+  }
+
+  export type PreguntaRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PreguntaRecordCreateManyInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    temaId: string
+    enunciado: string
+    alternativas: JsonNullValueInput | InputJsonValue
+    claveCorrecta: string
+    solucion?: string | null
+    fuente?: string | null
+    esAncla?: boolean
+    dificultad?: number
+    vecesServida?: number
+    activa?: boolean
+  }
+
+  export type PreguntaRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PreguntaRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type IntentoRecordCreateInput = {
+    id: string
+    creadoEn?: Date | string
+    alumnoId: string
+    preguntaId: string
+    temaId: string
+    asignaturaId: string
+    resultado: string
+    tiempoMs: number
+    modo: string
+    perfil: string
+    thetaAlumno?: number | null
+    thetaPregunta?: number | null
+  }
+
+  export type IntentoRecordUncheckedCreateInput = {
+    id: string
+    creadoEn?: Date | string
+    alumnoId: string
+    preguntaId: string
+    temaId: string
+    asignaturaId: string
+    resultado: string
+    tiempoMs: number
+    modo: string
+    perfil: string
+    thetaAlumno?: number | null
+    thetaPregunta?: number | null
+  }
+
+  export type IntentoRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    preguntaId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    resultado?: StringFieldUpdateOperationsInput | string
+    tiempoMs?: IntFieldUpdateOperationsInput | number
+    modo?: StringFieldUpdateOperationsInput | string
+    perfil?: StringFieldUpdateOperationsInput | string
+    thetaAlumno?: NullableFloatFieldUpdateOperationsInput | number | null
+    thetaPregunta?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type IntentoRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    preguntaId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    resultado?: StringFieldUpdateOperationsInput | string
+    tiempoMs?: IntFieldUpdateOperationsInput | number
+    modo?: StringFieldUpdateOperationsInput | string
+    perfil?: StringFieldUpdateOperationsInput | string
+    thetaAlumno?: NullableFloatFieldUpdateOperationsInput | number | null
+    thetaPregunta?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type IntentoRecordCreateManyInput = {
+    id: string
+    creadoEn?: Date | string
+    alumnoId: string
+    preguntaId: string
+    temaId: string
+    asignaturaId: string
+    resultado: string
+    tiempoMs: number
+    modo: string
+    perfil: string
+    thetaAlumno?: number | null
+    thetaPregunta?: number | null
+  }
+
+  export type IntentoRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    preguntaId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    resultado?: StringFieldUpdateOperationsInput | string
+    tiempoMs?: IntFieldUpdateOperationsInput | number
+    modo?: StringFieldUpdateOperationsInput | string
+    perfil?: StringFieldUpdateOperationsInput | string
+    thetaAlumno?: NullableFloatFieldUpdateOperationsInput | number | null
+    thetaPregunta?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type IntentoRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    preguntaId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    resultado?: StringFieldUpdateOperationsInput | string
+    tiempoMs?: IntFieldUpdateOperationsInput | number
+    modo?: StringFieldUpdateOperationsInput | string
+    perfil?: StringFieldUpdateOperationsInput | string
+    thetaAlumno?: NullableFloatFieldUpdateOperationsInput | number | null
+    thetaPregunta?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type ProgresoTemaRecordCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    alumnoId: string
+    temaId: string
+    rachaActual?: number
+    mejorRacha?: number
+    intentosEnTema?: number
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: number
+    ultimoIntentoEn?: Date | string | null
+  }
+
+  export type ProgresoTemaRecordUncheckedCreateInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    alumnoId: string
+    temaId: string
+    rachaActual?: number
+    mejorRacha?: number
+    intentosEnTema?: number
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: number
+    ultimoIntentoEn?: Date | string | null
+  }
+
+  export type ProgresoTemaRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    rachaActual?: IntFieldUpdateOperationsInput | number
+    mejorRacha?: IntFieldUpdateOperationsInput | number
+    intentosEnTema?: IntFieldUpdateOperationsInput | number
+    practicado?: BoolFieldUpdateOperationsInput | boolean
+    consolidado?: BoolFieldUpdateOperationsInput | boolean
+    theta?: FloatFieldUpdateOperationsInput | number
+    ultimoIntentoEn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ProgresoTemaRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    rachaActual?: IntFieldUpdateOperationsInput | number
+    mejorRacha?: IntFieldUpdateOperationsInput | number
+    intentosEnTema?: IntFieldUpdateOperationsInput | number
+    practicado?: BoolFieldUpdateOperationsInput | boolean
+    consolidado?: BoolFieldUpdateOperationsInput | boolean
+    theta?: FloatFieldUpdateOperationsInput | number
+    ultimoIntentoEn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ProgresoTemaRecordCreateManyInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    alumnoId: string
+    temaId: string
+    rachaActual?: number
+    mejorRacha?: number
+    intentosEnTema?: number
+    practicado?: boolean
+    consolidado?: boolean
+    theta?: number
+    ultimoIntentoEn?: Date | string | null
+  }
+
+  export type ProgresoTemaRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    rachaActual?: IntFieldUpdateOperationsInput | number
+    mejorRacha?: IntFieldUpdateOperationsInput | number
+    intentosEnTema?: IntFieldUpdateOperationsInput | number
+    practicado?: BoolFieldUpdateOperationsInput | boolean
+    consolidado?: BoolFieldUpdateOperationsInput | boolean
+    theta?: FloatFieldUpdateOperationsInput | number
+    ultimoIntentoEn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ProgresoTemaRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    alumnoId?: StringFieldUpdateOperationsInput | string
+    temaId?: StringFieldUpdateOperationsInput | string
+    rachaActual?: IntFieldUpdateOperationsInput | number
+    mejorRacha?: IntFieldUpdateOperationsInput | number
+    intentosEnTema?: IntFieldUpdateOperationsInput | number
+    practicado?: BoolFieldUpdateOperationsInput | boolean
+    consolidado?: BoolFieldUpdateOperationsInput | boolean
+    theta?: FloatFieldUpdateOperationsInput | number
+    ultimoIntentoEn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12064,6 +19286,402 @@ export namespace Prisma {
     createdByTeacherId?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type TemaRecordListRelationFilter = {
+    every?: TemaRecordWhereInput
+    some?: TemaRecordWhereInput
+    none?: TemaRecordWhereInput
+  }
+
+  export type TemaRecordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AsignaturaRecordEjeNombreCompoundUniqueInput = {
+    eje: string
+    nombre: string
+  }
+
+  export type AsignaturaRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    eje?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+  }
+
+  export type AsignaturaRecordAvgOrderByAggregateInput = {
+    orden?: SortOrder
+  }
+
+  export type AsignaturaRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    eje?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+  }
+
+  export type AsignaturaRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    eje?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+  }
+
+  export type AsignaturaRecordSumOrderByAggregateInput = {
+    orden?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type AsignaturaRecordScalarRelationFilter = {
+    is?: AsignaturaRecordWhereInput
+    isNot?: AsignaturaRecordWhereInput
+  }
+
+  export type PreguntaRecordListRelationFilter = {
+    every?: PreguntaRecordWhereInput
+    some?: PreguntaRecordWhereInput
+    none?: PreguntaRecordWhereInput
+  }
+
+  export type PreguntaRecordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TemaRecordAsignaturaIdOrdenCompoundUniqueInput = {
+    asignaturaId: string
+    orden: number
+  }
+
+  export type TemaRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    asignaturaId?: SortOrder
+    romano?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    bloque?: SortOrder
+  }
+
+  export type TemaRecordAvgOrderByAggregateInput = {
+    orden?: SortOrder
+  }
+
+  export type TemaRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    asignaturaId?: SortOrder
+    romano?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    bloque?: SortOrder
+  }
+
+  export type TemaRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    asignaturaId?: SortOrder
+    romano?: SortOrder
+    nombre?: SortOrder
+    orden?: SortOrder
+    bloque?: SortOrder
+  }
+
+  export type TemaRecordSumOrderByAggregateInput = {
+    orden?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type TemaRecordScalarRelationFilter = {
+    is?: TemaRecordWhereInput
+    isNot?: TemaRecordWhereInput
+  }
+
+  export type PreguntaRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    temaId?: SortOrder
+    enunciado?: SortOrder
+    alternativas?: SortOrder
+    claveCorrecta?: SortOrder
+    solucion?: SortOrder
+    fuente?: SortOrder
+    esAncla?: SortOrder
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+    activa?: SortOrder
+  }
+
+  export type PreguntaRecordAvgOrderByAggregateInput = {
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+  }
+
+  export type PreguntaRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    temaId?: SortOrder
+    enunciado?: SortOrder
+    claveCorrecta?: SortOrder
+    solucion?: SortOrder
+    fuente?: SortOrder
+    esAncla?: SortOrder
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+    activa?: SortOrder
+  }
+
+  export type PreguntaRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    temaId?: SortOrder
+    enunciado?: SortOrder
+    claveCorrecta?: SortOrder
+    solucion?: SortOrder
+    fuente?: SortOrder
+    esAncla?: SortOrder
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+    activa?: SortOrder
+  }
+
+  export type PreguntaRecordSumOrderByAggregateInput = {
+    dificultad?: SortOrder
+    vecesServida?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type IntentoRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    creadoEn?: SortOrder
+    alumnoId?: SortOrder
+    preguntaId?: SortOrder
+    temaId?: SortOrder
+    asignaturaId?: SortOrder
+    resultado?: SortOrder
+    tiempoMs?: SortOrder
+    modo?: SortOrder
+    perfil?: SortOrder
+    thetaAlumno?: SortOrder
+    thetaPregunta?: SortOrder
+  }
+
+  export type IntentoRecordAvgOrderByAggregateInput = {
+    tiempoMs?: SortOrder
+    thetaAlumno?: SortOrder
+    thetaPregunta?: SortOrder
+  }
+
+  export type IntentoRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    creadoEn?: SortOrder
+    alumnoId?: SortOrder
+    preguntaId?: SortOrder
+    temaId?: SortOrder
+    asignaturaId?: SortOrder
+    resultado?: SortOrder
+    tiempoMs?: SortOrder
+    modo?: SortOrder
+    perfil?: SortOrder
+    thetaAlumno?: SortOrder
+    thetaPregunta?: SortOrder
+  }
+
+  export type IntentoRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    creadoEn?: SortOrder
+    alumnoId?: SortOrder
+    preguntaId?: SortOrder
+    temaId?: SortOrder
+    asignaturaId?: SortOrder
+    resultado?: SortOrder
+    tiempoMs?: SortOrder
+    modo?: SortOrder
+    perfil?: SortOrder
+    thetaAlumno?: SortOrder
+    thetaPregunta?: SortOrder
+  }
+
+  export type IntentoRecordSumOrderByAggregateInput = {
+    tiempoMs?: SortOrder
+    thetaAlumno?: SortOrder
+    thetaPregunta?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type ProgresoTemaRecordAlumnoIdTemaIdCompoundUniqueInput = {
+    alumnoId: string
+    temaId: string
+  }
+
+  export type ProgresoTemaRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    alumnoId?: SortOrder
+    temaId?: SortOrder
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    practicado?: SortOrder
+    consolidado?: SortOrder
+    theta?: SortOrder
+    ultimoIntentoEn?: SortOrder
+  }
+
+  export type ProgresoTemaRecordAvgOrderByAggregateInput = {
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    theta?: SortOrder
+  }
+
+  export type ProgresoTemaRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    alumnoId?: SortOrder
+    temaId?: SortOrder
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    practicado?: SortOrder
+    consolidado?: SortOrder
+    theta?: SortOrder
+    ultimoIntentoEn?: SortOrder
+  }
+
+  export type ProgresoTemaRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    alumnoId?: SortOrder
+    temaId?: SortOrder
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    practicado?: SortOrder
+    consolidado?: SortOrder
+    theta?: SortOrder
+    ultimoIntentoEn?: SortOrder
+  }
+
+  export type ProgresoTemaRecordSumOrderByAggregateInput = {
+    rachaActual?: SortOrder
+    mejorRacha?: SortOrder
+    intentosEnTema?: SortOrder
+    theta?: SortOrder
+  }
+
   export type LearningPathRecordCreateaudienceRolesInput = {
     set: string[]
   }
@@ -12465,6 +20083,134 @@ export namespace Prisma {
     update?: XOR<XOR<ClassroomRecordUpdateToOneWithWhereWithoutMeetingsInput, ClassroomRecordUpdateWithoutMeetingsInput>, ClassroomRecordUncheckedUpdateWithoutMeetingsInput>
   }
 
+  export type TemaRecordCreateNestedManyWithoutAsignaturaInput = {
+    create?: XOR<TemaRecordCreateWithoutAsignaturaInput, TemaRecordUncheckedCreateWithoutAsignaturaInput> | TemaRecordCreateWithoutAsignaturaInput[] | TemaRecordUncheckedCreateWithoutAsignaturaInput[]
+    connectOrCreate?: TemaRecordCreateOrConnectWithoutAsignaturaInput | TemaRecordCreateOrConnectWithoutAsignaturaInput[]
+    createMany?: TemaRecordCreateManyAsignaturaInputEnvelope
+    connect?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+  }
+
+  export type TemaRecordUncheckedCreateNestedManyWithoutAsignaturaInput = {
+    create?: XOR<TemaRecordCreateWithoutAsignaturaInput, TemaRecordUncheckedCreateWithoutAsignaturaInput> | TemaRecordCreateWithoutAsignaturaInput[] | TemaRecordUncheckedCreateWithoutAsignaturaInput[]
+    connectOrCreate?: TemaRecordCreateOrConnectWithoutAsignaturaInput | TemaRecordCreateOrConnectWithoutAsignaturaInput[]
+    createMany?: TemaRecordCreateManyAsignaturaInputEnvelope
+    connect?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TemaRecordUpdateManyWithoutAsignaturaNestedInput = {
+    create?: XOR<TemaRecordCreateWithoutAsignaturaInput, TemaRecordUncheckedCreateWithoutAsignaturaInput> | TemaRecordCreateWithoutAsignaturaInput[] | TemaRecordUncheckedCreateWithoutAsignaturaInput[]
+    connectOrCreate?: TemaRecordCreateOrConnectWithoutAsignaturaInput | TemaRecordCreateOrConnectWithoutAsignaturaInput[]
+    upsert?: TemaRecordUpsertWithWhereUniqueWithoutAsignaturaInput | TemaRecordUpsertWithWhereUniqueWithoutAsignaturaInput[]
+    createMany?: TemaRecordCreateManyAsignaturaInputEnvelope
+    set?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    disconnect?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    delete?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    connect?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    update?: TemaRecordUpdateWithWhereUniqueWithoutAsignaturaInput | TemaRecordUpdateWithWhereUniqueWithoutAsignaturaInput[]
+    updateMany?: TemaRecordUpdateManyWithWhereWithoutAsignaturaInput | TemaRecordUpdateManyWithWhereWithoutAsignaturaInput[]
+    deleteMany?: TemaRecordScalarWhereInput | TemaRecordScalarWhereInput[]
+  }
+
+  export type TemaRecordUncheckedUpdateManyWithoutAsignaturaNestedInput = {
+    create?: XOR<TemaRecordCreateWithoutAsignaturaInput, TemaRecordUncheckedCreateWithoutAsignaturaInput> | TemaRecordCreateWithoutAsignaturaInput[] | TemaRecordUncheckedCreateWithoutAsignaturaInput[]
+    connectOrCreate?: TemaRecordCreateOrConnectWithoutAsignaturaInput | TemaRecordCreateOrConnectWithoutAsignaturaInput[]
+    upsert?: TemaRecordUpsertWithWhereUniqueWithoutAsignaturaInput | TemaRecordUpsertWithWhereUniqueWithoutAsignaturaInput[]
+    createMany?: TemaRecordCreateManyAsignaturaInputEnvelope
+    set?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    disconnect?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    delete?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    connect?: TemaRecordWhereUniqueInput | TemaRecordWhereUniqueInput[]
+    update?: TemaRecordUpdateWithWhereUniqueWithoutAsignaturaInput | TemaRecordUpdateWithWhereUniqueWithoutAsignaturaInput[]
+    updateMany?: TemaRecordUpdateManyWithWhereWithoutAsignaturaInput | TemaRecordUpdateManyWithWhereWithoutAsignaturaInput[]
+    deleteMany?: TemaRecordScalarWhereInput | TemaRecordScalarWhereInput[]
+  }
+
+  export type AsignaturaRecordCreateNestedOneWithoutTemasInput = {
+    create?: XOR<AsignaturaRecordCreateWithoutTemasInput, AsignaturaRecordUncheckedCreateWithoutTemasInput>
+    connectOrCreate?: AsignaturaRecordCreateOrConnectWithoutTemasInput
+    connect?: AsignaturaRecordWhereUniqueInput
+  }
+
+  export type PreguntaRecordCreateNestedManyWithoutTemaInput = {
+    create?: XOR<PreguntaRecordCreateWithoutTemaInput, PreguntaRecordUncheckedCreateWithoutTemaInput> | PreguntaRecordCreateWithoutTemaInput[] | PreguntaRecordUncheckedCreateWithoutTemaInput[]
+    connectOrCreate?: PreguntaRecordCreateOrConnectWithoutTemaInput | PreguntaRecordCreateOrConnectWithoutTemaInput[]
+    createMany?: PreguntaRecordCreateManyTemaInputEnvelope
+    connect?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+  }
+
+  export type PreguntaRecordUncheckedCreateNestedManyWithoutTemaInput = {
+    create?: XOR<PreguntaRecordCreateWithoutTemaInput, PreguntaRecordUncheckedCreateWithoutTemaInput> | PreguntaRecordCreateWithoutTemaInput[] | PreguntaRecordUncheckedCreateWithoutTemaInput[]
+    connectOrCreate?: PreguntaRecordCreateOrConnectWithoutTemaInput | PreguntaRecordCreateOrConnectWithoutTemaInput[]
+    createMany?: PreguntaRecordCreateManyTemaInputEnvelope
+    connect?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+  }
+
+  export type AsignaturaRecordUpdateOneRequiredWithoutTemasNestedInput = {
+    create?: XOR<AsignaturaRecordCreateWithoutTemasInput, AsignaturaRecordUncheckedCreateWithoutTemasInput>
+    connectOrCreate?: AsignaturaRecordCreateOrConnectWithoutTemasInput
+    upsert?: AsignaturaRecordUpsertWithoutTemasInput
+    connect?: AsignaturaRecordWhereUniqueInput
+    update?: XOR<XOR<AsignaturaRecordUpdateToOneWithWhereWithoutTemasInput, AsignaturaRecordUpdateWithoutTemasInput>, AsignaturaRecordUncheckedUpdateWithoutTemasInput>
+  }
+
+  export type PreguntaRecordUpdateManyWithoutTemaNestedInput = {
+    create?: XOR<PreguntaRecordCreateWithoutTemaInput, PreguntaRecordUncheckedCreateWithoutTemaInput> | PreguntaRecordCreateWithoutTemaInput[] | PreguntaRecordUncheckedCreateWithoutTemaInput[]
+    connectOrCreate?: PreguntaRecordCreateOrConnectWithoutTemaInput | PreguntaRecordCreateOrConnectWithoutTemaInput[]
+    upsert?: PreguntaRecordUpsertWithWhereUniqueWithoutTemaInput | PreguntaRecordUpsertWithWhereUniqueWithoutTemaInput[]
+    createMany?: PreguntaRecordCreateManyTemaInputEnvelope
+    set?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    disconnect?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    delete?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    connect?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    update?: PreguntaRecordUpdateWithWhereUniqueWithoutTemaInput | PreguntaRecordUpdateWithWhereUniqueWithoutTemaInput[]
+    updateMany?: PreguntaRecordUpdateManyWithWhereWithoutTemaInput | PreguntaRecordUpdateManyWithWhereWithoutTemaInput[]
+    deleteMany?: PreguntaRecordScalarWhereInput | PreguntaRecordScalarWhereInput[]
+  }
+
+  export type PreguntaRecordUncheckedUpdateManyWithoutTemaNestedInput = {
+    create?: XOR<PreguntaRecordCreateWithoutTemaInput, PreguntaRecordUncheckedCreateWithoutTemaInput> | PreguntaRecordCreateWithoutTemaInput[] | PreguntaRecordUncheckedCreateWithoutTemaInput[]
+    connectOrCreate?: PreguntaRecordCreateOrConnectWithoutTemaInput | PreguntaRecordCreateOrConnectWithoutTemaInput[]
+    upsert?: PreguntaRecordUpsertWithWhereUniqueWithoutTemaInput | PreguntaRecordUpsertWithWhereUniqueWithoutTemaInput[]
+    createMany?: PreguntaRecordCreateManyTemaInputEnvelope
+    set?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    disconnect?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    delete?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    connect?: PreguntaRecordWhereUniqueInput | PreguntaRecordWhereUniqueInput[]
+    update?: PreguntaRecordUpdateWithWhereUniqueWithoutTemaInput | PreguntaRecordUpdateWithWhereUniqueWithoutTemaInput[]
+    updateMany?: PreguntaRecordUpdateManyWithWhereWithoutTemaInput | PreguntaRecordUpdateManyWithWhereWithoutTemaInput[]
+    deleteMany?: PreguntaRecordScalarWhereInput | PreguntaRecordScalarWhereInput[]
+  }
+
+  export type TemaRecordCreateNestedOneWithoutPreguntasInput = {
+    create?: XOR<TemaRecordCreateWithoutPreguntasInput, TemaRecordUncheckedCreateWithoutPreguntasInput>
+    connectOrCreate?: TemaRecordCreateOrConnectWithoutPreguntasInput
+    connect?: TemaRecordWhereUniqueInput
+  }
+
+  export type TemaRecordUpdateOneRequiredWithoutPreguntasNestedInput = {
+    create?: XOR<TemaRecordCreateWithoutPreguntasInput, TemaRecordUncheckedCreateWithoutPreguntasInput>
+    connectOrCreate?: TemaRecordCreateOrConnectWithoutPreguntasInput
+    upsert?: TemaRecordUpsertWithoutPreguntasInput
+    connect?: TemaRecordWhereUniqueInput
+    update?: XOR<XOR<TemaRecordUpdateToOneWithWhereWithoutPreguntasInput, TemaRecordUpdateWithoutPreguntasInput>, TemaRecordUncheckedUpdateWithoutPreguntasInput>
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12687,6 +20433,61 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type LearningSessionRecordCreateWithoutLearningPathInput = {
@@ -13436,6 +21237,255 @@ export namespace Prisma {
     enrollments?: StudentEnrollmentRecordUncheckedUpdateManyWithoutClassroomNestedInput
   }
 
+  export type TemaRecordCreateWithoutAsignaturaInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+    preguntas?: PreguntaRecordCreateNestedManyWithoutTemaInput
+  }
+
+  export type TemaRecordUncheckedCreateWithoutAsignaturaInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+    preguntas?: PreguntaRecordUncheckedCreateNestedManyWithoutTemaInput
+  }
+
+  export type TemaRecordCreateOrConnectWithoutAsignaturaInput = {
+    where: TemaRecordWhereUniqueInput
+    create: XOR<TemaRecordCreateWithoutAsignaturaInput, TemaRecordUncheckedCreateWithoutAsignaturaInput>
+  }
+
+  export type TemaRecordCreateManyAsignaturaInputEnvelope = {
+    data: TemaRecordCreateManyAsignaturaInput | TemaRecordCreateManyAsignaturaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TemaRecordUpsertWithWhereUniqueWithoutAsignaturaInput = {
+    where: TemaRecordWhereUniqueInput
+    update: XOR<TemaRecordUpdateWithoutAsignaturaInput, TemaRecordUncheckedUpdateWithoutAsignaturaInput>
+    create: XOR<TemaRecordCreateWithoutAsignaturaInput, TemaRecordUncheckedCreateWithoutAsignaturaInput>
+  }
+
+  export type TemaRecordUpdateWithWhereUniqueWithoutAsignaturaInput = {
+    where: TemaRecordWhereUniqueInput
+    data: XOR<TemaRecordUpdateWithoutAsignaturaInput, TemaRecordUncheckedUpdateWithoutAsignaturaInput>
+  }
+
+  export type TemaRecordUpdateManyWithWhereWithoutAsignaturaInput = {
+    where: TemaRecordScalarWhereInput
+    data: XOR<TemaRecordUpdateManyMutationInput, TemaRecordUncheckedUpdateManyWithoutAsignaturaInput>
+  }
+
+  export type TemaRecordScalarWhereInput = {
+    AND?: TemaRecordScalarWhereInput | TemaRecordScalarWhereInput[]
+    OR?: TemaRecordScalarWhereInput[]
+    NOT?: TemaRecordScalarWhereInput | TemaRecordScalarWhereInput[]
+    id?: StringFilter<"TemaRecord"> | string
+    createdAt?: DateTimeFilter<"TemaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"TemaRecord"> | Date | string
+    asignaturaId?: StringFilter<"TemaRecord"> | string
+    romano?: StringFilter<"TemaRecord"> | string
+    nombre?: StringFilter<"TemaRecord"> | string
+    orden?: IntFilter<"TemaRecord"> | number
+    bloque?: StringNullableFilter<"TemaRecord"> | string | null
+  }
+
+  export type AsignaturaRecordCreateWithoutTemasInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    eje: string
+    nombre: string
+    orden: number
+  }
+
+  export type AsignaturaRecordUncheckedCreateWithoutTemasInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    eje: string
+    nombre: string
+    orden: number
+  }
+
+  export type AsignaturaRecordCreateOrConnectWithoutTemasInput = {
+    where: AsignaturaRecordWhereUniqueInput
+    create: XOR<AsignaturaRecordCreateWithoutTemasInput, AsignaturaRecordUncheckedCreateWithoutTemasInput>
+  }
+
+  export type PreguntaRecordCreateWithoutTemaInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enunciado: string
+    alternativas: JsonNullValueInput | InputJsonValue
+    claveCorrecta: string
+    solucion?: string | null
+    fuente?: string | null
+    esAncla?: boolean
+    dificultad?: number
+    vecesServida?: number
+    activa?: boolean
+  }
+
+  export type PreguntaRecordUncheckedCreateWithoutTemaInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enunciado: string
+    alternativas: JsonNullValueInput | InputJsonValue
+    claveCorrecta: string
+    solucion?: string | null
+    fuente?: string | null
+    esAncla?: boolean
+    dificultad?: number
+    vecesServida?: number
+    activa?: boolean
+  }
+
+  export type PreguntaRecordCreateOrConnectWithoutTemaInput = {
+    where: PreguntaRecordWhereUniqueInput
+    create: XOR<PreguntaRecordCreateWithoutTemaInput, PreguntaRecordUncheckedCreateWithoutTemaInput>
+  }
+
+  export type PreguntaRecordCreateManyTemaInputEnvelope = {
+    data: PreguntaRecordCreateManyTemaInput | PreguntaRecordCreateManyTemaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AsignaturaRecordUpsertWithoutTemasInput = {
+    update: XOR<AsignaturaRecordUpdateWithoutTemasInput, AsignaturaRecordUncheckedUpdateWithoutTemasInput>
+    create: XOR<AsignaturaRecordCreateWithoutTemasInput, AsignaturaRecordUncheckedCreateWithoutTemasInput>
+    where?: AsignaturaRecordWhereInput
+  }
+
+  export type AsignaturaRecordUpdateToOneWithWhereWithoutTemasInput = {
+    where?: AsignaturaRecordWhereInput
+    data: XOR<AsignaturaRecordUpdateWithoutTemasInput, AsignaturaRecordUncheckedUpdateWithoutTemasInput>
+  }
+
+  export type AsignaturaRecordUpdateWithoutTemasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eje?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AsignaturaRecordUncheckedUpdateWithoutTemasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eje?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PreguntaRecordUpsertWithWhereUniqueWithoutTemaInput = {
+    where: PreguntaRecordWhereUniqueInput
+    update: XOR<PreguntaRecordUpdateWithoutTemaInput, PreguntaRecordUncheckedUpdateWithoutTemaInput>
+    create: XOR<PreguntaRecordCreateWithoutTemaInput, PreguntaRecordUncheckedCreateWithoutTemaInput>
+  }
+
+  export type PreguntaRecordUpdateWithWhereUniqueWithoutTemaInput = {
+    where: PreguntaRecordWhereUniqueInput
+    data: XOR<PreguntaRecordUpdateWithoutTemaInput, PreguntaRecordUncheckedUpdateWithoutTemaInput>
+  }
+
+  export type PreguntaRecordUpdateManyWithWhereWithoutTemaInput = {
+    where: PreguntaRecordScalarWhereInput
+    data: XOR<PreguntaRecordUpdateManyMutationInput, PreguntaRecordUncheckedUpdateManyWithoutTemaInput>
+  }
+
+  export type PreguntaRecordScalarWhereInput = {
+    AND?: PreguntaRecordScalarWhereInput | PreguntaRecordScalarWhereInput[]
+    OR?: PreguntaRecordScalarWhereInput[]
+    NOT?: PreguntaRecordScalarWhereInput | PreguntaRecordScalarWhereInput[]
+    id?: StringFilter<"PreguntaRecord"> | string
+    createdAt?: DateTimeFilter<"PreguntaRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PreguntaRecord"> | Date | string
+    temaId?: StringFilter<"PreguntaRecord"> | string
+    enunciado?: StringFilter<"PreguntaRecord"> | string
+    alternativas?: JsonFilter<"PreguntaRecord">
+    claveCorrecta?: StringFilter<"PreguntaRecord"> | string
+    solucion?: StringNullableFilter<"PreguntaRecord"> | string | null
+    fuente?: StringNullableFilter<"PreguntaRecord"> | string | null
+    esAncla?: BoolFilter<"PreguntaRecord"> | boolean
+    dificultad?: FloatFilter<"PreguntaRecord"> | number
+    vecesServida?: IntFilter<"PreguntaRecord"> | number
+    activa?: BoolFilter<"PreguntaRecord"> | boolean
+  }
+
+  export type TemaRecordCreateWithoutPreguntasInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+    asignatura: AsignaturaRecordCreateNestedOneWithoutTemasInput
+  }
+
+  export type TemaRecordUncheckedCreateWithoutPreguntasInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    asignaturaId: string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+  }
+
+  export type TemaRecordCreateOrConnectWithoutPreguntasInput = {
+    where: TemaRecordWhereUniqueInput
+    create: XOR<TemaRecordCreateWithoutPreguntasInput, TemaRecordUncheckedCreateWithoutPreguntasInput>
+  }
+
+  export type TemaRecordUpsertWithoutPreguntasInput = {
+    update: XOR<TemaRecordUpdateWithoutPreguntasInput, TemaRecordUncheckedUpdateWithoutPreguntasInput>
+    create: XOR<TemaRecordCreateWithoutPreguntasInput, TemaRecordUncheckedCreateWithoutPreguntasInput>
+    where?: TemaRecordWhereInput
+  }
+
+  export type TemaRecordUpdateToOneWithWhereWithoutPreguntasInput = {
+    where?: TemaRecordWhereInput
+    data: XOR<TemaRecordUpdateWithoutPreguntasInput, TemaRecordUncheckedUpdateWithoutPreguntasInput>
+  }
+
+  export type TemaRecordUpdateWithoutPreguntasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+    asignatura?: AsignaturaRecordUpdateOneRequiredWithoutTemasNestedInput
+  }
+
+  export type TemaRecordUncheckedUpdateWithoutPreguntasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asignaturaId?: StringFieldUpdateOperationsInput | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type LearningSessionRecordCreateManyLearningPathInput = {
     id: string
     createdAt?: Date | string
@@ -13698,6 +21748,108 @@ export namespace Prisma {
     classroomId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TemaRecordCreateManyAsignaturaInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    romano: string
+    nombre: string
+    orden: number
+    bloque?: string | null
+  }
+
+  export type TemaRecordUpdateWithoutAsignaturaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+    preguntas?: PreguntaRecordUpdateManyWithoutTemaNestedInput
+  }
+
+  export type TemaRecordUncheckedUpdateWithoutAsignaturaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+    preguntas?: PreguntaRecordUncheckedUpdateManyWithoutTemaNestedInput
+  }
+
+  export type TemaRecordUncheckedUpdateManyWithoutAsignaturaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    romano?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    orden?: IntFieldUpdateOperationsInput | number
+    bloque?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PreguntaRecordCreateManyTemaInput = {
+    id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enunciado: string
+    alternativas: JsonNullValueInput | InputJsonValue
+    claveCorrecta: string
+    solucion?: string | null
+    fuente?: string | null
+    esAncla?: boolean
+    dificultad?: number
+    vecesServida?: number
+    activa?: boolean
+  }
+
+  export type PreguntaRecordUpdateWithoutTemaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PreguntaRecordUncheckedUpdateWithoutTemaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PreguntaRecordUncheckedUpdateManyWithoutTemaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enunciado?: StringFieldUpdateOperationsInput | string
+    alternativas?: JsonNullValueInput | InputJsonValue
+    claveCorrecta?: StringFieldUpdateOperationsInput | string
+    solucion?: NullableStringFieldUpdateOperationsInput | string | null
+    fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    esAncla?: BoolFieldUpdateOperationsInput | boolean
+    dificultad?: FloatFieldUpdateOperationsInput | number
+    vecesServida?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
   }
 
 
