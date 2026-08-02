@@ -55,7 +55,20 @@ export function LoginForm() {
       <div className="login-layout">
         <section className="login-page__hero">
           <p className="eyebrow">Plataforma de aprendizaje</p>
-          <h2>Bienvenido<br />de vuelta.</h2>
+          <h2>
+            Bienvenido
+            <br />
+            de vuelta.
+          </h2>
+          {/* La ilustracion la elige la marca; la de CUMBRE queda de reserva
+              para una institucion que aun no tenga la suya. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={marca.ilustraciones?.login ?? "/illustrations/illo-login.png"}
+            alt=""
+            className="login-page__illo"
+            draggable={false}
+          />
         </section>
 
         <form className="auth-card" onSubmit={onSubmit}>

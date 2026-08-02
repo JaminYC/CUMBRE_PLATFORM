@@ -12,7 +12,6 @@ import {
 } from "@/components/ui";
 import { AdaptiveStudySection } from "@/features/adaptive/adaptive-study-section";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import { fetchLearningProgress } from "@/services/client/student-api";
 
@@ -30,34 +29,38 @@ export function ProgressView() {
     [session?.userId, session?.defaultLearningPathId]
   );
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(progressState.isLoading);
+  const mostrandoCarga = progressState.isLoading;
 
   if (!auth.isHydrated || !session) {
     return (
-      <LoadingPanel
-        message="Preparando vista de progreso..."
-        detail="Restaurando la sesión del estudiante antes de leer sus datos de progreso."
-      />
+      <AppShell title="Progreso">
+        <LoadingPanel
+          message="Preparando vista de progreso..."
+          detail="Restaurando la sesión del estudiante antes de leer sus datos de progreso."
+        />
+      </AppShell>
     );
   }
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando progreso desde learning_service..."
-        detail="Leyendo sesiones, señales de dominio y recomendaciones."
-      />
+      <AppShell title="Progreso">
+        <LoadingPanel
+          message="Cargando progreso desde learning_service..."
+          detail="Leyendo sesiones, señales de dominio y recomendaciones."
+        />
+      </AppShell>
     );
   }
 
   if (progressState.error || !progressState.data) {
     return (
-      <ErrorPanel
-        message={progressState.error ?? "No fue posible cargar el progreso."}
-        onRetry={progressState.reload}
-      />
+      <AppShell title="Progreso">
+        <ErrorPanel
+          message={progressState.error ?? "No fue posible cargar el progreso."}
+          onRetry={progressState.reload}
+        />
+      </AppShell>
     );
   }
 

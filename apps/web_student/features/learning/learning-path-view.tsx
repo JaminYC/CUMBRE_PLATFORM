@@ -12,7 +12,6 @@ import {
   QuickAction
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import {
   fetchLearningPath,
@@ -44,9 +43,7 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
     [learningPathId, session?.userId]
   );
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(resource.isLoading);
+  const mostrandoCarga = resource.isLoading;
 
   useEffect(() => {
     if (!resource.data) {
@@ -60,28 +57,34 @@ export function LearningPathView({ learningPathId }: { learningPathId: string })
 
   if (!auth.isHydrated || !session) {
     return (
-      <LoadingPanel
-        message="Preparando ruta de aprendizaje..."
-        detail="Restaurando la sesión del estudiante antes de cargar los datos de la ruta."
-      />
+      <AppShell title="Ruta de aprendizaje">
+        <LoadingPanel
+          message="Preparando ruta de aprendizaje..."
+          detail="Restaurando la sesión del estudiante antes de cargar los datos de la ruta."
+        />
+      </AppShell>
     );
   }
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando tu ruta de aprendizaje..."
-        detail="Recuperando estructura de ruta, progreso y temas vinculados."
-      />
+      <AppShell title="Ruta de aprendizaje">
+        <LoadingPanel
+          message="Cargando tu ruta de aprendizaje..."
+          detail="Recuperando estructura de ruta, progreso y temas vinculados."
+        />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar la ruta de aprendizaje."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Ruta de aprendizaje">
+        <ErrorPanel
+          message={resource.error ?? "No fue posible cargar la ruta de aprendizaje."}
+          onRetry={resource.reload}
+        />
+      </AppShell>
     );
   }
 

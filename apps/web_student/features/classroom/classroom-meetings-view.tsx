@@ -8,31 +8,32 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchStudentClassroomMeetings } from "@/services/client/student-api";
 
 export function ClassroomMeetingsView() {
   const resource = useAsyncResource(() => fetchStudentClassroomMeetings(), []);
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(resource.isLoading);
+  const mostrandoCarga = resource.isLoading;
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando reuniones..."
-        detail="Revisando cada aula para encontrar la siguiente sesión programada por el docente."
-      />
+      <AppShell title="Reuniones del aula">
+        <LoadingPanel
+          message="Cargando reuniones..."
+          detail="Revisando cada aula para encontrar la siguiente sesión programada por el docente."
+        />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar las reuniones del aula."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Reuniones del aula">
+        <ErrorPanel
+          message={resource.error ?? "No fue posible cargar las reuniones del aula."}
+          onRetry={resource.reload}
+        />
+      </AppShell>
     );
   }
 
