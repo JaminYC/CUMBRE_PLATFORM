@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { PortalRoleTarget } from "@/lib/role-targets";
 import type { Marca } from "@cumbre/brands";
 import { Reveal } from "./reveal";
+import { TituloAnimado } from "./titulo-animado";
 
 /*
  * Portada editorial: titular serif, fondo claro, mucho aire y numeros
@@ -13,35 +14,50 @@ import { Reveal } from "./reveal";
  * `landing: "editorial"`.
  */
 
-const perfiles = [
+/*
+ * Las tres areas son las mismas que evalua la UNSA y las mismas que pide el
+ * motor de practica al entrar. No hay que traducir nada entre lo que la
+ * academia vende y lo que el campus hace.
+ */
+const areas = [
   {
-    rol: "Estudiantes",
-    titulo: "Tu ruta, siempre a la mano",
-    puntos: [
-      "Revisa tu ruta de estudio y qué toca ahora",
-      "Consulta tus avances y tu nivel por tema",
-      "Entra al aula y resuelve tus dudas"
-    ]
+    id: "ingenierias",
+    nombre: "Ingenierías",
+    detalle: "Matemática pesa 25% y Ciencia y Tecnología otro 25% del examen."
   },
   {
-    rol: "Docentes",
-    titulo: "El aula, sin papeleo",
-    puntos: [
-      "Gestiona tus cursos y a tus estudiantes",
-      "Registra notas y devuelve retroalimentación",
-      "Ve quién avanza y quién necesita apoyo"
-    ]
+    id: "biomedicas",
+    nombre: "Biomédicas",
+    detalle: "Ciencia y Tecnología pesa 35%, con Biología como asignatura principal."
   },
   {
-    rol: "Administración",
-    titulo: "La academia, en una vista",
-    puntos: [
-      "Administra usuarios, cursos y matrículas",
-      "Consulta reportes académicos al día",
-      "Revisa la actividad de la plataforma"
-    ]
+    id: "sociales",
+    nombre: "Sociales",
+    detalle: "Comunicación pesa 22% y Ciencias Sociales 23% del examen."
   }
 ];
+
+/*
+ * Ingresantes con primer puesto, tal como los publica la academia en su web.
+ *
+ * Viven aqui y no en el registro de marcas porque cambian cada proceso de
+ * admision: es lo primero que hay que actualizar cuando salgan los resultados
+ * del siguiente. Conviene confirmarlos con Direccion antes de cada campana.
+ */
+const ingresantes = [
+  { nombre: "Hector Cabrera", carrera: "Medicina" },
+  { nombre: "Johan Machaca", carrera: "Ing. Civil" },
+  { nombre: "Sofia Alvarez", carrera: "Arquitectura" },
+  { nombre: "Michael Torres", carrera: "Derecho" },
+  { nombre: "Gabriel Anco", carrera: "Biología" },
+  { nombre: "Lesli Viza", carrera: "Enfermería" },
+  { nombre: "Jorge Aguilar", carrera: "Psicología" },
+  { nombre: "Albert Ticona", carrera: "Ing. Minas" },
+  { nombre: "Yemili Maraza", carrera: "Contabilidad" },
+  { nombre: "Lesly Castro", carrera: "Ing. Sanitaria" }
+];
+
+const PROCESO = "UNSA 2025";
 
 const pasos = [
   {
@@ -70,6 +86,36 @@ export function LandingEditorial({
 }) {
   return (
     <div className="ble">
+      {/*
+        El filtro que hace temblar los bordes. Va una vez en la pagina y lo
+        referencian los estilos; el SVG no ocupa espacio ni se ve.
+
+        baseFrequency baja da ondas largas —trazo de pluma— y no rugosidad.
+        La semilla fija evita que cambie entre renders del servidor y el
+        cliente, que daria un parpadeo al hidratar.
+      */}
+      <svg width="0" height="0" aria-hidden="true" focusable="false"
+           style={{ position: "absolute" }}>
+        {/* Para lados rectos largos: ahi el desplazamiento se lee como
+            trazo de pluma. */}
+        <filter id="ble-temblor">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012"
+                        numOctaves="2" seed="7" result="ruido" />
+          <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.2"
+                             xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+
+        {/* Para pildoras. Una curva muy cerrada no admite el mismo
+            desplazamiento: en vez de ondularse, se astilla en muescas. Con
+            ondas mas largas y la mitad de recorrido, el borde tiembla sin
+            romperse. */}
+        <filter id="ble-temblor-suave">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006"
+                        numOctaves="1" seed="3" result="ruido" />
+          <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.1"
+                             xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
       {/* ── Navegación ── */}
       <header className="ble-nav">
         <div className="ble-inner ble-nav__inner">
@@ -79,9 +125,14 @@ export function LandingEditorial({
           </Link>
 
           <nav className="ble-nav__links">
-            <a href="#perfiles">Para quién</a>
-            <a href="#como">Cómo funciona</a>
+            <a href="#areas">Las tres áreas</a>
+            <a href="#ingresantes">Ingresantes</a>
             <a href="#contacto">Contacto</a>
+            {marca.contacto?.webPublica ? (
+              <a href={marca.contacto.webPublica} target="_blank" rel="noopener">
+                Web de la academia
+              </a>
+            ) : null}
           </nav>
 
           <Link className="ble-btn ble-btn--sm" href="/login">
@@ -93,9 +144,15 @@ export function LandingEditorial({
       {/* ── Hero ── */}
       <section className="ble-hero">
         <div className="ble-inner">
-          <h1 className="ble-hero__title">La academia, abierta todo el día.</h1>
+          <TituloAnimado
+            texto="Pon a prueba todo tu talento, todos los días."
+            className="ble-hero__title"
+            retardoBase={120}
+          />
           <p className="ble-hero__lede">
-            {marca.descripcion}
+            Practica con preguntas del temario oficial de la UNSA. El sistema
+            reconoce en qué tema estás flojo y te lleva por ahí, tema a tema,
+            hasta que lo dominas.
           </p>
 
           <div className="ble-hero__cta">
@@ -108,8 +165,8 @@ export function LandingEditorial({
                 Entrar al campus
               </Link>
             )}
-            <a className="ble-btn ble-btn--ghost" href="#perfiles">
-              Ver qué incluye
+            <a className="ble-btn ble-btn--ghost" href="#areas">
+              Ver las tres áreas
             </a>
           </div>
         </div>
@@ -128,30 +185,27 @@ export function LandingEditorial({
         </div>
       </section>
 
-      {/* ── Perfiles ── */}
-      <section className="ble-section" id="perfiles">
+      {/* ── Las tres áreas ── */}
+      <section className="ble-section" id="areas">
         <div className="ble-inner">
           <Reveal>
-            <p className="ble-eyebrow">Para quién</p>
-            <h2 className="ble-h2">Tres formas de entrar. Una sola puerta.</h2>
+            <p className="ble-eyebrow">Las tres áreas</p>
+            <h2 className="ble-h2">Cada área rinde un examen distinto.</h2>
             <p className="ble-sub">
-              No hay que elegir el perfil al ingresar: el sistema reconoce quién
-              eres y te lleva a tu espacio.
+              La UNSA reparte las mismas 80 preguntas de forma muy diferente
+              según a qué postules. El campus lo sabe: eliges tu área una vez y
+              todo lo demás se acomoda.
             </p>
           </Reveal>
 
           <div className="ble-perfiles">
-            {perfiles.map((p, i) => (
-              /* Escalonado corto: 70 ms basta para que se lea en cascada
-                 sin que la ultima tarjeta se haga esperar. */
-              <Reveal key={p.rol} delay={i * 70}>
+            {areas.map((a, i) => (
+              <Reveal key={a.id} delay={i * 70}>
                 <article className="ble-perfil">
-                  <p className="ble-perfil__rol">{p.rol}</p>
-                  <h3 className="ble-perfil__titulo">{p.titulo}</h3>
+                  <p className="ble-perfil__rol">Área</p>
+                  <h3 className="ble-perfil__titulo">{a.nombre}</h3>
                   <ul>
-                    {p.puntos.map((punto) => (
-                      <li key={punto}>{punto}</li>
-                    ))}
+                    <li>{a.detalle}</li>
                   </ul>
                 </article>
               </Reveal>
@@ -160,21 +214,28 @@ export function LandingEditorial({
         </div>
       </section>
 
-      {/* ── Cómo funciona ── */}
-      <section className="ble-section ble-section--alt" id="como">
+      {/* ── Ingresantes ── */}
+      <section className="ble-section ble-section--alt" id="ingresantes">
         <div className="ble-inner">
           <Reveal>
-            <p className="ble-eyebrow">Cómo funciona</p>
-            <h2 className="ble-h2">Empezar toma un minuto.</h2>
+            <p className="ble-eyebrow">{PROCESO}</p>
+            <h2 className="ble-h2">
+              Siempre con la mayor cantidad de ingresantes.
+            </h2>
+            <p className="ble-sub">
+              Primeros puestos del último proceso de admisión.
+            </p>
           </Reveal>
 
-          <div className="ble-pasos">
-            {pasos.map((p, i) => (
-              <Reveal key={p.n} delay={i * 70}>
-                <article className="ble-paso">
-                  <p className="ble-paso__n">{p.n}</p>
-                  <h3>{p.titulo}</h3>
-                  <p>{p.texto}</p>
+          <div className="ble-ingresantes">
+            {ingresantes.map((p, i) => (
+              /* Escalonado corto: la lista es larga y con mas retardo la
+                 ultima tarjeta se haria esperar demasiado. */
+              <Reveal key={p.nombre} delay={Math.min(i, 6) * 45}>
+                <article className="ble-ingresante">
+                  <p className="ble-ingresante__puesto">1.<sup>er</sup> puesto</p>
+                  <h3>{p.carrera}</h3>
+                  <p className="ble-ingresante__nombre">{p.nombre}</p>
                 </article>
               </Reveal>
             ))}
@@ -186,8 +247,8 @@ export function LandingEditorial({
       <section className="ble-cierre">
         <div className="ble-inner">
           <Reveal>
-            <h2>¿Listo para entrar?</h2>
-            <p>Usa el correo que te dio la academia.</p>
+            <h2>Tu preparación no espera al lunes.</h2>
+            <p>Entra con las credenciales que te dio la academia.</p>
             <Link className="ble-btn ble-btn--light" href="/login">
               Iniciar sesión
             </Link>
@@ -217,13 +278,31 @@ export function LandingEditorial({
               </div>
             ) : null}
 
-            {marca.contacto?.telefonos?.length || marca.contacto?.correo ? (
+            {marca.contacto?.telefonos?.length ||
+            marca.contacto?.correo ||
+            marca.contacto?.central ? (
               <div>
                 <p className="ble-foot__hd">Contacto</p>
+                {marca.contacto.central ? (
+                  <p>Central {marca.contacto.central}</p>
+                ) : null}
                 {marca.contacto.telefonos?.map((t) => (
                   <p key={t}>{t}</p>
                 ))}
                 {marca.contacto.correo ? <p>{marca.contacto.correo}</p> : null}
+              </div>
+            ) : null}
+
+            {marca.contacto?.whatsapp?.length ? (
+              <div>
+                <p className="ble-foot__hd">WhatsApp</p>
+                {marca.contacto.whatsapp.map((w) => (
+                  <p key={w}>
+                    <a href={`https://wa.me/51${w.replace(/\D/g, "")}`} target="_blank" rel="noopener">
+                      {w}
+                    </a>
+                  </p>
+                ))}
               </div>
             ) : null}
 
@@ -236,7 +315,15 @@ export function LandingEditorial({
           </div>
 
           <p className="ble-foot__legal">
-            {marca.nombre}
+            {marca.nombre} — Grupo Bryce, Arequipa.
+            {marca.contacto?.webPublica ? (
+              <>
+                {" "}
+                <a href={marca.contacto.webPublica} target="_blank" rel="noopener">
+                  academiabryce.com
+                </a>
+              </>
+            ) : null}
           </p>
         </div>
       </footer>

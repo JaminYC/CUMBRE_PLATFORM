@@ -47,56 +47,36 @@ export function te(texto: string): RegExp {
 }
 
 /**
- * El acceso de cada portal.
+ * El acceso, que ahora es uno solo.
  *
- * Los tres formularios no dicen lo mismo: el del estudiante se rediseñó y
- * usa "Iniciar sesión" / "Ingresar", mientras docente y dirección conservan
- * "Continuar como…" / "Abrir panel…". Las alternativas cubren ambos, para
- * que un rediseño de uno no tumbe la prueba del otro.
+ * Cada aplicacion de rol tenia su propio formulario y cada uno decia una cosa
+ * distinta. Desde que las tres mandan al portal, se entra siempre por la misma
+ * puerta y es el portal quien reparte segun el rol de la cuenta: aqui solo
+ * cambian el correo y el puerto donde se comprueba que aterriza.
+ *
+ * Se entra por el campus y no directamente por el portal a proposito: asi la
+ * prueba recorre tambien la redireccion, que es la parte que se puede romper.
  */
-async function entrar(
-  page: Page,
-  url: string,
-  correo: string,
-  titulo: RegExp,
-  boton: RegExp
-) {
-  await page.goto(url);
-  await expect(page.getByRole("heading", { name: titulo })).toBeVisible();
+async function entrar(page: Page, puerto: number, correo: string) {
+  await page.goto(`http://localhost:${puerto}/login`);
+  await expect(page).toHaveURL(/localhost:3005\/login/);
+  await expect(page.getByRole("heading", { name: /continuar en/i })).toBeVisible();
   await page.getByLabel(/correo|email/i).fill(correo);
   await page.getByLabel(/contrase[nñ]a|password/i).fill("placeholder");
-  await page.getByRole("button", { name: boton }).click();
-  await expect(page).toHaveURL(/\/dashboard/);
+  await page.getByRole("button", { name: /iniciar sesi[oó]n|ingresar/i }).click();
+  await expect(page).toHaveURL(new RegExp(`localhost:${puerto}/dashboard`));
 }
 
 export async function loginStudent(page: Page) {
-  await entrar(
-    page,
-    "http://localhost:3100/login",
-    "student@example.com",
-    /iniciar sesi[oó]n|continuar como estudiante/i,
-    /ingresar|abrir panel/i
-  );
+  await entrar(page, 3100, "student@example.com");
 }
 
 export async function loginTeacher(page: Page) {
-  await entrar(
-    page,
-    "http://localhost:3110/login",
-    "teacher@example.com",
-    /iniciar sesi[oó]n|continuar como docente/i,
-    /ingresar|abrir panel docente/i
-  );
+  await entrar(page, 3110, "teacher@example.com");
 }
 
 export async function loginAdmin(page: Page) {
-  await entrar(
-    page,
-    "http://localhost:3111/login",
-    "admin@example.com",
-    /iniciar sesi[oó]n|continuar como administrador/i,
-    /ingresar|abrir panel administrativo/i
-  );
+  await entrar(page, 3111, "admin@example.com");
 }
 
 /**

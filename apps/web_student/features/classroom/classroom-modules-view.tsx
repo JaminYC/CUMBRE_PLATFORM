@@ -8,31 +8,32 @@ import {
   LoadingPanel
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchStudentClassroomModules } from "@/services/client/student-api";
 
 export function ClassroomModulesView() {
   const resource = useAsyncResource(() => fetchStudentClassroomModules(), []);
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(resource.isLoading);
+  const mostrandoCarga = resource.isLoading;
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando modulos asignados..."
-        detail="Recuperando módulos publicados para el aula y cuestionarios disponibles."
-      />
+      <AppShell title="Módulos del aula">
+        <LoadingPanel
+          message="Cargando modulos asignados..."
+          detail="Recuperando módulos publicados para el aula y cuestionarios disponibles."
+        />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar los módulos del aula."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Módulos del aula">
+        <ErrorPanel
+          message={resource.error ?? "No fue posible cargar los módulos del aula."}
+          onRetry={resource.reload}
+        />
+      </AppShell>
     );
   }
 

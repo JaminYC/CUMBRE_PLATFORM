@@ -10,31 +10,32 @@ import {
   MetricCard
 } from "@/components/ui";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { fetchStudentClassroomWorkspace } from "@/services/client/student-api";
 
 export function ClassroomWorkspaceView() {
   const resource = useAsyncResource(() => fetchStudentClassroomWorkspace(), []);
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(resource.isLoading);
+  const mostrandoCarga = resource.isLoading;
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando aulas..."
-        detail="Recuperando aulas unidas, proximas reuniones y acceso a módulos asignados."
-      />
+      <AppShell title="Espacio de aula">
+        <LoadingPanel
+          message="Cargando aulas..."
+          detail="Recuperando aulas unidas, proximas reuniones y acceso a módulos asignados."
+        />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar el espacio de aula."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Espacio de aula">
+        <ErrorPanel
+          message={resource.error ?? "No fue posible cargar el espacio de aula."}
+          onRetry={resource.reload}
+        />
+      </AppShell>
     );
   }
 

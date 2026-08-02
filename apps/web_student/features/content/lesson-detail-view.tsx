@@ -11,7 +11,6 @@ import {
 } from "@/components/ui";
 import { KnowledgeInsightPanel } from "@/features/knowledge/knowledge-insight-panel";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import { studentAppConfig } from "@/lib/env";
 import {
@@ -49,9 +48,7 @@ export function LessonDetailView({
     [topicId, lessonId]
   );
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(lessonState.isLoading);
+  const mostrandoCarga = lessonState.isLoading;
   const [sessionResponse, setSessionResponse] =
     useState<CreateLearningSessionResponse | null>(null);
   const [sessionError, setSessionError] = useState<string | null>(null);
@@ -102,28 +99,34 @@ export function LessonDetailView({
 
   if (!auth.isHydrated || !session) {
     return (
-      <LoadingPanel
-        message="Preparando detalle de la lección..."
-        detail="Restaurando tu contexto de aprendizaje antes de abrir el contenido."
-      />
+      <AppShell title="Lección">
+        <LoadingPanel
+          message="Preparando detalle de la lección..."
+          detail="Restaurando tu contexto de aprendizaje antes de abrir el contenido."
+        />
+      </AppShell>
     );
   }
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando detalle de la lección..."
-        detail="Recuperando la lección desde content_service y preparando el flujo de inicio de sesión."
-      />
+      <AppShell title="Lección">
+        <LoadingPanel
+          message="Cargando detalle de la lección..."
+          detail="Recuperando la lección desde content_service y preparando el flujo de inicio de sesión."
+        />
+      </AppShell>
     );
   }
 
   if (lessonState.error || !lessonState.data) {
     return (
-      <ErrorPanel
-        message={lessonState.error ?? "No fue posible cargar el detalle de la lección."}
-        onRetry={lessonState.reload}
-      />
+      <AppShell title="Lección">
+        <ErrorPanel
+          message={lessonState.error ?? "No fue posible cargar el detalle de la lección."}
+          onRetry={lessonState.reload}
+        />
+      </AppShell>
     );
   }
 

@@ -1,0 +1,55 @@
+{
+  "_ADVERTENCIA": "NINGUNA DE ESTAS CLAVES ESTA VERIFICADA. No usar para calificar alumnos.",
+
+  "que_paso": {
+    "objetivo": "Conseguir la clave de respuestas de los 4 examenes UNSA II Fase 2020 descargados del sitio oficial.",
+    "metodo": "Se extrajeron secuencias de 50 pares numero-letra de blogs de terceros y se contrastaron contra el texto real de los PDF oficiales.",
+    "prueba_aplicada": "Se tomaron 14 alternativas largas repartidas por todo cada examen oficial y se buscaron en el texto de la pagina del blog. Si el blog publica el mismo examen, esas frases tienen que aparecer.",
+    "control_positivo": "El comparador se valido buscando las frases de un examen en su propio texto: 100% de coincidencia. El comparador funciona.",
+    "resultado": "Todas las claves encontradas dieron entre 0% y 7% de coincidencia. Son de un examen distinto: otro anio u otra fase.",
+    "conclusion": "Las claves no son incorrectas en si mismas; muy probablemente son validas para el examen al que pertenecen. Simplemente NO corresponden a los PDF de II Fase 2020."
+  },
+
+  "examenes_oficiales": {
+    "fuente": "https://admision.unsa.edu.pe/wp-content/uploads/2020/08/",
+    "fecha": "Domingo 19 de julio de 2020, Examen Ordinario II Fase",
+    "preguntas_por_examen": 50,
+    "archivos": [
+      "examenUNSA-IIordinario2020-ingenierias.pdf",
+      "examenUNSA-IIordinario2020-biomedicas.pdf",
+      "examenUNSA-IIordinario2020-socialesI.pdf",
+      "examenUNSA-IIordinario2020-socialesII.pdf"
+    ]
+  },
+
+  "claves_encontradas_sin_emparejar": [
+    {
+      "etiqueta_en_el_blog": "CLAVES-RESPUESTAS DE BIOMEDICAS",
+      "fuente": "https://matematicasn.blogspot.com/2019/03/examen-admision-unsa-solucionario-pdf.html",
+      "clave": "BBEAABAECDACBABCEBCCEBCEAABBDCEBECCACCEDCCCEECADDD",
+      "coincidencia_con_examenes_2020_II": "0-7%",
+      "veredicto": "no corresponde"
+    },
+    {
+      "etiqueta_en_el_blog": "CLAVES-RESPUESTAS DE INGENIERIAS",
+      "fuente": "https://matematicasn.blogspot.com/2019/03/examen-admision-unsa-solucionario-pdf.html",
+      "clave": "EEDADEADDBCAAEBBCDDCDBDEABAAEADDDDEACDEECEBDBCDCBE",
+      "coincidencia_con_examenes_2020_II": "0-7%",
+      "veredicto": "no corresponde"
+    },
+    {
+      "etiqueta_en_el_blog": "CLAVES-RESPUESTAS DE SOCIALES",
+      "fuente": "https://matematicasn.blogspot.com/2019/03/examen-admision-unsa-solucionario-pdf.html",
+      "clave": "ECCADEAECECAAEBDADAACABABCDEEDBECCAEDBCCCDEAAAEBDC",
+      "coincidencia_con_examenes_2020_II": "0-7%",
+      "veredicto": "no corresponde"
+    }
+  ],
+
+  "pista_importante": {
+    "hallazgo": "La propia Academia Briceno publica resoluciones de estos examenes en video (Facebook: academiabriceno, 'Resolucion del examen ORDINARIO II fase UNSA Medicina').",
+    "implicacion": "El solucionario de estos examenes ya existe dentro de la academia. Es la fuente correcta y evita depender de terceros."
+  },
+
+  "como_verificar_una_clave_nueva": "Ejecutar scratchpad/verificar_claves.py: extrae secuencias de 50 respuestas y mide que porcentaje de las alternativas del PDF oficial aparece en la fuente. Por debajo de 80% no se acepta."
+}

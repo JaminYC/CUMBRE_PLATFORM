@@ -91,14 +91,14 @@ async function main() {
     where: { id: DEMO_TOPIC_MAIN_ID },
     update: {
       title: "Learning Foundations",
-      summary: "Ruta de aprendizaje demo para la plataforma CUMBRE.",
+      summary: "Ruta de aprendizaje de demostración.",
       skillIds: ["skill-critical-thinking"],
       prerequisiteTopicIds: [DEMO_TOPIC_PREREQ_ID]
     },
     create: {
       id: DEMO_TOPIC_MAIN_ID,
       title: "Learning Foundations",
-      summary: "Ruta de aprendizaje demo para la plataforma CUMBRE.",
+      summary: "Ruta de aprendizaje de demostración.",
       skillIds: ["skill-critical-thinking"],
       prerequisiteTopicIds: [DEMO_TOPIC_PREREQ_ID]
     }
@@ -136,7 +136,7 @@ async function main() {
     where: { id: DEMO_LESSON_MAIN_ID },
     update: {
       title: "Thinking in Systems",
-      summary: "Lección principal del demo CUMBRE.",
+      summary: "Lección principal de demostración.",
       lessonType: "lesson",
       topicId: DEMO_TOPIC_MAIN_ID,
       skillIds: ["skill-critical-thinking"],
@@ -149,7 +149,7 @@ async function main() {
     create: {
       id: DEMO_LESSON_MAIN_ID,
       title: "Thinking in Systems",
-      summary: "Lección principal del demo CUMBRE.",
+      summary: "Lección principal de demostración.",
       lessonType: "lesson",
       topicId: DEMO_TOPIC_MAIN_ID,
       skillIds: ["skill-critical-thinking"],
@@ -166,7 +166,7 @@ async function main() {
     where: { id: DEMO_CONTENT_ITEM_ID },
     update: {
       title: "Systems Thinking Resource",
-      summary: "Recurso principal del demo CUMBRE.",
+      summary: "Recurso principal de demostración.",
       contentType: "resource",
       status: "published",
       topicIds: [DEMO_TOPIC_MAIN_ID],
@@ -178,7 +178,7 @@ async function main() {
     create: {
       id: DEMO_CONTENT_ITEM_ID,
       title: "Systems Thinking Resource",
-      summary: "Recurso principal del demo CUMBRE.",
+      summary: "Recurso principal de demostración.",
       contentType: "resource",
       status: "published",
       topicIds: [DEMO_TOPIC_MAIN_ID],

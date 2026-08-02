@@ -1,9 +1,8 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { commonMessages, useAppLocale } from "@cumbre/app-runtime/client";
-import { useMarca } from "@cumbre/brands/client";
 
 export interface BreadcrumbItem {
   label: string;
@@ -88,6 +87,29 @@ export function ProgressBar({ value }: { value: number }) {
   );
 }
 
+/** Antes de este tiempo no se enseña nada: una espera asi no se percibe. */
+const ANTES_DE_AVISAR = 180;
+
+/**
+ * Aviso de que algo se esta cargando.
+ *
+ * Antes era una portada a pantalla completa —degradado, tres anillos
+ * expandiendose y el logo latiendo— que se comia la ventana entera. Con la
+ * cortina puesta se veian dos animaciones seguidas para un solo cambio de
+ * pantalla, y la segunda ademas volvia a presentar la marca de alguien que ya
+ * habia entrado.
+ *
+ * Ahora vive dentro del contenido y se limita a decir que hay algo en camino.
+ *
+ * Dos detalles deliberados:
+ *
+ *   - No aparece hasta pasados 180 ms. Una respuesta de 120 ms con indicador
+ *     se lee como un parpadeo, y un parpadeo se percibe como un fallo, no como
+ *     una carga. El retraso es en APARECER, nunca en desaparecer: en cuanto
+ *     hay datos se quitan, sin minimos que cumplir.
+ *   - El hueco se reserva desde el principio, aunque el aviso aun no se vea,
+ *     para que al aparecer no empuje lo que hay debajo.
+ */
 export function LoadingPanel({
   message,
   detail
@@ -95,29 +117,23 @@ export function LoadingPanel({
   message: string;
   detail?: string;
 }) {
-  const marca = useMarca();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const temporizador = window.setTimeout(() => setVisible(true), ANTES_DE_AVISAR);
+    return () => window.clearTimeout(temporizador);
+  }, []);
+
   return (
-    <div className="splash-loader" role="status">
-      <div className="splash-loader__rings" aria-hidden="true">
-        <span className="splash-loader__ring splash-loader__ring--1" />
-        <span className="splash-loader__ring splash-loader__ring--2" />
-        <span className="splash-loader__ring splash-loader__ring--3" />
-      </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={marca.logo.principal}
-        alt=""
-        className="splash-loader__brand"
-        aria-hidden="true"
-        draggable={false}
-      />
-      <div className="splash-loader__body">
-        <p className="splash-loader__message">{message}</p>
-        {detail ? <p className="splash-loader__detail">{detail}</p> : null}
-        <div className="splash-loader__dots" aria-hidden="true">
-          <span /><span /><span />
-        </div>
-      </div>
+    <div
+      className="cargando"
+      data-visible={visible ? "si" : undefined}
+      role="status"
+      aria-live="polite"
+    >
+      <span className="cargando__aro" aria-hidden="true" />
+      <p className="cargando__mensaje">{message}</p>
+      {detail ? <p className="cargando__detalle">{detail}</p> : null}
     </div>
   );
 }

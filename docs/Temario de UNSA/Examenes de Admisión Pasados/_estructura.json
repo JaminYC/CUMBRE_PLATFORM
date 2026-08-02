@@ -1,0 +1,26 @@
+{
+  "examenUNSA-IIordinario2020-biomedicas.pdf": {
+    "detectadas": 50,
+    "con_5_alternativas": 50,
+    "rango": "1-50",
+    "faltantes": []
+  },
+  "examenUNSA-IIordinario2020-ingenierias.pdf": {
+    "detectadas": 50,
+    "con_5_alternativas": 50,
+    "rango": "1-50",
+    "faltantes": []
+  },
+  "examenUNSA-IIordinario2020-socialesI.pdf": {
+    "detectadas": 50,
+    "con_5_alternativas": 50,
+    "rango": "1-50",
+    "faltantes": []
+  },
+  "examenUNSA-IIordinario2020-socialesII.pdf": {
+    "detectadas": 50,
+    "con_5_alternativas": 50,
+    "rango": "1-50",
+    "faltantes": []
+  }
+}

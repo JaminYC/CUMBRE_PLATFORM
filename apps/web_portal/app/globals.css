@@ -3,6 +3,18 @@
      se percibe mecanico. No depende de la marca. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
+  /*
+   * Curvas con rebote. El tercer numero pasa de 1, asi que el elemento se va
+   * un poco mas alla de su destino y vuelve. Es lo que separa una entrada que
+   * se siente viva de una que se siente mecanica, y no cuesta una libreria.
+   *
+   * --impulso empieza en negativo: retrocede antes de arrancar, como quien
+   * toma carrerilla. Va bien en lo que sale de un borde.
+   */
+  --rebote: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --rebote-fuerte: cubic-bezier(0.34, 1.96, 0.64, 1);
+  --impulso: cubic-bezier(0.61, -0.21, 0.47, 0.72);
+
   --paper: #f7f1e5;
   --paper-strong: #fffaf1;
   --ink: #1f3138;
@@ -315,26 +327,99 @@ h4 {
   align-items: center;
 }
 .login-logo {
-  height: 28px;
+  /*
+   * Escala con el ancho de la ventana en vez de quedarse fijo: a 28px se leia
+   * como un icono de barra de tareas, no como la marca de la institucion.
+   * El maximo evita que en pantallas anchas se coma la cabecera.
+   */
+  height: clamp(38px, 4.4vw, 56px);
   width: auto;
   display: block;
+  transition: transform 200ms var(--ease-out);
 }
 
-.login-nav__back {
-  font-size: 0.875rem;
-  color: var(--ink-muted);
-  transition: color 0.15s;
-  display: flex;
+/* El logo es un enlace a la portada: conviene que se note que lo es. */
+@media (hover: hover) and (pointer: fine) {
+  .login-nav__logo:hover .login-logo {
+    transform: scale(1.04);
+  }
+}
+
+/*
+ * El de Bryce es un escudo alto y estrecho, no un logotipo horizontal: al
+ * misma altura se ve bastante mas pequeño que el de CUMBRE, asi que se le da
+ * mas margen.
+ */
+[data-marca="bryce"] .login-logo {
+  height: clamp(48px, 5.6vw, 72px);
+}
+
+.volver {
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem 0.5rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--paper-strong);
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms var(--ease-out);
 }
 
-.login-nav__back::before {
-  content: "←";
+.volver__flecha {
+  display: inline-flex;
+  /* Ancho fijo: al estirarse la raya, el texto de al lado no debe moverse. */
+  width: 15px;
+  flex: none;
 }
 
-.login-nav__back:hover {
-  color: var(--accent);
+.volver__raya {
+  /* En reposo la raya esta recogida sobre la punta. Se dibuja al pasar el
+     puntero, de modo que la flecha se estira en vez de aparecer entera. */
+  stroke-dasharray: 6;
+  stroke-dashoffset: 6;
+  transition: stroke-dashoffset 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .volver:hover {
+    color: var(--ink);
+    border-color: var(--ink-muted);
+  }
+
+  .volver:hover .volver__flecha {
+    transform: translateX(-2px);
+  }
+
+  .volver:hover .volver__raya {
+    stroke-dashoffset: 0;
+  }
+}
+
+.volver__flecha {
+  transition: transform 200ms var(--ease-out);
+}
+
+.volver:active {
+  transform: scale(0.97);
+}
+
+.volver:focus-visible {
+  outline: 2px solid var(--mint-strong);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .volver,
+  .volver__flecha,
+  .volver__raya {
+    transition: color 180ms ease, border-color 180ms ease;
+    transform: none;
+  }
+  .volver__raya { stroke-dashoffset: 0; }
 }
 
 .login-layout {
@@ -2256,6 +2341,417 @@ h4 {
   line-height: 1.6;
   color: var(--ink-muted);
 }
+/* --- Ingresantes: la prueba de la academia, en rejilla --- */
+
+.ble-ingresantes {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Reveal envuelve cada tarjeta; sin esto la rejilla ve el envoltorio y no
+   la tarjeta, y el fondo de un pixel que hace de linea no aparece. */
+.ble-ingresantes > .ble-reveal {
+  background: var(--paper-strong);
+}
+
+.ble-ingresante {
+  padding: 1.35rem 1.25rem;
+  height: 100%;
+}
+
+.ble-ingresante__puesto {
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+
+.ble-ingresante__puesto sup {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ble-ingresante h3 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0 0 0.45rem;
+  text-wrap: balance;
+}
+
+.ble-ingresante__nombre {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 640px) {
+  .ble-ingresantes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* --- Titular letra por letra --- */
+
+.ble-titulo-anim__palabra {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.ble-titulo-anim__letra {
+  display: inline-block;
+  opacity: 0;
+  /* Nada arranca desde cero: sale desde abajo y algo encogido, como si
+     subiera a su sitio. Desde scale(0) pareceria surgir de la nada. */
+  transform: translateY(0.5em) scale(0.94);
+  animation: ble-letra 620ms var(--rebote) forwards;
+  animation-delay: var(--retardo, 0ms);
+}
+
+@keyframes ble-letra {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Temblor: el borde deja de ser recto --- */
+
+/*
+ * Un filtro SVG desplaza los pixeles del borde con ruido, de modo que la
+ * caja se ondula como trazada a mano. Sirve para pegar la interfaz con las
+ * ilustraciones, que si son dibujadas.
+ *
+ * Solo se aplica en la marca que lo pide: CUMBRE se queda recta.
+ */
+/*
+ * Boton de tres capas.
+ *
+ * En reposo se ve uno solo: las dos capas de color estan justo detras,
+ * ocultas. Al pasar el puntero salen en diagonal y el boton se lee como una
+ * pila de tres. Es el efecto de la referencia.
+ *
+ * El filtro de temblor NO va sobre el elemento sino sobre cada capa. Aplicado
+ * al boton entero obliga a rasterizar su contenido y el texto pierde el
+ * suavizado subpixel: se ve blando. Comprobado ampliando capturas.
+ */
+
+[data-marca="bryce"] .ble-btn {
+  position: relative;
+  background: transparent;
+  /*
+   * Acota el z-index negativo de las capas a este boton. Sin esto se irian
+   * detras del fondo del contenedor padre y el boton desapareceria.
+   */
+  isolation: isolate;
+}
+
+[data-marca="bryce"] .ble-btn::before,
+[data-marca="bryce"] .ble-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  filter: url(#ble-temblor-suave);
+  /* Salen y entran con la misma curva con rebote del resto de la portada. */
+  transition: transform 260ms var(--rebote), box-shadow 260ms var(--rebote);
+}
+
+/* La de encima: el color propio del boton. */
+[data-marca="bryce"] .ble-btn::before {
+  background: var(--mint-strong);
+}
+
+/*
+ * La tercera capa sale de una sombra dura sobre la segunda, porque un
+ * elemento solo tiene dos pseudo-elementos. Con desenfoque cero, box-shadow
+ * es una copia desplazada exacta: sirve de capa sin anadir nodos al DOM.
+ */
+[data-marca="bryce"] .ble-btn::after {
+  background: var(--mint-alt, var(--mint-strong));
+  /* En reposo la sombra no se desplaza: la tercera capa queda escondida
+     exactamente detras y el boton se ve como uno solo. */
+  box-shadow: 0 0 0 var(--accent);
+  z-index: -2;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* La pila se abre en diagonal: cada capa un poco mas lejos que la
+     anterior, de modo que las tres se ven a la vez. */
+  [data-marca="bryce"] .ble-btn:hover::before {
+    transform: translate(3px, 3px);
+  }
+  [data-marca="bryce"] .ble-btn:hover::after {
+    transform: translate(7px, 7px);
+    box-shadow: 6px 6px 0 var(--accent);
+  }
+}
+
+/* Al pulsar, las capas vuelven a su sitio: la pila se cierra. Refuerza la
+   sensacion de que el boton se hunde. */
+/* Al pulsar, la pila se cierra de golpe: refuerza la sensacion de hundir. */
+[data-marca="bryce"] .ble-btn:active::before,
+[data-marca="bryce"] .ble-btn:active::after {
+  transform: none;
+  box-shadow: 0 0 0 var(--accent);
+  transition-duration: 120ms;
+}
+
+/* Variantes con fondo propio */
+[data-marca="bryce"] .ble-btn--ghost::before { background: var(--sand); }
+[data-marca="bryce"] .ble-btn--light::before { background: var(--paper-strong); }
+[data-marca="bryce"] .ble-btn--light::after { background: var(--mint-alt, var(--accent)); }
+
+/* Tarjetas: solo temblor de borde, sin capas. */
+[data-marca="bryce"] .ble-perfil,
+[data-marca="bryce"] .ble-ingresantes {
+  position: relative;
+  background: transparent;
+  isolation: isolate;
+}
+
+[data-marca="bryce"] .ble-perfil::before,
+[data-marca="bryce"] .ble-ingresantes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  background: var(--paper-strong);
+  filter: url(#ble-temblor);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-marca="bryce"] .ble-btn::before,
+  [data-marca="bryce"] .ble-btn::after {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ble-titulo-anim__letra {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* --- Transicion entre paginas --- */
+
+/*
+ * No es un fundido cruzado: es una secuencia. La pagina que se va sale, hay un
+ * respiro con la pantalla vacia, y solo entonces entra la nueva. Ese hueco en
+ * medio es lo que hace que se sienta deliberado y no como un parpadeo.
+ *
+ * Cada direccion lleva su curva. La salida usa una que retrocede antes de
+ * arrancar —anticipacion, como quien toma impulso— y la entrada una que se
+ * pasa del destino y vuelve.
+ *
+ * Los tiempos estan recortados respecto a la referencia: alli suman 1,4 s, que
+ * en una pagina de podcasts se disfruta pero aqui es lo que separa a alguien de
+ * su boton de iniciar sesion.
+ */
+:root {
+  --pt-salida: 380ms;
+  --pt-respiro: 220ms;
+  --pt-entrada: 620ms;
+}
+
+::view-transition-old(root) {
+  animation: pt-salir var(--pt-salida) var(--impulso) forwards;
+}
+
+::view-transition-new(root) {
+  /* backwards mantiene el estado inicial durante el retardo; sin el, la
+     pagina nueva se ve completa mientras espera su turno. */
+  animation: pt-entrar var(--pt-entrada) var(--rebote)
+             calc(var(--pt-salida) + var(--pt-respiro)) backwards;
+}
+
+@keyframes pt-salir {
+  to {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.985);
+  }
+}
+
+@keyframes pt-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.99);
+  }
+}
+
+/*
+ * Con movimiento reducido no se quita la transicion: se deja el fundido, que
+ * ayuda a entender que la pagina cambio, y se quitan los desplazamientos.
+ */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-delay: 0ms;
+    animation-timing-function: ease;
+  }
+
+  @keyframes pt-salir {
+    to { opacity: 0; transform: none; }
+  }
+
+  @keyframes pt-entrar {
+    from { opacity: 0; transform: none; }
+  }
+}
+
+
+/* --- Cortina entre paginas --- */
+
+/*
+ * Tres paneles que barren la pantalla en horizontal: entran por la izquierda
+ * para tapar y se retiran por la derecha para descubrir. No vuelven por donde
+ * vinieron —eso se leeria como un error— sino que siguen de largo, y al
+ * hacerlo escalonados se ve cada color por separado.
+ *
+ * Solo se anima transform: la tarjeta grafica lo resuelve sin recalcular
+ * distribucion ni repintar, que en una superficie a pantalla completa es la
+ * diferencia entre ir fluido y dar tirones.
+ */
+
+.ble-cortina {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  overflow: hidden;
+}
+
+.ble-cortina[data-estado="quieta"] {
+  /* Fuera del arbol de pintado cuando no hace falta: una capa fija a pantalla
+     completa que no se ve sigue costando composicion en cada scroll. */
+  display: none;
+}
+
+.ble-cortina__panel {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  will-change: transform;
+}
+
+.ble-cortina__panel[data-capa="1"] { background: var(--mint-strong); }
+.ble-cortina__panel[data-capa="2"] { background: var(--mint-alt, var(--mint-strong)); }
+.ble-cortina__panel[data-capa="3"] { background: var(--accent); }
+
+/* Tapar: entran casi juntos, con un desfase corto que da profundidad. */
+.ble-cortina[data-estado="cubriendo"] .ble-cortina__panel {
+  animation: ble-cortina-entra 520ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+.ble-cortina[data-estado="cubriendo"] .ble-cortina__panel[data-capa="2"] {
+  animation-delay: 70ms;
+}
+.ble-cortina[data-estado="cubriendo"] .ble-cortina__panel[data-capa="3"] {
+  animation-delay: 140ms;
+}
+
+/* Descubrir: se van en orden inverso, para que el ultimo en tapar sea el
+   primero en irse y los colores se vean uno tras otro. */
+.ble-cortina[data-estado="descubriendo"] .ble-cortina__panel {
+  animation: ble-cortina-sale 620ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+.ble-cortina[data-estado="descubriendo"] .ble-cortina__panel[data-capa="3"] {
+  animation-delay: 0ms;
+}
+.ble-cortina[data-estado="descubriendo"] .ble-cortina__panel[data-capa="2"] {
+  animation-delay: 90ms;
+}
+.ble-cortina[data-estado="descubriendo"] .ble-cortina__panel[data-capa="1"] {
+  animation-delay: 180ms;
+}
+
+@keyframes ble-cortina-entra {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes ble-cortina-sale {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
+/*
+ * Al retroceder, las capas barren hacia el otro lado. No es adorno: el sentido
+ * del barrido dice si avanzas o vuelves sin necesidad de leer nada.
+ *
+ * Aqui solo hay descubrimiento. Cuando el navegador dispara su retroceso la
+ * pagina nueva ya esta puesta, asi que no queda nada que tapar: las capas
+ * arrancan cubriendo y se retiran.
+ */
+.ble-cortina[data-sentido="atras"] .ble-cortina__panel {
+  transform: translateX(0);
+}
+
+.ble-cortina[data-sentido="atras"][data-estado="descubriendo"] .ble-cortina__panel {
+  animation-name: ble-cortina-sale-atras;
+}
+
+@keyframes ble-cortina-sale-atras {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ble-cortina { display: none !important; }
+}
+
+
+/* --- Tipografia de la portada de Bryce --- */
+
+/*
+ * Manrope solo aqui, de momento. Es la de la referencia: geometrica, regular
+ * y algo ancha, que hace de contrapeso a los bordes dibujados a mano.
+ *
+ * Se acota a la portada de Bryce a proposito. La base de la plataforma sigue
+ * como estaba porque cambiarla moveria los espaciados de las cuatro apps.
+ */
+[data-marca="bryce"] .ble {
+  font-family: var(--fuente-manrope), "Segoe UI", system-ui, sans-serif;
+}
+
+/* Los botones en ExtraBold, como en la referencia. */
+[data-marca="bryce"] .ble .ble-btn {
+  font-family: var(--fuente-manrope), "Segoe UI", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+}
+
+/*
+ * Los titulares tambien pasan a Manrope aqui, en su peso mas fuerte. La serif
+ * que habia declarada nunca llegaba a cargarse —no existe ningun @font-face
+ * en el proyecto— asi que en realidad se veian en Georgia. Mezclar Georgia
+ * con Manrope no cuadra; hasta decidir la display definitiva, una sola
+ * familia bien usada se ve mejor que dos que no conversan.
+ */
+[data-marca="bryce"] .ble .ble-hero__title,
+[data-marca="bryce"] .ble .ble-titulo-anim,
+[data-marca="bryce"] .ble .ble-h2,
+[data-marca="bryce"] .ble .ble-cierre h2,
+[data-marca="bryce"] .ble .ble-perfil__titulo,
+[data-marca="bryce"] .ble .ble-ingresante h3 {
+  font-family: var(--fuente-manrope), "Segoe UI", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
 /* --- Cierre --- */
 
 .ble-cierre {
@@ -2319,8 +2815,11 @@ h4 {
 
 .ble-reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out);
+  /* Sube algo mas y entra encogido: con rebote, el recorrido corto se pierde
+     y no se llega a apreciar el asentamiento. */
+  transform: translateY(26px) scale(0.985);
+  /* La opacidad no rebota —parpadearia—, solo la posicion. */
+  transition: opacity 520ms var(--ease-out), transform 860ms var(--rebote);
   will-change: opacity, transform;
 }
 .ble-reveal[data-visible="true"] {

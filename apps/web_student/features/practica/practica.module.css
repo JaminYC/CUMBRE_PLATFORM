@@ -1,0 +1,330 @@
+/*
+ * Estilos de la practica.
+ *
+ * Todo sale de los tokens de globals.css para que Bryce y CUMBRE se vean
+ * distintas sin tocar este archivo. Solo se animan transform y opacity: son
+ * las dos propiedades que la tarjeta grafica resuelve sola, sin recalcular
+ * distribucion ni repintar.
+ */
+
+.campo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.campo canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* El contenido va por encima del campo, con su propio contexto de apilado. */
+.sobre {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Selector de perfil --------------------------------------------------- */
+
+.perfiles {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.perfil {
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), background-color 160ms ease,
+    color 160ms ease, border-color 160ms ease;
+}
+
+.perfil[data-activo="true"] {
+  background: var(--mint-strong);
+  border-color: var(--mint-strong);
+  color: var(--paper-strong);
+}
+
+.perfil:active {
+  transform: scale(0.97);
+}
+
+/* --- Lista de cursos ------------------------------------------------------ */
+
+.cursos {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.curso {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--paper-strong);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), border-color 160ms ease;
+
+  /* Entrada escalonada: veinte cursos apareciendo a la vez se lee tosco. */
+  opacity: 0;
+  animation: entrar 320ms var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 35ms);
+}
+
+.curso:active {
+  transform: scale(0.99);
+}
+
+.curso[disabled] {
+  background: var(--paper);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cursoMeta {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* --- Pregunta ------------------------------------------------------------- */
+
+.marcador {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  margin-bottom: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+
+.racha {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  transition: transform 200ms var(--ease-out);
+}
+
+/* Late al subir. Es el unico momento con algo de celebracion en el bucle. */
+.racha[data-sube="true"] {
+  transform: scale(1.28);
+}
+
+.enunciado {
+  font-size: 1.06rem;
+  line-height: 1.62;
+  margin: 0 0 1.1rem;
+}
+
+/*
+ * La figura del enunciado.
+ *
+ * Fondo blanco solido a proposito: casi todas son diagramas en trazo negro
+ * sobre transparente, y sobre el papel tintado de la marca el trazo fino se
+ * pierde. El limite de alto evita que un grafico grande empuje las
+ * alternativas fuera de la pantalla, que es cuando el alumno deja de ver a la
+ * vez la pregunta y las opciones.
+ */
+.figura {
+  display: block;
+  max-width: 100%;
+  max-height: 26rem;
+  margin: 0 auto 1.2rem;
+  padding: 0.75rem;
+  border-radius: 0.9rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  object-fit: contain;
+}
+
+.alternativas {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.alternativa {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 0.8rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--paper-strong);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 150ms var(--ease-out), border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+/* El hover solo donde hay puntero de verdad: en tactil se dispara al tocar. */
+@media (hover: hover) and (pointer: fine) {
+  .alternativa:hover:not(:disabled) {
+    border-color: var(--ink-muted);
+  }
+}
+
+.alternativa:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.alternativa:disabled {
+  cursor: default;
+}
+
+.alternativa[data-estado="correcta"] {
+  border-color: var(--mint-strong);
+  background: var(--mint);
+}
+
+.alternativa[data-estado="fallo"] {
+  border-color: var(--error);
+  background: color-mix(in srgb, var(--error) 12%, var(--paper-strong));
+}
+
+.letra {
+  min-width: 1.2rem;
+  font-weight: 700;
+}
+
+.enBlanco {
+  margin-top: 0.9rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--ink-muted);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.enBlanco:hover {
+  color: var(--ink);
+}
+
+/* --- Solucionario e islas ------------------------------------------------- */
+
+.verSolucion {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--ink-muted);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.solucion {
+  margin-top: 0.7rem;
+  padding: 0.95rem 1.05rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  font-size: 0.95rem;
+  line-height: 1.62;
+  white-space: pre-wrap;
+  animation: desplegar 220ms var(--ease-out);
+}
+
+.isla {
+  animation: entrar 260ms var(--ease-out);
+}
+
+.acciones {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.accion {
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--paper-strong);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), border-color 160ms ease;
+}
+
+.accion[data-principal="true"] {
+  background: var(--mint-strong);
+  border-color: var(--mint-strong);
+  color: var(--paper-strong);
+}
+
+.accion:active {
+  transform: scale(0.97);
+}
+
+/* --- Movimiento ----------------------------------------------------------- */
+
+/* Nada arranca desde scale(0): en el mundo real nada aparece de la nada. */
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(7px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes desplegar {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * Movimiento reducido no significa sin animacion: se conservan las de opacidad
+ * y color, que ayudan a entender que ha cambiado algo, y se quita todo lo que
+ * se desplaza o escala.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .curso,
+  .isla,
+  .solucion {
+    animation: none;
+    opacity: 1;
+  }
+
+  .perfil:active,
+  .alternativa:active,
+  .accion:active,
+  .curso:active,
+  .racha[data-sube="true"] {
+    transform: none;
+  }
+
+  .campo {
+    opacity: 0.3;
+  }
+}

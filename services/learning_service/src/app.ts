@@ -15,6 +15,9 @@ import { ContentClient } from "./services/content-client.js";
 import { TutorService } from "./services/tutor-service.js";
 import { TutorController } from "./controllers/tutor-controller.js";
 import { registerTutorRoutes } from "./routes/tutor-routes.js";
+import { PracticaService } from "./practica/practica-service.js";
+import { PracticaController } from "./practica/practica-controller.js";
+import { registerPracticaRoutes } from "./practica/practica-routes.js";
 import { ClassroomProvisioningClient } from "./services/classroom-provisioning-client.js";
 import { LearningApplicationService } from "./services/learning-service.js";
 import type { Logger } from "./utils/logger.js";
@@ -63,6 +66,7 @@ export function createLearningApp({
     contentKnowledgeClient
   );
   const tutorController = new TutorController(tutorService);
+  const practicaController = new PracticaController(new PracticaService(prisma));
   const healthController = new HealthController(
     config.serviceName,
     async () => {
@@ -88,7 +92,8 @@ export function createLearningApp({
     [
       ...registerHealthRoutes(healthController),
       ...registerLearningRoutes(learningController),
-      ...registerTutorRoutes(tutorController)
+      ...registerTutorRoutes(tutorController),
+      ...registerPracticaRoutes(practicaController)
     ],
     logger
     ,

@@ -1,0 +1,496 @@
+{
+  "fuente": {
+    "documento": "Resolución de Consejo Universitario N° 0028-2026",
+    "titulo": "Temario y Matriz de Evaluación del Proceso de Admisión 2027",
+    "universidad": "Universidad Nacional de San Agustín de Arequipa (UNSA)",
+    "fecha_resolucion": "2026-02-02",
+    "sesion_consejo": "2026-01-26",
+    "archivo_original": "RCU-0028-Aprobacion-de-TEMARIO-y-MATRIZ-ADMISION-2027.pdf",
+    "paginas": 45,
+    "nota": "El PDF original es escaneado y no tiene texto extraíble. Esta digitalización se hizo leyendo las 45 páginas como imagen. Cubre el nivel eje > asignatura > tema. Los sub-contenidos de cada tema (viñetas) quedan pendientes de una segunda pasada.",
+    "digitalizado": "2026-07-30"
+  },
+
+  "examen": {
+    "total_preguntas": 80,
+    "total_puntos": 100,
+    "perfiles": ["ingenierias", "biomedicas", "sociales"],
+    "nota": "El postulante rinde uno de tres exámenes según el área a la que postula. Los tres tienen 80 preguntas y 100 puntos, pero reparten las preguntas de forma muy distinta entre asignaturas. Cada pregunta vale distinto según la asignatura y el perfil."
+  },
+
+  "matriz_evaluacion": {
+    "nota": "n = número de preguntas; valor = puntaje unitario de cada pregunta; subtotal = n x valor. Los porcentajes por eje están tomados del documento. VERIFICAR CONTRA EL ORIGINAL antes de usar en producción: la matriz está impresa en horizontal y algunos dígitos son de lectura difícil.",
+    "ejes": [
+      {
+        "eje": "Aptitud Académica",
+        "asignaturas": [
+          { "nombre": "Razonamiento Lógico",     "ingenierias": {"n": 4, "valor": 1.124150}, "biomedicas": {"n": 4, "valor": 1.124150}, "sociales": {"n": 4, "valor": 1.124150} },
+          { "nombre": "Razonamiento Matemático", "ingenierias": {"n": 5, "valor": 1.100680}, "biomedicas": {"n": 5, "valor": 1.100680}, "sociales": {"n": 5, "valor": 1.100680} },
+          { "nombre": "Razonamiento Verbal",     "ingenierias": {"n": 4, "valor": 1.124150}, "biomedicas": {"n": 4, "valor": 1.124150}, "sociales": {"n": 4, "valor": 1.124150} },
+          { "nombre": "Comprensión Lectora",     "ingenierias": {"n": 5, "valor": 1.100680}, "biomedicas": {"n": 5, "valor": 1.100680}, "sociales": {"n": 5, "valor": 1.100680} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 18, "puntos": 20.0, "porcentaje": 20},
+          "biomedicas":  {"n": 18, "puntos": 20.0, "porcentaje": 20},
+          "sociales":    {"n": 18, "puntos": 20.0, "porcentaje": 20}
+        }
+      },
+      {
+        "eje": "Matemática",
+        "asignaturas": [
+          { "nombre": "Álgebra",       "ingenierias": {"n": 4, "valor": 1.658337}, "biomedicas": {"n": 3, "valor": 1.265447}, "sociales": {"n": 3, "valor": 0.824574} },
+          { "nombre": "Aritmética",    "ingenierias": {"n": 4, "valor": 1.658267}, "biomedicas": {"n": 3, "valor": 1.266447}, "sociales": {"n": 3, "valor": 0.824134} },
+          { "nombre": "Geometría",     "ingenierias": {"n": 4, "valor": 1.658787}, "biomedicas": {"n": 3, "valor": 1.265447}, "sociales": {"n": 3, "valor": 0.826012} },
+          { "nombre": "Trigonometría", "ingenierias": {"n": 3, "valor": 1.699477}, "biomedicas": {"n": 3, "valor": 1.203958}, "sociales": {"n": 3, "valor": 0.859614} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 15, "puntos": 25.0, "porcentaje": 25},
+          "biomedicas":  {"n": 12, "puntos": 15.0, "porcentaje": 15},
+          "sociales":    {"n": 12, "puntos": 10.0, "porcentaje": 10}
+        }
+      },
+      {
+        "eje": "Ciencias Sociales",
+        "asignaturas": [
+          { "nombre": "Historia",   "ingenierias": {"n": 4, "valor": 1.289859}, "biomedicas": {"n": 5, "valor": 1.123540}, "sociales": {"n": 8, "valor": 1.774740} },
+          { "nombre": "Geografía",  "ingenierias": {"n": 4, "valor": 1.210410}, "biomedicas": {"n": 4, "valor": 1.086575}, "sociales": {"n": 5, "valor": 1.760416} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 8,  "puntos": 10.0, "porcentaje": 10},
+          "biomedicas":  {"n": 9,  "puntos": 10.0, "porcentaje": 10},
+          "sociales":    {"n": 13, "puntos": 23.0, "porcentaje": 23}
+        }
+      },
+      {
+        "eje": "Ciencia y Tecnología",
+        "asignaturas": [
+          { "nombre": "Química",  "ingenierias": {"n": 6, "valor": 1.425411}, "biomedicas": {"n": 6, "valor": 1.684740}, "sociales": {"n": 3, "valor": 1.106301} },
+          { "nombre": "Biología", "ingenierias": {"n": 5, "valor": 1.154749}, "biomedicas": {"n": 9, "valor": 1.945140}, "sociales": {"n": 3, "valor": 1.146903} },
+          { "nombre": "Física",   "ingenierias": {"n": 7, "valor": 1.524827}, "biomedicas": {"n": 5, "valor": 1.477060}, "sociales": {"n": 3, "valor": 1.077129} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 18, "puntos": 25.0, "porcentaje": 25},
+          "biomedicas":  {"n": 20, "puntos": 35.0, "porcentaje": 35},
+          "sociales":    {"n": 9,  "puntos": 10.0, "porcentaje": 10}
+        }
+      },
+      {
+        "eje": "Persona y Familia",
+        "asignaturas": [
+          { "nombre": "Filosofía",        "ingenierias": {"n": 3, "valor": 0.798740}, "biomedicas": {"n": 3, "valor": 0.798740}, "sociales": {"n": 3, "valor": 0.887787} },
+          { "nombre": "Psicología",       "ingenierias": {"n": 4, "valor": 0.801890}, "biomedicas": {"n": 4, "valor": 0.801890}, "sociales": {"n": 5, "valor": 0.934548} },
+          { "nombre": "Educación Cívica", "ingenierias": {"n": 3, "valor": 0.798740}, "biomedicas": {"n": 3, "valor": 0.798740}, "sociales": {"n": 3, "valor": 0.887787} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 10, "puntos": 8.0,  "porcentaje": 8},
+          "biomedicas":  {"n": 10, "puntos": 8.0,  "porcentaje": 8},
+          "sociales":    {"n": 11, "puntos": 10.0, "porcentaje": 10}
+        }
+      },
+      {
+        "eje": "Comunicación",
+        "asignaturas": [
+          { "nombre": "Lenguaje",   "ingenierias": {"n": 4, "valor": 1.021414}, "biomedicas": {"n": 4, "valor": 1.021414}, "sociales": {"n": 8, "valor": 1.701541} },
+          { "nombre": "Literatura", "ingenierias": {"n": 3, "valor": 0.971448}, "biomedicas": {"n": 3, "valor": 0.971448}, "sociales": {"n": 5, "valor": 1.677534} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 7,  "puntos": 7.0,  "porcentaje": 7},
+          "biomedicas":  {"n": 7,  "puntos": 7.0,  "porcentaje": 7},
+          "sociales":    {"n": 13, "puntos": 22.0, "porcentaje": 22}
+        }
+      },
+      {
+        "eje": "Idioma Extranjero",
+        "asignaturas": [
+          { "nombre": "Lectura",   "ingenierias": {"n": 2, "valor": 1.258700}, "biomedicas": {"n": 2, "valor": 1.258700}, "sociales": {"n": 2, "valor": 1.258700} },
+          { "nombre": "Gramática", "ingenierias": {"n": 2, "valor": 1.241300}, "biomedicas": {"n": 2, "valor": 1.241300}, "sociales": {"n": 2, "valor": 1.241300} }
+        ],
+        "totales": {
+          "ingenierias": {"n": 4, "puntos": 5.0, "porcentaje": 5},
+          "biomedicas":  {"n": 4, "puntos": 5.0, "porcentaje": 5},
+          "sociales":    {"n": 4, "puntos": 5.0, "porcentaje": 5}
+        }
+      }
+    ],
+    "verificacion": {
+      "ingenierias": {"suma_preguntas": 80, "suma_porcentajes": 100},
+      "biomedicas":  {"suma_preguntas": 80, "suma_porcentajes": 100},
+      "sociales":    {"suma_preguntas": 80, "suma_porcentajes": 100}
+    }
+  },
+
+  "temario": [
+    {
+      "eje": "Aptitud Académica",
+      "formato": "capacidades",
+      "nota": "Los temas de este eje están redactados como capacidades ('El postulante debe ser capaz de...'), no como contenidos.",
+      "asignaturas": [
+        {
+          "nombre": "Razonamiento Matemático",
+          "temas": [
+            {"orden": 1, "romano": "I",   "nombre": "Razonamiento numérico"},
+            {"orden": 2, "romano": "II",  "nombre": "Magnitudes y proporcionalidad"},
+            {"orden": 3, "romano": "III", "nombre": "Razonamiento algebraico intuitivo"},
+            {"orden": 4, "romano": "IV",  "nombre": "Razonamiento geométrico"},
+            {"orden": 5, "romano": "V",   "nombre": "Análisis combinatorio intuitivo"},
+            {"orden": 6, "romano": "VI",  "nombre": "Probabilidad intuitiva"},
+            {"orden": 7, "romano": "VII", "nombre": "Estadística y análisis de datos"}
+          ]
+        },
+        {
+          "nombre": "Razonamiento Lógico",
+          "temas": [
+            {"orden": 1, "romano": "I",    "nombre": "Proposiciones y enunciados lógicos"},
+            {"orden": 2, "romano": "II",   "nombre": "Conectores lógicos"},
+            {"orden": 3, "romano": "III",  "nombre": "Relaciones lógicas entre proposiciones"},
+            {"orden": 4, "romano": "IV",   "nombre": "Inferencias lógicas"},
+            {"orden": 5, "romano": "V",    "nombre": "Silogismos y razonamiento deductivo básico"},
+            {"orden": 6, "romano": "VI",   "nombre": "Consistencia y coherencia lógica"},
+            {"orden": 7, "romano": "VII",  "nombre": "Razonamiento con condicionales"},
+            {"orden": 8, "romano": "VIII", "nombre": "Organización y orden lógico"},
+            {"orden": 9, "romano": "IX",   "nombre": "Detección de falacias simples"}
+          ]
+        },
+        {
+          "nombre": "Razonamiento Verbal",
+          "temas": [
+            {"orden": 1, "romano": "I",    "nombre": "Relaciones semánticas básicas"},
+            {"orden": 2, "romano": "II",   "nombre": "Analogías verbales"},
+            {"orden": 3, "romano": "III",  "nombre": "Series y clasificaciones verbales"},
+            {"orden": 4, "romano": "IV",   "nombre": "Lógica de enunciados"},
+            {"orden": 5, "romano": "V",    "nombre": "Razonamiento argumentativo básico"},
+            {"orden": 6, "romano": "VI",   "nombre": "Pragmática en enunciados"},
+            {"orden": 7, "romano": "VII",  "nombre": "Corrección por sentido"},
+            {"orden": 8, "romano": "VIII", "nombre": "Resolución de problemas verbales"}
+          ]
+        },
+        {
+          "nombre": "Comprensión Lectora",
+          "temas": [
+            {"orden": 1, "romano": "I",    "nombre": "Comprensión literal"},
+            {"orden": 2, "romano": "II",   "nombre": "Comprensión inferencial"},
+            {"orden": 3, "romano": "III",  "nombre": "Comprensión global"},
+            {"orden": 4, "romano": "IV",   "nombre": "Intención y propósito del texto"},
+            {"orden": 5, "romano": "V",    "nombre": "Evaluación de la información"},
+            {"orden": 6, "romano": "VI",   "nombre": "Vocabulario en contexto"},
+            {"orden": 7, "romano": "VII",  "nombre": "Coherencia y cohesión textual"},
+            {"orden": 8, "romano": "VIII", "nombre": "Tipos de texto"}
+          ]
+        }
+      ]
+    },
+    {
+      "eje": "Matemática",
+      "formato": "contenidos",
+      "asignaturas": [
+        {
+          "nombre": "Aritmética",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "Relaciones lógicas y conjuntos"},
+            {"orden": 2,  "romano": "II",   "nombre": "Sistema de los números naturales (N)"},
+            {"orden": 3,  "romano": "III",  "nombre": "Divisibilidad en N"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Sistema de los números enteros (Z)"},
+            {"orden": 5,  "romano": "V",    "nombre": "Sistema de los números racionales (Q)"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Razones y proporciones"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Magnitudes y proporcionalidad"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Porcentajes"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Sucesiones y progresiones"},
+            {"orden": 10, "romano": "X",    "nombre": "Sumatorias y aplicaciones aritméticas"},
+            {"orden": 11, "romano": "XI",   "nombre": "Estadística descriptiva"},
+            {"orden": 12, "romano": "XII",  "nombre": "Análisis combinatorio"},
+            {"orden": 13, "romano": "XIII", "nombre": "Probabilidad"}
+          ]
+        },
+        {
+          "nombre": "Álgebra",
+          "temas": [
+            {"orden": 1,  "romano": "I",     "nombre": "Conjuntos"},
+            {"orden": 2,  "romano": "II",    "nombre": "Números reales"},
+            {"orden": 3,  "romano": "III",   "nombre": "Potenciación y radicación"},
+            {"orden": 4,  "romano": "IV",    "nombre": "Expresiones algebraicas"},
+            {"orden": 5,  "romano": "V",     "nombre": "Polinomios"},
+            {"orden": 6,  "romano": "VI",    "nombre": "Factorización"},
+            {"orden": 7,  "romano": "VII",   "nombre": "Fracciones algebraicas"},
+            {"orden": 8,  "romano": "VIII",  "nombre": "Ecuaciones"},
+            {"orden": 9,  "romano": "IX",    "nombre": "Inecuaciones"},
+            {"orden": 10, "romano": "X",     "nombre": "Sistemas de ecuaciones"},
+            {"orden": 11, "romano": "XI",    "nombre": "Números complejos"},
+            {"orden": 12, "romano": "XII",   "nombre": "Relaciones y funciones"},
+            {"orden": 13, "romano": "XIII",  "nombre": "Funciones elementales"},
+            {"orden": 14, "romano": "XIV",   "nombre": "Función exponencial y logarítmica"},
+            {"orden": 15, "romano": "XV",    "nombre": "Progresiones"},
+            {"orden": 16, "romano": "XVI",   "nombre": "Aplicaciones y modelación básica"}
+          ]
+        },
+        {
+          "nombre": "Geometría",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "Elementos fundamentales de la geometría"},
+            {"orden": 2,  "romano": "II",   "nombre": "Rectas en el plano"},
+            {"orden": 3,  "romano": "III",  "nombre": "Triángulos"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Teoremas fundamentales en el triángulo"},
+            {"orden": 5,  "romano": "V",    "nombre": "Lugares geométricos y puntos notables"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Polígonos"},
+            {"orden": 7,  "romano": "VII",  "nombre": "La circunferencia"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Perímetros, áreas y longitudes"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Geometría espacial"},
+            {"orden": 10, "romano": "X",    "nombre": "Cuerpos de revolución"},
+            {"orden": 11, "romano": "XI",   "nombre": "Geometría analítica"}
+          ]
+        },
+        {
+          "nombre": "Trigonometría",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "Sistema de medidas angulares"},
+            {"orden": 2,  "romano": "II",   "nombre": "Longitud y área en la circunferencia"},
+            {"orden": 3,  "romano": "III",  "nombre": "Trigonometría del triángulo rectángulo"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Ángulo en posición normal y círculo trigonométrico"},
+            {"orden": 5,  "romano": "V",    "nombre": "Identidades trigonométricas"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Razones trigonométricas de ángulos compuestos"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Ecuaciones trigonométricas"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Trigonometría del triángulo oblicuángulo"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Aplicaciones geométricas"},
+            {"orden": 10, "romano": "X",    "nombre": "Funciones trigonométricas"},
+            {"orden": 11, "romano": "XI",   "nombre": "Funciones trigonométricas inversas"},
+            {"orden": 12, "romano": "XII",  "nombre": "Aplicaciones de las funciones trigonométricas"}
+          ]
+        }
+      ]
+    },
+    {
+      "eje": "Ciencias Sociales",
+      "formato": "contenidos",
+      "asignaturas": [
+        {
+          "nombre": "Historia",
+          "temas": [
+            {"orden": 1,  "romano": "I.1",  "nombre": "La Historia como Ciencia",        "bloque": "Historia Universal"},
+            {"orden": 2,  "romano": "I.2",  "nombre": "La Prehistoria",                  "bloque": "Historia Universal"},
+            {"orden": 3,  "romano": "I.3",  "nombre": "La Edad Antigua",                 "bloque": "Historia Universal"},
+            {"orden": 4,  "romano": "I.4",  "nombre": "La Edad Media",                   "bloque": "Historia Universal"},
+            {"orden": 5,  "romano": "I.5",  "nombre": "La Edad Moderna",                 "bloque": "Historia Universal"},
+            {"orden": 6,  "romano": "I.6",  "nombre": "La Edad Contemporánea",           "bloque": "Historia Universal"},
+            {"orden": 7,  "romano": "II.1", "nombre": "El Perú Prehispánico",            "bloque": "Historia del Perú"},
+            {"orden": 8,  "romano": "II.2", "nombre": "La Conquista y el Virreinato",    "bloque": "Historia del Perú"},
+            {"orden": 9,  "romano": "II.3", "nombre": "La Emancipación",                 "bloque": "Historia del Perú"},
+            {"orden": 10, "romano": "II.4", "nombre": "La República del Perú (Siglo XIX)","bloque": "Historia del Perú"},
+            {"orden": 11, "romano": "II.5", "nombre": "El Perú Republicano y Contemporáneo","bloque": "Historia del Perú"}
+          ]
+        },
+        {
+          "nombre": "Geografía",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "La Geografía y el espacio geográfico"},
+            {"orden": 2,  "romano": "II",   "nombre": "Representación y localización del espacio geográfico"},
+            {"orden": 3,  "romano": "III",  "nombre": "Geografía física: estructura y dinámica de la Tierra"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Clima y cambio climático"},
+            {"orden": 5,  "romano": "V",    "nombre": "Hidrografía"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Biodiversidad y ecosistemas"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Gestión del riesgo de desastres"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Recursos naturales y desarrollo sostenible"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Actividades económicas y desarrollo"},
+            {"orden": 10, "romano": "X",    "nombre": "Población y organización del espacio"},
+            {"orden": 11, "romano": "XI",   "nombre": "Organización política y administrativa del territorio peruano"},
+            {"orden": 12, "romano": "XII",  "nombre": "Geografía continental"}
+          ]
+        }
+      ]
+    },
+    {
+      "eje": "Ciencia y Tecnología",
+      "formato": "contenidos",
+      "asignaturas": [
+        {
+          "nombre": "Química",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "La Química como ciencia"},
+            {"orden": 2,  "romano": "II",   "nombre": "Materia y sus transformaciones"},
+            {"orden": 3,  "romano": "III",  "nombre": "Energía y cambios físicos"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Estructura atómica"},
+            {"orden": 5,  "romano": "V",    "nombre": "Estructura electrónica y Tabla Periódica"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Enlace químico y estructura de la materia"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Nomenclatura y funciones químicas inorgánicas"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Reacciones químicas"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Estequiometría"},
+            {"orden": 10, "romano": "X",    "nombre": "Estados físicos de la materia"},
+            {"orden": 11, "romano": "XI",   "nombre": "Sistemas dispersos y soluciones"},
+            {"orden": 12, "romano": "XII",  "nombre": "Ácidos, bases y equilibrio químico"},
+            {"orden": 13, "romano": "XIII", "nombre": "Electroquímica"},
+            {"orden": 14, "romano": "XIV",  "nombre": "Química orgánica"},
+            {"orden": 15, "romano": "XV",   "nombre": "Química ambiental y recursos naturales"}
+          ]
+        },
+        {
+          "nombre": "Biología",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "Biología como ciencia"},
+            {"orden": 2,  "romano": "II",   "nombre": "Seres vivos y niveles de organización biológica"},
+            {"orden": 3,  "romano": "III",  "nombre": "Base química de la vida"},
+            {"orden": 4,  "romano": "IV",   "nombre": "La célula como unidad de la vida"},
+            {"orden": 5,  "romano": "V",    "nombre": "Metabolismo celular"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Organización tisular"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Sistemas en los seres vivos"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Coordinación y regulación"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Reproducción y desarrollo"},
+            {"orden": 10, "romano": "X",    "nombre": "Genética y continuidad de la vida"},
+            {"orden": 11, "romano": "XI",   "nombre": "Evolución y diversidad biológica"},
+            {"orden": 12, "romano": "XII",  "nombre": "Clasificación y biodiversidad"},
+            {"orden": 13, "romano": "XIII", "nombre": "Ecología, ambiente y sostenibilidad"}
+          ]
+        },
+        {
+          "nombre": "Física",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "La Física y las magnitudes físicas"},
+            {"orden": 2,  "romano": "II",   "nombre": "Cinemática del movimiento"},
+            {"orden": 3,  "romano": "III",  "nombre": "Dinámica"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Estática"},
+            {"orden": 5,  "romano": "V",    "nombre": "Cantidad de movimiento y gravitación"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Trabajo, energía y potencia"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Fenómenos térmicos"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Mecánica de fluidos"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Electricidad"},
+            {"orden": 10, "romano": "X",    "nombre": "Magnetismo y electromagnetismo"},
+            {"orden": 11, "romano": "XI",   "nombre": "Oscilaciones y ondas"},
+            {"orden": 12, "romano": "XII",  "nombre": "Física moderna"}
+          ]
+        }
+      ]
+    },
+    {
+      "eje": "Persona y Familia",
+      "formato": "contenidos",
+      "asignaturas": [
+        {
+          "nombre": "Psicología",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "Psicología como ciencia"},
+            {"orden": 2,  "romano": "II",   "nombre": "Proyecto de vida"},
+            {"orden": 3,  "romano": "III",  "nombre": "Orientación vocacional"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Hábitos de estudio"},
+            {"orden": 5,  "romano": "V",    "nombre": "Búsqueda de identidad"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Motivación y afectividad humana"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Inteligencia emocional"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Personalidad"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Aprendizaje"},
+            {"orden": 10, "romano": "X",    "nombre": "Procesos psicológicos básicos"},
+            {"orden": 11, "romano": "XI",   "nombre": "Inteligencia"},
+            {"orden": 12, "romano": "XII",  "nombre": "Factores de protección"},
+            {"orden": 13, "romano": "XIII", "nombre": "Factores de riesgo"},
+            {"orden": 14, "romano": "XIV",  "nombre": "Salud sexual y reproductiva"},
+            {"orden": 15, "romano": "XV",   "nombre": "Crecimiento, maduración y desarrollo"}
+          ]
+        },
+        {
+          "nombre": "Filosofía",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "Nociones preliminares de filosofía"},
+            {"orden": 2,  "romano": "II",   "nombre": "Disciplinas filosóficas"},
+            {"orden": 3,  "romano": "III",  "nombre": "Problemas fundamentales de la filosofía"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Lógica y teoría de la argumentación"},
+            {"orden": 5,  "romano": "V",    "nombre": "Conocimiento, ciencia y verdad"},
+            {"orden": 6,  "romano": "VI",   "nombre": "La filosofía a lo largo de la historia"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Filosofía en Latinoamérica y en el Perú"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Pensamiento filosófico contemporáneo y sociedad"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Estética y filosofía del arte"},
+            {"orden": 10, "romano": "X",    "nombre": "Ética"},
+            {"orden": 11, "romano": "XI",   "nombre": "Axiología"},
+            {"orden": 12, "romano": "XII",  "nombre": "Filosofía política"},
+            {"orden": 13, "romano": "XIII", "nombre": "Filosofía del ser humano"}
+          ]
+        },
+        {
+          "nombre": "Educación Cívica",
+          "temas": [
+            {"orden": 1,  "romano": "I",    "nombre": "La persona y la vida en sociedad"},
+            {"orden": 2,  "romano": "II",   "nombre": "Ciudadanía"},
+            {"orden": 3,  "romano": "III",  "nombre": "Estado y nación"},
+            {"orden": 4,  "romano": "IV",   "nombre": "Organización del Estado peruano"},
+            {"orden": 5,  "romano": "V",    "nombre": "Democracia y sistema político"},
+            {"orden": 6,  "romano": "VI",   "nombre": "Derechos humanos"},
+            {"orden": 7,  "romano": "VII",  "nombre": "Constitución y orden jurídico"},
+            {"orden": 8,  "romano": "VIII", "nombre": "Participación ciudadana y vida democrática"},
+            {"orden": 9,  "romano": "IX",   "nombre": "Gobierno regional y local (enfoque UNSA)"},
+            {"orden": 10, "romano": "X",    "nombre": "Desarrollo, convivencia y cultura cívica"},
+            {"orden": 11, "romano": "XI",   "nombre": "Derecho universitario"}
+          ]
+        }
+      ]
+    },
+    {
+      "eje": "Comunicación",
+      "formato": "contenidos",
+      "asignaturas": [
+        {
+          "nombre": "Lenguaje",
+          "temas": [
+            {"orden": 1, "romano": "I",    "nombre": "Comunicación y lenguaje"},
+            {"orden": 2, "romano": "II",   "nombre": "Lengua, habla y realidad lingüística"},
+            {"orden": 3, "romano": "III",  "nombre": "Fonología y ortografía"},
+            {"orden": 4, "romano": "IV",   "nombre": "Morfología de la lengua española"},
+            {"orden": 5, "romano": "V",    "nombre": "Sintaxis"},
+            {"orden": 6, "romano": "VI",   "nombre": "Oración gramatical"},
+            {"orden": 7, "romano": "VII",  "nombre": "Discurso escrito y normativa"},
+            {"orden": 8, "romano": "VIII", "nombre": "Semántica y lexicología"}
+          ]
+        },
+        {
+          "nombre": "Literatura",
+          "temas": [
+            {"orden": 1, "romano": "I",   "nombre": "Conceptos fundamentales de la literatura"},
+            {"orden": 2, "romano": "II",  "nombre": "Literatura universal"},
+            {"orden": 3, "romano": "III", "nombre": "Literatura española"},
+            {"orden": 4, "romano": "IV",  "nombre": "Literatura hispanoamericana"},
+            {"orden": 5, "romano": "V",   "nombre": "Literatura peruana"},
+            {"orden": 6, "romano": "VI",  "nombre": "Literatura regional del sur andino"}
+          ]
+        }
+      ]
+    },
+    {
+      "eje": "Idioma Extranjero",
+      "formato": "capacidades",
+      "nota": "Inglés. Nivel básico funcional.",
+      "asignaturas": [
+        {
+          "nombre": "Lectura",
+          "temas": [
+            {"orden": 1, "romano": "I", "nombre": "Comprensión de textos escritos"}
+          ]
+        },
+        {
+          "nombre": "Gramática",
+          "temas": [
+            {"orden": 1, "romano": "I",   "nombre": "Vocabulario funcional"},
+            {"orden": 2, "romano": "II",  "nombre": "Uso de estructuras gramaticales básicas"},
+            {"orden": 3, "romano": "III", "nombre": "Función comunicativa del idioma"},
+            {"orden": 4, "romano": "IV",  "nombre": "Elementos gramaticales de soporte"},
+            {"orden": 5, "romano": "V",   "nombre": "Transformación y reconocimiento de enunciados"}
+          ]
+        }
+      ]
+    }
+  ],
+
+  "solapamientos_detectados": {
+    "nota": "Temas que aparecen en más de una asignatura. Son las aristas entre cursos que la nota de voz pedía ('existe la correlación en dos cursos'). Están documentadas en el temario oficial, no son suposición nuestra.",
+    "pares": [
+      {"tema": "Conjuntos",                  "en": ["Aritmética I", "Álgebra I"]},
+      {"tema": "Conjuntos numéricos / reales","en": ["Aritmética II, IV, V", "Álgebra II"]},
+      {"tema": "Magnitudes y proporcionalidad","en": ["Razonamiento Matemático II", "Aritmética VII"]},
+      {"tema": "Sucesiones y progresiones",   "en": ["Aritmética IX", "Álgebra XV"]},
+      {"tema": "Estadística",                 "en": ["Razonamiento Matemático VII", "Aritmética XI"]},
+      {"tema": "Análisis combinatorio",       "en": ["Razonamiento Matemático V", "Aritmética XII"]},
+      {"tema": "Probabilidad",                "en": ["Razonamiento Matemático VI", "Aritmética XIII"]},
+      {"tema": "Longitud de arco y sector circular","en": ["Geometría VIII", "Trigonometría II"]},
+      {"tema": "Lógica proposicional",        "en": ["Razonamiento Lógico I-IX", "Filosofía IV"]},
+      {"tema": "Falacias",                    "en": ["Razonamiento Lógico IX", "Filosofía IV"]},
+      {"tema": "Comprensión lectora",         "en": ["Comprensión Lectora I-VIII", "Idioma Extranjero - Lectura I"]},
+      {"tema": "Semántica: sinonimia, antonimia, polisemia","en": ["Razonamiento Verbal I", "Lenguaje VIII"]},
+      {"tema": "Coherencia y cohesión",       "en": ["Comprensión Lectora VII", "Lenguaje VII"]},
+      {"tema": "Áreas Naturales Protegidas / biodiversidad","en": ["Geografía VI", "Biología XIII"]},
+      {"tema": "Cambio climático y contaminación","en": ["Geografía IV, VIII", "Química XV", "Biología XIII"]},
+      {"tema": "Ecuación de Einstein / relatividad","en": ["Química III", "Física XII"]}
+    ]
+  }
+}

@@ -30,3 +30,13 @@ test-results
 # el proxy de Cloud SQL, que se descarga solo
 deploy/gcp/cloud-sql-proxy
 deploy/gcp/cloud-sql-proxy.exe
+
+# Motores de consulta de Prisma: binarios de 17 MB que genera "prisma generate".
+# Se reconstruyen en cada instalacion; no tienen por que viajar en el repositorio.
+services/*/src/generated/prisma/libquery_engine-*.node
+
+# Fuente de Illustrator de 28 MB llamada "Prueba". Los logos y la ilustracion
+# que si se usan estan junto a ella y si entran al repositorio; esta se deja
+# fuera porque el historial de git no olvida un archivo de ese tamaño.
+# Para incluirla, basta con borrar esta linea.
+Documentos de Referencias/SvgsBRYCE/Prueba.ai

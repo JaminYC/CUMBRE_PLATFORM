@@ -5,6 +5,9 @@ import { marcaPorHost, variablesDeMarca } from "@cumbre/brands";
 import { ProveedorDeMarca } from "@cumbre/brands/client";
 import { AppLocaleProvider } from "@cumbre/app-runtime/client";
 import { AuthSessionProvider } from "@/features/auth/auth-session";
+import { Cortina } from "@/components/cortina";
+import { GUION_PLIEGUE_INICIAL } from "@cumbre/ui";
+import "@cumbre/ui/armazon.css";
 import "./globals.css";
 
 /**
@@ -27,7 +30,14 @@ export default async function RootLayout({
   const marca = marcaPorHost((await headers()).get("host"));
 
   return (
-    <html lang="es" data-marca={marca.id}>
+    /*
+      suppressHydrationWarning por el `data-barra` que pone el script de
+      arriba: lo escribe antes de que React hidrate, asi que el atributo que
+      encuentra no es el que el servidor mando. Es el aviso correcto para este
+      caso —un script previo al pintado que toca <html> a proposito— y se
+      limita a este elemento: dentro de la pagina los avisos siguen saliendo.
+    */
+    <html lang="es" data-marca={marca.id} suppressHydrationWarning>
       <head>
         {/*
           Los colores de la institucion, inyectados antes de la hoja de
@@ -42,12 +52,16 @@ export default async function RootLayout({
           id="tokens-de-marca"
           dangerouslySetInnerHTML={{ __html: variablesDeMarca(marca) }}
         />
+        <script dangerouslySetInnerHTML={{ __html: GUION_PLIEGUE_INICIAL }} />
       </head>
       <body>
         <ProveedorDeMarca marca={marca}>
           <AppLocaleProvider initialLocale="es">
             <AuthSessionProvider>{children}</AuthSessionProvider>
           </AppLocaleProvider>
+          {/* Fuera del contenido: cada pantalla monta su propio AppShell, asi
+              que aqui dentro la cortina se desmontaria a mitad de animacion. */}
+          <Cortina />
         </ProveedorDeMarca>
       </body>
     </html>

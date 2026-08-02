@@ -186,6 +186,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -212,8 +216,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel AuthUser {\n  id                String        @id\n  createdAt         DateTime      @default(now())\n  updatedAt         DateTime      @updatedAt\n  metadata          Json?\n  /// Institución dueña de la cuenta. Separa los datos de cada academia:\n  /// sin esto, el administrador de una vería los usuarios de las demás.\n  /// \"cumbre\" es el valor por defecto para no romper lo ya existente.\n  tenant            String        @default(\"cumbre\")\n  primaryRole       String\n  roles             String[]\n  status            String\n  displayName       String\n  givenName         String?\n  familyName        String?\n  email             String?       @unique\n  avatarUrl         String?\n  locale            String?\n  preferredLanguage String?\n  timezone          String?\n  externalRef       String?\n  credentialHash    String?\n  sessions          AuthSession[]\n\n  /// Toda consulta de usuarios filtra por institución, así que conviene\n  /// el índice desde el principio.\n  @@index([tenant])\n  @@map(\"auth_users\")\n}\n\nmodel AuthSession {\n  id                    String    @id\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime  @updatedAt\n  userId                String\n  primaryRole           String\n  roles                 String[]\n  accessTokenHash       String    @unique\n  refreshTokenHash      String    @unique\n  accessTokenExpiresAt  DateTime\n  refreshTokenExpiresAt DateTime\n  revokedAt             DateTime?\n  lastUsedAt            DateTime?\n  deviceId              String?\n  userAgent             String?\n  ipAddress             String?\n  user                  AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([accessTokenExpiresAt])\n  @@index([refreshTokenExpiresAt])\n  @@map(\"auth_sessions\")\n}\n",
-  "inlineSchemaHash": "06e355c10e1315eef3a979eb63cc76b6b6c82b6dd4ec0ca7e91cb8c509f61142",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  // \"native\" para desarrollo en Windows/macOS; el segundo es el que\n  // necesita el contenedor. Sin el, la imagen construye bien y revienta\n  // al arrancar buscando un motor que no existe.\n  binaryTargets = [\"native\", \"linux-musl-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel AuthUser {\n  id                String        @id\n  createdAt         DateTime      @default(now())\n  updatedAt         DateTime      @updatedAt\n  metadata          Json?\n  /// Institución dueña de la cuenta. Separa los datos de cada academia:\n  /// sin esto, el administrador de una vería los usuarios de las demás.\n  /// \"cumbre\" es el valor por defecto para no romper lo ya existente.\n  tenant            String        @default(\"cumbre\")\n  primaryRole       String\n  roles             String[]\n  status            String\n  displayName       String\n  givenName         String?\n  familyName        String?\n  email             String?       @unique\n  avatarUrl         String?\n  locale            String?\n  preferredLanguage String?\n  timezone          String?\n  externalRef       String?\n  credentialHash    String?\n  sessions          AuthSession[]\n\n  /// Toda consulta de usuarios filtra por institución, así que conviene\n  /// el índice desde el principio.\n  @@index([tenant])\n  @@map(\"auth_users\")\n}\n\nmodel AuthSession {\n  id                    String    @id\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime  @updatedAt\n  userId                String\n  primaryRole           String\n  roles                 String[]\n  accessTokenHash       String    @unique\n  refreshTokenHash      String    @unique\n  accessTokenExpiresAt  DateTime\n  refreshTokenExpiresAt DateTime\n  revokedAt             DateTime?\n  lastUsedAt            DateTime?\n  deviceId              String?\n  userAgent             String?\n  ipAddress             String?\n  user                  AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([accessTokenExpiresAt])\n  @@index([refreshTokenExpiresAt])\n  @@map(\"auth_sessions\")\n}\n",
+  "inlineSchemaHash": "0dca8e5c01e2c7152cd102dfa74a3f02dcc684c838ac403a06f13c7237e31603",
   "copyEngine": true
 }
 
@@ -254,6 +258,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/generated/prisma/schema.prisma")

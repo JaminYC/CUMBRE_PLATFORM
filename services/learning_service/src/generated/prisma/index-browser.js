@@ -229,6 +229,74 @@ exports.Prisma.ClassroomMeetingRecordScalarFieldEnum = {
   createdByTeacherId: 'createdByTeacherId'
 };
 
+exports.Prisma.AsignaturaRecordScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  eje: 'eje',
+  nombre: 'nombre',
+  orden: 'orden'
+};
+
+exports.Prisma.TemaRecordScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  asignaturaId: 'asignaturaId',
+  romano: 'romano',
+  nombre: 'nombre',
+  orden: 'orden',
+  bloque: 'bloque'
+};
+
+exports.Prisma.PreguntaRecordScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  temaId: 'temaId',
+  enunciado: 'enunciado',
+  alternativas: 'alternativas',
+  claveCorrecta: 'claveCorrecta',
+  solucion: 'solucion',
+  fuente: 'fuente',
+  imagenUrl: 'imagenUrl',
+  requiereFigura: 'requiereFigura',
+  esAncla: 'esAncla',
+  dificultad: 'dificultad',
+  vecesServida: 'vecesServida',
+  activa: 'activa'
+};
+
+exports.Prisma.IntentoRecordScalarFieldEnum = {
+  id: 'id',
+  creadoEn: 'creadoEn',
+  alumnoId: 'alumnoId',
+  preguntaId: 'preguntaId',
+  temaId: 'temaId',
+  asignaturaId: 'asignaturaId',
+  resultado: 'resultado',
+  tiempoMs: 'tiempoMs',
+  modo: 'modo',
+  perfil: 'perfil',
+  thetaAlumno: 'thetaAlumno',
+  thetaPregunta: 'thetaPregunta'
+};
+
+exports.Prisma.ProgresoTemaRecordScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  alumnoId: 'alumnoId',
+  temaId: 'temaId',
+  rachaActual: 'rachaActual',
+  mejorRacha: 'mejorRacha',
+  intentosEnTema: 'intentosEnTema',
+  practicado: 'practicado',
+  consolidado: 'consolidado',
+  theta: 'theta',
+  ultimoIntentoEn: 'ultimoIntentoEn'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -236,6 +304,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -263,7 +335,12 @@ exports.Prisma.ModelName = {
   ClassroomRecord: 'ClassroomRecord',
   ClassroomStudentProfileRecord: 'ClassroomStudentProfileRecord',
   StudentEnrollmentRecord: 'StudentEnrollmentRecord',
-  ClassroomMeetingRecord: 'ClassroomMeetingRecord'
+  ClassroomMeetingRecord: 'ClassroomMeetingRecord',
+  AsignaturaRecord: 'AsignaturaRecord',
+  TemaRecord: 'TemaRecord',
+  PreguntaRecord: 'PreguntaRecord',
+  IntentoRecord: 'IntentoRecord',
+  ProgresoTemaRecord: 'ProgresoTemaRecord'
 };
 
 /**

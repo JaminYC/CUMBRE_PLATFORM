@@ -1,0 +1,296 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{tinta}{HTML}{1B2A41}
+\definecolor{acento}{HTML}{C75B12}
+\definecolor{suave}{HTML}{F2F4F7}
+
+\titleformat{\section}{\Large\bfseries\color{tinta}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection.}{0.6em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small\color{tinta}CUMBRE — Análisis de mercado y estructura de precios}
+\rfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newcommand{\aviso}[1]{%
+  \begin{center}
+  \fcolorbox{acento}{suave}{%
+    \begin{minipage}{0.93\textwidth}
+    \vspace{4pt}#1\vspace{4pt}
+    \end{minipage}}
+  \end{center}}
+
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries\color{tinta} CUMBRE}\\[4pt]
+{\Large\color{tinta} Análisis de mercado y estructura de precios}\\[10pt]
+{\small Plataforma de aprendizaje adaptativo — Vastoria Solutions S.A.C.}\\
+{\small 29 de julio de 2026}
+\end{center}
+
+\vspace{10pt}
+
+\section{Qué es y qué no es este documento}
+
+\aviso{\textbf{Ninguna plataforma del mercado peruano publica sus precios.}
+Todas —sin excepción— exigen contacto comercial para cotizar. Se verificó
+también el mercado colombiano, con el mismo resultado. Por tanto, este
+documento \textbf{no contiene una tabla de precios de la competencia}: sería
+inventada.}
+
+Lo que sí contiene, y está verificado:
+
+\begin{itemize}[leftmargin=1.3em]
+  \item \textbf{Cómo empaqueta la competencia.} La estructura por módulos sí
+        es pública y se documenta más abajo.
+  \item \textbf{Qué modelo de cobro usan.} Declarado por los propios
+        proveedores en sus sitios.
+  \item \textbf{Cuánto cuesta operar CUMBRE.} Calculado sobre la
+        configuración real desplegada, no sobre supuestos.
+  \item \textbf{Qué estructura de precios se sostiene} con esos costos.
+\end{itemize}
+
+Las cifras marcadas como \emph{estimación} son órdenes de magnitud sobre
+precios de lista públicos. Deben confirmarse contra la facturación real antes
+de usarse en una negociación.
+
+\section{El mercado peruano}
+
+\subsection{Quién está y cómo se posiciona}
+
+\begin{longtable}{@{}p{3.1cm}p{5.2cm}p{6.3cm}@{}}
+\toprule
+\textbf{Plataforma} & \textbf{Posicionamiento} & \textbf{Señal relevante} \\
+\midrule
+\endhead
+Smiledu & Gestión educativa por paquetes & Vende en bloques de \textbf{8 y 12
+módulos}; tesorería y asistencia como adicionales \\
+\addlinespace
+Cubicol & Volumen y precio accesible & Más de \textbf{800 instituciones} en
+Perú; apps móviles nativas \\
+\addlinespace
+SophIA & Cumplimiento y confianza & \textbf{Autorizada por SUNAT} para boletas
+electrónicas; \textbf{ISO 27001}; más de 10 años \\
+\addlinespace
+JSedu & Flexibilidad de plan & Cobra por \textbf{número de alumnos y módulos}
+contratados \\
+\addlinespace
+SIGEDU & Cobertura por tamaño & Desde centros pequeños hasta grandes
+instituciones \\
+\addlinespace
+DataCole & ERP académica & Enfoque administrativo integral \\
+\addlinespace
+SIADED & Retención & Módulos nuevos y actualizaciones \textbf{sin costo
+adicional} \\
+\bottomrule
+\end{longtable}
+
+\subsection{Modelos de cobro observados}
+
+\begin{longtable}{@{}p{4.2cm}p{10.4cm}@{}}
+\toprule
+\textbf{Eje} & \textbf{Cómo se aplica} \\
+\midrule
+\endhead
+Por alumno & Cuota mensual proporcional a la matrícula del centro. Es el eje
+dominante. \\
+\addlinespace
+Por módulo & Un núcleo obligatorio más complementos contratables por separado.
+\\
+\addlinespace
+Por escalón & Planes cerrados (básico / operación / crecimiento) en lugar de
+precio unitario. \\
+\addlinespace
+Implementación & Costo aparte de puesta en marcha y capacitación, señalado en
+el sector como partida frecuentemente olvidada al comparar. \\
+\bottomrule
+\end{longtable}
+
+\aviso{\textbf{Dato estratégico:} que nadie publique precios significa que en
+este mercado \textbf{se vende con reunión, no con botón de compra}. El precio
+se construye por cliente. Eso favorece a quien puede justificar su costo con
+números —lo que hace útil la sección siguiente.}
+
+\section{Costo real de operar CUMBRE}
+
+Calculado sobre la infraestructura efectivamente desplegada al 29 de julio de
+2026.
+
+\subsection{Configuración actual}
+
+\begin{longtable}{@{}p{4.2cm}p{10.4cm}@{}}
+\toprule
+\textbf{Componente} & \textbf{Configuración real} \\
+\midrule
+\endhead
+Cloud Run & 3 servicios (auth, content, learning). 512\,MiB, mínimo
+\textbf{1 instancia siempre viva}, máximo 10. Región
+\texttt{southamerica-west1}. \\
+\addlinespace
+Cloud SQL & PostgreSQL 16, edición \emph{enterprise}, nivel
+\texttt{db-f1-micro}, disco 10\,GB con crecimiento automático. \\
+\addlinespace
+Vercel & 4 proyectos web. Hoy en plan Hobby. \\
+\addlinespace
+Modelo de lenguaje & \texttt{gpt-4o-mini} vía OpenAI, por consumo. \\
+\addlinespace
+Dominios & Bajo \texttt{teamvastoria.com}, ya adquirido. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Estructura de costo mensual}
+
+\begin{longtable}{@{}p{3.6cm}p{4.6cm}p{6.4cm}@{}}
+\toprule
+\textbf{Partida} & \textbf{Cómo se cobra} & \textbf{Comentario} \\
+\midrule
+\endhead
+Cloud Run & Por CPU/memoria asignada y peticiones & La instancia mínima
+siempre viva es un \textbf{costo fijo}, no proporcional al uso. Se eligió a
+propósito: sin ella, el primer alumno de la mañana espera varios segundos. \\
+\addlinespace
+Cloud SQL & Fijo por nivel + disco & \texttt{db-f1-micro} es el más pequeño.
+Soporta varias academias antes de necesitar cambio. \\
+\addlinespace
+Vercel Pro & Fijo por plan & \textbf{Obligatorio al firmar}: el plan Hobby es
+para uso no comercial. \\
+\addlinespace
+OpenAI & Por token consumido & \textbf{Única partida que escala con el uso}.
+Crece con alumnos activos, no con alumnos matriculados. \\
+\bottomrule
+\end{longtable}
+
+\aviso{\textbf{Antes de fijar precio, obtén el número real.} La consola de
+facturación de Google Cloud ya tiene semanas de datos del proyecto
+\texttt{vastoria-campus}. Ese número es el punto de partida honesto; cualquier
+estimación de lista es inferior a él en precisión.}
+
+\subsection{Lo que la estructura de costo implica para el precio}
+
+\begin{enumerate}[leftmargin=1.4em]
+  \item \textbf{Tu costo es mayoritariamente fijo.} Infraestructura siempre
+        encendida más planes mensuales. Eso significa que el primer cliente es
+        caro y el segundo casi gratis: \emph{el margen mejora con cada
+        academia, no con cada alumno}.
+  \item \textbf{La única partida variable es la IA.} Y depende de alumnos
+        \emph{activos}, no matriculados. Un colegio de 500 alumnos donde 50
+        usan el tutor cuesta como uno de 50.
+  \item \textbf{Conclusión de negocio:} cobrar por alumno matriculado —el
+        modelo dominante del mercado— te da ingresos que crecen más rápido que
+        tus costos. Es el modelo correcto para ti, y además es el que el
+        cliente ya entiende porque es el de todos.
+\end{enumerate}
+
+\section{Estructura de precios propuesta}
+
+Se propone replicar el modelo del mercado —núcleo más módulos— porque es el
+que el comprador ya sabe evaluar.
+
+\begin{longtable}{@{}p{3.8cm}p{5.4cm}p{5.4cm}@{}}
+\toprule
+\textbf{Bloque} & \textbf{Qué incluye} & \textbf{Estado hoy} \\
+\midrule
+\endhead
+\rowcolor{suave}
+Campus base & Acceso por rol, aulas, temas, lecciones, progreso, panel de
+dirección & \textbf{Funcionando} \\
+\addlinespace
+Tutor con IA & Tutor conversacional anclado a la lección, con contexto del
+progreso del alumno & \textbf{Funcionando}; requiere clave de OpenAI activa \\
+\addlinespace
+Ruta adaptativa & Secuenciación por dominio y grafo de conocimiento &
+Funcionando; enriquecimiento del grafo pendiente de corregir \\
+\addlinespace
+Autoría y generación & Constructor de módulos y generación asistida &
+Parcial \\
+\addlinespace
+YariNET & Retos & \textbf{En construcción}; oculto para clientes \\
+\addlinespace
+Marca propia & Dominio, logo y colores de la institución & \textbf{Funcionando}
+\\
+\bottomrule
+\end{longtable}
+
+\aviso{\textbf{El diferenciador real:} las siete plataformas del cuadro
+anterior son sistemas de \emph{gestión} —matrícula, notas, pensiones,
+asistencia—. CUMBRE es una plataforma de \emph{aprendizaje}. No compiten en lo
+mismo.\\[4pt]
+Eso es ventaja y riesgo a la vez: no hay con quién compararte, pero el colegio
+ya le paga a una de ellas y hay que explicarle por qué necesita otra cosa. La
+venta no es «somos mejores que Cubicol», es «esto hace algo que Cubicol no
+hace».}
+
+\section{Barreras de entrada que hoy no tienes}
+
+\begin{longtable}{@{}p{4.2cm}p{10.4cm}@{}}
+\toprule
+\textbf{Barrera} & \textbf{Situación} \\
+\midrule
+\endhead
+Autorización SUNAT & SophIA la tiene para emisión de boletas electrónicas. Si
+algún día se cobran pensiones desde la plataforma, es requisito, no adorno. \\
+\addlinespace
+ISO 27001 & Certificación de seguridad de la información. Pesa en licitaciones
+y en colegios grandes. \\
+\addlinespace
+Base instalada & Cubicol supera las 800 instituciones. La referencia de pares
+vende sola en este sector. \\
+\addlinespace
+App móvil nativa & Varios competidores la ofrecen. CUMBRE es web
+adaptable. \\
+\bottomrule
+\end{longtable}
+
+\section{Recomendaciones}
+
+\begin{enumerate}[leftmargin=1.4em]
+  \item \textbf{Obtener el costo real} desde la consola de facturación antes
+        de cualquier propuesta económica.
+  \item \textbf{Cobrar por alumno matriculado}, con núcleo más módulos:
+        alineado al mercado y favorable a tu estructura de costos.
+  \item \textbf{Cotizar la implementación aparte.} El sector lo hace y el
+        cliente lo espera; incluirlo silenciosamente erosiona el margen.
+  \item \textbf{No competir contra los sistemas de gestión.} Posicionar como
+        complemento pedagógico, no como reemplazo administrativo.
+  \item \textbf{Pasar a Vercel Pro al firmar.} El plan actual no permite uso
+        comercial.
+\end{enumerate}
+
+\section*{Fuentes}
+
+\small
+\begin{itemize}[leftmargin=1.3em]
+  \item Smiledu — \url{https://smiledu.com/}
+  \item Cubicol — \url{https://www.cubicol.pe/}
+  \item JSedu — \url{https://www.jsedu.company/sistema-gestion-escolar-peru}
+  \item SIGEDU — \url{https://www.sigedu.pe/}
+  \item DataCole — \url{https://www.datacole.com/}
+  \item SIADED — \url{https://siaded.com.pe/}
+  \item Tecnomedia, comparativa de software de gestión escolar en Perú —
+        \url{https://www.tecnomedia.pe/comparaciones/mejores-software-gestion-escolar-peru/}
+  \item Edtools, software para colegios en Colombia —
+        \url{https://edtools.co/blog/software-para-colegios-colombia-precios-modulos.html}
+\end{itemize}
+
+\vspace{6pt}
+\noindent\textit{Configuración de infraestructura tomada de
+\texttt{deploy/gcp/desplegar.sh} y \texttt{deploy/gcp/preparar.sh} del
+repositorio, no de estimaciones.}
+
+\end{document}

@@ -4,10 +4,25 @@ import { useEffect, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { commonMessages, useAppLocale } from "@cumbre/app-runtime/client";
+import {
+  Armazon,
+  IconoAula,
+  IconoGenerador,
+  IconoInicio,
+  IconoPractica,
+  IconoProgreso,
+  IconoRuta,
+  IconoUnirse,
+  type ItemDeNavegacion
+} from "@cumbre/ui";
 import { useAuthSession } from "@/features/auth/auth-session";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui";
-import { useMarca } from "@cumbre/brands/client";
 
+/**
+ * El armazon del alumno: la barra y su comportamiento viven en @cumbre/ui.
+ * Aqui solo queda lo que de verdad distingue a esta aplicacion —sus secciones,
+ * quien ha entrado y el enlace para retomar el recorrido.
+ */
 export function AppShell({
   title,
   description,
@@ -23,15 +38,48 @@ export function AppShell({
 }) {
   const pathname = usePathname();
   const { t } = useAppLocale();
-  const marca = useMarca();
   const { session, signOut, rememberRoute } = useAuthSession();
-  const navItems = [
-    { href: "/dashboard", label: t({ es: "Inicio", en: "Dashboard" }) },
-    { href: "/progress", label: t({ es: "Progreso", en: "Progress" }) },
-    { href: "/classroom", label: t({ es: "Aula", en: "Classroom" }) },
-    { href: "/join-class", label: t({ es: "Unirme a clase", en: "Join class" }) },
-    { href: "/generator", label: t({ es: "✨ Generador", en: "✨ Generator" }) }
+
+  const items: ItemDeNavegacion[] = [
+    { href: "/dashboard", etiqueta: t({ es: "Inicio", en: "Home" }), Icono: IconoInicio },
+    {
+      href: "/practica",
+      etiqueta: t({ es: "Práctica", en: "Practice" }),
+      Icono: IconoPractica,
+      prefijo: true
+    },
+    {
+      href: "/progress",
+      etiqueta: t({ es: "Progreso", en: "Progress" }),
+      Icono: IconoProgreso
+    },
+    {
+      href: "/classroom",
+      etiqueta: t({ es: "Aula", en: "Classroom" }),
+      Icono: IconoAula,
+      prefijo: true
+    },
+    {
+      href: "/join-class",
+      etiqueta: t({ es: "Unirme a clase", en: "Join class" }),
+      Icono: IconoUnirse
+    },
+    {
+      href: "/generator",
+      etiqueta: t({ es: "Generador", en: "Generator" }),
+      Icono: IconoGenerador
+    }
   ];
+
+  if (session?.defaultLearningPathId) {
+    items.push({
+      href: `/learning-path/${session.defaultLearningPathId}`,
+      etiqueta: t({ es: "Ruta de aprendizaje", en: "Learning path" }),
+      Icono: IconoRuta,
+      prefijo: true
+    });
+  }
+
   const resumeHref =
     session?.lastTopicId && session?.lastLessonId
       ? `/topics/${session.lastTopicId}/lessons/${session.lastLessonId}`
@@ -44,97 +92,33 @@ export function AppShell({
   }, [pathname, session?.userId]);
 
   return (
-    <div className="shell">
-      <aside className="shell__nav">
-        <div>
-          <p className="shell__eyebrow">
-            {t({ es: "Espacio del estudiante", en: "Student space" })}
-          </p>
-          <h1 className="shell__brand">{marca.nombreCorto}</h1>
-          <p className="shell__caption">
-            {t({
-              es: "Aprendizaje adaptativo, hitos claros y siguientes pasos guiados.",
-              en: "Adaptive learning, clear milestones, and guided next steps."
-            })}
-          </p>
-        </div>
-
-        <nav className="shell__menu">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={pathname === item.href ? "shell__link active" : "shell__link"}
-            >
-              {item.label}
-            </Link>
-          ))}
-
-          {session?.defaultLearningPathId ? (
-            <Link
-              href={`/learning-path/${session.defaultLearningPathId}`}
-              className={
-                pathname.startsWith("/learning-path")
-                  ? "shell__link active"
-                  : "shell__link"
-              }
-            >
-              {t({ es: "Ruta de aprendizaje", en: "Learning path" })}
+    <Armazon
+      ambito={t({ es: "Espacio del estudiante", en: "Student space" })}
+      items={items}
+      usuario={{
+        nombre: session?.displayName ?? t({ es: "Estudiante", en: "Student" }),
+        detalle: session?.email
+      }}
+      alCerrarSesion={() => void signOut()}
+      etiquetaCerrarSesion={t(commonMessages.signOut)}
+      etiquetaSecciones={t({ es: "Secciones", en: "Sections" })}
+      etiquetaPlegar={t({ es: "Plegar la barra", en: "Collapse sidebar" })}
+      etiquetaDesplegar={t({ es: "Desplegar la barra", en: "Expand sidebar" })}
+      title={title}
+      description={description}
+      breadcrumbs={breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
+      headerActions={
+        <>
+          {resumeHref && resumeHref !== pathname ? (
+            <Link className="button button--ghost" href={resumeHref}>
+              {t({ es: "Retomar recorrido", en: "Resume journey" })}
             </Link>
           ) : null}
-        </nav>
-
-        <div className="shell__profile">
-          <p className="shell__profile-name">
-            {session?.displayName ?? t({ es: "Estudiante", en: "Student" })}
-          </p>
-          <p className="shell__profile-meta">
-            {session?.email ??
-              t({
-                es: "Sesión iniciada con el backend local",
-                en: "Signed in with local backend"
-              })}
-          </p>
-          <button className="button button--ghost" onClick={() => void signOut()}>
-            {t(commonMessages.signOut)}
-          </button>
-        </div>
-      </aside>
-
-      <main className="shell__main">
-        <header className="page-header">
-          <div className="page-header__content">
-            {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
-            <p className="page-header__eyebrow">
-              {t({ es: "Aplicación del estudiante", en: "Student application" })}
-            </p>
-            <h2>{title}</h2>
-            {description ? <p className="page-header__description">{description}</p> : null}
-          </div>
-          <div className="page-header__actions">
-            {resumeHref && resumeHref !== pathname ? (
-              <Link className="button button--ghost" href={resumeHref}>
-                {t({ es: "Retomar recorrido", en: "Resume journey" })}
-              </Link>
-            ) : null}
-            {session?.defaultLearningPathId && !pathname.startsWith("/learning-path") ? (
-              <Link
-                className="button button--ghost"
-                href={`/learning-path/${session.defaultLearningPathId}`}
-              >
-                {t({ es: "Ruta actual", en: "Current path" })}
-              </Link>
-            ) : null}
-            {pathname !== "/progress" ? (
-              <Link className="button button--ghost" href="/progress">
-                {t({ es: "Progreso", en: "Progress" })}
-              </Link>
-            ) : null}
-            {headerActions}
-          </div>
-        </header>
-        {children}
-      </main>
-    </div>
+          {headerActions}
+        </>
+      }
+    >
+      {children}
+    </Armazon>
   );
 }

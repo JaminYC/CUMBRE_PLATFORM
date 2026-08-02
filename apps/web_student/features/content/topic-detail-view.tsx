@@ -12,7 +12,6 @@ import {
 } from "@/components/ui";
 import { KnowledgeInsightPanel } from "@/features/knowledge/knowledge-insight-panel";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import { useRequireSession } from "@/hooks/use-require-session";
 import {
   fetchLessons,
@@ -39,9 +38,7 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
     [topicId]
   );
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(resource.isLoading);
+  const mostrandoCarga = resource.isLoading;
 
   useEffect(() => {
     auth.patchSession({
@@ -51,28 +48,34 @@ export function TopicDetailView({ topicId }: { topicId: string }) {
 
   if (!auth.isHydrated || !auth.session) {
     return (
-      <LoadingPanel
-        message="Preparando detalle del tema..."
-        detail="Reconectando tu sesión antes de cargar el contenido del tema."
-      />
+      <AppShell title="Tema">
+        <LoadingPanel
+          message="Preparando detalle del tema..."
+          detail="Reconectando tu sesión antes de cargar el contenido del tema."
+        />
+      </AppShell>
     );
   }
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando tema y lecciones..."
-        detail="Leyendo metadatos del tema y lista de lecciones desde content_service."
-      />
+      <AppShell title="Tema">
+        <LoadingPanel
+          message="Cargando tema y lecciones..."
+          detail="Leyendo metadatos del tema y lista de lecciones desde content_service."
+        />
+      </AppShell>
     );
   }
 
   if (resource.error || !resource.data) {
     return (
-      <ErrorPanel
-        message={resource.error ?? "No fue posible cargar el detalle del tema."}
-        onRetry={resource.reload}
-      />
+      <AppShell title="Tema">
+        <ErrorPanel
+          message={resource.error ?? "No fue posible cargar el detalle del tema."}
+          onRetry={resource.reload}
+        />
+      </AppShell>
     );
   }
 

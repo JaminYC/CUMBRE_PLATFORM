@@ -86,6 +86,27 @@ export interface Marca {
     marca: string;
   };
 
+  /**
+   * Dónde vive el portal de esta institución: su puerta de entrada.
+   *
+   * Vive aquí, con los logos y los dominios, y no en la configuración de cada
+   * aplicación, porque es lo mismo que ellos: parte de la identidad. Las
+   * cuatro aplicaciones mandan al mismo sitio a quien no ha entrado, y con una
+   * variable de entorno por aplicación eso eran cuatro sitios donde
+   * desincronizarse —que es exactamente lo que pasó con los secretos de sesión.
+   *
+   * Se guardan las dos direcciones en vez de calcular una desde la otra porque
+   * en local la marca viaja en el subdominio y el puerto es el mismo, mientras
+   * que en producción cambia el dominio entero: no hay una regla que sirva
+   * para ambos casos sin volverse adivinanza.
+   */
+  portal: {
+    /** El dominio real, servido por Vercel. */
+    produccion: string;
+    /** En desarrollo. Cualquier host `*.localhost` resuelve solo. */
+    local: string;
+  };
+
   tokens: TokensDeMarca;
 
   /**
@@ -113,11 +134,46 @@ export interface Marca {
    */
   landing: "producto" | "editorial";
 
+  /**
+   * Que partes del producto ve esta institucion.
+   *
+   * Sirve para lo que esta a medio construir. YariNET aparecia en el menu
+   * del docente de todas las marcas, pero su servicio no esta desplegado:
+   * la pagina cargaba y los datos nunca llegaban. Un cliente encontrandose
+   * un menu que no lleva a ninguna parte es peor que no tener el menu.
+   *
+   * Se apaga por institucion y no del todo, para poder seguir
+   * desarrollandolo en CUMBRE mientras Bryce no lo ve. Cuando este listo,
+   * se enciende cambiando un booleano.
+   *
+   * Igual que con el registro publico: esconder el enlace no basta, la
+   * pagina tambien lo comprueba. Un menu oculto no impide escribir la URL.
+   */
+  funcionalidades: {
+    yarinet: boolean;
+  };
+
   /** Aparece en la landing y el pie de página. */
+  /**
+   * Ilustraciones propias de la institucion.
+   *
+   * Van aqui y no escritas en la pantalla para que sumar una academia no
+   * obligue a tocar el formulario de acceso: basta con declarar las suyas.
+   * Si no las trae, se usa la de CUMBRE.
+   */
+  ilustraciones?: {
+    login?: string;
+  };
   contacto?: {
     direccion?: string;
     telefonos?: string[];
     correo?: string;
     horario?: string;
+    /** Numeros de WhatsApp, tal como los publica la institucion. */
+    whatsapp?: string[];
+    /** Central telefonica, distinta de los moviles de atencion. */
+    central?: string;
+    /** Web institucional. El campus es un destino desde ahi, no su sustituto. */
+    webPublica?: string;
   };
 }

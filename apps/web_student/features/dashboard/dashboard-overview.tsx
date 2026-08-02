@@ -15,7 +15,6 @@ import {
 import { AdaptiveStudySection } from "@/features/adaptive/adaptive-study-section";
 import { useRequireSession } from "@/hooks/use-require-session";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { useCargaMinima } from "@/hooks/use-carga-minima";
 import {
   fetchCurrentStudent,
   fetchLearningPath,
@@ -88,9 +87,7 @@ export function DashboardOverview() {
     [session?.userId, session?.defaultLearningPathId]
   );
 
-  /* Minimo visible: sin esto, cuando los datos llegan rapido el
-     indicador parpadea y se lee como un fallo de dibujo. */
-  const mostrandoCarga = useCargaMinima(dashboard.isLoading);
+  const mostrandoCarga = dashboard.isLoading;
 
   useEffect(() => {
     if (!dashboard.data) return;
@@ -101,28 +98,34 @@ export function DashboardOverview() {
 
   if (!auth.isHydrated || !session) {
     return (
-      <LoadingPanel
-        message="Preparando tu espacio de estudiante..."
-        detail="Restaurando sesión y reconectando con los servicios."
-      />
+      <AppShell title="Inicio">
+        <LoadingPanel
+          message="Preparando tu espacio de estudiante..."
+          detail="Restaurando sesión y reconectando con los servicios."
+        />
+      </AppShell>
     );
   }
 
   if (mostrandoCarga) {
     return (
-      <LoadingPanel
-        message="Cargando el panel..."
-        detail="Recuperando ruta de aprendizaje, progreso y contenido."
-      />
+      <AppShell title="Inicio">
+        <LoadingPanel
+          message="Cargando el panel..."
+          detail="Recuperando ruta de aprendizaje, progreso y contenido."
+        />
+      </AppShell>
     );
   }
 
   if (dashboard.error || !dashboard.data) {
     return (
-      <ErrorPanel
-        message={dashboard.error ?? "No fue posible cargar el panel del estudiante."}
-        onRetry={dashboard.reload}
-      />
+      <AppShell title="Inicio">
+        <ErrorPanel
+          message={dashboard.error ?? "No fue posible cargar el panel del estudiante."}
+          onRetry={dashboard.reload}
+        />
+      </AppShell>
     );
   }
 
