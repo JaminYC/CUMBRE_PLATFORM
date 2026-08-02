@@ -86,6 +86,27 @@ export interface Marca {
     marca: string;
   };
 
+  /**
+   * Dónde vive el portal de esta institución: su puerta de entrada.
+   *
+   * Vive aquí, con los logos y los dominios, y no en la configuración de cada
+   * aplicación, porque es lo mismo que ellos: parte de la identidad. Las
+   * cuatro aplicaciones mandan al mismo sitio a quien no ha entrado, y con una
+   * variable de entorno por aplicación eso eran cuatro sitios donde
+   * desincronizarse —que es exactamente lo que pasó con los secretos de sesión.
+   *
+   * Se guardan las dos direcciones en vez de calcular una desde la otra porque
+   * en local la marca viaja en el subdominio y el puerto es el mismo, mientras
+   * que en producción cambia el dominio entero: no hay una regla que sirva
+   * para ambos casos sin volverse adivinanza.
+   */
+  portal: {
+    /** El dominio real, servido por Vercel. */
+    produccion: string;
+    /** En desarrollo. Cualquier host `*.localhost` resuelve solo. */
+    local: string;
+  };
+
   tokens: TokensDeMarca;
 
   /**

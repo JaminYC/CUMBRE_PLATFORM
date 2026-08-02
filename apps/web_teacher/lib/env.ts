@@ -2,7 +2,6 @@ import { defaultServiceEndpoints } from "@cumbre/sdk";
 
 export const teacherAppConfig = {
   appRole: "teacher" as const,
-  portalUrl: process.env.PORTAL_URL ?? "http://localhost:3000",
   defaultLearningPathId:
     process.env.NEXT_PUBLIC_DEFAULT_LEARNING_PATH_ID ?? "20000000-0000-0000-0000-000000000001",
   appSessionCookieName:

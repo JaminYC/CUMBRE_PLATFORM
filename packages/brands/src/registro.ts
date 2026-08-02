@@ -22,6 +22,10 @@ export const CUMBRE: Marca = {
     principal: "/brand/cumbre.png",
     marca: "/brand/cumbre.png"
   },
+  portal: {
+    produccion: "https://cumbre.teamvastoria.com",
+    local: "http://localhost:3005"
+  },
   tokens: {
     paper: "#f6f0e4",
     paperStrong: "#fffaf1",
@@ -57,6 +61,14 @@ export const BRYCE: Marca = {
   logo: {
     principal: "/brand/bryce.png",
     marca: "/brand/bryce-marca.svg"
+  },
+  // Mientras la academia no apunte un subdominio propio hacia nosotros, su
+  // portal vive aislado bajo teamvastoria.com. El dia que llegue
+  // campus.academiabryce.com solo cambia esta linea: los dos dominios ya estan
+  // reconocidos mas abajo.
+  portal: {
+    produccion: "https://bryce.teamvastoria.com",
+    local: "http://bryce.localhost:3005"
   },
   // Colores muestreados de los pixeles del logo oficial, no estimados.
   tokens: {
@@ -139,6 +151,26 @@ export function marcaPorHost(host: string | null | undefined): Marca {
   }
 
   return CUMBRE;
+}
+
+/**
+ * La puerta de entrada de una institución.
+ *
+ * Se usa desde las cuatro aplicaciones: quien llega sin sesión va a su portal,
+ * y ese portal tiene que ser el de SU institución. Mandarlo a una variable de
+ * entorno global fue el fallo original —un alumno de Bryce acababa en el
+ * portal de CUMBRE—, y tenerla repetida en cada aplicación es como se
+ * desincronizaron los secretos de sesión.
+ *
+ * Este es el único sitio del paquete que mira el entorno, y mira solo
+ * NODE_ENV: no es configuración de despliegue —eso es lo que se quería sacar
+ * de aquí— sino el modo de compilación, que los empaquetadores sustituyen por
+ * una constante y que existe siempre, también en el navegador.
+ */
+export function portalDeMarca(marca: Marca): string {
+  return process.env.NODE_ENV === "production"
+    ? marca.portal.produccion
+    : marca.portal.local;
 }
 
 /** Busca por identificador. Útil para el backend y los scripts. */
