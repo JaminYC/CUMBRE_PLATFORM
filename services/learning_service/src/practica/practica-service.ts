@@ -23,6 +23,27 @@ const AL_HILO_PRACTICADO = 3;
 const AL_HILO_CONSOLIDADO = 5;
 const UMBRAL_ISLA = 10;
 
+/**
+ * Que una pregunta se pueda poner delante de un alumno.
+ *
+ * Esta en un solo sitio a proposito: la condicion la usan cuatro consultas
+ * —contar el banco por asignatura, por tema, elegir la siguiente y el repesque
+ * cuando se agotan— y si una se quedara sin actualizar apareceria como un tema
+ * que dice tener preguntas y luego no sirve ninguna.
+ *
+ * Las tres partes:
+ *   - `activa`: la retirada manual de una pregunta con un error.
+ *   - `esAncla`: las de examenes reales se reservan para medir transferencia.
+ *   - la figura: un enunciado que dice "en la figura" y no tiene figura no se
+ *     puede resolver, solo adivinar. Y adivinar aqui no es inofensivo: rompe
+ *     la racha y mueve la dificultad estimada del alumno.
+ */
+const SE_PUEDE_SERVIR = {
+  activa: true,
+  esAncla: false,
+  OR: [{ requiereFigura: false }, { imagenUrl: { not: null } }]
+};
+
 interface SiguienteParams {
   alumnoId: string;
   perfil: string;
@@ -58,7 +79,7 @@ export class PracticaService {
 
     const banco = await this.prisma.preguntaRecord.groupBy({
       by: ["temaId"],
-      where: { activa: true, esAncla: false },
+      where: { ...SE_PUEDE_SERVIR },
       _count: { _all: true }
     });
     const porTema = new Map(banco.map((b) => [b.temaId, b._count._all]));
@@ -134,6 +155,9 @@ export class PracticaService {
       pregunta: {
         id: pregunta.id,
         enunciado: pregunta.enunciado,
+        // Sin la figura, un enunciado que dice "en el siguiente cuadro" no se
+        // puede resolver. Va junto al enunciado porque es parte de el.
+        imagenUrl: pregunta.imagenUrl,
         // La clave no viaja al cliente: el navegador no debe poder leerla
         // antes de responder.
         alternativas: pregunta.alternativas
@@ -291,7 +315,7 @@ export class PracticaService {
 
     const conBanco = await this.prisma.preguntaRecord.groupBy({
       by: ["temaId"],
-      where: { temaId: { in: ids }, activa: true, esAncla: false },
+      where: { temaId: { in: ids }, ...SE_PUEDE_SERVIR },
       _count: { _all: true }
     });
     const tienenPreguntas = new Set(conBanco.map((c) => c.temaId));
@@ -317,8 +341,7 @@ export class PracticaService {
     const disponibles = await this.prisma.preguntaRecord.findMany({
       where: {
         temaId,
-        activa: true,
-        esAncla: false,
+        ...SE_PUEDE_SERVIR,
         ...(excluir.length ? { id: { notIn: excluir } } : {})
       }
     });
@@ -326,7 +349,7 @@ export class PracticaService {
     const bolsa = disponibles.length
       ? disponibles
       : await this.prisma.preguntaRecord.findMany({
-          where: { temaId, activa: true, esAncla: false }
+          where: { temaId, ...SE_PUEDE_SERVIR }
         });
 
     if (!bolsa.length) {

@@ -259,6 +259,8 @@ exports.Prisma.PreguntaRecordScalarFieldEnum = {
   claveCorrecta: 'claveCorrecta',
   solucion: 'solucion',
   fuente: 'fuente',
+  imagenUrl: 'imagenUrl',
+  requiereFigura: 'requiereFigura',
   esAncla: 'esAncla',
   dificultad: 'dificultad',
   vecesServida: 'vecesServida',

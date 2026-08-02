@@ -189,23 +189,33 @@ model TemaRecord {
 }
 
 model PreguntaRecord {
-  id            String     @id
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  temaId        String
-  enunciado     String
-  alternativas  Json
-  claveCorrecta String
-  solucion      String?
-  fuente        String?
+  id             String     @id
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  temaId         String
+  enunciado      String
+  alternativas   Json
+  claveCorrecta  String
+  solucion       String?
+  fuente         String?
+  /// Figura que acompaña al enunciado, si la tiene.
+  imagenUrl      String?
+  /// El enunciado remite a una figura, un cuadro o un texto de lectura.
+  ///
+  /// Muchas preguntas de admision dicen "en la figura" o "segun el texto" y
+  /// sin eso delante no se pueden resolver: el alumno solo puede adivinar.
+  /// Marcarlas permite dejarlas en el banco —el enunciado y la clave son
+  /// buenos— sin servirlas hasta que alguien les ponga la imagen. En cuanto
+  /// `imagenUrl` deja de estar vacio, vuelven solas.
+  requiereFigura Boolean    @default(false)
   // Las preguntas ancla salen de examenes reales y se reservan para medir
   // transferencia. Nunca entran al banco de practica.
-  esAncla       Boolean    @default(false)
+  esAncla        Boolean    @default(false)
   // Dificultad estimada por Elo. Arranca en 0 y la mueven las respuestas.
-  dificultad    Float      @default(0)
-  vecesServida  Int        @default(0)
-  activa        Boolean    @default(true)
-  tema          TemaRecord @relation(fields: [temaId], references: [id], onDelete: Cascade)
+  dificultad     Float      @default(0)
+  vecesServida   Int        @default(0)
+  activa         Boolean    @default(true)
+  tema           TemaRecord @relation(fields: [temaId], references: [id], onDelete: Cascade)
 
   @@index([temaId, activa, esAncla])
   @@map("practica_preguntas")

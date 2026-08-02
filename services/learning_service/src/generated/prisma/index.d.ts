@@ -12564,6 +12564,8 @@ export namespace Prisma {
     claveCorrecta: string | null
     solucion: string | null
     fuente: string | null
+    imagenUrl: string | null
+    requiereFigura: boolean | null
     esAncla: boolean | null
     dificultad: number | null
     vecesServida: number | null
@@ -12579,6 +12581,8 @@ export namespace Prisma {
     claveCorrecta: string | null
     solucion: string | null
     fuente: string | null
+    imagenUrl: string | null
+    requiereFigura: boolean | null
     esAncla: boolean | null
     dificultad: number | null
     vecesServida: number | null
@@ -12595,6 +12599,8 @@ export namespace Prisma {
     claveCorrecta: number
     solucion: number
     fuente: number
+    imagenUrl: number
+    requiereFigura: number
     esAncla: number
     dificultad: number
     vecesServida: number
@@ -12622,6 +12628,8 @@ export namespace Prisma {
     claveCorrecta?: true
     solucion?: true
     fuente?: true
+    imagenUrl?: true
+    requiereFigura?: true
     esAncla?: true
     dificultad?: true
     vecesServida?: true
@@ -12637,6 +12645,8 @@ export namespace Prisma {
     claveCorrecta?: true
     solucion?: true
     fuente?: true
+    imagenUrl?: true
+    requiereFigura?: true
     esAncla?: true
     dificultad?: true
     vecesServida?: true
@@ -12653,6 +12663,8 @@ export namespace Prisma {
     claveCorrecta?: true
     solucion?: true
     fuente?: true
+    imagenUrl?: true
+    requiereFigura?: true
     esAncla?: true
     dificultad?: true
     vecesServida?: true
@@ -12756,6 +12768,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion: string | null
     fuente: string | null
+    imagenUrl: string | null
+    requiereFigura: boolean
     esAncla: boolean
     dificultad: number
     vecesServida: number
@@ -12791,6 +12805,8 @@ export namespace Prisma {
     claveCorrecta?: boolean
     solucion?: boolean
     fuente?: boolean
+    imagenUrl?: boolean
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: boolean
     vecesServida?: boolean
@@ -12808,6 +12824,8 @@ export namespace Prisma {
     claveCorrecta?: boolean
     solucion?: boolean
     fuente?: boolean
+    imagenUrl?: boolean
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: boolean
     vecesServida?: boolean
@@ -12825,6 +12843,8 @@ export namespace Prisma {
     claveCorrecta?: boolean
     solucion?: boolean
     fuente?: boolean
+    imagenUrl?: boolean
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: boolean
     vecesServida?: boolean
@@ -12842,13 +12862,15 @@ export namespace Prisma {
     claveCorrecta?: boolean
     solucion?: boolean
     fuente?: boolean
+    imagenUrl?: boolean
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: boolean
     vecesServida?: boolean
     activa?: boolean
   }
 
-  export type PreguntaRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "temaId" | "enunciado" | "alternativas" | "claveCorrecta" | "solucion" | "fuente" | "esAncla" | "dificultad" | "vecesServida" | "activa", ExtArgs["result"]["preguntaRecord"]>
+  export type PreguntaRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "temaId" | "enunciado" | "alternativas" | "claveCorrecta" | "solucion" | "fuente" | "imagenUrl" | "requiereFigura" | "esAncla" | "dificultad" | "vecesServida" | "activa", ExtArgs["result"]["preguntaRecord"]>
   export type PreguntaRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tema?: boolean | TemaRecordDefaultArgs<ExtArgs>
   }
@@ -12874,6 +12896,20 @@ export namespace Prisma {
       claveCorrecta: string
       solucion: string | null
       fuente: string | null
+      /**
+       * Figura que acompaña al enunciado, si la tiene.
+       */
+      imagenUrl: string | null
+      /**
+       * El enunciado remite a una figura, un cuadro o un texto de lectura.
+       * 
+       * Muchas preguntas de admision dicen "en la figura" o "segun el texto" y
+       * sin eso delante no se pueden resolver: el alumno solo puede adivinar.
+       * Marcarlas permite dejarlas en el banco —el enunciado y la clave son
+       * buenos— sin servirlas hasta que alguien les ponga la imagen. En cuanto
+       * `imagenUrl` deja de estar vacio, vuelven solas.
+       */
+      requiereFigura: boolean
       esAncla: boolean
       dificultad: number
       vecesServida: number
@@ -13311,6 +13347,8 @@ export namespace Prisma {
     readonly claveCorrecta: FieldRef<"PreguntaRecord", 'String'>
     readonly solucion: FieldRef<"PreguntaRecord", 'String'>
     readonly fuente: FieldRef<"PreguntaRecord", 'String'>
+    readonly imagenUrl: FieldRef<"PreguntaRecord", 'String'>
+    readonly requiereFigura: FieldRef<"PreguntaRecord", 'Boolean'>
     readonly esAncla: FieldRef<"PreguntaRecord", 'Boolean'>
     readonly dificultad: FieldRef<"PreguntaRecord", 'Float'>
     readonly vecesServida: FieldRef<"PreguntaRecord", 'Int'>
@@ -16168,6 +16206,8 @@ export namespace Prisma {
     claveCorrecta: 'claveCorrecta',
     solucion: 'solucion',
     fuente: 'fuente',
+    imagenUrl: 'imagenUrl',
+    requiereFigura: 'requiereFigura',
     esAncla: 'esAncla',
     dificultad: 'dificultad',
     vecesServida: 'vecesServida',
@@ -17159,6 +17199,8 @@ export namespace Prisma {
     claveCorrecta?: StringFilter<"PreguntaRecord"> | string
     solucion?: StringNullableFilter<"PreguntaRecord"> | string | null
     fuente?: StringNullableFilter<"PreguntaRecord"> | string | null
+    imagenUrl?: StringNullableFilter<"PreguntaRecord"> | string | null
+    requiereFigura?: BoolFilter<"PreguntaRecord"> | boolean
     esAncla?: BoolFilter<"PreguntaRecord"> | boolean
     dificultad?: FloatFilter<"PreguntaRecord"> | number
     vecesServida?: IntFilter<"PreguntaRecord"> | number
@@ -17176,6 +17218,8 @@ export namespace Prisma {
     claveCorrecta?: SortOrder
     solucion?: SortOrderInput | SortOrder
     fuente?: SortOrderInput | SortOrder
+    imagenUrl?: SortOrderInput | SortOrder
+    requiereFigura?: SortOrder
     esAncla?: SortOrder
     dificultad?: SortOrder
     vecesServida?: SortOrder
@@ -17196,6 +17240,8 @@ export namespace Prisma {
     claveCorrecta?: StringFilter<"PreguntaRecord"> | string
     solucion?: StringNullableFilter<"PreguntaRecord"> | string | null
     fuente?: StringNullableFilter<"PreguntaRecord"> | string | null
+    imagenUrl?: StringNullableFilter<"PreguntaRecord"> | string | null
+    requiereFigura?: BoolFilter<"PreguntaRecord"> | boolean
     esAncla?: BoolFilter<"PreguntaRecord"> | boolean
     dificultad?: FloatFilter<"PreguntaRecord"> | number
     vecesServida?: IntFilter<"PreguntaRecord"> | number
@@ -17213,6 +17259,8 @@ export namespace Prisma {
     claveCorrecta?: SortOrder
     solucion?: SortOrderInput | SortOrder
     fuente?: SortOrderInput | SortOrder
+    imagenUrl?: SortOrderInput | SortOrder
+    requiereFigura?: SortOrder
     esAncla?: SortOrder
     dificultad?: SortOrder
     vecesServida?: SortOrder
@@ -17237,6 +17285,8 @@ export namespace Prisma {
     claveCorrecta?: StringWithAggregatesFilter<"PreguntaRecord"> | string
     solucion?: StringNullableWithAggregatesFilter<"PreguntaRecord"> | string | null
     fuente?: StringNullableWithAggregatesFilter<"PreguntaRecord"> | string | null
+    imagenUrl?: StringNullableWithAggregatesFilter<"PreguntaRecord"> | string | null
+    requiereFigura?: BoolWithAggregatesFilter<"PreguntaRecord"> | boolean
     esAncla?: BoolWithAggregatesFilter<"PreguntaRecord"> | boolean
     dificultad?: FloatWithAggregatesFilter<"PreguntaRecord"> | number
     vecesServida?: IntWithAggregatesFilter<"PreguntaRecord"> | number
@@ -18349,6 +18399,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion?: string | null
     fuente?: string | null
+    imagenUrl?: string | null
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: number
     vecesServida?: number
@@ -18366,6 +18418,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion?: string | null
     fuente?: string | null
+    imagenUrl?: string | null
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: number
     vecesServida?: number
@@ -18381,6 +18435,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number
@@ -18398,6 +18454,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number
@@ -18414,6 +18472,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion?: string | null
     fuente?: string | null
+    imagenUrl?: string | null
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: number
     vecesServida?: number
@@ -18429,6 +18489,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number
@@ -18445,6 +18507,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number
@@ -19462,6 +19526,8 @@ export namespace Prisma {
     claveCorrecta?: SortOrder
     solucion?: SortOrder
     fuente?: SortOrder
+    imagenUrl?: SortOrder
+    requiereFigura?: SortOrder
     esAncla?: SortOrder
     dificultad?: SortOrder
     vecesServida?: SortOrder
@@ -19482,6 +19548,8 @@ export namespace Prisma {
     claveCorrecta?: SortOrder
     solucion?: SortOrder
     fuente?: SortOrder
+    imagenUrl?: SortOrder
+    requiereFigura?: SortOrder
     esAncla?: SortOrder
     dificultad?: SortOrder
     vecesServida?: SortOrder
@@ -19497,6 +19565,8 @@ export namespace Prisma {
     claveCorrecta?: SortOrder
     solucion?: SortOrder
     fuente?: SortOrder
+    imagenUrl?: SortOrder
+    requiereFigura?: SortOrder
     esAncla?: SortOrder
     dificultad?: SortOrder
     vecesServida?: SortOrder
@@ -21331,6 +21401,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion?: string | null
     fuente?: string | null
+    imagenUrl?: string | null
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: number
     vecesServida?: number
@@ -21346,6 +21418,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion?: string | null
     fuente?: string | null
+    imagenUrl?: string | null
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: number
     vecesServida?: number
@@ -21420,6 +21494,8 @@ export namespace Prisma {
     claveCorrecta?: StringFilter<"PreguntaRecord"> | string
     solucion?: StringNullableFilter<"PreguntaRecord"> | string | null
     fuente?: StringNullableFilter<"PreguntaRecord"> | string | null
+    imagenUrl?: StringNullableFilter<"PreguntaRecord"> | string | null
+    requiereFigura?: BoolFilter<"PreguntaRecord"> | boolean
     esAncla?: BoolFilter<"PreguntaRecord"> | boolean
     dificultad?: FloatFilter<"PreguntaRecord"> | number
     vecesServida?: IntFilter<"PreguntaRecord"> | number
@@ -21801,6 +21877,8 @@ export namespace Prisma {
     claveCorrecta: string
     solucion?: string | null
     fuente?: string | null
+    imagenUrl?: string | null
+    requiereFigura?: boolean
     esAncla?: boolean
     dificultad?: number
     vecesServida?: number
@@ -21816,6 +21894,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number
@@ -21831,6 +21911,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number
@@ -21846,6 +21928,8 @@ export namespace Prisma {
     claveCorrecta?: StringFieldUpdateOperationsInput | string
     solucion?: NullableStringFieldUpdateOperationsInput | string | null
     fuente?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    requiereFigura?: BoolFieldUpdateOperationsInput | boolean
     esAncla?: BoolFieldUpdateOperationsInput | boolean
     dificultad?: FloatFieldUpdateOperationsInput | number
     vecesServida?: IntFieldUpdateOperationsInput | number

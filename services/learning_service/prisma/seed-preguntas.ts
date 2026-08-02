@@ -58,6 +58,37 @@ function solucionUtil(bruta: string | null | undefined): string | null {
   return limpia.length >= 40 ? limpia : null;
 }
 
+/**
+ * Quita los dos puntos que el troceado de la pagina deja delante.
+ *
+ * Es el mismo resto que ya se limpiaba en la resolucion, y por el mismo
+ * motivo, solo que en el enunciado se habia pasado por alto: en pantalla se
+ * leia ": En un recipiente de masa m=10g...".
+ */
+function enunciadoLimpio(bruto: string): string {
+  return bruto.replace(/^[\s:.;–-]+/, "").trim();
+}
+
+/**
+ * Si el enunciado remite a algo que la cosecha no capturo.
+ *
+ * Muchas preguntas de admision dicen "en la figura", "del grafico" o "segun el
+ * texto". Se guardo el texto pero no la imagen ni la lectura, asi que tal cual
+ * no se pueden resolver: el alumno solo puede adivinar, y adivinar le rompe la
+ * racha y le mueve la dificultad estimada.
+ *
+ * Las excepciones son literales: "figura literaria", "cuadro sinoptico" y
+ * "figura geometrica" son conceptos del enunciado, no dibujos que falten.
+ */
+function necesitaFigura(enunciado: string): boolean {
+  if (/figura literaria|cuadro sinóptico|figura geométrica/i.test(enunciado)) {
+    return false;
+  }
+  return /en (el|la) (siguiente )?(figura|gráfico|grafico|cuadro|tabla|esquema)|del (gráfico|grafico|cuadro|figura)|figura (mostrada|adjunta)|alude la imagen|se muestran en la figura|siguiente (cuadro|arreglo|distribución)|en el texto|del texto|según el texto/i.test(
+    enunciado
+  );
+}
+
 async function main() {
   const fuente = JSON.parse(readFileSync(RUTA, "utf-8")) as {
     examenes: { area: string; perfil: string; preguntas: PreguntaFuente[] }[];
@@ -89,31 +120,36 @@ async function main() {
       // El id sale del enunciado y no del numero de pregunta: las paginas por
       // curso empiezan cada una en "PREGUNTA 1", asi que numerar por examen
       // hacia chocar unas con otras.
+      //
+      // OJO: se calcula sobre el enunciado EN BRUTO, antes de limpiarlo. Las
+      // filas que ya estan cargadas tienen su id derivado del texto con los
+      // dos puntos delante; si se limpiara primero saldria otro id y cada
+      // resiembra crearia un duplicado en vez de actualizar la fila.
       const preguntaId = uuidDe(`pregunta:${p.enunciado.slice(0, 180)}`);
+
+      const enunciado = enunciadoLimpio(p.enunciado);
+      const comun = {
+        temaId,
+        enunciado,
+        alternativas: p.alternativas,
+        claveCorrecta: p.claveCorrecta,
+        solucion: solucionUtil(p.solucion),
+        fuente: `UNSA ${examen.area} #${p.numero} — ${p.fuenteExamen}`,
+        requiereFigura: necesitaFigura(enunciado),
+        activa: true
+      };
 
       await prisma.preguntaRecord.upsert({
         where: { id: preguntaId },
-        update: {
-          temaId,
-          enunciado: p.enunciado,
-          alternativas: p.alternativas,
-          claveCorrecta: p.claveCorrecta,
-          solucion: solucionUtil(p.solucion),
-          fuente: `UNSA ${examen.area} #${p.numero} — ${p.fuenteExamen}`,
-          activa: true
-        },
+        // `imagenUrl` no aparece en ningun lado a proposito: lo rellena una
+        // persona a mano y una resiembra no debe borrarselo.
+        update: comun,
         create: {
           id: preguntaId,
-          temaId,
-          enunciado: p.enunciado,
-          alternativas: p.alternativas,
-          claveCorrecta: p.claveCorrecta,
-          solucion: solucionUtil(p.solucion),
-          fuente: `UNSA ${examen.area} #${p.numero} — ${p.fuenteExamen}`,
+          ...comun,
           // Son de examen real, pero hasta confirmar el anio se usan como
           // banco de practica. Las ancla deben estar fechadas.
-          esAncla: false,
-          activa: true
+          esAncla: false
         }
       });
       cargadas += 1;

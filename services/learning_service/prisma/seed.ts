@@ -23,7 +23,7 @@ async function main() {
     where: { id: DEMO_LEARNING_PATH_ID },
     update: {
       title: "Fundamentos Adaptativos",
-      summary: "Ruta de aprendizaje demo para la plataforma CUMBRE.",
+      summary: "Ruta de aprendizaje de demostración.",
       status: "active",
       audienceRoles: ["student"],
       topicIds: [DEMO_TOPIC_MAIN_ID],
@@ -36,7 +36,7 @@ async function main() {
     create: {
       id: DEMO_LEARNING_PATH_ID,
       title: "Fundamentos Adaptativos",
-      summary: "Ruta de aprendizaje demo para la plataforma CUMBRE.",
+      summary: "Ruta de aprendizaje de demostración.",
       status: "active",
       audienceRoles: ["student"],
       topicIds: [DEMO_TOPIC_MAIN_ID],
