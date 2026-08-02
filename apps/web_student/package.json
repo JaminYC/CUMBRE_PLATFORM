@@ -18,6 +18,7 @@
     "@cumbre/schemas": "workspace:*",
     "@cumbre/sdk": "workspace:*",
     "@cumbre/types": "workspace:*",
+    "@cumbre/ui": "workspace:*",
     "next": "^15.3.1",
     "pdfjs-dist": "^5.7.284",
     "react": "^19.0.0",

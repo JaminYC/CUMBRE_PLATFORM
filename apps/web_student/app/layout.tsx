@@ -6,27 +6,9 @@ import { ProveedorDeMarca } from "@cumbre/brands/client";
 import { AppLocaleProvider } from "@cumbre/app-runtime/client";
 import { AuthSessionProvider } from "@/features/auth/auth-session";
 import { Cortina } from "@/components/cortina";
+import { GUION_PLIEGUE_INICIAL } from "@cumbre/ui";
+import "@cumbre/ui/armazon.css";
 import "./globals.css";
-
-/**
- * Decide si la barra lateral arranca plegada, antes de que se pinte nada.
- *
- * Va como script sincrono y no como efecto de React por lo mismo que los
- * colores de la marca van en el HTML: un efecto corre despues del primer
- * pintado, asi que la barra se veria abierta y daria un salto al plegarse.
- *
- * En pantalla estrecha se pliega siempre: 17rem no caben en un movil.
- */
-const PLIEGUE_INICIAL = `(function(){
-  var raiz = document.documentElement;
-  try {
-    var guardado = localStorage.getItem("campus:barra-plegada");
-    var estrecha = window.matchMedia("(max-width: 980px)").matches;
-    raiz.dataset.barra = (estrecha || guardado === "1") ? "plegada" : "abierta";
-  } catch (e) {
-    raiz.dataset.barra = "abierta";
-  }
-})();`;
 
 /**
  * El titulo y la descripcion salen de la marca que corresponde al dominio,
@@ -70,7 +52,7 @@ export default async function RootLayout({
           id="tokens-de-marca"
           dangerouslySetInnerHTML={{ __html: variablesDeMarca(marca) }}
         />
-        <script dangerouslySetInnerHTML={{ __html: PLIEGUE_INICIAL }} />
+        <script dangerouslySetInnerHTML={{ __html: GUION_PLIEGUE_INICIAL }} />
       </head>
       <body>
         <ProveedorDeMarca marca={marca}>

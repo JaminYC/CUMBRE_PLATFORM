@@ -4,9 +4,27 @@
   "version": "0.1.0",
   "type": "module",
   "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./armazon": "./src/armazon.tsx",
+    "./armazon.css": "./src/armazon.css"
+  },
   "scripts": {
-    "build": "echo ui build scaffold pending",
-    "lint": "echo ui lint scaffold pending",
-    "test": "echo ui test scaffold pending"
+    "build": "echo ui sirve el codigo fuente, no necesita compilacion",
+    "lint": "echo ui lint pendiente",
+    "test": "echo ui test pendiente",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@cumbre/brands": "workspace:*",
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.1.0",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "next": "^15.3.0"
   }
 }

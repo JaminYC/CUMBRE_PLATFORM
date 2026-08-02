@@ -191,6 +191,9 @@ importers:
       '@cumbre/types':
         specifier: workspace:*
         version: link:../../packages/types
+      '@cumbre/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       next:
         specifier: ^15.3.1
         version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -277,6 +280,9 @@ importers:
       '@cumbre/types':
         specifier: workspace:*
         version: link:../../packages/types
+      '@cumbre/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       next:
         specifier: ^15.3.1
         version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -329,6 +335,9 @@ importers:
       '@cumbre/types':
         specifier: workspace:*
         version: link:../../packages/types
+      '@cumbre/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       next:
         specifier: ^15.3.1
         version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -493,7 +502,27 @@ importers:
         specifier: ^5.7.2
         version: 5.9.3
 
-  packages/ui: {}
+  packages/ui:
+    dependencies:
+      '@cumbre/brands':
+        specifier: workspace:*
+        version: link:../brands
+      next:
+        specifier: ^15.3.0
+        version: 15.5.12(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: ^19.1.0
+        version: 19.2.4
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.1.0
+        version: 19.2.14
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
 
   services/analytics_service: {}
 

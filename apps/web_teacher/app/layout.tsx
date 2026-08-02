@@ -4,6 +4,8 @@ import { headers } from "next/headers";
 import { marcaPorHost, variablesDeMarca } from "@cumbre/brands";
 import { ProveedorDeMarca } from "@cumbre/brands/client";
 import { AppLocaleProvider } from "@cumbre/app-runtime/client";
+import { GUION_PLIEGUE_INICIAL } from "@cumbre/ui";
+import "@cumbre/ui/armazon.css";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,7 +23,7 @@ export default async function RootLayout({
   const marca = marcaPorHost((await headers()).get("host"));
 
   return (
-    <html lang="es" data-marca={marca.id}>
+    <html lang="es" data-marca={marca.id} suppressHydrationWarning>
       <head>
         {/* Los colores de la institucion, antes de la hoja de estilos: en un
             archivo aparte cargarian despues y la pagina alcanzaria a
@@ -30,6 +32,7 @@ export default async function RootLayout({
           id="tokens-de-marca"
           dangerouslySetInnerHTML={{ __html: variablesDeMarca(marca) }}
         />
+        <script dangerouslySetInnerHTML={{ __html: GUION_PLIEGUE_INICIAL }} />
       </head>
       <body>
         <ProveedorDeMarca marca={marca}>
