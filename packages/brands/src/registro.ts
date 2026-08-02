@@ -80,14 +80,20 @@ export const BRYCE: Marca = {
   // Las cuentas de Bryce las crea Dirección desde su panel.
   permiteRegistroPublico: false,
   landing: "editorial",
+  ilustraciones: {
+    login: "/illustrations/illo-login-bryce.svg"
+  },
   funcionalidades: {
     yarinet: false
   },
   contacto: {
-    direccion: "Santa Marta 209, Cercado — Arequipa",
+    direccion: "Santa Marta 209 (frente a la comisaría), Cercado — Arequipa",
     telefonos: ["940 161 725", "054 263701"],
+    central: "(054) 223334",
+    whatsapp: ["959 744 594", "948 000 103"],
     correo: "academia@bryce.edu.pe",
-    horario: "Lunes a sábado, 7:00 a. m. — 8:00 p. m."
+    horario: "Lunes a sábado, 7:00 a. m. — 8:00 p. m.",
+    webPublica: "https://academiabryce.com"
   }
 };
 

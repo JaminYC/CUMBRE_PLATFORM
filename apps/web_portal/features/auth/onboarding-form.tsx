@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { VolverAlInicio } from "./volver-al-inicio";
 import { useMarca } from "@cumbre/brands/client";
 
 function StudentIcon() {
@@ -71,7 +72,7 @@ export function OnboardingForm() {
       <header className="login-nav">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={marca.logo.principal} alt={marca.nombre} className="login-logo" draggable={false} />
-        <Link href="/" className="login-nav__back">Volver al inicio</Link>
+        <VolverAlInicio />
       </header>
 
       <div className="onboarding-body">

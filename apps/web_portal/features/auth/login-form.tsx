@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { VolverAlInicio } from "./volver-al-inicio";
 import { requestAppApi } from "@/lib/app-http";
 import { useMarca } from "@cumbre/brands/client";
 
@@ -61,7 +62,7 @@ export function LoginForm() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={marca.logo.principal} alt={marca.nombre} className="login-logo" draggable={false} />
         </Link>
-        <Link href="/" className="login-nav__back">Volver al inicio</Link>
+        <VolverAlInicio />
       </header>
 
       <div className="login-layout">
@@ -70,7 +71,7 @@ export function LoginForm() {
           <h2>Un login.<br />Tu espacio.</h2>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/illustrations/illo-login.png"
+            src={marca.ilustraciones?.login ?? "/illustrations/illo-login.png"}
             alt=""
             className="login-page__illo"
             draggable={false}

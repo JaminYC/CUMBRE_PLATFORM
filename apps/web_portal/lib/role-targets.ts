@@ -63,10 +63,31 @@ export const cookiesDeRol: CookieDeRol[] = [
  * los alumnos de CUMBRE al campus de Bryce, porque el destino se decidia sin
  * mirar por que dominio habia llegado la persona.
  *
- * En desarrollo ambas apuntan a los mismos puertos locales, para poder probar
- * `bryce.localhost:3000` sin levantar nada aparte.
+ * En desarrollo las dos comparten puerto, pero no host: la marca viaja en el
+ * subdominio porque el campus la resuelve igual que el portal, mirando de
+ * donde viene la peticion. Apuntar a `localhost` a secas mandaba al alumno de
+ * Bryce a un campus con los colores de CUMBRE.
  */
 const enProduccion = process.env.NODE_ENV === "production";
+
+/**
+ * Antepone el subdominio de la institucion al host local.
+ *
+ * Cualquier nombre que termine en `.localhost` resuelve a la maquina misma sin
+ * tocar el fichero de hosts, asi que `bryce.localhost:3100` funciona tal cual
+ * y el campus reconoce la marca.
+ */
+function enLocalPara(marca: string, url: string): string {
+  try {
+    const destino = new URL(url);
+    if (destino.hostname === "localhost" || destino.hostname === "127.0.0.1") {
+      destino.hostname = `${marca}.localhost`;
+    }
+    return destino.origin;
+  } catch {
+    return url;
+  }
+}
 
 const DESTINOS_POR_MARCA: Record<string, Record<SupportedPortalRole, string>> = {
   cumbre: {
@@ -79,17 +100,17 @@ const DESTINOS_POR_MARCA: Record<string, Record<SupportedPortalRole, string>> = 
       process.env.BRYCE_STUDENT_APP_URL ??
       (enProduccion
         ? "https://alumno.bryce.teamvastoria.com"
-        : portalAppConfig.studentAppUrl),
+        : enLocalPara("bryce", portalAppConfig.studentAppUrl)),
     teacher:
       process.env.BRYCE_TEACHER_APP_URL ??
       (enProduccion
         ? "https://docente.bryce.teamvastoria.com"
-        : portalAppConfig.teacherAppUrl),
+        : enLocalPara("bryce", portalAppConfig.teacherAppUrl)),
     administrator:
       process.env.BRYCE_ADMIN_APP_URL ??
       (enProduccion
         ? "https://direccion.bryce.teamvastoria.com"
-        : portalAppConfig.adminAppUrl)
+        : enLocalPara("bryce", portalAppConfig.adminAppUrl))
   }
 };
 

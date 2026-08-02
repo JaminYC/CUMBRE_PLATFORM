@@ -133,10 +133,26 @@ export interface Marca {
   };
 
   /** Aparece en la landing y el pie de página. */
+  /**
+   * Ilustraciones propias de la institucion.
+   *
+   * Van aqui y no escritas en la pantalla para que sumar una academia no
+   * obligue a tocar el formulario de acceso: basta con declarar las suyas.
+   * Si no las trae, se usa la de CUMBRE.
+   */
+  ilustraciones?: {
+    login?: string;
+  };
   contacto?: {
     direccion?: string;
     telefonos?: string[];
     correo?: string;
     horario?: string;
+    /** Numeros de WhatsApp, tal como los publica la institucion. */
+    whatsapp?: string[];
+    /** Central telefonica, distinta de los moviles de atencion. */
+    central?: string;
+    /** Web institucional. El campus es un destino desde ahi, no su sustituto. */
+    webPublica?: string;
   };
 }
