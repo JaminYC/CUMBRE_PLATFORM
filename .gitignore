@@ -40,3 +40,10 @@ services/*/src/generated/prisma/libquery_engine-*.node
 # fuera porque el historial de git no olvida un archivo de ese tamaño.
 # Para incluirla, basta con borrar esta linea.
 Documentos de Referencias/SvgsBRYCE/Prueba.ai
+
+# Guion de arranque de la etapa de Supabase: lleva la URL de la base y una
+# clave de OpenAI en claro. Ya no funciona —ese proyecto de Supabase esta
+# muerto, el host no resuelve— y las credenciales estan revocadas, pero no
+# tiene por que seguir viajando en el repositorio. Se deja en el disco de
+# quien lo tenga; simplemente deja de versionarse.
+start-cumbre.ps1

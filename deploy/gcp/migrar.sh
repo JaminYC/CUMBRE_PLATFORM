@@ -118,6 +118,23 @@ for SERVICIO in auth-service learning-service content-service; do
 done
 
 echo ""
+# El temario oficial de la UNSA y el banco de preguntas.
+#
+# Van aparte de las semillas de demostracion porque son dato real, y en este
+# orden porque las preguntas cuelgan de los temas: sembrarlas antes las
+# descarta todas por "tema desconocido" sin dar ningun error.
+#
+# Estaban SOLO en .github/workflows/production-migrations.yml, que apunta a la
+# infraestructura anterior —Supabase, con DATABASE_URL y DIRECT_URL separados
+# por el pooler— y que nunca llego a ejecutarse. La misma trampa que ya conto
+# el comentario de arriba sobre el tutor: dos listas de lo mismo en dos sitios
+# y solo una completa. Aqui la de verdad es esta.
+for SEMILLA in temario preguntas; do
+  echo "── sembrando ${SEMILLA} ──"
+  pnpm --filter "@cumbre/learning-service" "db:seed:${SEMILLA}"
+done
+
+echo ""
 echo "════════════════════════════════════════════════════════════"
 echo " Base lista."
 echo ""
