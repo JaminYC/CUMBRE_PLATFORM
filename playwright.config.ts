@@ -14,6 +14,22 @@ export default defineConfig({
     video: "retain-on-failure"
   },
   webServer: [
+    /*
+     * El portal va el primero y es obligatorio.
+     *
+     * Desde que las tres aplicaciones de rol mandan al portal a quien no tiene
+     * sesion, su /login ya no pinta nada: responde una redireccion. Sin el
+     * portal levantado esa redireccion no lleva a ningun sitio, la
+     * comprobacion de arranque de las otras tres no se satisface nunca y la
+     * suite entera muere por tiempo de espera sin llegar a ejecutar una sola
+     * prueba. En local no se notaba porque el portal ya estaba en marcha.
+     */
+    {
+      command: "corepack pnpm --filter @cumbre/web-portal exec next dev --port 3005",
+      url: "http://localhost:3005/login",
+      reuseExistingServer,
+      timeout: 120_000
+    },
     {
       command: "corepack pnpm --filter @cumbre/auth-service start",
       url: "http://localhost:3001/health",
